@@ -1,0 +1,240 @@
+[
+	{
+		"bytes_response": 6, 
+		"cmd": "0100",
+		"decoder": "pid",
+		"description": "Supported PIDs [01-20]",
+		"name": "PIDS_A"
+	},
+	{
+		"bytes_response": 6, 
+		"cmd": "0101",
+		"decoder": "status",
+		"description": "Status since DTCs cleared",
+		"name": "STATUS"	
+	},
+	{
+		"bytes_response": 4,
+		"cmd": "0102",
+		"decoder": "single_dtc",
+		"description": "DTC that triggered the freeze frame",
+		"name": "FREEZE_DTC"
+	},
+	{
+		"bytes_response": 4,
+		"cmd": "0103",
+		"decoder": "fuel_status",
+		"description": "Fuel System Status",
+		"name": "FUEL_STATUS"
+	},
+	{
+		"bytes_response": 3,
+		"cmd": "0104",
+		"decoder": "percent",
+		"description": "Calculated Engine Load",
+		"name": "ENGINE_LOAD"
+	},
+	{
+		"bytes_response": 3,
+		"cmd": "0105",
+		"decoder": "temp",
+		"description": "Engine Coolant Temperature",
+		"name": "COOLANT_TEMP"
+	},
+	{
+		"bytes_response": 3,
+		"cmd": "0106",
+		"decoder": "percent_centered",
+		"description": "Short Term Fuel Trim - Bank 1",
+		"name": "SHORT_FUEL_TRIM_1" 
+	},
+	{
+		"bytes_response": 3,
+		"cmd": "0107",
+		"decoder": "percent_centered",
+		"description": "Long Term Fuel Trim - Bank 1",
+		"name": "LONG_FUEL_TRIM_1"
+	},
+	{
+		"bytes_response": 3,
+		"cmd": "0108",
+		"decoder": "percent_centered",
+		"description": "Short Term Fuel Trim - Bank 2",
+		"name": "SHORT_FUEL_TRIM_2"
+	},
+	{
+		"bytes_response": 3,
+		"cmd": "0109",
+		"decoder": "percent_centered",
+		"description": "Long Term Fuel Trim - Bank 2",
+		"name": "LONG_FUEL_TRIM_2"
+	},
+	{
+		"bytes_response": 3,
+		"cmd": "010A",
+		"decoder": "fuel_pressure",
+		"description": "Fuel Pressure",
+		"name": "FUEL_PRESSURE"
+	},
+	{
+		"bytes_response": 3,
+		"cmd": "010B",
+		"decoder": "pressure",
+		"description": "Intake Manifold Pressure",
+		"name": "INTAKE_PRESSURE"
+	},
+	{
+		"bytes_response": 4,
+		"cmd": "010C",
+		"decoder": "uas(0x07)",
+		"description": "Engine RPM",
+		"name": "RPM"
+	},
+	{
+		"bytes_response": 3,
+		"cmd": "010D",
+		"decoder": "uas(0x09)",
+		"description": "Vehicle Speed",
+		"name": "SPEED"
+	},
+	{
+		"bytes_response": 3,
+		"cmd": "010E",
+		"decoder": "timing_advance",
+		"description": "Timing Advance",
+		"name": "TIMING_ADVANCE"
+	},
+	{
+		"bytes_response": 3,
+		"cmd": "010F",
+		"decoder": "temp",
+		"description": "Intake Air Temp",
+		"name": "INTAKE_TEMP"
+	},
+	{
+		"bytes_response": 4,
+		"cmd": "0110",
+		"decoder": "uas(0x27)",
+		"description": "Air Flow Rate (MAF)",
+		"name": "MAF"
+	},
+	{
+		"bytes_response": 3,
+		"cmd": "0111",
+		"decoder": "percent",
+		"description": "Throttle Position",
+		"name": "THROTTLE_POS"
+	},
+	{
+		"bytes_response": 3,
+		"cmd": "0112",
+		"decoder": "air_status",
+		"description": "Secondary Air Status",
+		"name": "AIR_STATUS"
+	},
+	{
+		"bytes_response": 3,
+		"cmd": "0113",
+		"decoder": "o2_sensors",
+		"description": "O2 Sensors Present",
+		"name": "O2_SENSORS"
+	},
+	{
+		"bytes_response": 4,
+		"cmd": "0114",
+		"decoder": "sensor_voltage",
+		"description": "O2: Bank 1 - Sensor 1 Voltage",
+		"name": "O2_B1S1"
+	},
+	{
+		"bytes_response": 4,
+		"cmd": "0115",
+		"decoder": "sensor_voltage",
+		"description": "O2: Bank 1 - Sensor 2 Voltage",
+		"name": "O2_B1S2"
+	},
+	{
+		"bytes_response": 4,
+		"cmd": "0116",
+		"decoder": "sensor_voltage",
+		"description": "O2: Bank 1 - Sensor 3 Voltage",
+		"name": "O2_B1S3"
+	},
+	{
+		"bytes_response": 4,
+		"cmd": "0117",
+		"decoder": "sensor_voltage",
+		"description": "O2: Bank 1 - Sensor 4 Voltage",
+		"name": "O2_B1S4"
+	},
+	{
+		"bytes_response": 4,
+		"cmd": "0118",
+		"decoder": "sensor_voltage",
+		"description": "O2: Bank 2 - Sensor 1 Voltage",
+		"name": "O2_B2S1"
+	},
+	{
+		"bytes_response": 4,
+		"cmd": "0119",
+		"decoder": "sensor_voltage",
+		"description": "O2: Bank 2 - Sensor 2 Voltage",
+		"name": "O2_B2S2"
+	},
+	{
+		"bytes_response": 4,
+		"cmd": "011A",
+		"decoder": "sensor_voltage",
+		"description": "O2: Bank 2 - Sensor 3 Voltage",
+		"name": "O2_B2S3"
+	},
+	{
+		"bytes_response": 4,
+		"cmd": "011B",
+		"decoder": "sensor_voltage",
+		"description": "O2: Bank 2 - Sensor 4 Voltage",
+		"name": "O2_B2S4"
+	},
+	{
+		"bytes_response": 3,
+		"cmd": "011C",
+		"decoder": "obd_compliance",
+		"description": "OBD Standards Compliance",
+		"name": "OBD_COMPLIANCE"
+	},
+	{
+		"bytes_response": 3,
+		"cmd": "011D",
+		"decoder": "o2_sensors_alt",
+		"description": "O2 Sensors Present (alternate)",
+		"name": "O2_SENSORS_ALT"
+	},
+	{
+		"bytes_response": 3,
+		"cmd": "011E",
+		"decoder": "aux_input_status",
+		"description": "Auxiliary input status (power take off)",
+		"name": "AUX_INPUT_STATUS"
+	},
+	{
+		"bytes_response": 4,
+		"cmd": "011F",
+		"decoder": "uas(0x12)",
+		"description": "Engine Run Time",
+		"name": "RUN_TIME"
+	},
+	{
+		"bytes_response": 6,
+		"cmd": "0120",
+		"decoder": "pid",
+		"description": "Supported PIDs [21-40]",
+		"name": "PIDS_B"
+	},
+	{
+		"bytes_response": 4,
+		"cmd": "0121",
+		"decoder": "uas(0x25)",
+		"description": "Distance Traveled with MIL on",
+		"name": "DISTANCE_W_MIL"
+	}
+]
