@@ -8,7 +8,7 @@
 int main(){
 	using json = nlohmann::json;
 
-	std::ifstream ifs("PIDS.json");
+	std::ifstream ifs("data/PIDS.json");
 	auto j = json::parse(ifs);
 
 	std::vector<Commands> commands;
