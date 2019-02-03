@@ -66,7 +66,7 @@ public:
 	}
 
 	void readFileData(){
-		std::ifstream ifs("PIDS.json");
+		std::ifstream ifs("data/PIDS.json");
 		auto j = json::parse(ifs);
 
 		for (int i = 0; i < (int)j.size(); ++i)

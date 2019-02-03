@@ -1,5 +1,6 @@
 ParametroBluetooth = -lbluetooth
-HPP = Obd.hpp Commands.hpp
+HPP = src/Obd.hpp src/Commands.hpp
+CPP = src/main.cpp
 
-main: main.cpp $(HPP)
-	g++ -std=c++11 -W -o main main.cpp $(HPP) $(ParametroBluetooth) 
+main: $(CPP) $(HPP)
+	g++ -std=c++11 -W -o main $(CPP) $(HPP) $(ParametroBluetooth) 
