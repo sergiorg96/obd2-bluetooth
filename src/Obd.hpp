@@ -12,6 +12,8 @@
 
 #include <bluetooth/bluetooth.h>
 #include <bluetooth/rfcomm.h>
+#include <bluetooth/hci.h>
+#include <bluetooth/hci_lib.h>
 
 #include <unistd.h>
 
@@ -23,19 +25,23 @@ class Obd {
 public:
 	std::vector<Commands> m_commands;
       // Constructor
-	Obd(){
-		this->connectBluetooth();
+	Obd(char *deviceName){
+		this->discoverDeviceAddress(deviceName, this->dest);
+		if(this->m_deviceFound)
+			this->connectBluetooth(dest);
+		else
+			printf("Device %s not found.\n", deviceName);
 		//if(this->m_status)
 			this->readFileData();
 	}
       // Funciones miembro de la clase "Obd"
       //void getDato();
       //void setDato(int dato);
-	void connectBluetooth(){
+	void connectBluetooth(char *dest){
 		try{
 			struct sockaddr_rc addr;
 			int statusConnection;
-			char dest[18] = "00:1D:A5:00:0D:AC";
+			//char dest[18] = "00:1D:A5:00:0D:AC";
 
 
 			this->m_cli_s = socket(AF_BLUETOOTH, SOCK_STREAM, BTPROTO_RFCOMM);
@@ -45,7 +51,7 @@ public:
 			//Faltaría sustituir automaticamente la MAC
 			addr.rc_family = AF_BLUETOOTH;
 			str2ba(dest, &addr.rc_bdaddr );
-			addr.rc_channel = (uint8_t) 1;
+			addr.rc_channel = (uint8_t) 2;
 
 			printf("connecting to %s (channel %d)\n", dest, addr.rc_channel);
 
@@ -58,10 +64,10 @@ public:
 			}
 
 			printf("connected\n");
+			this->m_status = true;
 
 		} catch(std::string e) {
 			std::cerr << e << std::endl;
-			this->m_status = false;
 		}
 	}
 
@@ -75,6 +81,47 @@ public:
 		}
 	}
 
+	void discoverDeviceAddress(char * deviceName, char *deviceAddress){
+		inquiry_info *ii = NULL;
+		int max_rsp, num_rsp;
+		int dev_id, sock, len, flags;
+		int i;
+		char addr[19] = { 0 };
+		char name[248] = { 0 };
+
+		dev_id = hci_get_route(NULL);
+		sock = hci_open_dev( dev_id );
+		if (dev_id < 0 || sock < 0) {
+			perror("opening socket");
+			exit(1);
+		}
+
+		len  = 8;
+		max_rsp = 255;
+		flags = IREQ_CACHE_FLUSH;
+		ii = (inquiry_info*)malloc(max_rsp * sizeof(inquiry_info));
+
+		num_rsp = hci_inquiry(dev_id, len, max_rsp, NULL, &ii, flags);
+		if( num_rsp < 0 ) perror("hci_inquiry");
+
+		for (i = 0; i < num_rsp; i++) {
+			ba2str(&(ii+i)->bdaddr, addr);
+			memset(name, 0, sizeof(name));
+			if (hci_read_remote_name(sock, &(ii+i)->bdaddr, sizeof(name), 
+				name, 0) < 0)
+				strcpy(name, "[unknown]");
+			printf("%s  %s\n", addr, name);
+			//Si la cadena introducida a la función es igual al dispositivo encontrado guardamos la dirección
+			if(strcmp(deviceName, name) == 0){
+				this->m_deviceFound = true;
+				strcpy(deviceAddress, addr);
+				printf("Dispositivo %s encontrado\n", deviceName);
+			}
+		}
+
+		free( ii );
+		close( sock );
+	}
 
 
 	void disconnectBluetooth(){
@@ -90,8 +137,10 @@ private:
       // Datos miembro de la clase "Obd"
    		//struct sockaddr_rc addr;
    		//int addr_len;
+	char dest[19] = { 0 };
 	int m_cli_s;
-	bool m_status = true;
+	bool m_deviceFound = false;
+	bool m_status = false;
 };
 
 
