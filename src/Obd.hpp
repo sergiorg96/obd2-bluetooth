@@ -19,6 +19,8 @@
 
 #include "Commands.hpp"
 
+#define MAX_EP_EVTS 8
+
 using json = nlohmann::json;
 
 class Obd {
@@ -122,7 +124,112 @@ public:
 		free( ii );
 		close( sock );
 	}
+	
+	void polling(){
+		struct epoll_event ev, events[MAX_EP_EVTS];
+		/*
+		struct epoll_event {
+        	uint32_t     events;    Epoll events 
+        	epoll_data_t data;};      User data variable 
 
+    	typedef union epoll_data {
+        	void    *ptr;
+        	int      fd;
+        	uint32_t u32;
+        	uint64_t u64;
+    	} epoll_data_t;
+    	The data field of each returned structure contains the same data as
+       	was specified in the most recent call to epoll_ctl(2) (EPOLL_CTL_ADD,
+       	EPOLL_CTL_MOD) for the corresponding open file description.  The
+       	events field contains the returned event bit field.
+		*/
+
+		int epoll_fd, err, nfds;
+		int fd_out = fileno(stdout);
+		//El parametro de epoll_create significa el número de file descriptor que un proceso quiere monitorizar
+		// y ayuda al Kernel a decidir el tamaño de la instancia epoll.
+		epoll_fd = epoll_create(1);
+		if (epoll_fd < 0) {
+			perror("Unable to create epoll");
+			close(this->m_cli_s);
+			return epoll_fd;
+		}
+
+		/*
+		Estructura Epoll:
+		Like so, if fd is a socket, we might want to monitor it for the arrival of new data on the socket buffer (EPOLLIN).
+		*/
+		ev.events = EPOLLIN;
+		// Se almacena el file descriptor en el campo data de epoll_event
+		ev.data.fd = this->m_cli_s;
+		/*
+		A process can add file descriptors it wants monitored to the epoll instance by calling epoll_ctl.
+ 		All the file descriptors registered with an epoll instance are collectively called an epoll set or the interest list.
+		int epoll_ctl(int epfd, int op, int fd, struct epoll_event *event);
+		*/
+		// Se añade al epoll set o interest list, el descriptor de la conexión del socket
+		err = epoll_ctl(epoll_fd, EPOLL_CTL_ADD, this->m_cli_s, &ev);
+		if (err) {
+			perror("unable to add client socket to epoll instance");
+			close(this->m_cli_s);
+			return err;
+		}
+
+		// Bucle infinito para el envío de datos por bluetooth al conector OBD
+		while(1) {
+		// Buffer para enviar y recibir
+			char buf[1024], *p;
+			ssize_t len;
+			int i;
+		/*
+		A thread can be notified of events that happened on the epoll set/interest set of an epoll instance by calling the epoll_wait system call,
+ 		which blocks until any of the descriptors being monitored becomes ready for I/O.
+ 		int epoll_wait(int epfd, struct epoll_event *evlist, int maxevents, int timeout);
+
+ 		evlist - is an array of epoll_event structures. evlist is allocated by the calling process and when epoll_wait returns,
+ 		this array is modified to indicate information about the subset of file descriptors in the interest list that
+ 		 are in the ready state (this is called the ready list)
+
+ 		 timeout — this argument behaves the same way as it does for poll or select.
+ 		  This value specifies for how long the epoll_wait system call will block:
+ 		  -1 -> when timeout is set to -1, epoll_wait will block “forever”.
+		*/
+			nfds = epoll_wait(epoll_fd, events, MAX_EP_EVTS, -1);
+			if (nfds < 0) {
+				perror("epoll error");
+				break;
+			}
+
+			for (i = 0; i < nfds; i++) {
+				if ((events[i].events & EPOLLERR) || (events[i].events & EPOLLHUP)) {
+					fprintf(stderr, "epoll error\n");
+					goto end;
+				}
+
+				if (events[i].data.fd == this->m_cli_s) {
+					len = read(this->m_cli_s, &buf, sizeof(buf) - 1);
+					if (len < 0) {
+						perror("socket read error");
+						continue;
+					}
+					buf[len] = '\0';
+
+					p = buf;
+					while(*p) {
+						if (*p == '\r')
+							*p = '\n';
+						p++;
+					}
+
+					write(fd_out, buf, strlen(buf));
+				} else {
+					fprintf(stderr, "unknown event");
+				}
+			}
+		}
+	end:
+		close(this->m_cli_s);
+	}
 
 	void disconnectBluetooth(){
 		close(this->m_cli_s);
