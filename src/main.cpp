@@ -2,6 +2,7 @@
 
 int main(int argc, char **argv)
 {
+	char str[] = "¡Esto es una prueba!";
 
 	if (argc != 2){
 		printf("Uso: ./main DEVICE-NAME\n");
@@ -12,6 +13,8 @@ int main(int argc, char **argv)
 
 	if(connection.isValid()){
 		std::cout << "Se ha creado correctamente" << std::endl;
+		connection.send(str);
+
 		connection.disconnectBluetooth();
 	} else {
 		std::cout << "No se ha conectado correctamente" << std::endl;

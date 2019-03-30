@@ -1,4 +1,4 @@
-ParametroBluetooth = -lbluetooth
+ParametroBluetooth = -lbluetooth -lpthread
 HPP = src/Obd.hpp src/Commands.hpp
 CPP = src/main.cpp
 

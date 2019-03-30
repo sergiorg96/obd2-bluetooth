@@ -3,6 +3,7 @@
 
 #include <iostream>
 #include <fstream>
+#include <thread>
 
 #include <netinet/in.h>
 #include <arpa/inet.h>
@@ -125,7 +126,22 @@ public:
 		close( sock );
 	}
 	
-	void polling(){
+	void send(char *message){
+		int i = 0;
+
+		std::thread t1(&Obd::polling, this);
+		while(1){
+			i++;
+			std::cout << "Esperamos 5 segundos..." << std::endl;
+			std::this_thread::sleep_for(std::chrono::seconds(5));
+			std::cout << "Enviando mensaje "<< i << " ..." << std::endl;
+			write(this->m_cli_s, message, strlen(message));
+			std::cout << "Mensaje " << message << " enviado" << std::endl;
+		}
+		t1.join();
+	}
+
+	int polling(){
 		struct epoll_event ev, events[MAX_EP_EVTS];
 		/*
 		struct epoll_event {
@@ -199,7 +215,7 @@ public:
 				perror("epoll error");
 				break;
 			}
-
+			printf("Se ha detectado un evento(nfds): %d\n", nfds);
 			for (i = 0; i < nfds; i++) {
 				if ((events[i].events & EPOLLERR) || (events[i].events & EPOLLHUP)) {
 					fprintf(stderr, "epoll error\n");
