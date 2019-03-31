@@ -5,6 +5,9 @@
 #include <fstream>
 #include <thread>
 
+#include <utility>
+#include <map>
+
 #include <netinet/in.h>
 #include <arpa/inet.h>
 #include <sys/types.h>
@@ -19,14 +22,17 @@
 #include <unistd.h>
 
 #include "Commands.hpp"
+#include "decoders.hpp"
 
 #define MAX_EP_EVTS 8
 
 using json = nlohmann::json;
 
+typedef std::pair<std::string, Commands> tupla;
+
 class Obd {
 public:
-	std::vector<Commands> m_commands;
+	std::map<std::string, Commands> map_commands;
       // Constructor
 	Obd(char *deviceName){
 		this->discoverDeviceAddress(deviceName, this->dest);
@@ -80,7 +86,7 @@ public:
 
 		for (int i = 0; i < (int)j.size(); ++i)
 		{
-			this->m_commands.push_back(Commands(j[i]));
+			this->map_commands.insert(tupla(j[i]["name"], Commands(j[i])));
 		}
 	}
 
@@ -238,6 +244,16 @@ public:
 					}
 
 					write(fd_out, buf, strlen(buf));
+					//Transformar respuesta
+					char *ocurrencia = strstr(buf, "410D");
+					if (ocurrencia != NULL)
+					{
+						char info[5];
+						memset(info, '\0', sizeof(info));
+						strncpy(info, ocurrencia + 4 , 3);
+						printf("Info: %s\n", info);
+						printf("Velocidad = %.2f km/h\n", decodeHexToDec(info));
+					}
 				} else {
 					fprintf(stderr, "unknown event");
 				}
@@ -246,6 +262,8 @@ public:
 	end:
 		close(this->m_cli_s);
 	}
+
+
 
 	void disconnectBluetooth(){
 		close(this->m_cli_s);

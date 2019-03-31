@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include "decoders.h"
+#include "decoders.hpp"
 
 /*
 Definición de la función
