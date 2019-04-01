@@ -60,7 +60,7 @@ public:
 			//Faltaría sustituir automaticamente la MAC
 			addr.rc_family = AF_BLUETOOTH;
 			str2ba(dest, &addr.rc_bdaddr );
-			addr.rc_channel = (uint8_t) 2;
+			addr.rc_channel = (uint8_t) 1;
 
 			printf("connecting to %s (channel %d)\n", dest, addr.rc_channel);
 
@@ -132,17 +132,46 @@ public:
 		close( sock );
 	}
 	
-	void send(char *message){
+	void send(const char *message){
 		int i = 0;
+
+		//printf("Mensaje a enviar: %s\n", message);
 
 		std::thread t1(&Obd::polling, this);
 		while(1){
 			i++;
+			char *p;
+			char buf[1024];
+			int len;
+
 			std::cout << "Esperamos 5 segundos..." << std::endl;
 			std::this_thread::sleep_for(std::chrono::seconds(5));
 			std::cout << "Enviando mensaje "<< i << " ..." << std::endl;
-			write(this->m_cli_s, message, strlen(message));
-			std::cout << "Mensaje " << message << " enviado" << std::endl;
+
+			len = strlen(buf);
+
+			strcpy(buf, message);
+
+			//Mirar si sustituir \n por \r directamente
+			buf[len] = '\r';
+			buf[len+1] = '\0';
+		
+			/* All  messages  to  the ELM327  must  be
+			 * terminated  with  a  carriage  return
+			 * character  (hex  ‘0D’, \r).
+			 */
+			/*
+			p = buf;
+			while (*p) {
+				if (*p == '\n')
+					*p = '\r';
+				p++;
+			}
+			*/
+			//printf("Mensaje a enviar: %s\n", buf);
+
+			write(this->m_cli_s, buf, len);
+			//std::cout << "Mensaje " << message << " enviado" << std::endl;
 		}
 		t1.join();
 	}
@@ -196,11 +225,11 @@ public:
 			close(this->m_cli_s);
 			return err;
 		}
-
+		printf("Polling function\n");
 		// Bucle infinito para el envío de datos por bluetooth al conector OBD
 		while(1) {
 		// Buffer para enviar y recibir
-			char buf[1024], *p;
+			char message_rcv[1024], buf[1024], *p;
 			ssize_t len;
 			int i;
 		/*
@@ -221,7 +250,7 @@ public:
 				perror("epoll error");
 				break;
 			}
-			printf("Se ha detectado un evento(nfds): %d\n", nfds);
+			//printf("Se ha detectado un evento(nfds): %d\n", nfds);
 			for (i = 0; i < nfds; i++) {
 				if ((events[i].events & EPOLLERR) || (events[i].events & EPOLLHUP)) {
 					fprintf(stderr, "epoll error\n");
@@ -234,26 +263,35 @@ public:
 						perror("socket read error");
 						continue;
 					}
-					buf[len] = '\0';
+					strcat(message_rcv, buf);
+					if(strstr(buf, ">") != NULL) {
+						len = strlen(message_rcv);
+						message_rcv[len] = '\0';
 
-					p = buf;
-					while(*p) {
-						if (*p == '\r')
-							*p = '\n';
-						p++;
+						p = message_rcv;
+						while(*p) {
+							if (*p == '\r')
+								*p = '\n';
+							p++;
+						}
+						//Transformar respuesta
+						char *ocurrencia = strstr(message_rcv, "410D");
+						//printf("He recibido: %s\n", message_rcv);
+						if (ocurrencia != NULL)
+						{
+							printf("Ocurrencia encontrada\n");
+							char info[5];
+							memset(info, '\0', sizeof(info));
+							strncpy(info, ocurrencia + 4 , 3);
+							printf("Info: %s\n", info);
+							printf("Velocidad = %d km/h\n", decodeHexToDec(info));
+							memset(message_rcv, '\0', sizeof(message_rcv));
+						}
 					}
 
-					write(fd_out, buf, strlen(buf));
-					//Transformar respuesta
-					char *ocurrencia = strstr(buf, "410D");
-					if (ocurrencia != NULL)
-					{
-						char info[5];
-						memset(info, '\0', sizeof(info));
-						strncpy(info, ocurrencia + 4 , 3);
-						printf("Info: %s\n", info);
-						printf("Velocidad = %.2f km/h\n", decodeHexToDec(info));
-					}
+					memset(buf, '\0', sizeof(buf));
+
+					//write(fd_out, buf, strlen(buf));
 				} else {
 					fprintf(stderr, "unknown event");
 				}

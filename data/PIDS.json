@@ -92,7 +92,7 @@
 	},
 	{
 		"bytes_response": 3,
-		"cmd": "010D",
+		"cmd": "010d",
 		"decoder": "uas(0x09)",
 		"description": "Vehicle Speed",
 		"name": "SPEED"
