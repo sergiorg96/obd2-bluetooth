@@ -30,98 +30,98 @@
 	{
 		"bytes_response": 3,
 		"cmd": "0104",
-		"decoder": "percent",
+		"decoder": "decodeCargaPosicionEGR",
 		"description": "Calculated Engine Load",
 		"name": "ENGINE_LOAD"
 	},
 	{
 		"bytes_response": 3,
 		"cmd": "0105",
-		"decoder": "temp",
+		"decoder": "decodeTempGeneral",
 		"description": "Engine Coolant Temperature",
 		"name": "COOLANT_TEMP"
 	},
 	{
 		"bytes_response": 3,
 		"cmd": "0106",
-		"decoder": "percent_centered",
+		"decoder": "decodeAjusteCombustibleEGR",
 		"description": "Short Term Fuel Trim - Bank 1",
 		"name": "SHORT_FUEL_TRIM_1" 
 	},
 	{
 		"bytes_response": 3,
 		"cmd": "0107",
-		"decoder": "percent_centered",
+		"decoder": "decodeAjusteCombustibleEGR",
 		"description": "Long Term Fuel Trim - Bank 1",
 		"name": "LONG_FUEL_TRIM_1"
 	},
 	{
 		"bytes_response": 3,
 		"cmd": "0108",
-		"decoder": "percent_centered",
+		"decoder": "decodeAjusteCombustibleEGR",
 		"description": "Short Term Fuel Trim - Bank 2",
 		"name": "SHORT_FUEL_TRIM_2"
 	},
 	{
 		"bytes_response": 3,
 		"cmd": "0109",
-		"decoder": "percent_centered",
+		"decoder": "decodeAjusteCombustibleEGR",
 		"description": "Long Term Fuel Trim - Bank 2",
 		"name": "LONG_FUEL_TRIM_2"
 	},
 	{
 		"bytes_response": 3,
 		"cmd": "010A",
-		"decoder": "fuel_pressure",
+		"decoder": "decodePresionCombustible",
 		"description": "Fuel Pressure",
 		"name": "FUEL_PRESSURE"
 	},
 	{
 		"bytes_response": 3,
 		"cmd": "010B",
-		"decoder": "pressure",
+		"decoder": "decodeHexToDec",
 		"description": "Intake Manifold Pressure",
 		"name": "INTAKE_PRESSURE"
 	},
 	{
 		"bytes_response": 4,
 		"cmd": "010C",
-		"decoder": "uas(0x07)",
+		"decoder": "decodeRPM",
 		"description": "Engine RPM",
 		"name": "RPM"
 	},
 	{
 		"bytes_response": 3,
 		"cmd": "010D",
-		"decoder": "uas(0x09)",
+		"decoder": "decodeHexToDec",
 		"description": "Vehicle Speed",
 		"name": "SPEED"
 	},
 	{
 		"bytes_response": 3,
 		"cmd": "010E",
-		"decoder": "timing_advance",
+		"decoder": "decodeAvanceTiempo",
 		"description": "Timing Advance",
 		"name": "TIMING_ADVANCE"
 	},
 	{
 		"bytes_response": 3,
 		"cmd": "010F",
-		"decoder": "temp",
+		"decoder": "decodeTempGeneral",
 		"description": "Intake Air Temp",
 		"name": "INTAKE_TEMP"
 	},
 	{
 		"bytes_response": 4,
 		"cmd": "0110",
-		"decoder": "uas(0x27)",
+		"decoder": "decodeVelocidadMAF",
 		"description": "Air Flow Rate (MAF)",
 		"name": "MAF"
 	},
 	{
 		"bytes_response": 3,
 		"cmd": "0111",
-		"decoder": "percent",
+		"decoder": "decodeCargaPosicionEGR",
 		"description": "Throttle Position",
 		"name": "THROTTLE_POS"
 	},
@@ -142,56 +142,56 @@
 	{
 		"bytes_response": 4,
 		"cmd": "0114",
-		"decoder": "sensor_voltage",
+		"decoder": "decodeSensorOxigeno",
 		"description": "O2: Bank 1 - Sensor 1 Voltage",
 		"name": "O2_B1S1"
 	},
 	{
 		"bytes_response": 4,
 		"cmd": "0115",
-		"decoder": "sensor_voltage",
+		"decoder": "decodeSensorOxigeno",
 		"description": "O2: Bank 1 - Sensor 2 Voltage",
 		"name": "O2_B1S2"
 	},
 	{
 		"bytes_response": 4,
 		"cmd": "0116",
-		"decoder": "sensor_voltage",
+		"decoder": "decodeSensorOxigeno",
 		"description": "O2: Bank 1 - Sensor 3 Voltage",
 		"name": "O2_B1S3"
 	},
 	{
 		"bytes_response": 4,
 		"cmd": "0117",
-		"decoder": "sensor_voltage",
+		"decoder": "decodeSensorOxigeno",
 		"description": "O2: Bank 1 - Sensor 4 Voltage",
 		"name": "O2_B1S4"
 	},
 	{
 		"bytes_response": 4,
 		"cmd": "0118",
-		"decoder": "sensor_voltage",
+		"decoder": "decodeSensorOxigeno",
 		"description": "O2: Bank 2 - Sensor 1 Voltage",
 		"name": "O2_B2S1"
 	},
 	{
 		"bytes_response": 4,
 		"cmd": "0119",
-		"decoder": "sensor_voltage",
+		"decoder": "decodeSensorOxigeno",
 		"description": "O2: Bank 2 - Sensor 2 Voltage",
 		"name": "O2_B2S2"
 	},
 	{
 		"bytes_response": 4,
 		"cmd": "011A",
-		"decoder": "sensor_voltage",
+		"decoder": "decodeSensorOxigeno",
 		"description": "O2: Bank 2 - Sensor 3 Voltage",
 		"name": "O2_B2S3"
 	},
 	{
 		"bytes_response": 4,
 		"cmd": "011B",
-		"decoder": "sensor_voltage",
+		"decoder": "decodeSensorOxigeno",
 		"description": "O2: Bank 2 - Sensor 4 Voltage",
 		"name": "O2_B2S4"
 	},
@@ -219,7 +219,7 @@
 	{
 		"bytes_response": 4,
 		"cmd": "011F",
-		"decoder": "uas(0x12)",
+		"decoder": "decodeHexToDec",
 		"description": "Engine Run Time",
 		"name": "RUN_TIME"
 	},
@@ -233,8 +233,120 @@
 	{
 		"bytes_response": 4,
 		"cmd": "0121",
-		"decoder": "uas(0x25)",
+		"decoder": "decodeHexToDec",
 		"description": "Distance Traveled with MIL on",
 		"name": "DISTANCE_W_MIL"
-	}
+	},
+	{
+		"bytes_response": 4,
+		"cmd": "0122",
+		"decoder": "decodePresionCombColector",
+		"description": "Fuel Rail Pressure (relative to vacuum)",
+		"name": "FUEL_RAIL_PRESSURE_VAC"
+	},
+	{
+		"bytes_response": 4,
+		"cmd": "0123",
+		"decoder": "decodePresionMedidorCombustible",
+		"description": "Fuel Rail Pressure (direct inject)",
+		"name": "FUEL_RAIL_PRESSURE_DIRECT"
+	},
+	{
+		"bytes_response": 6,
+		"cmd": "0124",
+		"decoder": "",
+		"description": "02 Sensor 1 WR Lambda Voltage",
+		"name": "O2_S1_WR_VOLTAGE"
+	},
+	{
+		"bytes_response": 6,
+		"cmd": "0125",
+		"decoder": "",
+		"description": "02 Sensor 2 WR Lambda Voltage",
+		"name": "O2_S2_WR_VOLTAGE"
+	},
+	{
+		"bytes_response": 6,
+		"cmd": "0126",
+		"decoder": "",
+		"description": "02 Sensor 3 WR Lambda Voltage",
+		"name": "O2_S3_WR_VOLTAGE"
+	},
+	{
+		"bytes_response": 6,
+		"cmd": "0127",
+		"decoder": "",
+		"description": "02 Sensor 4 WR Lambda Voltage",
+		"name": "O2_S4_WR_VOLTAGE"
+	},
+	{
+		"bytes_response": 6,
+		"cmd": "0128",
+		"decoder": "",
+		"description": "02 Sensor 5 WR Lambda Voltage",
+		"name": "O2_S5_WR_VOLTAGE"
+	},
+	{
+		"bytes_response": 6,
+		"cmd": "0129",
+		"decoder": "",
+		"description": "02 Sensor 6 WR Lambda Voltage",
+		"name": "O2_S6_WR_VOLTAGE"
+	},
+	{
+		"bytes_response": 6,
+		"cmd": "012A",
+		"decoder": "",
+		"description": "02 Sensor 7 WR Lambda Voltage",
+		"name": "O2_S7_WR_VOLTAGE"
+	},
+	{
+		"bytes_response": 6,
+		"cmd": "012B",
+		"decoder": "",
+		"description": "02 Sensor 8 WR Lambda Voltage",
+		"name": "O2_S8_WR_VOLTAGE"
+	},
+	{
+		"bytes_response": 3,
+		"cmd": "012C",
+		"decoder": "decodeCargaPosicionEGR",
+		"description": "Commanded EGR",
+		"name": "COMMANDED_EGR"
+	},
+	{
+		"bytes_response": 3,
+		"cmd": "012D",
+		"decoder": "decodeAjusteCombustibleEGR",
+		"description": "EGR Error",
+		"name": "EGR_ERROR"
+	},
+	{
+		"bytes_response": 3,
+		"cmd": "012E",
+		"decoder": "decodeCargaPosicionEGR",
+		"description": "Commanded Evaporative Purge",
+		"name": "EVAPORATIVE_PURGE"
+	},
+	{
+		"bytes_response": 3,
+		"cmd": "012F",
+		"decoder": "decodeCargaPosicionEGR",
+		"description": "Fuel Level Input",
+		"name": "FUEL_LEVEL"
+	},
+	{
+		"bytes_response": 3,
+		"cmd": "0130",
+		"decoder": "decodeHexToDec",
+		"description": "Number of warm-ups since codes cleared",
+		"name": "WARMUPS_SINCE_DTC_CLEAR"
+	},
+	{
+		"bytes_response": 4,
+		"cmd": "0131",
+		"decoder": "decodeHexToDec",
+		"description": "Distance traveled since codes cleared",
+		"name": "DISTANCE_SINCE_DTC_CLEAR"
+	},
 ]

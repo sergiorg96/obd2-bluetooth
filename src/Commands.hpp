@@ -43,6 +43,13 @@ public:
 		return command;
 	}
 
+	std::string getCMDResponse() {
+		std::string CMDResponse;
+		CMDResponse = this->m_cmd;
+		CMDResponse.replace(0, 1, "4");
+		return CMDResponse;
+	}
+
 	void setName(std::string name) { this->m_name = name; }
 	void setDescription(std::string description) { this->m_description = description; }
 	void setCMD(std::string cmd) { this->m_cmd = cmd; }

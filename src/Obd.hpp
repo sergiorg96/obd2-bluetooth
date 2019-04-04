@@ -133,29 +133,29 @@ public:
 		close( sock );
 	}
 	
-	void initSend(const char *message){
-		int i = 0;
+	void send(Commands command){
 
 		//printf("Mensaje a enviar: %s\n", message);
 
-		std::thread t1(&Obd::polling, this);
-		while(1){
-			i++;
-			char *p;
-			char buf[1024];
-			int len;
+		std::thread t1(&Obd::polling, this, command);
 
-			std::cout << "Esperamos 5 segundos..." << std::endl;
-			std::this_thread::sleep_for(std::chrono::seconds(5));
-			std::cout << "Enviando mensaje "<< i << " ..." << std::endl;
+		char *p;
+		char buf[1024];
+		int len;
 
-			len = strlen(buf);
+		std::cout << "Esperamos 2 segundos..." << std::endl;
+		std::this_thread::sleep_for(std::chrono::seconds(2));
+		std::cout << "Enviando mensaje..." << std::endl;
 
-			strcpy(buf, message);
+		std::string message = command.getCMD();
+
+		len = strlen(buf);
+
+		strcpy(buf, message.c_str());
 
 			//Mirar si sustituir \n por \r directamente
-			buf[len] = '\r';
-			buf[len+1] = '\0';
+		buf[len] = '\r';
+		buf[len+1] = '\0';
 		
 			/* All  messages  to  the ELM327  must  be
 			 * terminated  with  a  carriage  return
@@ -171,13 +171,13 @@ public:
 			*/
 			//printf("Mensaje a enviar: %s\n", buf);
 
-			write(this->m_cli_s, buf, len);
+		write(this->m_cli_s, buf, len);
 			//std::cout << "Mensaje " << message << " enviado" << std::endl;
-		}
+
 		t1.join();
 	}
 
-	int polling(){
+	int polling(Commands command){
 		struct epoll_event ev, events[MAX_EP_EVTS];
 		/*
 		struct epoll_event {
@@ -198,6 +198,8 @@ public:
 
 		int epoll_fd, err, nfds;
 		int fd_out = fileno(stdout);
+
+		bool continuar = true;
 		//El parametro de epoll_create significa el número de file descriptor que un proceso quiere monitorizar
 		// y ayuda al Kernel a decidir el tamaño de la instancia epoll.
 		epoll_fd = epoll_create(1);
@@ -228,7 +230,7 @@ public:
 		}
 		printf("Polling function\n");
 		// Bucle infinito para el envío de datos por bluetooth al conector OBD
-		while(1) {
+		while(continuar) {
 		// Buffer para enviar y recibir
 			char message_rcv[1024], buf[1024], *p;
 			ssize_t len;
@@ -276,18 +278,23 @@ public:
 							p++;
 						}
 						//Transformar respuesta
-						char *ocurrencia = strstr(message_rcv, "410D");
+						//char *ocurrencia = strstr(message_rcv, "410D");
+
+
+
+						char *ocurrencia = strstr(message_rcv, command.getCMDResponse().c_str());
 						//printf("He recibido: %s\n", message_rcv);
 						if (ocurrencia != NULL)
 						{
 							printf("Ocurrencia encontrada\n");
 							char info[5];
 							memset(info, '\0', sizeof(info));
-							strncpy(info, ocurrencia + 4 , 3);
+							strncpy(info, ocurrencia + 4 , command.getBytesResponse());
 							printf("Info: %s\n", info);
 							//printf("Velocidad = %d km/h\n", decodeHexToDec(info));
-							printf("Velocidad = %.2f km/h\n", this->decoderFunctions["decodeHexToDec"](info));
+							printf("Velocidad = %.2f km/h\n", this->decoderFunctions[command.getDecoder().c_str()](info));
 							memset(message_rcv, '\0', sizeof(message_rcv));
+							continuar = false;
 						}
 					}
 
