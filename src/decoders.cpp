@@ -20,7 +20,7 @@ float decodeCargaPosicionEGR(char *response){
 
 //05 - Temperatura del líquido de enfriamiento del motor , -40 , 215 , ºC , A-40
 
-int decodeTempGeneral(char *response){
+float decodeTempGeneral(char *response){
 	int dec = (int)strtol(response, NULL, 16);
 	return dec-40;
 }
@@ -34,14 +34,14 @@ float decodeAjusteCombustibleEGR(char *response){
 
 //0a - Presión del combustible , 0 , 765 , kPa , 3A
 
-int decodePresionCombustible(char *response){
+float decodePresionCombustible(char *response){
 	int dec = (int)strtol(response, NULL, 16);
 	return 3*dec;
 }
 
 //0b - Presión absoluta del colector de admisión , 0 , 255 , kPa , A
 
-int decodeHexToDec(char *response){
+float decodeHexToDec(char *response){
 	int dec = (int)strtol(response, NULL, 16);
 	return dec;
 }

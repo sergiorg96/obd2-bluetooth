@@ -41,7 +41,8 @@ public:
 		else
 			printf("Device %s not found.\n", deviceName);
 		//if(this->m_status)
-			this->readFileData();
+		this->initDecoderFunctions();
+		this->readFileData();
 	}
       // Funciones miembro de la clase "Obd"
       //void getDato();
@@ -132,7 +133,7 @@ public:
 		close( sock );
 	}
 	
-	void send(const char *message){
+	void initSend(const char *message){
 		int i = 0;
 
 		//printf("Mensaje a enviar: %s\n", message);
@@ -284,7 +285,8 @@ public:
 							memset(info, '\0', sizeof(info));
 							strncpy(info, ocurrencia + 4 , 3);
 							printf("Info: %s\n", info);
-							printf("Velocidad = %d km/h\n", decodeHexToDec(info));
+							//printf("Velocidad = %d km/h\n", decodeHexToDec(info));
+							printf("Velocidad = %.2f km/h\n", this->decoderFunctions["decodeHexToDec"](info));
 							memset(message_rcv, '\0', sizeof(message_rcv));
 						}
 					}
@@ -301,7 +303,25 @@ public:
 		close(this->m_cli_s);
 	}
 
-
+	void initDecoderFunctions(){
+		//this->decoderFunctions["decodeHexToDec"] = decodeHexToDec;
+		this->decoderFunctions = {
+			{ "decodeCargaPosicionEGR", decodeCargaPosicionEGR},
+			{ "decodeTempGeneral", decodeTempGeneral},
+			{ "decodeAjusteCombustibleEGR", decodeAjusteCombustibleEGR},
+			{ "decodePresionCombustible", decodePresionCombustible},
+			{ "decodeHexToDec", decodeHexToDec},
+			{ "decodeRPM", decodeRPM},
+			{ "decodeAvanceTiempo", decodeAvanceTiempo},
+			{ "decodeVelocidadMAF", decodeVelocidadMAF},
+			{ "decodePresionCombColector", decodePresionCombColector},
+			{ "decodePresionMedidorCombustible", decodePresionMedidorCombustible},
+			{ "decodePresionVapor", decodePresionVapor},
+			{ "decodeTempCatalizador", decodeTempCatalizador},
+			{ "decodeVoltajeControl", decodeVoltajeControl},
+			{ "decodeRelacionCombAireBasica", decodeRelacionCombAireBasica}
+        };
+	}
 
 	void disconnectBluetooth(){
 		close(this->m_cli_s);
@@ -316,6 +336,7 @@ private:
       // Datos miembro de la clase "Obd"
    		//struct sockaddr_rc addr;
    		//int addr_len;
+	std::map<std::string, std::function<float(char *)>> decoderFunctions;
 	char dest[19] = { 0 };
 	int m_cli_s;
 	bool m_deviceFound = false;

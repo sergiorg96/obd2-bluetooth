@@ -13,7 +13,7 @@ int main(int argc, char **argv)
 
 	if(connection.isValid()){
 		std::cout << "Se ha creado correctamente" << std::endl;
-		connection.send(connection.map_commands.find("SPEED")->second.getCMD().c_str());
+		connection.initSend(connection.map_commands.find("SPEED")->second.getCMD().c_str());
 
 		connection.disconnectBluetooth();
 	} else {
