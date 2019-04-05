@@ -349,4 +349,214 @@
 		"description": "Distance traveled since codes cleared",
 		"name": "DISTANCE_SINCE_DTC_CLEAR"
 	},
+	{
+		"bytes_response": 4,
+		"cmd": "0132",
+		"decoder": "decodePresionVapor",
+		"description": "Evaporative system vapor pressure",
+		"name": "EVAP_VAPOR_PRESSURE"
+	},
+	{
+		"bytes_response": 3,
+		"cmd": "0133",
+		"decoder": "decodeHexToDec",
+		"description": "Barometric Pressure",
+		"name": "BAROMETRIC_PRESSURE"
+	},
+	{
+		"bytes_response": 6,
+		"cmd": "0134",
+		"decoder": "decodeRelacionCombAireActual",
+		"description": "02 Sensor 1 WR Lambda Current",
+		"name": "O2_S1_WR_CURRENT"
+	},
+	{
+		"bytes_response": 6,
+		"cmd": "0135",
+		"decoder": "decodeRelacionCombAireActual",
+		"description": "02 Sensor 2 WR Lambda Current",
+		"name": "O2_S2_WR_CURRENT"
+	},
+	{
+		"bytes_response": 6,
+		"cmd": "0136",
+		"decoder": "decodeRelacionCombAireActual",
+		"description": "02 Sensor 3 WR Lambda Current",
+		"name": "O2_S3_WR_CURRENT"
+	},
+	{
+		"bytes_response": 6,
+		"cmd": "0137",
+		"decoder": "decodeRelacionCombAireActual",
+		"description": "02 Sensor 4 WR Lambda Current",
+		"name": "O2_S4_WR_CURRENT"
+	},
+	{
+		"bytes_response": 6,
+		"cmd": "0138",
+		"decoder": "decodeRelacionCombAireActual",
+		"description": "02 Sensor 5 WR Lambda Current",
+		"name": "O2_S5_WR_CURRENT"
+	},
+	{
+		"bytes_response": 6,
+		"cmd": "0139",
+		"decoder": "decodeRelacionCombAireActual",
+		"description": "02 Sensor 6 WR Lambda Current",
+		"name": "O2_S6_WR_CURRENT"
+	},
+	{
+		"bytes_response": 6,
+		"cmd": "013A",
+		"decoder": "decodeRelacionCombAireActual",
+		"description": "02 Sensor 7 WR Lambda Current",
+		"name": "O2_S7_WR_CURRENT"
+	},
+	{
+		"bytes_response": 6,
+		"cmd": "013B",
+		"decoder": "decodeRelacionCombAireActual",
+		"description": "02 Sensor 8 WR Lambda Current",
+		"name": "O2_S8_WR_CURRENT"
+	},
+	{
+		"bytes_response": 4,
+		"cmd": "013C",
+		"decoder": "decodeTempCatalizador",
+		"description": "Catalyst Temperature: Bank 1 - Sensor 1",
+		"name": "CATALYST_TEMP_B1S1"
+	},
+	{
+		"bytes_response": 4,
+		"cmd": "013D",
+		"decoder": "decodeTempCatalizador",
+		"description": "Catalyst Temperature: Bank 2 - Sensor 1",
+		"name": "CATALYST_TEMP_B2S1"
+	},
+	{
+		"bytes_response": 4,
+		"cmd": "013E",
+		"decoder": "decodeTempCatalizador",
+		"description": "Catalyst Temperature: Bank 1 - Sensor 2",
+		"name": "CATALYST_TEMP_B1S2"
+	},
+	{
+		"bytes_response": 4,
+		"cmd": "013F",
+		"decoder": "decodeTempCatalizador",
+		"description": "Catalyst Temperature: Bank 2 - Sensor 2",
+		"name": "CATALYST_TEMP_B2S2"
+	},
+	{
+		"bytes_response": 6,
+		"cmd": "0140",
+		"decoder": "",
+		"description": "Supported PIDs [41-60]",
+		"name": "PIDS_C"
+	},
+	{
+		"bytes_response": 6,
+		"cmd": "0141",
+		"decoder": "",
+		"description": "Monitor status this drive cycle",
+		"name": "STATUS_DRIVE_CYCLE"
+	},
+	{
+		"bytes_response": 4,
+		"cmd": "0142",
+		"decoder": "decodeVoltajeControl",
+		"description": "Control module voltage",
+		"name": "CONTROL_MODULE_VOLTAGE"
+	},
+	{
+		"bytes_response": 4,
+		"cmd": "0143",
+		"decoder": "decodeCargaPosicionEGR",
+		"description": "Absolute load value",
+		"name": "ABSOLUTE_LOAD"
+	},
+	{
+		"bytes_response": 4,
+		"cmd": "0144",
+		"decoder": "decodeRelacionCombAireBasica",
+		"description": "Commanded equivalence ratio",
+		"name": "COMMANDED_EQUIV_RATIO"
+	},
+	{
+		"bytes_response": 3,
+		"cmd": "0145",
+		"decoder": "decodeCargaPosicionEGR",
+		"description": "Relative throttle position",
+		"name": "RELATIVE_THROTTLE_POS"
+	},
+	{
+		"bytes_response": 3,
+		"cmd": "0146",
+		"decoder": "decodeTempGeneral",
+		"description": "Ambient air temperature",
+		"name": "AMBIANT_AIR_TEMP"
+	},
+	{
+		"bytes_response": 3,
+		"cmd": "0147",
+		"decoder": "decodeCargaPosicionEGR",
+		"description": "Absolute throttle position B",
+		"name": "THROTTLE_POS_B"
+	},
+	{
+		"bytes_response": 3,
+		"cmd": "0148",
+		"decoder": "decodeCargaPosicionEGR",
+		"description": "Absolute throttle position C",
+		"name": "THROTTLE_POS_C"
+	},
+	{
+		"bytes_response": 3,
+		"cmd": "0149",
+		"decoder": "decodeCargaPosicionEGR",
+		"description": "Accelerator pedal position D",
+		"name": "ACCELERATOR_POS_D"
+	},
+	{
+		"bytes_response": 3,
+		"cmd": "014A",
+		"decoder": "decodeCargaPosicionEGR",
+		"description": "Accelerator pedal position E",
+		"name": "ACCELERATOR_POS_E"
+	},
+	{
+		"bytes_response": 3,
+		"cmd": "014B",
+		"decoder": "decodeCargaPosicionEGR",
+		"description": "Accelerator pedal position F",
+		"name": "ACCELERATOR_POS_F"
+	},
+	{
+		"bytes_response": 3,
+		"cmd": "014C",
+		"decoder": "decodeCargaPosicionEGR",
+		"description": "Commanded throttle actuator",
+		"name": "THROTTLE_ACTUATOR"
+	},
+	{
+		"bytes_response": 4,
+		"cmd": "014D",
+		"decoder": "",
+		"description": "Time run with MIL on",
+		"name": "RUN_TIME_MIL"
+	},
+	{
+		"bytes_response": 4,
+		"cmd": "014E",
+		"decoder": "",
+		"description": "Time since trouble codes cleared",
+		"name": "TIME_SINCE_DTC_CLEARED"
+	},
+	{
+		"bytes_response": 6,
+		"cmd": "014F",
+		"decoder": "decodeRelaciones",
+		"description": "Various Max values",
+		"name": "MAX_VALUES"
+	}
 ]
