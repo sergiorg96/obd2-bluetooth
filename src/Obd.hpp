@@ -153,9 +153,13 @@ public:
 
 		std::string message = command.getCMD();
 
-		strcpy(buf, messages.c_str());
+
+		strcpy(buf, message.c_str());
 
 		len = strlen(buf);
+		//strcpy(buf, "010C\n");
+
+
 
 			//Mirar si sustituir \n por \r directamente
 		buf[len] = '\n';
@@ -174,6 +178,7 @@ public:
 			}
 			
 			printf("Mensaje a enviar: %s\n", buf);
+			printf("Longitud: %d %d\n", strlen(buf), len);
 
 		write(this->m_cli_s, buf, strlen(buf));
 		}
@@ -270,7 +275,7 @@ public:
 						perror("socket read error");
 						continue;
 					}
-					printf("RECIBIDO: %s\n", buf);
+					//printf("RECIBIDO: %s\n", buf);
 					strcat(message_rcv, buf);
 					if(strstr(buf, ">") != NULL) {
 						len = strlen(message_rcv);
@@ -298,19 +303,20 @@ public:
 							memset(info, '\0', sizeof(info));
 							strncpy(info, ocurrencia + 4 , command.getBytesResponse());
 							printf("Info: %s\n", info);
-							//auto varResultado = this->decoderFunctions[command.getDecoder().c_str()](info);
+							auto varResultado = this->decoderFunctions[command.getDecoder().c_str()](info);
 							//printf("Velocidad = %d km/h\n", decodeHexToDec(info));
-							//std::cout << typeid(varResultado).name() << std::endl;
-							//if(typeid(varResultado) == typeid(float)){
+							std::cout << "Tipo de dato: "<< typeid(varResultado).name() << std::endl;
+							if(typeid(varResultado) == typeid(float)){
 								printf("Dato = %.2f \n", this->decoderFunctions[command.getDecoder().c_str()](info));
 								printf("-------------------------------------------------------------\n");
-							//} else {
-								//printf("No es del tipo float (Temp General)\n");
-							//}
+							} else {
+								printf("No es del tipo float (Temp General)\n");
+							}
 							memset(message_rcv, '\0', sizeof(message_rcv));
 							//continuar = false;
 						} else {
 							printf("Mensaje recibido no entendido!\n");
+							memset(message_rcv, '\0', sizeof(message_rcv));
 							//continuar = false;
 						}
 					}

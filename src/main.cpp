@@ -2,8 +2,8 @@
 
 int main(int argc, char **argv)
 {
-	if (argc != 2){
-		printf("Uso: ./main DEVICE-NAME\n");
+	if (argc != 3){
+		printf("Uso: ./main DEVICE-NAME DATO\n");
 		return 0;
 	}
 
@@ -12,7 +12,7 @@ int main(int argc, char **argv)
 	if(connection.isValid()){
 		std::cout << "Se ha conectado correctamente" << std::endl;
 
-		connection.send(connection.map_commands.find("RPM")->second);
+		connection.send(connection.map_commands.find(argv[2])->second);
 
 
 		connection.disconnectBluetooth();

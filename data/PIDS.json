@@ -39,7 +39,7 @@
 		"cmd": "0105",
 		"decoder": "decodeTempGeneral",
 		"description": "Engine Coolant Temperature",
-		"name": "ENGINE_COOLANTCAAMBIAR" 
+		"name": "ENGINE_COOLANT" 
 	},
 	{
 		"bytes_response": 2,
