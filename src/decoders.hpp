@@ -23,7 +23,7 @@ struct RelacionesResponse {
 //Declaración de funciones
 
 float decodeCargaPosicionEGR(char *response);
-float decodeTempGeneral(char *response);
+int decodeTempGeneral(char *response);
 float decodeAjusteCombustibleEGR(char *response);
 float decodePresionCombustible(char *response);
 float decodeHexToDec(char *response);

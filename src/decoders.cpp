@@ -20,7 +20,7 @@ float decodeCargaPosicionEGR(char *response){
 
 //05 - Temperatura del líquido de enfriamiento del motor , -40 , 215 , ºC , A-40
 
-float decodeTempGeneral(char *response){
+int decodeTempGeneral(char *response){
 	int dec = (int)strtol(response, NULL, 16);
 	return dec-40;
 }

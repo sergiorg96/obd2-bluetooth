@@ -1,13 +1,13 @@
 [
 	{
-		"bytes_response": 6, 
+		"bytes_response": 8, 
 		"cmd": "0100",
 		"decoder": "pid",
 		"description": "Supported PIDs [01-20]",
 		"name": "PIDS_A"
 	},
 	{
-		"bytes_response": 6, 
+		"bytes_response": 8, 
 		"cmd": "0101",
 		"decoder": "status",
 		"description": "Status since DTCs cleared",
@@ -28,56 +28,56 @@
 		"name": "FUEL_STATUS"
 	},
 	{
-		"bytes_response": 3,
+		"bytes_response": 2,
 		"cmd": "0104",
 		"decoder": "decodeCargaPosicionEGR",
 		"description": "Calculated Engine Load",
 		"name": "ENGINE_LOAD"
 	},
 	{
-		"bytes_response": 3,
+		"bytes_response": 2,
 		"cmd": "0105",
 		"decoder": "decodeTempGeneral",
 		"description": "Engine Coolant Temperature",
-		"name": "COOLANT_TEMP"
+		"name": "ENGINE_COOLANTCAAMBIAR" 
 	},
 	{
-		"bytes_response": 3,
+		"bytes_response": 2,
 		"cmd": "0106",
 		"decoder": "decodeAjusteCombustibleEGR",
 		"description": "Short Term Fuel Trim - Bank 1",
 		"name": "SHORT_FUEL_TRIM_1" 
 	},
 	{
-		"bytes_response": 3,
+		"bytes_response": 2,
 		"cmd": "0107",
 		"decoder": "decodeAjusteCombustibleEGR",
 		"description": "Long Term Fuel Trim - Bank 1",
 		"name": "LONG_FUEL_TRIM_1"
 	},
 	{
-		"bytes_response": 3,
+		"bytes_response": 2,
 		"cmd": "0108",
 		"decoder": "decodeAjusteCombustibleEGR",
 		"description": "Short Term Fuel Trim - Bank 2",
 		"name": "SHORT_FUEL_TRIM_2"
 	},
 	{
-		"bytes_response": 3,
+		"bytes_response": 2,
 		"cmd": "0109",
 		"decoder": "decodeAjusteCombustibleEGR",
 		"description": "Long Term Fuel Trim - Bank 2",
 		"name": "LONG_FUEL_TRIM_2"
 	},
 	{
-		"bytes_response": 3,
+		"bytes_response": 2,
 		"cmd": "010A",
 		"decoder": "decodePresionCombustible",
 		"description": "Fuel Pressure",
 		"name": "FUEL_PRESSURE"
 	},
 	{
-		"bytes_response": 3,
+		"bytes_response": 2,
 		"cmd": "010B",
 		"decoder": "decodeHexToDec",
 		"description": "Intake Manifold Pressure",
@@ -91,21 +91,21 @@
 		"name": "RPM"
 	},
 	{
-		"bytes_response": 3,
+		"bytes_response": 2,
 		"cmd": "010D",
 		"decoder": "decodeHexToDec",
 		"description": "Vehicle Speed",
 		"name": "SPEED"
 	},
 	{
-		"bytes_response": 3,
+		"bytes_response": 2,
 		"cmd": "010E",
 		"decoder": "decodeAvanceTiempo",
 		"description": "Timing Advance",
 		"name": "TIMING_ADVANCE"
 	},
 	{
-		"bytes_response": 3,
+		"bytes_response": 2,
 		"cmd": "010F",
 		"decoder": "decodeTempGeneral",
 		"description": "Intake Air Temp",
@@ -119,21 +119,21 @@
 		"name": "MAF"
 	},
 	{
-		"bytes_response": 3,
+		"bytes_response": 2,
 		"cmd": "0111",
 		"decoder": "decodeCargaPosicionEGR",
 		"description": "Throttle Position",
 		"name": "THROTTLE_POS"
 	},
 	{
-		"bytes_response": 3,
+		"bytes_response": 2,
 		"cmd": "0112",
 		"decoder": "air_status",
 		"description": "Secondary Air Status",
 		"name": "AIR_STATUS"
 	},
 	{
-		"bytes_response": 3,
+		"bytes_response": 2,
 		"cmd": "0113",
 		"decoder": "o2_sensors",
 		"description": "O2 Sensors Present",
@@ -196,21 +196,21 @@
 		"name": "O2_B2S4"
 	},
 	{
-		"bytes_response": 3,
+		"bytes_response": 2,
 		"cmd": "011C",
 		"decoder": "obd_compliance",
 		"description": "OBD Standards Compliance",
 		"name": "OBD_COMPLIANCE"
 	},
 	{
-		"bytes_response": 3,
+		"bytes_response": 2,
 		"cmd": "011D",
 		"decoder": "o2_sensors_alt",
 		"description": "O2 Sensors Present (alternate)",
 		"name": "O2_SENSORS_ALT"
 	},
 	{
-		"bytes_response": 3,
+		"bytes_response": 2,
 		"cmd": "011E",
 		"decoder": "aux_input_status",
 		"description": "Auxiliary input status (power take off)",
@@ -224,7 +224,7 @@
 		"name": "RUN_TIME"
 	},
 	{
-		"bytes_response": 6,
+		"bytes_response": 8,
 		"cmd": "0120",
 		"decoder": "pid",
 		"description": "Supported PIDs [21-40]",
@@ -252,91 +252,91 @@
 		"name": "FUEL_RAIL_PRESSURE_DIRECT"
 	},
 	{
-		"bytes_response": 6,
+		"bytes_response": 8,
 		"cmd": "0124",
 		"decoder": "",
 		"description": "02 Sensor 1 WR Lambda Voltage",
 		"name": "O2_S1_WR_VOLTAGE"
 	},
 	{
-		"bytes_response": 6,
+		"bytes_response": 8,
 		"cmd": "0125",
 		"decoder": "",
 		"description": "02 Sensor 2 WR Lambda Voltage",
 		"name": "O2_S2_WR_VOLTAGE"
 	},
 	{
-		"bytes_response": 6,
+		"bytes_response": 8,
 		"cmd": "0126",
 		"decoder": "",
 		"description": "02 Sensor 3 WR Lambda Voltage",
 		"name": "O2_S3_WR_VOLTAGE"
 	},
 	{
-		"bytes_response": 6,
+		"bytes_response": 8,
 		"cmd": "0127",
 		"decoder": "",
 		"description": "02 Sensor 4 WR Lambda Voltage",
 		"name": "O2_S4_WR_VOLTAGE"
 	},
 	{
-		"bytes_response": 6,
+		"bytes_response": 8,
 		"cmd": "0128",
 		"decoder": "",
 		"description": "02 Sensor 5 WR Lambda Voltage",
 		"name": "O2_S5_WR_VOLTAGE"
 	},
 	{
-		"bytes_response": 6,
+		"bytes_response": 8,
 		"cmd": "0129",
 		"decoder": "",
 		"description": "02 Sensor 6 WR Lambda Voltage",
 		"name": "O2_S6_WR_VOLTAGE"
 	},
 	{
-		"bytes_response": 6,
+		"bytes_response": 8,
 		"cmd": "012A",
 		"decoder": "",
 		"description": "02 Sensor 7 WR Lambda Voltage",
 		"name": "O2_S7_WR_VOLTAGE"
 	},
 	{
-		"bytes_response": 6,
+		"bytes_response": 8,
 		"cmd": "012B",
 		"decoder": "",
 		"description": "02 Sensor 8 WR Lambda Voltage",
 		"name": "O2_S8_WR_VOLTAGE"
 	},
 	{
-		"bytes_response": 3,
+		"bytes_response": 2,
 		"cmd": "012C",
 		"decoder": "decodeCargaPosicionEGR",
 		"description": "Commanded EGR",
 		"name": "COMMANDED_EGR"
 	},
 	{
-		"bytes_response": 3,
+		"bytes_response": 2,
 		"cmd": "012D",
 		"decoder": "decodeAjusteCombustibleEGR",
 		"description": "EGR Error",
 		"name": "EGR_ERROR"
 	},
 	{
-		"bytes_response": 3,
+		"bytes_response": 2,
 		"cmd": "012E",
 		"decoder": "decodeCargaPosicionEGR",
 		"description": "Commanded Evaporative Purge",
 		"name": "EVAPORATIVE_PURGE"
 	},
 	{
-		"bytes_response": 3,
+		"bytes_response": 2,
 		"cmd": "012F",
 		"decoder": "decodeCargaPosicionEGR",
 		"description": "Fuel Level Input",
 		"name": "FUEL_LEVEL"
 	},
 	{
-		"bytes_response": 3,
+		"bytes_response": 2,
 		"cmd": "0130",
 		"decoder": "decodeHexToDec",
 		"description": "Number of warm-ups since codes cleared",
@@ -357,63 +357,63 @@
 		"name": "EVAP_VAPOR_PRESSURE"
 	},
 	{
-		"bytes_response": 3,
+		"bytes_response": 2,
 		"cmd": "0133",
 		"decoder": "decodeHexToDec",
 		"description": "Barometric Pressure",
 		"name": "BAROMETRIC_PRESSURE"
 	},
 	{
-		"bytes_response": 6,
+		"bytes_response": 8,
 		"cmd": "0134",
 		"decoder": "decodeRelacionCombAireActual",
 		"description": "02 Sensor 1 WR Lambda Current",
 		"name": "O2_S1_WR_CURRENT"
 	},
 	{
-		"bytes_response": 6,
+		"bytes_response": 8,
 		"cmd": "0135",
 		"decoder": "decodeRelacionCombAireActual",
 		"description": "02 Sensor 2 WR Lambda Current",
 		"name": "O2_S2_WR_CURRENT"
 	},
 	{
-		"bytes_response": 6,
+		"bytes_response": 8,
 		"cmd": "0136",
 		"decoder": "decodeRelacionCombAireActual",
 		"description": "02 Sensor 3 WR Lambda Current",
 		"name": "O2_S3_WR_CURRENT"
 	},
 	{
-		"bytes_response": 6,
+		"bytes_response": 8,
 		"cmd": "0137",
 		"decoder": "decodeRelacionCombAireActual",
 		"description": "02 Sensor 4 WR Lambda Current",
 		"name": "O2_S4_WR_CURRENT"
 	},
 	{
-		"bytes_response": 6,
+		"bytes_response": 8,
 		"cmd": "0138",
 		"decoder": "decodeRelacionCombAireActual",
 		"description": "02 Sensor 5 WR Lambda Current",
 		"name": "O2_S5_WR_CURRENT"
 	},
 	{
-		"bytes_response": 6,
+		"bytes_response": 8,
 		"cmd": "0139",
 		"decoder": "decodeRelacionCombAireActual",
 		"description": "02 Sensor 6 WR Lambda Current",
 		"name": "O2_S6_WR_CURRENT"
 	},
 	{
-		"bytes_response": 6,
+		"bytes_response": 8,
 		"cmd": "013A",
 		"decoder": "decodeRelacionCombAireActual",
 		"description": "02 Sensor 7 WR Lambda Current",
 		"name": "O2_S7_WR_CURRENT"
 	},
 	{
-		"bytes_response": 6,
+		"bytes_response": 8,
 		"cmd": "013B",
 		"decoder": "decodeRelacionCombAireActual",
 		"description": "02 Sensor 8 WR Lambda Current",
@@ -448,14 +448,14 @@
 		"name": "CATALYST_TEMP_B2S2"
 	},
 	{
-		"bytes_response": 6,
+		"bytes_response": 8,
 		"cmd": "0140",
 		"decoder": "",
 		"description": "Supported PIDs [41-60]",
 		"name": "PIDS_C"
 	},
 	{
-		"bytes_response": 6,
+		"bytes_response": 8,
 		"cmd": "0141",
 		"decoder": "",
 		"description": "Monitor status this drive cycle",
@@ -483,56 +483,56 @@
 		"name": "COMMANDED_EQUIV_RATIO"
 	},
 	{
-		"bytes_response": 3,
+		"bytes_response": 2,
 		"cmd": "0145",
 		"decoder": "decodeCargaPosicionEGR",
 		"description": "Relative throttle position",
 		"name": "RELATIVE_THROTTLE_POS"
 	},
 	{
-		"bytes_response": 3,
+		"bytes_response": 2,
 		"cmd": "0146",
 		"decoder": "decodeTempGeneral",
 		"description": "Ambient air temperature",
 		"name": "AMBIANT_AIR_TEMP"
 	},
 	{
-		"bytes_response": 3,
+		"bytes_response": 2,
 		"cmd": "0147",
 		"decoder": "decodeCargaPosicionEGR",
 		"description": "Absolute throttle position B",
 		"name": "THROTTLE_POS_B"
 	},
 	{
-		"bytes_response": 3,
+		"bytes_response": 2,
 		"cmd": "0148",
 		"decoder": "decodeCargaPosicionEGR",
 		"description": "Absolute throttle position C",
 		"name": "THROTTLE_POS_C"
 	},
 	{
-		"bytes_response": 3,
+		"bytes_response": 2,
 		"cmd": "0149",
 		"decoder": "decodeCargaPosicionEGR",
 		"description": "Accelerator pedal position D",
 		"name": "ACCELERATOR_POS_D"
 	},
 	{
-		"bytes_response": 3,
+		"bytes_response": 2,
 		"cmd": "014A",
 		"decoder": "decodeCargaPosicionEGR",
 		"description": "Accelerator pedal position E",
 		"name": "ACCELERATOR_POS_E"
 	},
 	{
-		"bytes_response": 3,
+		"bytes_response": 2,
 		"cmd": "014B",
 		"decoder": "decodeCargaPosicionEGR",
 		"description": "Accelerator pedal position F",
 		"name": "ACCELERATOR_POS_F"
 	},
 	{
-		"bytes_response": 3,
+		"bytes_response": 2,
 		"cmd": "014C",
 		"decoder": "decodeCargaPosicionEGR",
 		"description": "Commanded throttle actuator",
@@ -553,7 +553,7 @@
 		"name": "TIME_SINCE_DTC_CLEARED"
 	},
 	{
-		"bytes_response": 6,
+		"bytes_response": 8,
 		"cmd": "014F",
 		"decoder": "decodeRelaciones",
 		"description": "Various Max values",

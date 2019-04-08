@@ -8,6 +8,8 @@
 #include <utility>
 #include <map>
 
+#include <typeinfo>
+
 #include <netinet/in.h>
 #include <arpa/inet.h>
 #include <sys/types.h>
@@ -37,7 +39,7 @@ public:
 	Obd(char *deviceName){
 		this->discoverDeviceAddress(deviceName, this->dest);
 		if(this->m_deviceFound)
-			this->connectBluetooth(dest);
+			this->connectBluetooth();
 		else
 			printf("Device %s not found.\n", deviceName);
 		//if(this->m_status)
@@ -47,7 +49,7 @@ public:
       // Funciones miembro de la clase "Obd"
       //void getDato();
       //void setDato(int dato);
-	void connectBluetooth(char *dest){
+	void connectBluetooth(){
 		try{
 			struct sockaddr_rc addr;
 			int statusConnection;
@@ -60,10 +62,10 @@ public:
 			}
 			//Faltaría sustituir automaticamente la MAC
 			addr.rc_family = AF_BLUETOOTH;
-			str2ba(dest, &addr.rc_bdaddr );
+			str2ba(this->dest, &addr.rc_bdaddr );
 			addr.rc_channel = (uint8_t) 1;
 
-			printf("connecting to %s (channel %d)\n", dest, addr.rc_channel);
+			printf("connecting to %s (channel %d)\n", this->dest, addr.rc_channel);
 
 			// connect to server, throw socket s (m_cli_s -> descriptor)
 			statusConnection = connect(this->m_cli_s, (struct sockaddr *)&addr, sizeof(addr));
@@ -126,6 +128,7 @@ public:
 				this->m_deviceFound = true;
 				strcpy(deviceAddress, addr);
 				printf("Dispositivo %s encontrado\n", deviceName);
+				break;
 			}
 		}
 
@@ -143,37 +146,38 @@ public:
 		char buf[1024];
 		int len;
 
-		std::cout << "Esperamos 2 segundos..." << std::endl;
-		std::this_thread::sleep_for(std::chrono::seconds(2));
+		while(1){
+		std::cout << "Esperamos 5 segundos..." << std::endl;
+		std::this_thread::sleep_for(std::chrono::seconds(5));
 		std::cout << "Enviando mensaje..." << std::endl;
 
 		std::string message = command.getCMD();
 
+		strcpy(buf, messages.c_str());
+
 		len = strlen(buf);
 
-		strcpy(buf, message.c_str());
-
 			//Mirar si sustituir \n por \r directamente
-		buf[len] = '\r';
+		buf[len] = '\n';
 		buf[len+1] = '\0';
 		
 			/* All  messages  to  the ELM327  must  be
 			 * terminated  with  a  carriage  return
 			 * character  (hex  ‘0D’, \r).
 			 */
-			/*
+		
 			p = buf;
 			while (*p) {
 				if (*p == '\n')
 					*p = '\r';
 				p++;
 			}
-			*/
-			//printf("Mensaje a enviar: %s\n", buf);
+			
+			printf("Mensaje a enviar: %s\n", buf);
 
-		write(this->m_cli_s, buf, len);
+		write(this->m_cli_s, buf, strlen(buf));
+		}
 			//std::cout << "Mensaje " << message << " enviado" << std::endl;
-
 		t1.join();
 	}
 
@@ -266,6 +270,7 @@ public:
 						perror("socket read error");
 						continue;
 					}
+					printf("RECIBIDO: %s\n", buf);
 					strcat(message_rcv, buf);
 					if(strstr(buf, ">") != NULL) {
 						len = strlen(message_rcv);
@@ -279,9 +284,11 @@ public:
 						}
 						//Transformar respuesta
 						//char *ocurrencia = strstr(message_rcv, "410D");
+						printf("Mensaje recibido:\n%s", message_rcv);
 
 
 
+						printf("\nComparación con: %s\n", command.getCMDResponse().c_str());
 						char *ocurrencia = strstr(message_rcv, command.getCMDResponse().c_str());
 						//printf("He recibido: %s\n", message_rcv);
 						if (ocurrencia != NULL)
@@ -291,10 +298,20 @@ public:
 							memset(info, '\0', sizeof(info));
 							strncpy(info, ocurrencia + 4 , command.getBytesResponse());
 							printf("Info: %s\n", info);
+							//auto varResultado = this->decoderFunctions[command.getDecoder().c_str()](info);
 							//printf("Velocidad = %d km/h\n", decodeHexToDec(info));
-							printf("Velocidad = %.2f km/h\n", this->decoderFunctions[command.getDecoder().c_str()](info));
+							//std::cout << typeid(varResultado).name() << std::endl;
+							//if(typeid(varResultado) == typeid(float)){
+								printf("Dato = %.2f \n", this->decoderFunctions[command.getDecoder().c_str()](info));
+								printf("-------------------------------------------------------------\n");
+							//} else {
+								//printf("No es del tipo float (Temp General)\n");
+							//}
 							memset(message_rcv, '\0', sizeof(message_rcv));
-							continuar = false;
+							//continuar = false;
+						} else {
+							printf("Mensaje recibido no entendido!\n");
+							//continuar = false;
 						}
 					}
 

@@ -2,8 +2,6 @@
 
 int main(int argc, char **argv)
 {
-	char str[] = "¡Esto es una prueba!";
-
 	if (argc != 2){
 		printf("Uso: ./main DEVICE-NAME\n");
 		return 0;
@@ -12,9 +10,9 @@ int main(int argc, char **argv)
 	Obd connection = Obd(argv[1]);
 
 	if(connection.isValid()){
-		std::cout << "Se ha creado correctamente" << std::endl;
-		//connection.send(connection.map_commands.find("SPEED")->second.getCMD().c_str());
-		connection.send(connection.map_commands.find("SPEED")->second);
+		std::cout << "Se ha conectado correctamente" << std::endl;
+
+		connection.send(connection.map_commands.find("RPM")->second);
 
 
 		connection.disconnectBluetooth();
@@ -28,7 +26,7 @@ int main(int argc, char **argv)
 			std::cout << "\t" << connection.vec_commands[i].getName() << "\t\t" << connection.vec_commands[i].getCMD() << std::endl;	
 		}
 		*/
-		std::cout << "Comando a ejecutar: " << connection.map_commands.find("SPEED")->second.getCMD() << std::endl;
+		//std::cout << "Comando a ejecutar: " << connection.map_commands.find("RPM")->second.getCMD() << std::endl;
 	}
 
 	return 0;
