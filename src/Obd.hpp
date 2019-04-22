@@ -178,7 +178,7 @@ public:
 			}
 			
 			printf("Mensaje a enviar: %s\n", buf);
-			printf("Longitud: %d %d\n", strlen(buf), len);
+			printf("Longitud: %d %d\n", (int) strlen(buf), len);
 
 		write(this->m_cli_s, buf, strlen(buf));
 		}
@@ -299,19 +299,38 @@ public:
 						if (ocurrencia != NULL)
 						{
 							printf("Ocurrencia encontrada\n");
-							char info[5];
+							char info[20];
 							memset(info, '\0', sizeof(info));
 							strncpy(info, ocurrencia + 4 , command.getBytesResponse());
 							printf("Info: %s\n", info);
-							auto varResultado = this->decoderFunctions[command.getDecoder().c_str()](info);
-							//printf("Velocidad = %d km/h\n", decodeHexToDec(info));
-							std::cout << "Tipo de dato: "<< typeid(varResultado).name() << std::endl;
-							if(typeid(varResultado) == typeid(float)){
-								printf("Dato = %.2f \n", this->decoderFunctions[command.getDecoder().c_str()](info));
-								printf("-------------------------------------------------------------\n");
+							std::string type_data = command.getTypeData();
+							//HAY QUE CAMBIAR DECODERFUNCTIONS
+							if (!type_data.compare("float")){
+								auto varResultado = this->decoderFunctionsFloat[command.getDecoder().c_str()](info);
+								std::cout << "Tipo de dato: "<< typeid(varResultado).name() << std::endl;
+								std::cout << command.getName() << " - " << command.getDescription() << " - Min=" << command.getMIN() << " Max=" << command.getMAX() << std::endl;
+								std::cout << "-> " << varResultado << " "<< command.getUnits() << std::endl;
+							} else if(!type_data.compare("OxigenoResponse")){
+								auto varResultado = this->decoderFunctionsStructOx[command.getDecoder().c_str()](info);
+								std::cout << "Tipo de dato: "<< typeid(varResultado).name() << std::endl;
+								std::cout << command.getName() << " - " << command.getDescription() << " - Min=" << command.getMIN() << " Max=" << command.getMAX() << std::endl;
+								std::cout << "-> " << varResultado.A << "/" << varResultado.B << " "<< command.getUnits() << std::endl;
+							} else if (!type_data.compare("RelacionesResponse")) {
+								auto varResultado = this->decoderFunctionsStructRel[command.getDecoder().c_str()](info);
+								std::cout << "Tipo de dato: "<< typeid(varResultado).name() << std::endl;
+								std::cout << command.getName() << " - " << command.getDescription() << " - Min=" << command.getMIN() << " Max=" << command.getMAX() << std::endl;
+								std::cout << "-> " << varResultado.A << "/" << varResultado.B << "/" << varResultado.C << "/" << varResultado.D << " "<< command.getUnits() << std::endl;
 							} else {
-								printf("No es del tipo float (Temp General)\n");
+								std::cout << "Tipo de dato no reconocido" << std::endl;
 							}
+							std::cout << "--------------------------------------------------------------" << std::endl;
+							//printf("Velocidad = %d km/h\n", decodeHexToDec(info));
+							//if(typeid(varResultado) == typeid(float)){
+								//printf("Dato = %.2f \n", this->decoderFunctions[command.getDecoder().c_str()](info));
+								//printf("-------------------------------------------------------------\n");
+							//} else {
+								//printf("No es del tipo float (Temp General)\n");
+							//}
 							memset(message_rcv, '\0', sizeof(message_rcv));
 							//continuar = false;
 						} else {
@@ -335,7 +354,7 @@ public:
 
 	void initDecoderFunctions(){
 		//this->decoderFunctions["decodeHexToDec"] = decodeHexToDec;
-		this->decoderFunctions = {
+		this->decoderFunctionsFloat = {
 			{ "decodeCargaPosicionEGR", decodeCargaPosicionEGR},
 			{ "decodeTempGeneral", decodeTempGeneral},
 			{ "decodeAjusteCombustibleEGR", decodeAjusteCombustibleEGR},
@@ -351,6 +370,13 @@ public:
 			{ "decodeVoltajeControl", decodeVoltajeControl},
 			{ "decodeRelacionCombAireBasica", decodeRelacionCombAireBasica}
         };
+		this->decoderFunctionsStructOx = {
+			{ "decodeSensorOxigeno", decodeSensorOxigeno},
+			{ "decodeRelacionCombAire", decodeRelacionCombAire},
+			{ "decodeRelacionCombAireActual", decodeRelacionCombAireActual}
+		};
+
+		this->decoderFunctionsStructRel["decodeRelaciones"] = decodeRelaciones;
 	}
 
 	void disconnectBluetooth(){
@@ -366,7 +392,9 @@ private:
       // Datos miembro de la clase "Obd"
    		//struct sockaddr_rc addr;
    		//int addr_len;
-	std::map<std::string, std::function<float(char *)>> decoderFunctions;
+	std::map<std::string, std::function<float(char *)>> decoderFunctionsFloat;
+	std::map<std::string, std::function<struct OxigenoResponse(char *)>> decoderFunctionsStructOx;
+	std::map<std::string, std::function<struct RelacionesResponse(char *)>> decoderFunctionsStructRel;
 	char dest[19] = { 0 };
 	int m_cli_s;
 	bool m_deviceFound = false;

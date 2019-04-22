@@ -18,6 +18,8 @@ int main(int argc, char **argv)
 		connection.disconnectBluetooth();
 	} else {
 		std::cout << "No se ha conectado correctamente" << std::endl;
+
+		connection.map_commands.find(argv[2])->second;
 		/*
 		std::cout << "Lista de comandos disponibles:" << std::endl << std::endl;
 		std::cout << "\tComando\t\tBytes" << std::endl;

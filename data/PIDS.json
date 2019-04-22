@@ -4,559 +4,879 @@
 		"cmd": "0100",
 		"decoder": "pid",
 		"description": "Supported PIDs [01-20]",
-		"name": "PIDS_A"
+		"name": "PIDS_A",
+		"min_unit": 0,
+		"max_unit": 0,
+		"units": "No units",
+		"type_data": "bitset"
 	},
 	{
 		"bytes_response": 8, 
 		"cmd": "0101",
 		"decoder": "status",
 		"description": "Status since DTCs cleared",
-		"name": "STATUS"	
+		"name": "STATUS",
+		"min_unit": 0,
+		"max_unit": 0,
+		"units": "No units",
+		"type_data":	
 	},
 	{
 		"bytes_response": 4,
 		"cmd": "0102",
 		"decoder": "single_dtc",
 		"description": "DTC that triggered the freeze frame",
-		"name": "FREEZE_DTC"
+		"name": "FREEZE_DTC",
+		"min_unit": 0,
+		"max_unit": 0,
+		"units": ,
+		"type_data":
 	},
 	{
 		"bytes_response": 4,
 		"cmd": "0103",
 		"decoder": "fuel_status",
 		"description": "Fuel System Status",
-		"name": "FUEL_STATUS"
+		"name": "FUEL_STATUS",
+		"min_unit": 0,
+		"max_unit": 0,
+		"units": ,
+		"type_data":
 	},
 	{
 		"bytes_response": 2,
 		"cmd": "0104",
 		"decoder": "decodeCargaPosicionEGR",
 		"description": "Calculated Engine Load",
-		"name": "ENGINE_LOAD"
+		"name": "ENGINE_LOAD",
+		"min_unit": 0,
+		"max_unit": 100,
+		"units": "%",
+		"type_data": "float"
 	},
 	{
 		"bytes_response": 2,
 		"cmd": "0105",
 		"decoder": "decodeTempGeneral",
 		"description": "Engine Coolant Temperature",
-		"name": "ENGINE_COOLANT" 
+		"name": "ENGINE_COOLANT",
+		"min_unit": -40,
+		"max_unit": 215,
+		"units": "°C",
+		"type_data": "float"
 	},
 	{
 		"bytes_response": 2,
 		"cmd": "0106",
 		"decoder": "decodeAjusteCombustibleEGR",
 		"description": "Short Term Fuel Trim - Bank 1",
-		"name": "SHORT_FUEL_TRIM_1" 
+		"name": "SHORT_FUEL_TRIM_1",
+		"min_unit": -100,
+		"max_unit": 99.2,
+		"units": "%",
+		"type_data": "float"
 	},
 	{
 		"bytes_response": 2,
 		"cmd": "0107",
 		"decoder": "decodeAjusteCombustibleEGR",
 		"description": "Long Term Fuel Trim - Bank 1",
-		"name": "LONG_FUEL_TRIM_1"
+		"name": "LONG_FUEL_TRIM_1",
+		"min_unit": -100,
+		"max_unit": 99.2,
+		"units": "%",
+		"type_data": "float"
 	},
 	{
 		"bytes_response": 2,
 		"cmd": "0108",
 		"decoder": "decodeAjusteCombustibleEGR",
 		"description": "Short Term Fuel Trim - Bank 2",
-		"name": "SHORT_FUEL_TRIM_2"
+		"name": "SHORT_FUEL_TRIM_2",
+		"min_unit": -100,
+		"max_unit": 99.2,
+		"units": "%",
+		"type_data": "float"
 	},
 	{
 		"bytes_response": 2,
 		"cmd": "0109",
 		"decoder": "decodeAjusteCombustibleEGR",
 		"description": "Long Term Fuel Trim - Bank 2",
-		"name": "LONG_FUEL_TRIM_2"
+		"name": "LONG_FUEL_TRIM_2",
+		"min_unit": -100,
+		"max_unit": 99.2,
+		"units": "%",
+		"type_data": "float"
 	},
 	{
 		"bytes_response": 2,
 		"cmd": "010A",
 		"decoder": "decodePresionCombustible",
 		"description": "Fuel Pressure",
-		"name": "FUEL_PRESSURE"
+		"name": "FUEL_PRESSURE",
+		"min_unit": 0,
+		"max_unit": 765,
+		"units": "kPa",
+		"type_data": "float"
 	},
 	{
 		"bytes_response": 2,
 		"cmd": "010B",
 		"decoder": "decodeHexToDec",
 		"description": "Intake Manifold Pressure",
-		"name": "INTAKE_PRESSURE"
+		"name": "INTAKE_PRESSURE",
+		"min_unit": 0,
+		"max_unit": 255,
+		"units": "kPa",
+		"type_data": "float"
 	},
 	{
 		"bytes_response": 4,
 		"cmd": "010C",
 		"decoder": "decodeRPM",
 		"description": "Engine RPM",
-		"name": "RPM"
+		"name": "RPM",
+		"min_unit": 0,
+		"max_unit": 16383.75,
+		"units": "rpm",
+		"type_data": "float"
 	},
 	{
 		"bytes_response": 2,
 		"cmd": "010D",
 		"decoder": "decodeHexToDec",
 		"description": "Vehicle Speed",
-		"name": "SPEED"
+		"name": "SPEED",
+		"min_unit": 0,
+		"max_unit": 255,
+		"units": "km/h",
+		"type_data": "float"
 	},
 	{
 		"bytes_response": 2,
 		"cmd": "010E",
 		"decoder": "decodeAvanceTiempo",
 		"description": "Timing Advance",
-		"name": "TIMING_ADVANCE"
+		"name": "TIMING_ADVANCE",
+		"min_unit": -64,
+		"max_unit": 63.5,
+		"units": "° antes TDC",
+		"type_data": "float"
 	},
 	{
 		"bytes_response": 2,
 		"cmd": "010F",
 		"decoder": "decodeTempGeneral",
 		"description": "Intake Air Temp",
-		"name": "INTAKE_TEMP"
+		"name": "INTAKE_TEMP",
+		"min_unit": -40,
+		"max_unit": 215,
+		"units": "°C",
+		"type_data": "float"
 	},
 	{
 		"bytes_response": 4,
 		"cmd": "0110",
 		"decoder": "decodeVelocidadMAF",
 		"description": "Air Flow Rate (MAF)",
-		"name": "MAF"
+		"name": "MAF",
+		"min_unit": 0,
+		"max_unit": 655.35,
+		"units": "gr/sec",
+		"type_data": "float"
 	},
 	{
 		"bytes_response": 2,
 		"cmd": "0111",
 		"decoder": "decodeCargaPosicionEGR",
 		"description": "Throttle Position",
-		"name": "THROTTLE_POS"
+		"name": "THROTTLE_POS",
+		"min_unit": 0,
+		"max_unit": 100,
+		"units": "%",
+		"type_data": "float"
 	},
 	{
 		"bytes_response": 2,
 		"cmd": "0112",
 		"decoder": "air_status",
 		"description": "Secondary Air Status",
-		"name": "AIR_STATUS"
+		"name": "AIR_STATUS",
+		"min_unit": 0,
+		"max_unit": 0,
+		"units": "No units",
+		"type_data":
 	},
 	{
 		"bytes_response": 2,
 		"cmd": "0113",
 		"decoder": "o2_sensors",
 		"description": "O2 Sensors Present",
-		"name": "O2_SENSORS"
+		"name": "O2_SENSORS",
+		"min_unit": 0,
+		"max_unit": 0,
+		"units": "No units",
+		"type_data":
 	},
 	{
 		"bytes_response": 4,
 		"cmd": "0114",
 		"decoder": "decodeSensorOxigeno",
 		"description": "O2: Bank 1 - Sensor 1 Voltage",
-		"name": "O2_B1S1"
+		"name": "O2_B1S1",
+		"min_unit": 0,
+		"max_unit": 1.275,
+		"units": "voltios o %[-100,99.2]",
+		"type_data": "OxigenoResponse"
 	},
 	{
 		"bytes_response": 4,
 		"cmd": "0115",
 		"decoder": "decodeSensorOxigeno",
 		"description": "O2: Bank 1 - Sensor 2 Voltage",
-		"name": "O2_B1S2"
+		"name": "O2_B1S2",
+		"min_unit": 0,
+		"max_unit": 1.275,
+		"units": "voltios o %[-100,99.2]",
+		"type_data": "OxigenoResponse"
 	},
 	{
 		"bytes_response": 4,
 		"cmd": "0116",
 		"decoder": "decodeSensorOxigeno",
 		"description": "O2: Bank 1 - Sensor 3 Voltage",
-		"name": "O2_B1S3"
+		"name": "O2_B1S3",
+		"min_unit": 0,
+		"max_unit": 1.275,
+		"units": "voltios o %[-100,99.2]",
+		"type_data": "OxigenoResponse"
 	},
 	{
 		"bytes_response": 4,
 		"cmd": "0117",
 		"decoder": "decodeSensorOxigeno",
 		"description": "O2: Bank 1 - Sensor 4 Voltage",
-		"name": "O2_B1S4"
+		"name": "O2_B1S4",
+		"min_unit": 0,
+		"max_unit": 1.275,
+		"units": "voltios o %[-100,99.2]",
+		"type_data": "OxigenoResponse"
 	},
 	{
 		"bytes_response": 4,
 		"cmd": "0118",
 		"decoder": "decodeSensorOxigeno",
 		"description": "O2: Bank 2 - Sensor 1 Voltage",
-		"name": "O2_B2S1"
+		"name": "O2_B2S1",
+		"min_unit": 0,
+		"max_unit": 1.275,
+		"units": "voltios o %[-100,99.2]",
+		"type_data": "OxigenoResponse"
 	},
 	{
 		"bytes_response": 4,
 		"cmd": "0119",
 		"decoder": "decodeSensorOxigeno",
 		"description": "O2: Bank 2 - Sensor 2 Voltage",
-		"name": "O2_B2S2"
+		"name": "O2_B2S2",
+		"min_unit": 0,
+		"max_unit": 1.275,
+		"units": "voltios o %[-100,99.2]",
+		"type_data": "OxigenoResponse"
 	},
 	{
 		"bytes_response": 4,
 		"cmd": "011A",
 		"decoder": "decodeSensorOxigeno",
 		"description": "O2: Bank 2 - Sensor 3 Voltage",
-		"name": "O2_B2S3"
+		"name": "O2_B2S3",
+		"min_unit": 0,
+		"max_unit": 1.275,
+		"units": "voltios o %[-100,99.2]",
+		"type_data": "OxigenoResponse"
 	},
 	{
 		"bytes_response": 4,
 		"cmd": "011B",
 		"decoder": "decodeSensorOxigeno",
 		"description": "O2: Bank 2 - Sensor 4 Voltage",
-		"name": "O2_B2S4"
+		"name": "O2_B2S4",
+		"min_unit": 0,
+		"max_unit": 1.275,
+		"units": "voltios o %[-100,99.2]",
+		"type_data": "OxigenoResponse"
 	},
 	{
 		"bytes_response": 2,
 		"cmd": "011C",
 		"decoder": "obd_compliance",
 		"description": "OBD Standards Compliance",
-		"name": "OBD_COMPLIANCE"
+		"name": "OBD_COMPLIANCE",
+		"min_unit": 0,
+		"max_unit": 0,
+		"units": "No units",
+		"type_data":
 	},
 	{
 		"bytes_response": 2,
 		"cmd": "011D",
 		"decoder": "o2_sensors_alt",
 		"description": "O2 Sensors Present (alternate)",
-		"name": "O2_SENSORS_ALT"
+		"name": "O2_SENSORS_ALT",
+		"min_unit": 0,
+		"max_unit": 0,
+		"units": "No units",
+		"type_data":
 	},
 	{
 		"bytes_response": 2,
 		"cmd": "011E",
 		"decoder": "aux_input_status",
 		"description": "Auxiliary input status (power take off)",
-		"name": "AUX_INPUT_STATUS"
+		"name": "AUX_INPUT_STATUS",
+		"min_unit": 0,
+		"max_unit": 0,
+		"units": "No units",
+		"type_data":
 	},
 	{
 		"bytes_response": 4,
 		"cmd": "011F",
 		"decoder": "decodeHexToDec",
 		"description": "Engine Run Time",
-		"name": "RUN_TIME"
+		"name": "RUN_TIME",
+		"min_unit": 0,
+		"max_unit": 65535,
+		"units": "sec",
+		"type_data": 
 	},
 	{
 		"bytes_response": 8,
 		"cmd": "0120",
 		"decoder": "pid",
 		"description": "Supported PIDs [21-40]",
-		"name": "PIDS_B"
+		"name": "PIDS_B",
+		"min_unit": 0,
+		"max_unit": 0,
+		"units": "No units",
+		"type_data": "bitset"
 	},
 	{
 		"bytes_response": 4,
 		"cmd": "0121",
 		"decoder": "decodeHexToDec",
 		"description": "Distance Traveled with MIL on",
-		"name": "DISTANCE_W_MIL"
+		"name": "DISTANCE_W_MIL",
+		"min_unit": 0,
+		"max_unit": 65535,
+		"units": "km",
+		"type_data": "float"
 	},
 	{
 		"bytes_response": 4,
 		"cmd": "0122",
 		"decoder": "decodePresionCombColector",
 		"description": "Fuel Rail Pressure (relative to vacuum)",
-		"name": "FUEL_RAIL_PRESSURE_VAC"
+		"name": "FUEL_RAIL_PRESSURE_VAC",
+		"min_unit": 0,
+		"max_unit": 5177.265,
+		"units": "kPa",
+		"type_data": "float"
 	},
 	{
 		"bytes_response": 4,
 		"cmd": "0123",
 		"decoder": "decodePresionMedidorCombustible",
 		"description": "Fuel Rail Pressure (direct inject)",
-		"name": "FUEL_RAIL_PRESSURE_DIRECT"
+		"name": "FUEL_RAIL_PRESSURE_DIRECT",
+		"min_unit": 0,
+		"max_unit": 655350,
+		"units": "kPa",
+		"type_data": "float"
 	},
 	{
 		"bytes_response": 8,
 		"cmd": "0124",
-		"decoder": "",
+		"decoder": "decodeRelacionCombAire",
 		"description": "02 Sensor 1 WR Lambda Voltage",
-		"name": "O2_S1_WR_VOLTAGE"
+		"name": "O2_S1_WR_VOLTAGE",
+		"min_unit": 0,
+		"max_unit": 2,
+		"units": "prop./V[0,8)",
+		"type_data": "OxigenoResponse"
 	},
 	{
 		"bytes_response": 8,
 		"cmd": "0125",
-		"decoder": "",
+		"decoder": "decodeRelacionCombAire",
 		"description": "02 Sensor 2 WR Lambda Voltage",
-		"name": "O2_S2_WR_VOLTAGE"
+		"name": "O2_S2_WR_VOLTAGE",
+		"min_unit": 0,
+		"max_unit": 2,
+		"units": "prop./V[0,8)",
+		"type_data": "OxigenoResponse"
 	},
 	{
 		"bytes_response": 8,
 		"cmd": "0126",
-		"decoder": "",
+		"decoder": "decodeRelacionCombAire",
 		"description": "02 Sensor 3 WR Lambda Voltage",
-		"name": "O2_S3_WR_VOLTAGE"
+		"name": "O2_S3_WR_VOLTAGE",
+		"min_unit": 0,
+		"max_unit": 2,
+		"units": "prop./V[0,8)",
+		"type_data": "OxigenoResponse"
 	},
 	{
 		"bytes_response": 8,
 		"cmd": "0127",
-		"decoder": "",
+		"decoder": "decodeRelacionCombAire",
 		"description": "02 Sensor 4 WR Lambda Voltage",
-		"name": "O2_S4_WR_VOLTAGE"
+		"name": "O2_S4_WR_VOLTAGE",
+		"min_unit": 0,
+		"max_unit": 2,
+		"units": "prop./V[0,8)",
+		"type_data": "OxigenoResponse"
 	},
 	{
 		"bytes_response": 8,
 		"cmd": "0128",
-		"decoder": "",
+		"decoder": "decodeRelacionCombAire",
 		"description": "02 Sensor 5 WR Lambda Voltage",
-		"name": "O2_S5_WR_VOLTAGE"
+		"name": "O2_S5_WR_VOLTAGE",
+		"min_unit": 0,
+		"max_unit": 2,
+		"units": "prop./V[0,8)",
+		"type_data": "OxigenoResponse"
 	},
 	{
 		"bytes_response": 8,
 		"cmd": "0129",
-		"decoder": "",
+		"decoder": "decodeRelacionCombAire",
 		"description": "02 Sensor 6 WR Lambda Voltage",
-		"name": "O2_S6_WR_VOLTAGE"
+		"name": "O2_S6_WR_VOLTAGE",
+		"min_unit": 0,
+		"max_unit": 2,
+		"units": "prop./V[0,8)",
+		"type_data": "OxigenoResponse"
 	},
 	{
 		"bytes_response": 8,
 		"cmd": "012A",
-		"decoder": "",
+		"decoder": "decodeRelacionCombAire",
 		"description": "02 Sensor 7 WR Lambda Voltage",
-		"name": "O2_S7_WR_VOLTAGE"
+		"name": "O2_S7_WR_VOLTAGE",
+		"min_unit": 0,
+		"max_unit": 2,
+		"units": "prop./V[0,8)",
+		"type_data": "OxigenoResponse"
 	},
 	{
 		"bytes_response": 8,
 		"cmd": "012B",
-		"decoder": "",
+		"decoder": "decodeRelacionCombAire",
 		"description": "02 Sensor 8 WR Lambda Voltage",
-		"name": "O2_S8_WR_VOLTAGE"
+		"name": "O2_S8_WR_VOLTAGE",
+		"min_unit": 0,
+		"max_unit": 2,
+		"units": "prop./V[0,8)",
+		"type_data": "OxigenoResponse"
 	},
 	{
 		"bytes_response": 2,
 		"cmd": "012C",
 		"decoder": "decodeCargaPosicionEGR",
 		"description": "Commanded EGR",
-		"name": "COMMANDED_EGR"
+		"name": "COMMANDED_EGR",
+		"min_unit": 0,
+		"max_unit": 100,
+		"units": "%",
+		"type_data": "float"
 	},
 	{
 		"bytes_response": 2,
 		"cmd": "012D",
 		"decoder": "decodeAjusteCombustibleEGR",
 		"description": "EGR Error",
-		"name": "EGR_ERROR"
+		"name": "EGR_ERROR",
+		"min_unit": -100,
+		"max_unit": 99.2,
+		"units": "%",
+		"type_data": "float"
 	},
 	{
 		"bytes_response": 2,
 		"cmd": "012E",
 		"decoder": "decodeCargaPosicionEGR",
 		"description": "Commanded Evaporative Purge",
-		"name": "EVAPORATIVE_PURGE"
+		"name": "EVAPORATIVE_PURGE",
+		"min_unit": 0,
+		"max_unit": 100,
+		"units": "%",
+		"type_data": "float"
 	},
 	{
 		"bytes_response": 2,
 		"cmd": "012F",
 		"decoder": "decodeCargaPosicionEGR",
 		"description": "Fuel Level Input",
-		"name": "FUEL_LEVEL"
+		"name": "FUEL_LEVEL",
+		"min_unit": 0,
+		"max_unit": 100,
+		"units": "%",
+		"type_data": "float"
 	},
 	{
 		"bytes_response": 2,
 		"cmd": "0130",
 		"decoder": "decodeHexToDec",
 		"description": "Number of warm-ups since codes cleared",
-		"name": "WARMUPS_SINCE_DTC_CLEAR"
+		"name": "WARMUPS_SINCE_DTC_CLEAR",
+		"min_unit": 0,
+		"max_unit": 255,
+		"units": "cuenta",
+		"type_data": "float"
 	},
 	{
 		"bytes_response": 4,
 		"cmd": "0131",
 		"decoder": "decodeHexToDec",
 		"description": "Distance traveled since codes cleared",
-		"name": "DISTANCE_SINCE_DTC_CLEAR"
+		"name": "DISTANCE_SINCE_DTC_CLEAR",
+		"min_unit": 0,
+		"max_unit": 65535,
+		"units": "km",
+		"type_data": "float"
 	},
 	{
 		"bytes_response": 4,
 		"cmd": "0132",
 		"decoder": "decodePresionVapor",
 		"description": "Evaporative system vapor pressure",
-		"name": "EVAP_VAPOR_PRESSURE"
+		"name": "EVAP_VAPOR_PRESSURE",
+		"min_unit": -8.192,
+		"max_unit": 8191.75,
+		"units": "Pa",
+		"type_data": "float"
 	},
 	{
 		"bytes_response": 2,
 		"cmd": "0133",
 		"decoder": "decodeHexToDec",
 		"description": "Barometric Pressure",
-		"name": "BAROMETRIC_PRESSURE"
+		"name": "BAROMETRIC_PRESSURE",
+		"min_unit": 0,
+		"max_unit": 255,
+		"units": "kPa",
+		"type_data": "float"
 	},
 	{
 		"bytes_response": 8,
 		"cmd": "0134",
 		"decoder": "decodeRelacionCombAireActual",
 		"description": "02 Sensor 1 WR Lambda Current",
-		"name": "O2_S1_WR_CURRENT"
+		"name": "O2_S1_WR_CURRENT",
+		"min_unit": 0,
+		"max_unit": 2,
+		"units": "prop./mA[-128,128)",
+		"type_data": "OxigenoResponse"
 	},
 	{
 		"bytes_response": 8,
 		"cmd": "0135",
 		"decoder": "decodeRelacionCombAireActual",
 		"description": "02 Sensor 2 WR Lambda Current",
-		"name": "O2_S2_WR_CURRENT"
+		"name": "O2_S2_WR_CURRENT",
+		"min_unit": 0,
+		"max_unit": 2,
+		"units": "prop./mA[-128,128)",
+		"type_data": "OxigenoResponse"
 	},
 	{
 		"bytes_response": 8,
 		"cmd": "0136",
 		"decoder": "decodeRelacionCombAireActual",
 		"description": "02 Sensor 3 WR Lambda Current",
-		"name": "O2_S3_WR_CURRENT"
+		"name": "O2_S3_WR_CURRENT",
+		"min_unit": 0,
+		"max_unit": 2,
+		"units": "prop./mA[-128,128)",
+		"type_data": "OxigenoResponse"
 	},
 	{
 		"bytes_response": 8,
 		"cmd": "0137",
 		"decoder": "decodeRelacionCombAireActual",
 		"description": "02 Sensor 4 WR Lambda Current",
-		"name": "O2_S4_WR_CURRENT"
+		"name": "O2_S4_WR_CURRENT",
+		"min_unit": 0,
+		"max_unit": 2,
+		"units": "prop./mA[-128,128)",
+		"type_data": "OxigenoResponse"
 	},
 	{
 		"bytes_response": 8,
 		"cmd": "0138",
 		"decoder": "decodeRelacionCombAireActual",
 		"description": "02 Sensor 5 WR Lambda Current",
-		"name": "O2_S5_WR_CURRENT"
+		"name": "O2_S5_WR_CURRENT",
+		"min_unit": 0,
+		"max_unit": 2,
+		"units": "prop./mA[-128,128)",
+		"type_data": "OxigenoResponse"
 	},
 	{
 		"bytes_response": 8,
 		"cmd": "0139",
 		"decoder": "decodeRelacionCombAireActual",
 		"description": "02 Sensor 6 WR Lambda Current",
-		"name": "O2_S6_WR_CURRENT"
+		"name": "O2_S6_WR_CURRENT",
+		"min_unit": 0,
+		"max_unit": 2,
+		"units": "prop./mA[-128,128)",
+		"type_data": "OxigenoResponse"
 	},
 	{
 		"bytes_response": 8,
 		"cmd": "013A",
 		"decoder": "decodeRelacionCombAireActual",
 		"description": "02 Sensor 7 WR Lambda Current",
-		"name": "O2_S7_WR_CURRENT"
+		"name": "O2_S7_WR_CURRENT",
+		"min_unit": 0,
+		"max_unit": 2,
+		"units": "prop./mA[-128,128)",
+		"type_data": "OxigenoResponse"
 	},
 	{
 		"bytes_response": 8,
 		"cmd": "013B",
 		"decoder": "decodeRelacionCombAireActual",
 		"description": "02 Sensor 8 WR Lambda Current",
-		"name": "O2_S8_WR_CURRENT"
+		"name": "O2_S8_WR_CURRENT",
+		"min_unit": 0,
+		"max_unit": 2,
+		"units": "prop./mA[-128,128)",
+		"type_data": "OxigenoResponse"
 	},
 	{
 		"bytes_response": 4,
 		"cmd": "013C",
 		"decoder": "decodeTempCatalizador",
 		"description": "Catalyst Temperature: Bank 1 - Sensor 1",
-		"name": "CATALYST_TEMP_B1S1"
+		"name": "CATALYST_TEMP_B1S1",
+		"min_unit": -40,
+		"max_unit": 6513.5,
+		"units": "°C",
+		"type_data": "float"
 	},
 	{
 		"bytes_response": 4,
 		"cmd": "013D",
 		"decoder": "decodeTempCatalizador",
 		"description": "Catalyst Temperature: Bank 2 - Sensor 1",
-		"name": "CATALYST_TEMP_B2S1"
+		"name": "CATALYST_TEMP_B2S1",
+		"min_unit": -40,
+		"max_unit": 6513.5,
+		"units": "°C",
+		"type_data": "float"
 	},
 	{
 		"bytes_response": 4,
 		"cmd": "013E",
 		"decoder": "decodeTempCatalizador",
 		"description": "Catalyst Temperature: Bank 1 - Sensor 2",
-		"name": "CATALYST_TEMP_B1S2"
+		"name": "CATALYST_TEMP_B1S2",
+		"min_unit": -40,
+		"max_unit": 6513.5,
+		"units": "°C",
+		"type_data": "float"
 	},
 	{
 		"bytes_response": 4,
 		"cmd": "013F",
 		"decoder": "decodeTempCatalizador",
 		"description": "Catalyst Temperature: Bank 2 - Sensor 2",
-		"name": "CATALYST_TEMP_B2S2"
+		"name": "CATALYST_TEMP_B2S2",
+		"min_unit": -40,
+		"max_unit": 6513.5,
+		"units": "°C",
+		"type_data": "float"
 	},
 	{
 		"bytes_response": 8,
 		"cmd": "0140",
 		"decoder": "",
 		"description": "Supported PIDs [41-60]",
-		"name": "PIDS_C"
+		"name": "PIDS_C",
+		"min_unit": 0,
+		"max_unit": 0,
+		"units": "No units",
+		"type_data": "bitset"
 	},
 	{
 		"bytes_response": 8,
 		"cmd": "0141",
 		"decoder": "",
 		"description": "Monitor status this drive cycle",
-		"name": "STATUS_DRIVE_CYCLE"
+		"name": "STATUS_DRIVE_CYCLE",
+		"min_unit": 0,
+		"max_unit": 0,
+		"units": "No units",
+		"type_data":
 	},
 	{
 		"bytes_response": 4,
 		"cmd": "0142",
 		"decoder": "decodeVoltajeControl",
 		"description": "Control module voltage",
-		"name": "CONTROL_MODULE_VOLTAGE"
+		"name": "CONTROL_MODULE_VOLTAGE",
+		"min_unit": 0,
+		"max_unit": 65.535,
+		"units": "V",
+		"type_data": "float"
 	},
 	{
 		"bytes_response": 4,
 		"cmd": "0143",
 		"decoder": "decodeCargaPosicionEGR",
 		"description": "Absolute load value",
-		"name": "ABSOLUTE_LOAD"
+		"name": "ABSOLUTE_LOAD",
+		"min_unit": 0,
+		"max_unit": 25700,
+		"units": "%",
+		"type_data": "float"
 	},
 	{
 		"bytes_response": 4,
 		"cmd": "0144",
 		"decoder": "decodeRelacionCombAireBasica",
 		"description": "Commanded equivalence ratio",
-		"name": "COMMANDED_EQUIV_RATIO"
+		"name": "COMMANDED_EQUIV_RATIO",
+		"min_unit": 0,
+		"max_unit": 2,
+		"units": "prop.",
+		"type_data": "float"
 	},
 	{
 		"bytes_response": 2,
 		"cmd": "0145",
 		"decoder": "decodeCargaPosicionEGR",
 		"description": "Relative throttle position",
-		"name": "RELATIVE_THROTTLE_POS"
+		"name": "RELATIVE_THROTTLE_POS",
+		"min_unit": 0,
+		"max_unit": 100,
+		"units": "%",
+		"type_data": "float"
 	},
 	{
 		"bytes_response": 2,
 		"cmd": "0146",
 		"decoder": "decodeTempGeneral",
 		"description": "Ambient air temperature",
-		"name": "AMBIANT_AIR_TEMP"
+		"name": "AMBIANT_AIR_TEMP",
+		"min_unit": -40,
+		"max_unit": 215,
+		"units": "°C",
+		"type_data": "float"
 	},
 	{
 		"bytes_response": 2,
 		"cmd": "0147",
 		"decoder": "decodeCargaPosicionEGR",
 		"description": "Absolute throttle position B",
-		"name": "THROTTLE_POS_B"
+		"name": "THROTTLE_POS_B",
+		"min_unit": 0,
+		"max_unit": 100,
+		"units": "%",
+		"type_data": "float"
 	},
 	{
 		"bytes_response": 2,
 		"cmd": "0148",
 		"decoder": "decodeCargaPosicionEGR",
 		"description": "Absolute throttle position C",
-		"name": "THROTTLE_POS_C"
+		"name": "THROTTLE_POS_C",
+		"min_unit": 0,
+		"max_unit": 100,
+		"units": "%",
+		"type_data": "float"
 	},
 	{
 		"bytes_response": 2,
 		"cmd": "0149",
 		"decoder": "decodeCargaPosicionEGR",
 		"description": "Accelerator pedal position D",
-		"name": "ACCELERATOR_POS_D"
+		"name": "ACCELERATOR_POS_D",
+		"min_unit": 0,
+		"max_unit": 100,
+		"units": "%",
+		"type_data": "float"
 	},
 	{
 		"bytes_response": 2,
 		"cmd": "014A",
 		"decoder": "decodeCargaPosicionEGR",
 		"description": "Accelerator pedal position E",
-		"name": "ACCELERATOR_POS_E"
+		"name": "ACCELERATOR_POS_E",
+		"min_unit": 0,
+		"max_unit": 100,
+		"units": "%",
+		"type_data": "float"
 	},
 	{
 		"bytes_response": 2,
 		"cmd": "014B",
 		"decoder": "decodeCargaPosicionEGR",
 		"description": "Accelerator pedal position F",
-		"name": "ACCELERATOR_POS_F"
+		"name": "ACCELERATOR_POS_F",
+		"min_unit": 0,
+		"max_unit": 100,
+		"units": "%",
+		"type_data": "float"
 	},
 	{
 		"bytes_response": 2,
 		"cmd": "014C",
 		"decoder": "decodeCargaPosicionEGR",
 		"description": "Commanded throttle actuator",
-		"name": "THROTTLE_ACTUATOR"
+		"name": "THROTTLE_ACTUATOR",
+		"min_unit": 0,
+		"max_unit": 100,
+		"units": "%",
+		"type_data": "float"
 	},
 	{
 		"bytes_response": 4,
 		"cmd": "014D",
 		"decoder": "",
 		"description": "Time run with MIL on",
-		"name": "RUN_TIME_MIL"
+		"name": "RUN_TIME_MIL",
+		"min_unit": 0,
+		"max_unit": 65535,
+		"units": "min",
+		"type_data": "float"
 	},
 	{
 		"bytes_response": 4,
 		"cmd": "014E",
 		"decoder": "",
 		"description": "Time since trouble codes cleared",
-		"name": "TIME_SINCE_DTC_CLEARED"
+		"name": "TIME_SINCE_DTC_CLEARED",
+		"min_unit": 0,
+		"max_unit": 65535,
+		"units": "min",
+		"type_data": "float"
 	},
 	{
 		"bytes_response": 8,
 		"cmd": "014F",
 		"decoder": "decodeRelaciones",
 		"description": "Various Max values",
-		"name": "MAX_VALUES"
+		"name": "MAX_VALUES",
+		"min_unit": 0,
+		"max_unit": 255,
+		"units": "prop./V/mA/kPa[2550]",
+		"type_data": "RelacionesResponse"
 	}
 ]

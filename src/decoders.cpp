@@ -20,7 +20,7 @@ float decodeCargaPosicionEGR(char *response){
 
 //05 - Temperatura del líquido de enfriamiento del motor , -40 , 215 , ºC , A-40
 
-int decodeTempGeneral(char *response){
+float decodeTempGeneral(char *response){
 	int dec = (int)strtol(response, NULL, 16);
 	return dec-40;
 }
@@ -136,10 +136,10 @@ float decodePresionMedidorCombustible(char *response){
 
 //24,25,26,27,28,29,2a,2b - Sensor de oxígeno 1 AB: Relación equivalente de combustible - aire CD: Voltaje , 0 0 , <2 <8 , prop. V , A, B: (256A+B)/32768 C, D: (256C+D)/8192   
 
-struct RelacionCombAireResponse decodeRelacionCombAire(char *response){
+struct OxigenoResponse decodeRelacionCombAire(char *response){
 	char ABResponse[5], CDResponse[5];
 	float AB, CD;
-	struct RelacionCombAireResponse datos; 
+	struct OxigenoResponse datos; 
 	//Añade caracter \0 al final de la cadena AResponse
 	memset(ABResponse, '\0', sizeof(ABResponse));
 	//Divide los bytes de respuesta
@@ -147,9 +147,9 @@ struct RelacionCombAireResponse decodeRelacionCombAire(char *response){
 	strcpy( CDResponse, response + 4 );
 
 	AB = (int)strtol(ABResponse, NULL, 16);
-	datos.AB = AB/32768;
+	datos.A = AB/32768;
 	CD = (int)strtol(CDResponse, NULL, 16);
-	datos.CD = CD/8192; 
+	datos.B = CD/8192; 
 	
 	return datos;
 }
@@ -191,10 +191,10 @@ float decodePresionVapor(char *response){
 
 //34,35,36,37,38,39,3a,3b - Sensor de oxígeno 8 AB: Relación equivalente de combustible - aire CD: Actual , 0 -128 , <2 <128, prop. mA, A, B: (256A+B)/32768 C, D: C+D/256-128 
 
-struct RelacionCombAireResponse decodeRelacionCombAireActual(char *response){
+struct OxigenoResponse decodeRelacionCombAireActual(char *response){
 	char ABResponse[5], CResponse[3], DResponse[3];
 	float AB, C, D;
-	struct RelacionCombAireResponse datos; 
+	struct OxigenoResponse datos; 
 	//Añade caracter \0 al final de la cadena AResponse
 	memset(ABResponse, '\0', sizeof(ABResponse));
 	memset(CResponse, '\0', sizeof(CResponse));
@@ -204,10 +204,10 @@ struct RelacionCombAireResponse decodeRelacionCombAireActual(char *response){
 	strcpy( DResponse, response + 6);
 
 	AB = (int)strtol(ABResponse, NULL, 16);
-	datos.AB = AB/32768;
+	datos.A = AB/32768;
 	C = (int)strtol(CResponse, NULL, 16);
 	D = (int)strtol(DResponse, NULL, 16);
-	datos.CD = C+(D/256)-128; 
+	datos.B = C+(D/256)-128; 
 	
 	return datos;
 }
