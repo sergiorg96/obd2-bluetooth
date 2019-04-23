@@ -1,14 +1,25 @@
 [
 	{
+		"bytes_response": 12,
+		"cmd": "03",
+		"decoder": "decodeDTCs",
+		"description": "Get DTCs",
+		"name": "GET_DTC",
+		"min_unit": 0,
+		"max_unit": 0,
+		"units": "No units",
+		"type_data": "vectorStr"
+	},
+	{
 		"bytes_response": 8, 
 		"cmd": "0100",
-		"decoder": "pid",
+		"decoder": "decodePIDS",
 		"description": "Supported PIDs [01-20]",
 		"name": "PIDS_A",
 		"min_unit": 0,
 		"max_unit": 0,
 		"units": "No units",
-		"type_data": "bitset"
+		"type_data": "vectorInt"
 	},
 	{
 		"bytes_response": 8, 
@@ -19,7 +30,7 @@
 		"min_unit": 0,
 		"max_unit": 0,
 		"units": "No units",
-		"type_data":	
+		"type_data": "vectorInt"	
 	},
 	{
 		"bytes_response": 4,
@@ -29,8 +40,8 @@
 		"name": "FREEZE_DTC",
 		"min_unit": 0,
 		"max_unit": 0,
-		"units": ,
-		"type_data":
+		"units": "No units",
+		"type_data": "vectorInt"
 	},
 	{
 		"bytes_response": 4,
@@ -40,8 +51,8 @@
 		"name": "FUEL_STATUS",
 		"min_unit": 0,
 		"max_unit": 0,
-		"units": ,
-		"type_data":
+		"units": "No units",
+		"type_data": "vectorInt"
 	},
 	{
 		"bytes_response": 2,
@@ -206,7 +217,7 @@
 		"min_unit": 0,
 		"max_unit": 0,
 		"units": "No units",
-		"type_data":
+		"type_data": "vectorInt"
 	},
 	{
 		"bytes_response": 2,
@@ -217,7 +228,7 @@
 		"min_unit": 0,
 		"max_unit": 0,
 		"units": "No units",
-		"type_data":
+		"type_data": "vectorInt"
 	},
 	{
 		"bytes_response": 4,
@@ -316,7 +327,7 @@
 		"min_unit": 0,
 		"max_unit": 0,
 		"units": "No units",
-		"type_data":
+		"type_data": "vectorInt"
 	},
 	{
 		"bytes_response": 2,
@@ -327,7 +338,7 @@
 		"min_unit": 0,
 		"max_unit": 0,
 		"units": "No units",
-		"type_data":
+		"type_data": "vectorInt"
 	},
 	{
 		"bytes_response": 2,
@@ -338,7 +349,7 @@
 		"min_unit": 0,
 		"max_unit": 0,
 		"units": "No units",
-		"type_data":
+		"type_data": "vectorInt"
 	},
 	{
 		"bytes_response": 4,
@@ -349,18 +360,18 @@
 		"min_unit": 0,
 		"max_unit": 65535,
 		"units": "sec",
-		"type_data": 
+		"type_data": "float"
 	},
 	{
 		"bytes_response": 8,
 		"cmd": "0120",
-		"decoder": "pid",
+		"decoder": "decodePIDS",
 		"description": "Supported PIDs [21-40]",
 		"name": "PIDS_B",
 		"min_unit": 0,
 		"max_unit": 0,
 		"units": "No units",
-		"type_data": "bitset"
+		"type_data": "vectorInt"
 	},
 	{
 		"bytes_response": 4,
@@ -706,13 +717,13 @@
 	{
 		"bytes_response": 8,
 		"cmd": "0140",
-		"decoder": "",
+		"decoder": "decodePIDS",
 		"description": "Supported PIDs [41-60]",
 		"name": "PIDS_C",
 		"min_unit": 0,
 		"max_unit": 0,
 		"units": "No units",
-		"type_data": "bitset"
+		"type_data": "vectorInt"
 	},
 	{
 		"bytes_response": 8,
@@ -723,7 +734,7 @@
 		"min_unit": 0,
 		"max_unit": 0,
 		"units": "No units",
-		"type_data":
+		"type_data": "vectorInt"
 	},
 	{
 		"bytes_response": 4,

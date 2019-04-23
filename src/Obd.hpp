@@ -5,6 +5,11 @@
 #include <fstream>
 #include <thread>
 
+#include <bitset>
+#include <vector>
+#include <sstream>
+#include <algorithm>
+
 #include <utility>
 #include <map>
 
@@ -146,7 +151,6 @@ public:
 		char buf[1024];
 		int len;
 
-		while(1){
 		std::cout << "Esperamos 5 segundos..." << std::endl;
 		std::this_thread::sleep_for(std::chrono::seconds(5));
 		std::cout << "Enviando mensaje..." << std::endl;
@@ -170,18 +174,18 @@ public:
 			 * character  (hex  ‘0D’, \r).
 			 */
 		
-			p = buf;
-			while (*p) {
-				if (*p == '\n')
-					*p = '\r';
-				p++;
-			}
-			
-			printf("Mensaje a enviar: %s\n", buf);
-			printf("Longitud: %d %d\n", (int) strlen(buf), len);
+		p = buf;
+		while (*p) {
+			if (*p == '\n')
+				*p = '\r';
+			p++;
+		}
+		
+		printf("Mensaje a enviar: %s\n", buf);
+			//printf("Longitud: %d %d\n", (int) strlen(buf), len);
 
 		write(this->m_cli_s, buf, strlen(buf));
-		}
+		
 			//std::cout << "Mensaje " << message << " enviado" << std::endl;
 		t1.join();
 	}
@@ -293,7 +297,7 @@ public:
 
 
 
-						printf("\nComparación con: %s\n", command.getCMDResponse().c_str());
+						//printf("\nComparación con: %s\n", command.getCMDResponse().c_str());
 						char *ocurrencia = strstr(message_rcv, command.getCMDResponse().c_str());
 						//printf("He recibido: %s\n", message_rcv);
 						if (ocurrencia != NULL)
@@ -301,7 +305,7 @@ public:
 							printf("Ocurrencia encontrada\n");
 							char info[20];
 							memset(info, '\0', sizeof(info));
-							strncpy(info, ocurrencia + 4 , command.getBytesResponse());
+							strncpy(info, ocurrencia + command.getCMD().size() , command.getBytesResponse());
 							printf("Info: %s\n", info);
 							std::string type_data = command.getTypeData();
 							//HAY QUE CAMBIAR DECODERFUNCTIONS
@@ -320,23 +324,49 @@ public:
 								std::cout << "Tipo de dato: "<< typeid(varResultado).name() << std::endl;
 								std::cout << command.getName() << " - " << command.getDescription() << " - Min=" << command.getMIN() << " Max=" << command.getMAX() << std::endl;
 								std::cout << "-> " << varResultado.A << "/" << varResultado.B << "/" << varResultado.C << "/" << varResultado.D << " "<< command.getUnits() << std::endl;
+							} else if(!type_data.compare("vectorInt")){
+								std::cout << "Llego aquí sin problemas" << std::endl;
+								auto varResultado = this->decoderFunctionsVectorInt[command.getDecoder().c_str()](info);
+								std::cout << "NO śe si llego aqui" << std::endl;
+								std::cout << "Tipo de dato: "<< typeid(varResultado).name() << std::endl;
+								std::cout << command.getName() << " - " << command.getDescription() << " - Min=" << command.getMIN() << " Max=" << command.getMAX() << std::endl;
+								for (uint32_t i = 0; i < varResultado.size(); ++i){
+									std::string substr_cmd = command.getCMD().substr(2,2);
+									int sum_pid = stoi(substr_cmd,nullptr,16);
+									std::stringstream stream;
+									stream << std::hex << sum_pid+varResultado[i];
+									std::string result(stream.str());
+									if(result.size() == 1)
+										//Si el resultado solo tiene un caracter se añade un 0 al principio
+										result.insert(0,"0");
+									result.insert(0,"01");
+									std::transform(result.begin(), result.end(),result.begin(), ::toupper);
+
+									this->vecPIDs.push_back(result);
+								}
+							} else if (!type_data.compare("vectorStr")) {
+								auto varResultado = this->decoderFunctionsVectorStr[command.getDecoder().c_str()](info);
+								if (varResultado.empty()){
+									std::cout << "No hay DTC en el vehículo" << std::endl;
+								} else {
+									for (uint32_t i = 0; i < varResultado.size(); ++i)
+									{
+										std::cout << "Enviar " << varResultado[i] << std::endl; 
+									}
+								}
+								//std::cout << "Tipo de dato: "<< typeid(varResultado).name() << std::endl;
+								//std::cout << command.getName() << " - " << command.getDescription() << " - Min=" << command.getMIN() << " Max=" << command.getMAX() << std::endl;
+								
 							} else {
 								std::cout << "Tipo de dato no reconocido" << std::endl;
 							}
 							std::cout << "--------------------------------------------------------------" << std::endl;
-							//printf("Velocidad = %d km/h\n", decodeHexToDec(info));
-							//if(typeid(varResultado) == typeid(float)){
-								//printf("Dato = %.2f \n", this->decoderFunctions[command.getDecoder().c_str()](info));
-								//printf("-------------------------------------------------------------\n");
-							//} else {
-								//printf("No es del tipo float (Temp General)\n");
-							//}
 							memset(message_rcv, '\0', sizeof(message_rcv));
-							//continuar = false;
+							continuar = false;
 						} else {
 							printf("Mensaje recibido no entendido!\n");
 							memset(message_rcv, '\0', sizeof(message_rcv));
-							//continuar = false;
+							continuar = false;
 						}
 					}
 
@@ -377,14 +407,32 @@ public:
 		};
 
 		this->decoderFunctionsStructRel["decodeRelaciones"] = decodeRelaciones;
+		this->decoderFunctionsVectorInt["decodePIDS"] = decodePIDS;
+		this->decoderFunctionsVectorStr["decodeDTCs"] = decodeDTCs;
 	}
 
 	void disconnectBluetooth(){
+		std::cout << "Desconectando dispositivo Bluetooth" << std::endl;
 		close(this->m_cli_s);
 	}
 
+
+	void printPIDs(){
+		for (std::map<std::string, Commands>::iterator it=this->map_commands.begin(); it!=this->map_commands.end(); ++it)
+		{
+			Commands command = it->second;
+			std::string str_cmd = command.getCMD();
+			for (uint32_t i = 0; i < this->vecPIDs.size(); ++i)
+			{
+				if(!str_cmd.compare(this->vecPIDs[i])){
+					std::cout << str_cmd << " - "<< command.getName() << " - " << command.getDescription() << " - Min=" << command.getMIN() << " Max=" << command.getMAX() << std::endl;
+					break;
+				}
+			}
+		}
+	}
 	
-	
+
 	bool isValid(){
 		return this->m_status;
 	}
@@ -392,9 +440,12 @@ private:
       // Datos miembro de la clase "Obd"
    		//struct sockaddr_rc addr;
    		//int addr_len;
+	std::vector<std::string> vecPIDs;
 	std::map<std::string, std::function<float(char *)>> decoderFunctionsFloat;
 	std::map<std::string, std::function<struct OxigenoResponse(char *)>> decoderFunctionsStructOx;
 	std::map<std::string, std::function<struct RelacionesResponse(char *)>> decoderFunctionsStructRel;
+	std::map<std::string, std::function<std::vector<int>(char *)>> decoderFunctionsVectorInt;
+	std::map<std::string, std::function<std::vector<std::string>(char *)>> decoderFunctionsVectorStr;
 	char dest[19] = { 0 };
 	int m_cli_s;
 	bool m_deviceFound = false;

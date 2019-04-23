@@ -1,13 +1,88 @@
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
 #include "decoders.hpp"
 
 /*
 Definición de la función
 */
+std::string convertDTCs(std::string dtc){
+	if(dtc[0] == '0'){
+		dtc.replace(0,1,"P0");
+	} else if (dtc[0] == '1'){
+		dtc.replace(0,1,"P1");
+	} else if (dtc[0] == '2'){
+		dtc.replace(0,1,"P2");
+	} else if (dtc[0] == '3'){
+		dtc.replace(0,1,"P3");
+	} else if (dtc[0] == '4'){
+		dtc.replace(0,1,"C0");
+	} else if (dtc[0] == '5'){
+		dtc.replace(0,1,"C1");
+	} else if (dtc[0] == '6'){
+		dtc.replace(0,1,"C2");
+	} else if (dtc[0] == '7'){
+		dtc.replace(0,1,"C3");
+	} else if (dtc[0] == '8'){
+		dtc.replace(0,1,"B0");
+	} else if (dtc[0] == '9'){
+		dtc.replace(0,1,"B1");
+	} else if (dtc[0] == 'A'){
+		dtc.replace(0,1,"B2");
+	} else if (dtc[0] == 'B'){
+		dtc.replace(0,1,"B3");
+	} else if (dtc[0] == 'C'){
+		dtc.replace(0,1,"U0");
+	} else if (dtc[0] == 'D'){
+		dtc.replace(0,1,"U1");
+	} else if (dtc[0] == 'E'){
+		dtc.replace(0,1,"U2");
+	} else if (dtc[0] == 'F'){
+		dtc.replace(0,1,"U3");
+	}
+
+	return dtc;
+}
+
+//Modo 03
+std::vector<std::string> decodeDTCs(char *response){
+	std::vector<std::string> vec_dtcs;
+	std::string bytes_res(response);
+
+	std::string dtc_1 = bytes_res.substr(0,4);
+	if (dtc_1.compare("0000")){
+		dtc_1 = convertDTCs(dtc_1);
+		vec_dtcs.push_back(dtc_1);
+	}
+	std::string dtc_2 = bytes_res.substr(4,4);
+	if (dtc_2.compare("0000")){
+		dtc_2 = convertDTCs(dtc_2);
+		vec_dtcs.push_back(dtc_2);
+	}
+	std::string dtc_3 = bytes_res.substr(8,4);
+	if (dtc_3.compare("0000")){
+		dtc_3 = convertDTCs(dtc_3);
+		vec_dtcs.push_back(dtc_3);
+	}
+
+	return vec_dtcs;
+}
+
 	//Modo 01-> Descripcion - PID - Valor Mínimo - Valor Máximo - Unidad - Fórmula
-//00
+//00 - PIDs implementados [01 - 20] -Cada bit indica si los siguientes 32 PID están implementados (1) o no (0): [A7..D0] == [PID 01..20] 
+
+std::vector<int> decodePIDS(char *response){
+	//Conversión a long para poder convertirlo a bitset
+	long value_rcv = std::stol(response, nullptr, 16);
+	//Conversión a bitset
+	std::bitset<PID_BITS> setBit (value_rcv);
+	std::vector<int> vec_pids;
+	//Comprobación de PIDs disponibles(bitset lectura al reves)
+	for (int i = PID_BITS-1; i >= 0; i--){
+		if(setBit[i]){
+			vec_pids.push_back(PID_BITS-i);
+		}
+	}
+	return vec_pids;
+}
+
 //01
 //02
 //03

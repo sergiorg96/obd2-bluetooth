@@ -1,6 +1,15 @@
 #ifndef DECODERS_H
 #define DECODERS_H
 
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <bitset>
+#include <vector>
+
+#define PID_BITS 32
+
+
 //Declaración estructuras
 
 struct OxigenoResponse {
@@ -18,6 +27,9 @@ struct RelacionesResponse {
 
 //Declaración de funciones
 
+std::vector<int> decodePIDS(char *response);
+std::vector<std::string> decodeDTCs(char *response);
+std::string convertDTCs(std::string dtc);
 float decodeCargaPosicionEGR(char *response);
 float decodeTempGeneral(char *response);
 float decodeAjusteCombustibleEGR(char *response);
