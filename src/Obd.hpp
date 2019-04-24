@@ -151,8 +151,8 @@ public:
 		char buf[1024];
 		int len;
 
-		std::cout << "Esperamos 5 segundos..." << std::endl;
-		std::this_thread::sleep_for(std::chrono::seconds(5));
+		std::cout << "Esperamos 2 segundos..." << std::endl;
+		std::this_thread::sleep_for(std::chrono::seconds(2));
 		std::cout << "Enviando mensaje..." << std::endl;
 
 		std::string message = command.getCMD();
@@ -295,70 +295,72 @@ public:
 						//char *ocurrencia = strstr(message_rcv, "410D");
 						printf("Mensaje recibido:\n%s", message_rcv);
 
-
-
-						//printf("\nComparación con: %s\n", command.getCMDResponse().c_str());
-						char *ocurrencia = strstr(message_rcv, command.getCMDResponse().c_str());
+						//char *ocurrencia = strstr(message_rcv, command.getCMDResponse().c_str());
+						char * ocurrencia = message_rcv;
 						//printf("He recibido: %s\n", message_rcv);
-						if (ocurrencia != NULL)
-						{
-							printf("Ocurrencia encontrada\n");
-							char info[20];
-							memset(info, '\0', sizeof(info));
-							strncpy(info, ocurrencia + command.getCMD().size() , command.getBytesResponse());
-							printf("Info: %s\n", info);
-							std::string type_data = command.getTypeData();
-							//HAY QUE CAMBIAR DECODERFUNCTIONS
-							if (!type_data.compare("float")){
-								auto varResultado = this->decoderFunctionsFloat[command.getDecoder().c_str()](info);
-								std::cout << "Tipo de dato: "<< typeid(varResultado).name() << std::endl;
-								std::cout << command.getName() << " - " << command.getDescription() << " - Min=" << command.getMIN() << " Max=" << command.getMAX() << std::endl;
-								std::cout << "-> " << varResultado << " "<< command.getUnits() << std::endl;
-							} else if(!type_data.compare("OxigenoResponse")){
-								auto varResultado = this->decoderFunctionsStructOx[command.getDecoder().c_str()](info);
-								std::cout << "Tipo de dato: "<< typeid(varResultado).name() << std::endl;
-								std::cout << command.getName() << " - " << command.getDescription() << " - Min=" << command.getMIN() << " Max=" << command.getMAX() << std::endl;
-								std::cout << "-> " << varResultado.A << "/" << varResultado.B << " "<< command.getUnits() << std::endl;
-							} else if (!type_data.compare("RelacionesResponse")) {
-								auto varResultado = this->decoderFunctionsStructRel[command.getDecoder().c_str()](info);
-								std::cout << "Tipo de dato: "<< typeid(varResultado).name() << std::endl;
-								std::cout << command.getName() << " - " << command.getDescription() << " - Min=" << command.getMIN() << " Max=" << command.getMAX() << std::endl;
-								std::cout << "-> " << varResultado.A << "/" << varResultado.B << "/" << varResultado.C << "/" << varResultado.D << " "<< command.getUnits() << std::endl;
-							} else if(!type_data.compare("vectorInt")){
-								std::cout << "Llego aquí sin problemas" << std::endl;
-								auto varResultado = this->decoderFunctionsVectorInt[command.getDecoder().c_str()](info);
-								std::cout << "NO śe si llego aqui" << std::endl;
-								std::cout << "Tipo de dato: "<< typeid(varResultado).name() << std::endl;
-								std::cout << command.getName() << " - " << command.getDescription() << " - Min=" << command.getMIN() << " Max=" << command.getMAX() << std::endl;
-								for (uint32_t i = 0; i < varResultado.size(); ++i){
-									std::string substr_cmd = command.getCMD().substr(2,2);
-									int sum_pid = stoi(substr_cmd,nullptr,16);
-									std::stringstream stream;
-									stream << std::hex << sum_pid+varResultado[i];
-									std::string result(stream.str());
-									if(result.size() == 1)
+						if((ocurrencia=strstr(ocurrencia, command.getCMDResponse().c_str())) != NULL){
+							while((ocurrencia=strstr(ocurrencia, command.getCMDResponse().c_str())) != NULL){
+								printf("Ocurrencia encontrada\n");
+								char info[20];
+								memset(info, '\0', sizeof(info));
+								strncpy(info, ocurrencia + command.getCMD().size() , command.getBytesResponse());
+								printf("Info: %s\n", info);
+								std::string type_data = command.getTypeData();
+								//HAY QUE CAMBIAR DECODERFUNCTIONS
+								if (!type_data.compare("float")){
+									auto varResultado = this->decoderFunctionsFloat[command.getDecoder().c_str()](info);
+									std::cout << "Tipo de dato: "<< typeid(varResultado).name() << std::endl;
+									std::cout << command.getName() << " - " << command.getDescription() << " - Min=" << command.getMIN() << " Max=" << command.getMAX() << std::endl;
+									std::cout << "-> " << varResultado << " "<< command.getUnits() << std::endl;
+								} else if(!type_data.compare("OxigenoResponse")){
+									auto varResultado = this->decoderFunctionsStructOx[command.getDecoder().c_str()](info);
+									std::cout << "Tipo de dato: "<< typeid(varResultado).name() << std::endl;
+									std::cout << command.getName() << " - " << command.getDescription() << " - Min=" << command.getMIN() << " Max=" << command.getMAX() << std::endl;
+									std::cout << "-> " << varResultado.A << "/" << varResultado.B << " "<< command.getUnits() << std::endl;
+								} else if (!type_data.compare("RelacionesResponse")) {
+									auto varResultado = this->decoderFunctionsStructRel[command.getDecoder().c_str()](info);
+									std::cout << "Tipo de dato: "<< typeid(varResultado).name() << std::endl;
+									std::cout << command.getName() << " - " << command.getDescription() << " - Min=" << command.getMIN() << " Max=" << command.getMAX() << std::endl;
+									std::cout << "-> " << varResultado.A << "/" << varResultado.B << "/" << varResultado.C << "/" << varResultado.D << " "<< command.getUnits() << std::endl;
+								} else if(!type_data.compare("vectorInt")){
+									std::cout << "Llego aquí sin problemas" << std::endl;
+									auto varResultado = this->decoderFunctionsVectorInt[command.getDecoder().c_str()](info);
+									std::cout << "NO śe si llego aqui" << std::endl;
+									std::cout << "Tipo de dato: "<< typeid(varResultado).name() << std::endl;
+									std::cout << command.getName() << " - " << command.getDescription() << " - Min=" << command.getMIN() << " Max=" << command.getMAX() << std::endl;
+									for (uint32_t i = 0; i < varResultado.size(); ++i){
+										std::string substr_cmd = command.getCMD().substr(2,2);
+										int sum_pid = stoi(substr_cmd,nullptr,16);
+										std::stringstream stream;
+										stream << std::hex << sum_pid+varResultado[i];
+										std::string result(stream.str());
+										if(result.size() == 1)
 										//Si el resultado solo tiene un caracter se añade un 0 al principio
-										result.insert(0,"0");
-									result.insert(0,"01");
-									std::transform(result.begin(), result.end(),result.begin(), ::toupper);
+											result.insert(0,"0");
+										result.insert(0,"01");
+										std::transform(result.begin(), result.end(),result.begin(), ::toupper);
 
-									this->vecPIDs.push_back(result);
-								}
-							} else if (!type_data.compare("vectorStr")) {
-								auto varResultado = this->decoderFunctionsVectorStr[command.getDecoder().c_str()](info);
-								if (varResultado.empty()){
-									std::cout << "No hay DTC en el vehículo" << std::endl;
-								} else {
-									for (uint32_t i = 0; i < varResultado.size(); ++i)
-									{
-										std::cout << "Enviar " << varResultado[i] << std::endl; 
+										this->vecPIDs.push_back(result);
 									}
+								} else if (!type_data.compare("vectorStr")) {
+									auto varResultado = this->decoderFunctionsVectorStr[command.getDecoder().c_str()](info);
+									if (varResultado.empty()){
+										std::cout << "No hay DTC en el vehículo" << std::endl;
+									} else {
+										for (uint32_t i = 0; i < varResultado.size(); ++i)
+										{
+											std::cout << "Enviar " << varResultado[i] << std::endl; 
+										}
+									}
+								} else if (!type_data.compare("string")) {
+									auto varResultado = this->decoderFunctionsStr[command.getDecoder().c_str()](info);
+									this->vin.append(varResultado);
+									std::cout << "Tipo de dato: "<< typeid(varResultado).name() << std::endl;
+									std::cout << command.getName() << " - " << command.getDescription() << " - Min=" << command.getMIN() << " Max=" << command.getMAX() << std::endl;
+								} else {
+									std::cout << "Tipo de dato no reconocido" << std::endl;
 								}
-								//std::cout << "Tipo de dato: "<< typeid(varResultado).name() << std::endl;
-								//std::cout << command.getName() << " - " << command.getDescription() << " - Min=" << command.getMIN() << " Max=" << command.getMAX() << std::endl;
-								
-							} else {
-								std::cout << "Tipo de dato no reconocido" << std::endl;
+								ocurrencia++;
 							}
 							std::cout << "--------------------------------------------------------------" << std::endl;
 							memset(message_rcv, '\0', sizeof(message_rcv));
@@ -409,6 +411,7 @@ public:
 		this->decoderFunctionsStructRel["decodeRelaciones"] = decodeRelaciones;
 		this->decoderFunctionsVectorInt["decodePIDS"] = decodePIDS;
 		this->decoderFunctionsVectorStr["decodeDTCs"] = decodeDTCs;
+		this->decoderFunctionsStr["decodeVIN"] = decodeVIN;
 	}
 
 	void disconnectBluetooth(){
@@ -431,6 +434,10 @@ public:
 			}
 		}
 	}
+
+	std::string getVIN(){
+		return this->vin;
+	}
 	
 
 	bool isValid(){
@@ -441,11 +448,14 @@ private:
    		//struct sockaddr_rc addr;
    		//int addr_len;
 	std::vector<std::string> vecPIDs;
+	std::string vin;
+
 	std::map<std::string, std::function<float(char *)>> decoderFunctionsFloat;
 	std::map<std::string, std::function<struct OxigenoResponse(char *)>> decoderFunctionsStructOx;
 	std::map<std::string, std::function<struct RelacionesResponse(char *)>> decoderFunctionsStructRel;
 	std::map<std::string, std::function<std::vector<int>(char *)>> decoderFunctionsVectorInt;
 	std::map<std::string, std::function<std::vector<std::string>(char *)>> decoderFunctionsVectorStr;
+	std::map<std::string, std::function<std::string(char *)>> decoderFunctionsStr;
 	char dest[19] = { 0 };
 	int m_cli_s;
 	bool m_deviceFound = false;

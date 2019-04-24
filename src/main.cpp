@@ -14,7 +14,12 @@ int main(int argc, char **argv)
 
 		connection.send(connection.map_commands.find(argv[2])->second);
 
-		connection.printPIDs();
+		//connection.printPIDs();
+		if(connection.getVIN().empty()){
+			std::cout << "Vehicle Identification Number no disponible" << std::endl;
+		} else {
+			std::cout << "Vehicle Identification Number = " << connection.getVIN() << std::endl;
+		}
 
 		connection.disconnectBluetooth();
 	} else {

@@ -3,6 +3,28 @@
 /*
 Definición de la función
 */
+
+//Modo 09
+
+std::string decodeVIN(char * response){
+	std::string bytes_res(response);
+	std::string vin;
+
+	//División de orden y datos
+	std::string order = bytes_res.substr(0,2);
+	std::string vin_bytes = bytes_res.substr(2,8);
+	//Eliminación de primeros bytes de rellenos con 00
+	if(!order.compare("01")){
+		vin_bytes = vin_bytes.substr(6,2);
+	}
+	for (uint32_t i = 0; i < vin_bytes.size(); i+=2){
+		std::string vin_char = vin_bytes.substr(i,2);
+		//Conversión de bytes en char
+		vin.push_back((char) stoi(vin_char,nullptr,16));
+	}
+	return vin; 
+}
+
 std::string convertDTCs(std::string dtc){
 	if(dtc[0] == '0'){
 		dtc.replace(0,1,"P0");

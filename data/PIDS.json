@@ -1,5 +1,16 @@
 [
 	{
+		"bytes_response": 10,
+		"cmd": "0902",
+		"decoder": "decodeVIN",
+		"description": "Get Vehicle Identification Number",
+		"name": "GET_VIN",
+		"min_unit": 0,
+		"max_unit": 0,
+		"units": "No units",
+		"type_data": "string"
+	},
+	{
 		"bytes_response": 12,
 		"cmd": "03",
 		"decoder": "decodeDTCs",

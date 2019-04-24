@@ -29,7 +29,7 @@ struct RelacionesResponse {
 
 std::vector<int> decodePIDS(char *response);
 std::vector<std::string> decodeDTCs(char *response);
-std::string convertDTCs(std::string dtc);
+std::string decodeVIN(char * response);
 float decodeCargaPosicionEGR(char *response);
 float decodeTempGeneral(char *response);
 float decodeAjusteCombustibleEGR(char *response);
@@ -48,5 +48,7 @@ float decodeTempCatalizador(char *response);
 float decodeVoltajeControl(char *response);
 float decodeRelacionCombAireBasica(char *response);
 struct RelacionesResponse decodeRelaciones(char *response);
+
+std::string convertDTCs(std::string dtc);
 
 #endif
