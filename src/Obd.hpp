@@ -32,7 +32,7 @@
 #include "decoders.hpp"
 #include "loadcfg.hpp"
 
-#define MAX_EP_EVTS 8
+#define MAX_EP_EVTS 20
 
 using json = nlohmann::json;
 
@@ -44,13 +44,20 @@ public:
       // Constructor
 	Obd(const char *deviceName){
 		this->discoverDeviceAddress(deviceName, this->dest);
-		if(this->m_deviceFound)
+		if(this->m_deviceFound){
 			this->connectBluetooth();
-		else
+			if (this->m_status){
+				this->initDecoderFunctions();
+				this->readFileData();
+				this->send(this->map_commands.find("INIT")->second);
+				this->send(this->map_commands.find("AUTO_PROTO")->second);	
+				this->send(this->map_commands.find("RESP_SIN_ESPACIOS")->second);					
+				this->send(this->map_commands.find("SIN_ECO")->second);
+				this->send(this->map_commands.find("SIN_HEADER")->second);					
+			}
+		} else {
 			printf("Device %s not found.\n", deviceName);
-		//if(this->m_status)
-		this->initDecoderFunctions();
-		this->readFileData();
+		}
 	}
       // Funciones miembro de la clase "Obd"
       //void getDato();
@@ -83,6 +90,27 @@ public:
 
 			printf("connected\n");
 			this->m_status = true;
+
+			this->epoll_fd = epoll_create(1);
+			std::cout << this->epoll_fd << std::endl;
+			if (this->epoll_fd < 0) {
+				perror("Unable to create epoll");
+				close(this->m_cli_s);
+			}
+
+			this->ev.events = EPOLLIN;
+			this->ev.data.fd = this->m_cli_s;
+
+			int err = epoll_ctl(this->epoll_fd, EPOLL_CTL_ADD, this->m_cli_s, &ev);
+			
+			//std::cout << EBADF << "," << EEXIST << "," << EINVAL << "," << ELOOP << "," << ENOENT << "," << ENOMEM << ",";
+			//std::cout << ENOSPC << "," << EPERM << std::endl;  
+			if (err) {
+				perror("unable to add client socket to epoll instance");
+				close(this->m_cli_s);
+				close(this->epoll_fd);
+			}
+
 
 		} catch(std::string e) {
 			std::cerr << e << std::endl;
@@ -152,8 +180,8 @@ public:
 		char buf[1024];
 		int len;
 
-		std::cout << "Esperamos 2 segundos..." << std::endl;
-		std::this_thread::sleep_for(std::chrono::seconds(2));
+		//std::cout << "Esperamos 2 segundos..." << std::endl;
+		//std::this_thread::sleep_for(std::chrono::seconds(2));
 		std::cout << "Enviando mensaje..." << std::endl;
 
 		std::string message = command.getCMD();
@@ -192,7 +220,7 @@ public:
 	}
 
 	int polling(Commands command){
-		struct epoll_event ev, events[MAX_EP_EVTS];
+		struct epoll_event events[MAX_EP_EVTS];
 		/*
 		struct epoll_event {
         	uint32_t     events;    Epoll events 
@@ -210,38 +238,47 @@ public:
        	events field contains the returned event bit field.
 		*/
 
-		int epoll_fd, err, nfds;
+		int nfds;
 		int fd_out = fileno(stdout);
 
 		bool continuar = true;
 		//El parametro de epoll_create significa el número de file descriptor que un proceso quiere monitorizar
 		// y ayuda al Kernel a decidir el tamaño de la instancia epoll.
+		/*
 		epoll_fd = epoll_create(1);
+		std::cout << epoll_fd << std::endl;
 		if (epoll_fd < 0) {
 			perror("Unable to create epoll");
 			close(this->m_cli_s);
 			return epoll_fd;
 		}
+		*/
 
 		/*
 		Estructura Epoll:
 		Like so, if fd is a socket, we might want to monitor it for the arrival of new data on the socket buffer (EPOLLIN).
 		*/
-		ev.events = EPOLLIN;
+		//ev.events = EPOLLIN;
 		// Se almacena el file descriptor en el campo data de epoll_event
-		ev.data.fd = this->m_cli_s;
+		//ev.data.fd = this->m_cli_s;
 		/*
 		A process can add file descriptors it wants monitored to the epoll instance by calling epoll_ctl.
  		All the file descriptors registered with an epoll instance are collectively called an epoll set or the interest list.
 		int epoll_ctl(int epfd, int op, int fd, struct epoll_event *event);
 		*/
 		// Se añade al epoll set o interest list, el descriptor de la conexión del socket
+		/*
 		err = epoll_ctl(epoll_fd, EPOLL_CTL_ADD, this->m_cli_s, &ev);
+		std::cout << "Error: " << errno << std::endl;
+		std::cout << EBADF << "," << EEXIST << "," << EINVAL << "," << ELOOP << "," << ENOENT << "," << ENOMEM << ",";
+		std::cout << ENOSPC << "," << EPERM << std::endl;  
 		if (err) {
 			perror("unable to add client socket to epoll instance");
 			close(this->m_cli_s);
+			close(epoll_fd);
 			return err;
 		}
+		*/
 		printf("Polling function\n");
 		// Bucle infinito para el envío de datos por bluetooth al conector OBD
 		while(continuar) {
@@ -262,7 +299,8 @@ public:
  		  This value specifies for how long the epoll_wait system call will block:
  		  -1 -> when timeout is set to -1, epoll_wait will block “forever”.
 		*/
-			nfds = epoll_wait(epoll_fd, events, MAX_EP_EVTS, -1);
+			//nfds = epoll_wait(epoll_fd, events, MAX_EP_EVTS, -1);
+			nfds = epoll_wait(this->epoll_fd, events, MAX_EP_EVTS, -1);			
 			if (nfds < 0) {
 				perror("epoll error");
 				break;
@@ -271,7 +309,6 @@ public:
 			for (i = 0; i < nfds; i++) {
 				if ((events[i].events & EPOLLERR) || (events[i].events & EPOLLHUP)) {
 					fprintf(stderr, "epoll error\n");
-					goto end;
 				}
 
 				if (events[i].data.fd == this->m_cli_s) {
@@ -310,24 +347,22 @@ public:
 								//HAY QUE CAMBIAR DECODERFUNCTIONS
 								if (!type_data.compare("float")){
 									auto varResultado = this->decoderFunctionsFloat[command.getDecoder().c_str()](info);
-									std::cout << "Tipo de dato: "<< typeid(varResultado).name() << std::endl;
+									//std::cout << "Tipo de dato: "<< typeid(varResultado).name() << std::endl;
 									std::cout << command.getName() << " - " << command.getDescription() << " - Min=" << command.getMIN() << " Max=" << command.getMAX() << std::endl;
 									std::cout << "-> " << varResultado << " "<< command.getUnits() << std::endl;
 								} else if(!type_data.compare("OxigenoResponse")){
 									auto varResultado = this->decoderFunctionsStructOx[command.getDecoder().c_str()](info);
-									std::cout << "Tipo de dato: "<< typeid(varResultado).name() << std::endl;
+									//std::cout << "Tipo de dato: "<< typeid(varResultado).name() << std::endl;
 									std::cout << command.getName() << " - " << command.getDescription() << " - Min=" << command.getMIN() << " Max=" << command.getMAX() << std::endl;
 									std::cout << "-> " << varResultado.A << "/" << varResultado.B << " "<< command.getUnits() << std::endl;
 								} else if (!type_data.compare("RelacionesResponse")) {
 									auto varResultado = this->decoderFunctionsStructRel[command.getDecoder().c_str()](info);
-									std::cout << "Tipo de dato: "<< typeid(varResultado).name() << std::endl;
+									//std::cout << "Tipo de dato: "<< typeid(varResultado).name() << std::endl;
 									std::cout << command.getName() << " - " << command.getDescription() << " - Min=" << command.getMIN() << " Max=" << command.getMAX() << std::endl;
 									std::cout << "-> " << varResultado.A << "/" << varResultado.B << "/" << varResultado.C << "/" << varResultado.D << " "<< command.getUnits() << std::endl;
 								} else if(!type_data.compare("vectorInt")){
-									std::cout << "Llego aquí sin problemas" << std::endl;
 									auto varResultado = this->decoderFunctionsVectorInt[command.getDecoder().c_str()](info);
-									std::cout << "NO śe si llego aqui" << std::endl;
-									std::cout << "Tipo de dato: "<< typeid(varResultado).name() << std::endl;
+									//std::cout << "Tipo de dato: "<< typeid(varResultado).name() << std::endl;
 									std::cout << command.getName() << " - " << command.getDescription() << " - Min=" << command.getMIN() << " Max=" << command.getMAX() << std::endl;
 									for (uint32_t i = 0; i < varResultado.size(); ++i){
 										std::string substr_cmd = command.getCMD().substr(2,2);
@@ -356,12 +391,12 @@ public:
 								} else if (!type_data.compare("string")) {
 									auto varResultado = this->decoderFunctionsStr[command.getDecoder().c_str()](info);
 									this->vin.append(varResultado);
-									std::cout << "Tipo de dato: "<< typeid(varResultado).name() << std::endl;
+									//std::cout << "Tipo de dato: "<< typeid(varResultado).name() << std::endl;
 									std::cout << command.getName() << " - " << command.getDescription() << " - Min=" << command.getMIN() << " Max=" << command.getMAX() << std::endl;
 								} else if (!type_data.compare("map")) {
 									auto varResultado = this->decoderFunctionsMap[command.getDecoder().c_str()](info);
 									this->mapStatus = varResultado;
-									std::cout << "Tipo de dato: "<< typeid(varResultado).name() << std::endl;
+									//std::cout << "Tipo de dato: "<< typeid(varResultado).name() << std::endl;
 								} else {
 									std::cout << "Tipo de dato no reconocido" << std::endl;
 								}
@@ -378,15 +413,11 @@ public:
 					}
 
 					memset(buf, '\0', sizeof(buf));
-
-					//write(fd_out, buf, strlen(buf));
 				} else {
 					fprintf(stderr, "unknown event");
 				}
 			}
 		}
-	end:
-		close(this->m_cli_s);
 	}
 
 	void initDecoderFunctions(){
@@ -423,6 +454,7 @@ public:
 	void disconnectBluetooth(){
 		std::cout << "Desconectando dispositivo Bluetooth" << std::endl;
 		close(this->m_cli_s);
+		close(this->epoll_fd);
 	}
 
 
@@ -474,6 +506,9 @@ private:
 	int m_cli_s;
 	bool m_deviceFound = false;
 	bool m_status = false;
+
+	int epoll_fd;
+	struct epoll_event ev;
 };
 
 

@@ -1,5 +1,60 @@
 [
 	{
+		"bytes_response": 2,
+		"cmd": "AT H0",
+		"decoder": "decodeVIN",
+		"description": "Eliminar el ECO de respuesta",
+		"name": "SIN_HEADER",
+		"min_unit": 0,
+		"max_unit": 0,
+		"units": "No units",
+		"type_data": "string"
+	},	
+	{
+		"bytes_response": 2,
+		"cmd": "AT E0",
+		"decoder": "decodeVIN",
+		"description": "Eliminar el ECO de respuesta",
+		"name": "SIN_ECO",
+		"min_unit": 0,
+		"max_unit": 0,
+		"units": "No units",
+		"type_data": "string"
+	},		
+	{
+		"bytes_response": 2,
+		"cmd": "AT S0",
+		"decoder": "decodeVIN",
+		"description": "Eliminar espacios bytes de respuesta",
+		"name": "RESP_SIN_ESPACIOS",
+		"min_unit": 0,
+		"max_unit": 0,
+		"units": "No units",
+		"type_data": "string"
+	},	
+	{
+		"bytes_response": 2,
+		"cmd": "AT SP 0",
+		"decoder": "decodeVIN",
+		"description": "Utilizar el protocolo automático y grabarlo",
+		"name": "AUTO_PROTO",
+		"min_unit": 0,
+		"max_unit": 0,
+		"units": "No units",
+		"type_data": "string"
+	},	
+	{
+		"bytes_response": 2,
+		"cmd": "AT Z",
+		"decoder": "decodeVIN",
+		"description": "Reset para comenzar la comunicación",
+		"name": "INIT",
+		"min_unit": 0,
+		"max_unit": 0,
+		"units": "No units",
+		"type_data": "string"
+	},	
+	{
 		"bytes_response": 10,
 		"cmd": "0902",
 		"decoder": "decodeVIN",

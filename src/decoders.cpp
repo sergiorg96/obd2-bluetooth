@@ -125,12 +125,13 @@ std::map<std::string, std::string> decodeStatus(char *response){
 	std::bitset<STATUS_BITS> byteC (intC);
 	std::bitset<STATUS_BITS> byteD (intD);
 
-	if (byteA[7])
+	if (byteA[7]){
 		status["MIL"] = "Encendida";
-	else
+		status["DTC_CNT"] = std::to_string(intA-128);
+	} else {
 		status["MIL"] = "Apagada";
-
-	status["DTC_CNT"] = std::to_string(intA-128);
+		status["DTC_CNT"] = std::to_string(intA);
+	}
 
 	if (byteB[0]){
 		if (byteB[4])
