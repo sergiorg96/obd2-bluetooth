@@ -1,6 +1,17 @@
 [
 	{
 		"bytes_response": 2,
+		"cmd": "AT D",
+		"decoder": "decodeVIN",
+		"description": "Establecer valores por defecto",
+		"name": "DEFAULT_VALUES",
+		"min_unit": 0,
+		"max_unit": 0,
+		"units": "No units",
+		"type_data": "string"
+	},	
+	{
+		"bytes_response": 2,
 		"cmd": "AT H0",
 		"decoder": "decodeVIN",
 		"description": "Eliminar el ECO de respuesta",
@@ -48,7 +59,7 @@
 		"cmd": "AT Z",
 		"decoder": "decodeVIN",
 		"description": "Reset para comenzar la comunicación",
-		"name": "INIT",
+		"name": "RESET",
 		"min_unit": 0,
 		"max_unit": 0,
 		"units": "No units",

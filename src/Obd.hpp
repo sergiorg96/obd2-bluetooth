@@ -49,11 +49,12 @@ public:
 			if (this->m_status){
 				this->initDecoderFunctions();
 				this->readFileData();
-				this->send(this->map_commands.find("INIT")->second);
-				this->send(this->map_commands.find("AUTO_PROTO")->second);	
+				this->send(this->map_commands.find("RESET")->second);
+				this->send(this->map_commands.find("DEFAULT_VALUES")->second);
 				this->send(this->map_commands.find("RESP_SIN_ESPACIOS")->second);					
 				this->send(this->map_commands.find("SIN_ECO")->second);
 				this->send(this->map_commands.find("SIN_HEADER")->second);					
+				this->send(this->map_commands.find("AUTO_PROTO")->second);	
 			}
 		} else {
 			printf("Device %s not found.\n", deviceName);
