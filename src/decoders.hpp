@@ -6,8 +6,10 @@
 #include <string.h>
 #include <bitset>
 #include <vector>
+#include <map>
 
 #define PID_BITS 32
+#define STATUS_BITS 8
 
 
 //Declaración estructuras
@@ -28,6 +30,7 @@ struct RelacionesResponse {
 //Declaración de funciones
 
 std::vector<int> decodePIDS(char *response);
+std::map<std::string, std::string> decodeStatus(char *response);
 std::vector<std::string> decodeDTCs(char *response);
 std::string decodeVIN(char * response);
 float decodeCargaPosicionEGR(char *response);

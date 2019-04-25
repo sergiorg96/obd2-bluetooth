@@ -105,7 +105,144 @@ std::vector<int> decodePIDS(char *response){
 	return vec_pids;
 }
 
-//01
+//01 - Estado de los monitores de diagnóstico desde que se borraron los códigos de fallas DTC; incluye el estado de la luz indicadora de fallas, MIL, y la cantidad de códigos de fallas DTC 
+std::map<std::string, std::string> decodeStatus(char *response){
+	std::map<std::string, std::string> status;
+
+	std::string bytes_res(response);
+	std::string responseA = bytes_res.substr(0,2);
+	std::string responseB = bytes_res.substr(2,2);
+	std::string responseC = bytes_res.substr(4,2);
+	std::string responseD = bytes_res.substr(6,2);
+	
+	int intA = std::stoi(responseA, nullptr, 16);
+	int intB = std::stoi(responseB, nullptr, 16);
+	int intC = std::stoi(responseC, nullptr, 16);
+	int intD = std::stoi(responseD, nullptr, 16);
+	
+	std::bitset<STATUS_BITS> byteA (intA);
+	std::bitset<STATUS_BITS> byteB (intB);
+	std::bitset<STATUS_BITS> byteC (intC);
+	std::bitset<STATUS_BITS> byteD (intD);
+
+	if (byteA[7])
+		status["MIL"] = "Encendida";
+	else
+		status["MIL"] = "Apagada";
+
+	status["DTC_CNT"] = std::to_string(intA-128);
+
+	if (byteB[0]){
+		if (byteB[4])
+			status["Sistema de detección de condiciones inadecuadas de ignición en cilindros"] = "Prueba Incorrecta";
+		else
+			status["Sistema de detección de condiciones inadecuadas de ignición en cilindros"] = "Prueba Correcta";
+	}
+	if (byteB[1]){
+		if (byteB[5])
+			status["Sistema de combustible"] = "Prueba Incorrecta";
+		else
+			status["Sistema de combustible"] = "Prueba Correcta";
+	}
+	if (byteB[2]){
+		if (byteB[6])
+			status["Sistema de componentes integrales"] = "Prueba Incorrecta";
+		else
+			status["Sistema de componentes integrales"] = "Prueba Correcta";
+	}
+
+	if (byteB[3]){
+		status["IGNICION"] = "Chispa";
+		if (byteC[0]){
+			if (byteD[0])
+				status["Sistema de eficiencia del convertidor catalítico"] = "Prueba Incorrecta";
+			else
+				status["Sistema de eficiencia del convertidor catalítico"] = "Prueba Correcta";
+		}
+		if (byteC[1]){
+			if (byteD[1])
+				status["Sistema de calentamiento de convertidor catalítico"] = "Prueba Incorrecta";
+			else
+				status["Sistema de calentamiento de convertidor catalítico"] = "Prueba Correcta";
+		}
+		if (byteC[2]){
+			if (byteD[2])
+				status["Sistema evaporativo"] = "Prueba Incorrecta";
+			else
+				status["Sistema evaporativo"] = "Prueba Correcta";
+		}
+		if (byteC[3]){
+			if (byteD[3])
+				status["Sistema secundario de aire"] = "Prueba Incorrecta";
+			else
+				status["Sistema secundario de aire"] = "Prueba Correcta";
+		}
+		if (byteC[4]){
+			if (byteD[4])
+				status["Sistema de fugas de aire acondicionado"] = "Prueba Incorrecta";
+			else
+				status["Sistema de fugas de aire acondicionado"] = "Prueba Correcta";
+		}
+		if (byteC[5]){
+			if (byteD[5])
+				status["Sistema de sensores de oxígeno"] = "Prueba Incorrecta";
+			else
+				status["Sistema de sensores de oxígeno"] = "Prueba Correcta";
+		}
+		if (byteC[6]){
+			if (byteD[6])
+				status["Sistema de calentamiento del sensor de oxígeno"] = "Prueba Incorrecta";
+			else
+				status["Sistema de calentamiento del sensor de oxígeno"] = "Prueba Correcta";
+		}
+		if (byteC[7]){
+			if (byteD[7])
+				status["Sistema de recirculación de los gases de escape (Exhaust Gas Recicrulation, EGR)"] = "Prueba Incorrecta";
+			else
+				status["Sistema de recirculación de los gases de escape (Exhaust Gas Recicrulation, EGR)"] = "Prueba Correcta";
+		}
+	} else {
+		status["IGNICION"] = "Compresión";
+		if (byteC[0]){
+			if (byteD[0])
+				status["Sistema de catalizador NMHC"] = "Prueba Incorrecta";
+			else
+				status["Sistema de catalizador NMHC"] = "Prueba Correcta";
+		}
+		if (byteC[1]){
+			if (byteD[1])
+				status["Sistema monitor de NOx/SCR"] = "Prueba Incorrecta";
+			else
+				status["Sistema monitor de NOx/SCR"] = "Prueba Correcta";
+		}
+		if (byteC[3]){
+			if (byteD[3])
+				status["Sistema de presión de impulso"] = "Prueba Incorrecta";
+			else
+				status["Sistema de presión de impulso"] = "Prueba Correcta";
+		}
+		if (byteC[5]){
+			if (byteD[5])
+				status["Sistema del sensor de gases de escape"] = "Prueba Incorrecta";
+			else
+				status["Sistema del sensor de gases de escape"] = "Prueba Correcta";
+		}
+		if (byteC[6]){
+			if (byteD[6])
+				status["Sistema de monitor del filtro de partículas (Particular Matter, PM)"] = "Prueba Incorrecta";
+			else
+				status["Sistema de monitor del filtro de partículas (Particular Matter, PM)"] = "Prueba Correcta";
+		}
+		if (byteC[7]){
+			if (byteD[7])
+				status["Sistema de recirculación de gases de escape (Exhaust Gas Recirculation, EGR) y/o VVT"] = "Prueba Incorrecta";
+			else
+				status["Sistema de recirculación de gases de escape (Exhaust Gas Recirculation, EGR) y/o VVT"] = "Prueba Correcta";
+		}
+	}
+
+	return status;
+}
 //02
 //03
 //04 - Carga calculada del motor , 0 , 100 , % , A/2.55 

@@ -30,6 +30,7 @@
 
 #include "Commands.hpp"
 #include "decoders.hpp"
+#include "loadcfg.hpp"
 
 #define MAX_EP_EVTS 8
 
@@ -41,7 +42,7 @@ class Obd {
 public:
 	std::map<std::string, Commands> map_commands;
       // Constructor
-	Obd(char *deviceName){
+	Obd(const char *deviceName){
 		this->discoverDeviceAddress(deviceName, this->dest);
 		if(this->m_deviceFound)
 			this->connectBluetooth();
@@ -98,7 +99,7 @@ public:
 		}
 	}
 
-	void discoverDeviceAddress(char * deviceName, char *deviceAddress){
+	void discoverDeviceAddress(const char * deviceName, char *deviceAddress){
 		inquiry_info *ii = NULL;
 		int max_rsp, num_rsp;
 		int dev_id, sock, len, flags;
@@ -357,6 +358,10 @@ public:
 									this->vin.append(varResultado);
 									std::cout << "Tipo de dato: "<< typeid(varResultado).name() << std::endl;
 									std::cout << command.getName() << " - " << command.getDescription() << " - Min=" << command.getMIN() << " Max=" << command.getMAX() << std::endl;
+								} else if (!type_data.compare("map")) {
+									auto varResultado = this->decoderFunctionsMap[command.getDecoder().c_str()](info);
+									this->mapStatus = varResultado;
+									std::cout << "Tipo de dato: "<< typeid(varResultado).name() << std::endl;
 								} else {
 									std::cout << "Tipo de dato no reconocido" << std::endl;
 								}
@@ -412,6 +417,7 @@ public:
 		this->decoderFunctionsVectorInt["decodePIDS"] = decodePIDS;
 		this->decoderFunctionsVectorStr["decodeDTCs"] = decodeDTCs;
 		this->decoderFunctionsStr["decodeVIN"] = decodeVIN;
+		this->decoderFunctionsMap["decodeStatus"] = decodeStatus;
 	}
 
 	void disconnectBluetooth(){
@@ -421,8 +427,7 @@ public:
 
 
 	void printPIDs(){
-		for (std::map<std::string, Commands>::iterator it=this->map_commands.begin(); it!=this->map_commands.end(); ++it)
-		{
+		for (std::map<std::string, Commands>::iterator it=this->map_commands.begin(); it!=this->map_commands.end(); ++it){
 			Commands command = it->second;
 			std::string str_cmd = command.getCMD();
 			for (uint32_t i = 0; i < this->vecPIDs.size(); ++i)
@@ -432,6 +437,12 @@ public:
 					break;
 				}
 			}
+		}
+	}
+
+	void printStatus(){
+		for (std::map<std::string, std::string>::iterator it=this->mapStatus.begin(); it!=this->mapStatus.end(); ++it){
+			std::cout << it->first << " -> " << it->second << std::endl;
 		}
 	}
 
@@ -449,6 +460,7 @@ private:
    		//int addr_len;
 	std::vector<std::string> vecPIDs;
 	std::string vin;
+	std::map<std::string, std::string> mapStatus;
 
 	std::map<std::string, std::function<float(char *)>> decoderFunctionsFloat;
 	std::map<std::string, std::function<struct OxigenoResponse(char *)>> decoderFunctionsStructOx;
@@ -456,6 +468,8 @@ private:
 	std::map<std::string, std::function<std::vector<int>(char *)>> decoderFunctionsVectorInt;
 	std::map<std::string, std::function<std::vector<std::string>(char *)>> decoderFunctionsVectorStr;
 	std::map<std::string, std::function<std::string(char *)>> decoderFunctionsStr;
+	std::map<std::string, std::function<std::map<std::string, std::string>(char *)>> decoderFunctionsMap;
+
 	char dest[19] = { 0 };
 	int m_cli_s;
 	bool m_deviceFound = false;

@@ -35,13 +35,13 @@
 	{
 		"bytes_response": 8, 
 		"cmd": "0101",
-		"decoder": "status",
+		"decoder": "decodeStatus",
 		"description": "Status since DTCs cleared",
 		"name": "STATUS",
 		"min_unit": 0,
 		"max_unit": 0,
 		"units": "No units",
-		"type_data": "vectorInt"	
+		"type_data": "map"	
 	},
 	{
 		"bytes_response": 4,
