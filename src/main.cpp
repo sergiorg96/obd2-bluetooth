@@ -4,12 +4,6 @@ typedef  std::map <std::string, std::string> cfgType;
 
 int main(int argc, char **argv)
 {
-	if (argc != 1){
-		printf("Uso: ./main DEVICE-NAME DATO\n");
-
-		return 0;
-	}
-
 	cfgType variablesCfg;
 	loadCfg("./configuration.cfg", &variablesCfg);
 	//std::cout << variablesCfg["BT-DISP-NAME"] << std::endl;
@@ -24,7 +18,17 @@ int main(int argc, char **argv)
 		connection.send(connection.map_commands.find("PIDS_B")->second);
 		connection.send(connection.map_commands.find("PIDS_C")->second);
 		connection.send(connection.map_commands.find("GET_VIN")->second);
-		connection.send(connection.map_commands.find("STATUS")->second);
+
+		std::vector<std::string> vecDTCs = connection.getDTCs();
+
+		if(vecDTCs.empty()){
+			std::cout << "No hay DTCs" << std::endl;
+		} else {
+			std::cout << "Códigos de errores DTCs:" << std::endl;
+			for (int i = 0; i < vecDTCs.size(); ++i){
+				std::cout <<  vecDTCs[i] << std::endl;
+			}
+		}
 
 		connection.printStatus();
 

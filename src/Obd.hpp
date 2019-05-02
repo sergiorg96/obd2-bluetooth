@@ -384,6 +384,7 @@ public:
 									if (varResultado.empty()){
 										std::cout << "No hay DTC en el vehículo" << std::endl;
 									} else {
+										this->vecDTCs = varResultado;
 										for (uint32_t i = 0; i < varResultado.size(); ++i)
 										{
 											std::cout << "Enviar " << varResultado[i] << std::endl; 
@@ -483,6 +484,16 @@ public:
 		return this->vin;
 	}
 	
+	std::vector<std::string> getDTCs(){
+		send(this->map_commands.find("STATUS")->second);
+		if (this->mapStatus["DTC_CNT"] != 0){
+			send(this->map_commands.find("GET_DTC")->second);
+		} else {
+			std::cout << "No hay DTC disponibles" << std::endl;
+		}
+		return this->vecDTCs;
+	}
+
 
 	bool isValid(){
 		return this->m_status;
@@ -492,6 +503,7 @@ private:
    		//struct sockaddr_rc addr;
    		//int addr_len;
 	std::vector<std::string> vecPIDs;
+	std::vector<std::string> vecDTCs;
 	std::string vin;
 	std::map<std::string, std::string> mapStatus;
 

@@ -14,7 +14,7 @@
 		"bytes_response": 2,
 		"cmd": "AT H0",
 		"decoder": "decodeVIN",
-		"description": "Eliminar el ECO de respuesta",
+		"description": "Eliminar la cabecera en la respuesta",
 		"name": "SIN_HEADER",
 		"min_unit": 0,
 		"max_unit": 0,
@@ -66,7 +66,7 @@
 		"type_data": "string"
 	},	
 	{
-		"bytes_response": 10,
+		"bytes_response": 42,
 		"cmd": "0902",
 		"decoder": "decodeVIN",
 		"description": "Get Vehicle Identification Number",
