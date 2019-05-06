@@ -17,10 +17,7 @@ std::string decodeVIN(char * response){
 
 	std::size_t found = vin_bytes.find("\n");
 	while(found!=std::string::npos){
-		std::cout << "Antes -> " << vin_bytes << std::endl;
 		vin_bytes.erase(found,3);
-		std::cout << "Después -> " << vin_bytes << std::endl;
-		std::cout << "------------------------" << std::endl;
 		found = vin_bytes.find("\n");
 	}
 

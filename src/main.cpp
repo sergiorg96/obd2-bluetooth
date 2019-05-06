@@ -14,10 +14,6 @@ int main(int argc, char **argv)
 		std::cout << "Se ha conectado correctamente" << std::endl;
 
 		//connection.send(connection.map_commands.find(argv[2])->second);
-		connection.send(connection.map_commands.find("PIDS_A")->second);
-		connection.send(connection.map_commands.find("PIDS_B")->second);
-		connection.send(connection.map_commands.find("PIDS_C")->second);
-		connection.send(connection.map_commands.find("GET_VIN")->second);
 
 		std::vector<std::string> vecDTCs = connection.getDTCs();
 
@@ -25,7 +21,7 @@ int main(int argc, char **argv)
 			std::cout << "No hay DTCs" << std::endl;
 		} else {
 			std::cout << "Códigos de errores DTCs:" << std::endl;
-			for (int i = 0; i < vecDTCs.size(); ++i){
+			for (uint32_t i = 0; i < vecDTCs.size(); ++i){
 				std::cout <<  vecDTCs[i] << std::endl;
 			}
 		}

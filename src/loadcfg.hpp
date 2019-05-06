@@ -1,5 +1,5 @@
-#ifndef LOADCFG_H
-#define LOADCFG_H
+#ifndef LOADCFG_HPP
+#define LOADCFG_HPP
 
 typedef  std::map <std::string, std::string> cfgType;
 

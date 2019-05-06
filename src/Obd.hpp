@@ -49,12 +49,7 @@ public:
 			if (this->m_status){
 				this->initDecoderFunctions();
 				this->readFileData();
-				this->send(this->map_commands.find("RESET")->second);
-				this->send(this->map_commands.find("DEFAULT_VALUES")->second);
-				this->send(this->map_commands.find("RESP_SIN_ESPACIOS")->second);					
-				this->send(this->map_commands.find("SIN_ECO")->second);
-				this->send(this->map_commands.find("SIN_HEADER")->second);					
-				this->send(this->map_commands.find("AUTO_PROTO")->second);	
+				this->initMessages();
 			}
 		} else {
 			printf("Device %s not found.\n", deviceName);
@@ -340,7 +335,7 @@ public:
 						if((ocurrencia=strstr(ocurrencia, command.getCMDResponse().c_str())) != NULL){
 							while((ocurrencia=strstr(ocurrencia, command.getCMDResponse().c_str())) != NULL){
 								printf("Ocurrencia encontrada\n");
-								char info[20];
+								char info[1024];
 								memset(info, '\0', sizeof(info));
 								strncpy(info, ocurrencia + command.getCMD().size() , command.getBytesResponse());
 								printf("Info: %s\n", info);
@@ -422,8 +417,33 @@ public:
 		}
 	}
 
+	void initMessages(){
+		std::map<std::string, std::string> listPIDs = {
+			{"PIDS_B", "0120"},
+			{"PIDS_C", "0140"},
+			{"PIDS_D", "0160"},
+			{"PIDS_E", "0180"},
+			{"PIDS_F", "01A0"},
+			{"PIDS_G", "01C0"}
+		};
+		this->send(this->map_commands.find("RESET")->second);
+		this->send(this->map_commands.find("DEFAULT_VALUES")->second);
+		this->send(this->map_commands.find("RESP_SIN_ESPACIOS")->second);					
+		this->send(this->map_commands.find("SIN_ECO")->second);
+		this->send(this->map_commands.find("SIN_HEADER")->second);					
+		this->send(this->map_commands.find("AUTO_PROTO")->second);
+		this->send(this->map_commands.find("GET_VIN")->second);
+		this->send(this->map_commands.find("STATUS")->second);
+		this->send(this->map_commands.find("PIDS_A")->second);
+		for (std::map<std::string, std::string>::iterator it=listPIDs.begin(); it!=listPIDs.end(); ++it){
+			if(this->existPID(it->second)){
+				this->send(this->map_commands.find(it->first)->second);	
+			}
+		}
+		std::cout << "Nº de comandos disponibles = " << vecPIDs.size() << std::endl;
+	}
+
 	void initDecoderFunctions(){
-		//this->decoderFunctions["decodeHexToDec"] = decodeHexToDec;
 		this->decoderFunctionsFloat = {
 			{ "decodeCargaPosicionEGR", decodeCargaPosicionEGR},
 			{ "decodeTempGeneral", decodeTempGeneral},
@@ -459,13 +479,23 @@ public:
 		close(this->epoll_fd);
 	}
 
+	bool existPID(std::string command){
+		bool exists = false;
+		for (uint32_t i = 0; i < this->vecPIDs.size(); ++i){
+			if(!this->vecPIDs[i].compare(command)){
+				exists = true;
+				break;
+			}
+		}
+		return exists;
+	}
+	
 
 	void printPIDs(){
 		for (std::map<std::string, Commands>::iterator it=this->map_commands.begin(); it!=this->map_commands.end(); ++it){
 			Commands command = it->second;
 			std::string str_cmd = command.getCMD();
-			for (uint32_t i = 0; i < this->vecPIDs.size(); ++i)
-			{
+			for (uint32_t i = 0; i < this->vecPIDs.size(); ++i){
 				if(!str_cmd.compare(this->vecPIDs[i])){
 					std::cout << str_cmd << " - "<< command.getName() << " - " << command.getDescription() << " - Min=" << command.getMIN() << " Max=" << command.getMAX() << std::endl;
 					break;
@@ -473,6 +503,8 @@ public:
 			}
 		}
 	}
+
+
 
 	void printStatus(){
 		for (std::map<std::string, std::string>::iterator it=this->mapStatus.begin(); it!=this->mapStatus.end(); ++it){
@@ -485,9 +517,9 @@ public:
 	}
 	
 	std::vector<std::string> getDTCs(){
-		send(this->map_commands.find("STATUS")->second);
-		if (this->mapStatus["DTC_CNT"] != 0){
-			send(this->map_commands.find("GET_DTC")->second);
+		this->send(this->map_commands.find("STATUS")->second);
+		if (this->mapStatus["DTC_CNT"].compare("0")){
+			this->send(this->map_commands.find("GET_DTC")->second);
 		} else {
 			std::cout << "No hay DTC disponibles" << std::endl;
 		}

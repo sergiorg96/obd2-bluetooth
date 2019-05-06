@@ -1,6 +1,28 @@
 [
 	{
 		"bytes_response": 2,
+		"cmd": "AT DP",
+		"decoder": "decodeVIN",
+		"description": "Describe the Protocol",
+		"name": "DESCRIBE_PROTOCOL",
+		"min_unit": 0,
+		"max_unit": 0,
+		"units": "No units",
+		"type_data": "string"
+	},
+	{
+		"bytes_response": 2,
+		"cmd": "AT DPN",
+		"decoder": "decodeVIN",
+		"description": "Describe the Protocol by Number",
+		"name": "DESCRIBE_PROTOCOL_NUMBER",
+		"min_unit": 0,
+		"max_unit": 0,
+		"units": "No units",
+		"type_data": "string"
+	},
+	{
+		"bytes_response": 2,
 		"cmd": "AT D",
 		"decoder": "decodeVIN",
 		"description": "Establecer valores por defecto",

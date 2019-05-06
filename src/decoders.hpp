@@ -1,5 +1,5 @@
-#ifndef DECODERS_H
-#define DECODERS_H
+#ifndef DECODERS_HPP
+#define DECODERS_HPP
 
 #include <stdio.h>
 #include <stdlib.h>
