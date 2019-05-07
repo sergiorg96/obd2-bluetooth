@@ -432,8 +432,8 @@ public:
 		this->send(this->map_commands.find("SIN_ECO")->second);
 		this->send(this->map_commands.find("SIN_HEADER")->second);					
 		this->send(this->map_commands.find("AUTO_PROTO")->second);
-		this->send(this->map_commands.find("GET_VIN")->second);
 		this->send(this->map_commands.find("STATUS")->second);
+		this->send(this->map_commands.find("GET_VIN")->second);
 		this->send(this->map_commands.find("PIDS_A")->second);
 		for (std::map<std::string, std::string>::iterator it=listPIDs.begin(); it!=listPIDs.end(); ++it){
 			if(this->existPID(it->second)){
