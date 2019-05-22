@@ -1,4 +1,6 @@
 #include "Obd.hpp"
+#include "picangps.hpp"
+#include "alarmfile.hpp"
 
 typedef  std::map <std::string, std::string> cfgType;
 
