@@ -10,7 +10,7 @@ public:
            std::string AlarmPort,
            std::string AlarmFilename,
            std::string LastAlarmFilename);
-  std::string getGeoPos();
+  std::string getGeoPos(std::string serialPort);
   bool hasGps();
   void Gps(bool installed);
   bool sendAlarm(std::string msg);

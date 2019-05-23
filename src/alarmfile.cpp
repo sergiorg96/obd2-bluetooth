@@ -14,9 +14,9 @@
 
 bool AlarmFile::gps_ = false;
 
-std::string AlarmFile::getGeoPos ()
+std::string AlarmFile::getGeoPos(std::string serialPort)
 {
-  return PicanGetGPS();
+  return PicanGetGPS(serialPort);
 }
 
 bool AlarmFile::hasGps()

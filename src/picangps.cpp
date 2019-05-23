@@ -1,34 +1,36 @@
 #include "picangps.hpp"
 
-int openGPS (std::string tty) 
-{ 
+int openGPS (std::string tty) { 
   int fd;
   struct termios options;
   
   fd=open(tty.c_str(), O_RDONLY | O_NOCTTY | O_NDELAY);
-  fcntl(fd, F_SETFL, 0);
-  if( 0 != tcgetattr(fd, &options))
-	return -1;
-  
-  options.c_cflag &= ~PARENB;
-  options.c_cflag &= ~CSTOPB;
-  options.c_cflag &= ~CSIZE;
-  options.c_cflag |= CS8;
+  int result = flock(fd, LOCK_EX);
+  if(result==0){
+    fcntl(fd, F_SETFL, 0);
+    if( 0 != tcgetattr(fd, &options))
+     return -1;
 
-  options.c_cflag |= (CLOCAL | CREAD);
+   options.c_cflag &= ~PARENB;
+   options.c_cflag &= ~CSTOPB;
+   options.c_cflag &= ~CSIZE;
+   options.c_cflag |= CS8;
+
+   options.c_cflag |= (CLOCAL | CREAD);
 
   options.c_lflag &= ~(ICANON | ECHO | ECHOE | ISIG); /* raw input */
 
-  options.c_oflag &= ~OPOST;
+   options.c_oflag &= ~OPOST;
 
-  options.c_cc[VMIN]  = 0;
-  options.c_cc[VTIME] = 0;
+   options.c_cc[VMIN]  = 0;
+   options.c_cc[VTIME] = 0;
 
-  cfsetispeed(&options, B9600);
-  cfsetospeed(&options, B9600);
-  if (0 != tcsetattr(fd, TCSANOW, &options))
-	return -1;
-  return fd;
+   cfsetispeed(&options, B9600);
+   cfsetospeed(&options, B9600);
+   if (0 != tcsetattr(fd, TCSANOW, &options))
+     return -1;
+   return fd;
+ }
 }
 
 bool readPicanGPS(int fd, char* buffer, int maxsiz, int seconds)
@@ -135,7 +137,7 @@ char* explore (int field, char sep, char* s)
   return s;
 }
 
-std::string PicanGetGPS ()
+std::string PicanGetGPS (std::string serialPort)
 {
   const int maxbuf = 2560;
   char buffer [maxbuf];
@@ -144,7 +146,7 @@ std::string PicanGetGPS ()
   memset(buffer, 0, maxbuf);
   std::string retval(",,,,,");
 
-  int      fd = openGPS("/dev/serial0"); 
+  int      fd = openGPS(serialPort); 
   bool  valid = readPicanGPS(fd, buffer, maxbuf, 3);
   close(fd);
   if (!valid)
