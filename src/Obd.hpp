@@ -28,6 +28,8 @@
 
 #include <unistd.h>
 
+#include <ctime>
+
 #include "Commands.hpp"
 #include "decoders.hpp"
 #include "loadcfg.hpp"
@@ -387,7 +389,8 @@ public:
 									}
 								} else if (!type_data.compare("string")) {
 									auto varResultado = this->decoderFunctionsStr[command.getDecoder().c_str()](info);
-									this->vin.append(varResultado);
+									if(!command.getDecoder().compare("decodeVIN"))
+										this->vin.append(varResultado);
 									//std::cout << "Tipo de dato: "<< typeid(varResultado).name() << std::endl;
 									std::cout << command.getName() << " - " << command.getDescription() << " - Min=" << command.getMIN() << " Max=" << command.getMAX() << std::endl;
 								} else if (!type_data.compare("map")) {
@@ -402,9 +405,32 @@ public:
 							std::cout << "--------------------------------------------------------------" << std::endl;
 							memset(message_rcv, '\0', sizeof(message_rcv));
 							continuar = false;
+						} else if((strstr(message_rcv, "OK")) != NULL){
+							std::cout << command.getDescription() << " = OK." << std::endl;
+							memset(message_rcv, '\0', sizeof(message_rcv));							
+							continuar = false;
+						} else if((strstr(message_rcv, "NO DATA")) != NULL){
+							std::cout << command.getDescription() << " = No disponible." << std::endl;
+							memset(message_rcv, '\0', sizeof(message_rcv));							
+							continuar = false;
 						} else {
-							printf("Mensaje recibido no entendido!\n");
-							memset(message_rcv, '\0', sizeof(message_rcv));
+							//Para conocer el protocolo actual
+							if(!command.getName().compare("DESCRIBE_PROTOCOL")){
+								char info[1024];
+								char* token = strtok(message_rcv, "\n");
+								strcpy(info, token);
+								auto varResultado = this->decoderFunctionsStr[command.getDecoder().c_str()](info);
+								this->currentProtocol = varResultado;
+							}else if(!command.getName().compare("DESCRIBE_PROTOCOL_NUMBER")){
+								char info[1024];
+								char* token = strtok(message_rcv, "\n");
+								strcpy(info, token);
+								auto varResultado = this->decoderFunctionsStr[command.getDecoder().c_str()](info);
+								this->currentProtocolNumber = varResultado;
+							} else {
+								printf("Mensaje recibido no entendido!\n");
+							}
+							memset(message_rcv, '\0', sizeof(message_rcv));							
 							continuar = false;
 						}
 					}
@@ -469,8 +495,12 @@ public:
 		this->decoderFunctionsStructRel["decodeRelaciones"] = decodeRelaciones;
 		this->decoderFunctionsVectorInt["decodePIDS"] = decodePIDS;
 		this->decoderFunctionsVectorStr["decodeDTCs"] = decodeDTCs;
-		this->decoderFunctionsStr["decodeVIN"] = decodeVIN;
+		this->decoderFunctionsStr = {
+			{"decodeVIN", decodeVIN},
+			{"decodeDescribeProtocol", decodeDescribeProtocol}
+		};
 		this->decoderFunctionsMap["decodeStatus"] = decodeStatus;
+		this->noDecodeFunctionAT["noDecodeAT"] = noDecodeAT;
 	}
 
 	void disconnectBluetooth(){
@@ -517,6 +547,17 @@ public:
 	}
 	
 	std::vector<std::string> getDTCs(){
+		time_t curr_time;
+		tm *curr_tm;
+		char date_string[100];
+		char time_string[100];
+		time(&curr_time);
+
+		curr_tm = localtime(&curr_time);
+		strftime(date_string, 50, "%d/%m/%Y", curr_tm);
+		strftime(time_string, 50, "%T", curr_tm);
+		std::cout << date_string << " " << time_string << std::endl;
+
 		this->send(this->map_commands.find("STATUS")->second);
 		if (this->mapStatus["DTC_CNT"].compare("0")){
 			this->send(this->map_commands.find("GET_DTC")->second);
@@ -537,8 +578,11 @@ private:
 	std::vector<std::string> vecPIDs;
 	std::vector<std::string> vecDTCs;
 	std::string vin;
+	std::string currentProtocol;
+	std::string currentProtocolNumber;
 	std::map<std::string, std::string> mapStatus;
 
+	std::map<std::string, std::function<void()>> noDecodeFunctionAT;
 	std::map<std::string, std::function<float(char *)>> decoderFunctionsFloat;
 	std::map<std::string, std::function<struct OxigenoResponse(char *)>> decoderFunctionsStructOx;
 	std::map<std::string, std::function<struct RelacionesResponse(char *)>> decoderFunctionsStructRel;

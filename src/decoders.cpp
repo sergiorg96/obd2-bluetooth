@@ -4,6 +4,12 @@
 Definición de la función
 */
 
+//Modo AT
+void noDecodeAT(){}
+std::string decodeDescribeProtocol(char * response){
+	std::string protocol(response);
+	return protocol;
+}
 //Modo 09
 std::string decodeVIN(char * response){
 	std::string bytes_res(response);

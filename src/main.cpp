@@ -31,7 +31,9 @@ int main(int argc, char **argv)
 		std::string macAddress = getmac(variablesCfg["INTERFACE-NAME"].c_str());
 		//connection.send(connection.map_commands.find(argv[2])->second);
 		while(1){
+			std::this_thread::sleep_for(std::chrono::seconds(std::stoi(variablesCfg["PERIOD"])));
 			std::vector<std::string> vecDTCs = connection.getDTCs();
+			//connection.send(connection.map_commands.find("SPEED")->second);
 
 			if(vecDTCs.empty()){
 				std::cout << "No hay DTCs" << std::endl;
@@ -49,7 +51,7 @@ int main(int argc, char **argv)
 						std::cout << "Mensaje vacío, alarma no enviada." << std::endl;
 					}					
 				}
-				std::this_thread::sleep_for(std::chrono::seconds(std::stoi(variablesCfg["PERIOD"])));
+				//sleep(std::stoi(variablesCfg["PERIOD"]));
 			}
 		}
 		//connection.printStatus();

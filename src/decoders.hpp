@@ -29,10 +29,12 @@ struct RelacionesResponse {
 
 //Declaración de funciones
 
+void noDecodeAT();
 std::vector<int> decodePIDS(char *response);
 std::map<std::string, std::string> decodeStatus(char *response);
 std::vector<std::string> decodeDTCs(char *response);
 std::string decodeVIN(char * response);
+std::string decodeDescribeProtocol(char * response);
 float decodeCargaPosicionEGR(char *response);
 float decodeTempGeneral(char *response);
 float decodeAjusteCombustibleEGR(char *response);

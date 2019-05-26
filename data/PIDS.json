@@ -2,7 +2,7 @@
 	{
 		"bytes_response": 2,
 		"cmd": "AT DP",
-		"decoder": "decodeVIN",
+		"decoder": "decodeDescribeProtocol",
 		"description": "Describe the Protocol",
 		"name": "DESCRIBE_PROTOCOL",
 		"min_unit": 0,
@@ -13,7 +13,7 @@
 	{
 		"bytes_response": 2,
 		"cmd": "AT DPN",
-		"decoder": "decodeVIN",
+		"decoder": "decodeDescribeProtocol",
 		"description": "Describe the Protocol by Number",
 		"name": "DESCRIBE_PROTOCOL_NUMBER",
 		"min_unit": 0,
@@ -24,68 +24,68 @@
 	{
 		"bytes_response": 2,
 		"cmd": "AT D",
-		"decoder": "decodeVIN",
+		"decoder": "noDecodeAT",
 		"description": "Establecer valores por defecto",
 		"name": "DEFAULT_VALUES",
 		"min_unit": 0,
 		"max_unit": 0,
 		"units": "No units",
-		"type_data": "string"
+		"type_data": "void"
 	},	
 	{
 		"bytes_response": 2,
 		"cmd": "AT H0",
-		"decoder": "decodeVIN",
+		"decoder": "noDecodeAT",
 		"description": "Eliminar la cabecera en la respuesta",
 		"name": "SIN_HEADER",
 		"min_unit": 0,
 		"max_unit": 0,
 		"units": "No units",
-		"type_data": "string"
+		"type_data": "void"
 	},	
 	{
 		"bytes_response": 2,
 		"cmd": "AT E0",
-		"decoder": "decodeVIN",
+		"decoder": "noDecodeAT",
 		"description": "Eliminar el ECO de respuesta",
 		"name": "SIN_ECO",
 		"min_unit": 0,
 		"max_unit": 0,
 		"units": "No units",
-		"type_data": "string"
+		"type_data": "void"
 	},		
 	{
 		"bytes_response": 2,
 		"cmd": "AT S0",
-		"decoder": "decodeVIN",
+		"decoder": "noDecodeAT",
 		"description": "Eliminar espacios bytes de respuesta",
 		"name": "RESP_SIN_ESPACIOS",
 		"min_unit": 0,
 		"max_unit": 0,
 		"units": "No units",
-		"type_data": "string"
+		"type_data": "void"
 	},	
 	{
 		"bytes_response": 2,
 		"cmd": "AT SP 0",
-		"decoder": "decodeVIN",
+		"decoder": "noDecodeAT",
 		"description": "Utilizar el protocolo automático y grabarlo",
 		"name": "AUTO_PROTO",
 		"min_unit": 0,
 		"max_unit": 0,
 		"units": "No units",
-		"type_data": "string"
+		"type_data": "void"
 	},	
 	{
 		"bytes_response": 2,
 		"cmd": "AT Z",
-		"decoder": "decodeVIN",
+		"decoder": "noDecodeAT",
 		"description": "Reset para comenzar la comunicación",
 		"name": "RESET",
 		"min_unit": 0,
 		"max_unit": 0,
 		"units": "No units",
-		"type_data": "string"
+		"type_data": "void"
 	},	
 	{
 		"bytes_response": 42,
