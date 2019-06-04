@@ -5,8 +5,8 @@ int openGPS (std::string tty) {
   struct termios options;
   
   fd=open(tty.c_str(), O_RDONLY | O_NOCTTY | O_NDELAY);
-  int result = flock(fd, LOCK_EX);
-  if(result==0){
+  //int result = flock(fd, LOCK_EX);
+  //if(result==0){
     fcntl(fd, F_SETFL, 0);
     if( 0 != tcgetattr(fd, &options))
      return -1;
@@ -30,7 +30,7 @@ int openGPS (std::string tty) {
    if (0 != tcsetattr(fd, TCSANOW, &options))
      return -1;
    return fd;
- }
+ //}
 }
 
 bool readPicanGPS(int fd, char* buffer, int maxsiz, int seconds)

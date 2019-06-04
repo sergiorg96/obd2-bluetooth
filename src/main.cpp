@@ -56,6 +56,7 @@ int main(int argc, char **argv)
 		}
 		//connection.printStatus();
 
+
 		//connection.printPIDs();
 		if(connection.getVIN().empty()){
 			std::cout << "Vehicle Identification Number no disponible" << std::endl;

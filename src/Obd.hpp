@@ -217,7 +217,7 @@ public:
 		t1.join();
 	}
 
-	int polling(Commands command){
+	void polling(Commands command){
 		struct epoll_event events[MAX_EP_EVTS];
 		/*
 		struct epoll_event {
@@ -237,7 +237,7 @@ public:
 		*/
 
 		int nfds;
-		int fd_out = fileno(stdout);
+		//int fd_out = fileno(stdout);
 
 		bool continuar = true;
 		//El parametro de epoll_create significa el número de file descriptor que un proceso quiere monitorizar
