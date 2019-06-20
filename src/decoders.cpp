@@ -28,7 +28,7 @@ std::string decodeVIN(char * response){
 	}
 
 
-	//Eliminación de primeros bytes de rellenos con 00
+	//Conversión en ASCII
 	for (uint32_t i = 0; i < vin_bytes.size(); i+=2){
 		std::string vin_char = vin_bytes.substr(i,2);
 		//Conversión de bytes en char
@@ -317,7 +317,7 @@ float decodeHexToDec(char *response){
 
 float decodeRPM(char *response){
 	int dec = (int)strtol(response, NULL, 16);
-	return dec/4;
+	return dec/4.0;
 }
 
 //0d - Velocidad del vehículo , 0 , 255 , km/h , A
@@ -328,7 +328,7 @@ float decodeRPM(char *response){
 
 float decodeAvanceTiempo(char *response){
 	int dec = (int)strtol(response, NULL, 16);
-	return (dec/2)-64;
+	return (dec/2.0)-64;
 }
 
 //0f - Temperatura del aire del colector de admisión , -40 , 215 , ºC, A-40
@@ -339,7 +339,7 @@ float decodeAvanceTiempo(char *response){
 
 float decodeVelocidadMAF(char *response){
 	int dec = (int)strtol(response, NULL, 16);
-	return dec/100;
+	return dec/100.0;
 }
 
 //11 - Posición del acelerador , 0 , 100 , % , A/2.55 
@@ -363,6 +363,8 @@ struct OxigenoResponse decodeSensorOxigeno(char *response){
 
 	A = (int)strtol(AResponse, NULL, 16);
 	datos.A = A/200;
+	/*
+	Según la documentación si B==FF, entonces el sensor no se usa en el cálculo del ajuste
 	if (strcmp(BResponse, "FF") == 0){
 		//Si B==FF, entonces el sensor no se usa en el cálculo del ajuste
 		datos.B=0;
@@ -371,6 +373,9 @@ struct OxigenoResponse decodeSensorOxigeno(char *response){
 		B = (int)strtol(BResponse, NULL, 16);
 		datos.B = (B/1.28)-100;
 	} 
+	*/
+	B = (int)strtol(BResponse, NULL, 16);
+	datos.B = (B/1.28)-100;
 	
 	return datos;
 }
@@ -449,7 +454,7 @@ struct OxigenoResponse decodeRelacionCombAire(char *response){
 
 float decodePresionVapor(char *response){
 	int dec = (int)strtol(response, NULL, 16);
-	return (dec/4)-8192;
+	return (dec/4.0)-8192.0;
 }
 
 //33 - Presión barométrica absoluta , 0 , 255 , kPa , A
@@ -483,7 +488,7 @@ struct OxigenoResponse decodeRelacionCombAireActual(char *response){
 
 float decodeTempCatalizador(char *response){
 	int dec = (int)strtol(response, NULL, 16);
-	return (dec/10)-40;
+	return (dec/10.0)-40;
 }
 
 //40 - PID implementados [41 - 60]
@@ -492,7 +497,7 @@ float decodeTempCatalizador(char *response){
 
 float decodeVoltajeControl(char *response){
 	int dec = (int)strtol(response, NULL, 16);
-	return dec/1000;
+	return dec/1000.0;
 }
 
 //43 - Valor absoluta de carga , 0 , 25,700 , % , (256A+B)/2.55 
@@ -503,7 +508,7 @@ float decodeVoltajeControl(char *response){
 
 float decodeRelacionCombAireBasica(char *response){
 	int dec = (int)strtol(response, NULL, 16);
-	return dec/32768;
+	return dec/32768.0;
 }
 
 //45 - Posición relativa del acelerador , 0 , 100 , % , A/2.55 

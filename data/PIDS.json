@@ -665,7 +665,7 @@
 		"decoder": "decodePresionVapor",
 		"description": "Evaporative system vapor pressure",
 		"name": "EVAP_VAPOR_PRESSURE",
-		"min_unit": -8.192,
+		"min_unit": -8192,
 		"max_unit": 8191.75,
 		"units": "Pa",
 		"type_data": "float"

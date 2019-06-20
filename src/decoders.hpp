@@ -30,11 +30,12 @@ struct RelacionesResponse {
 //Declaración de funciones
 
 void noDecodeAT();
-std::vector<int> decodePIDS(char *response);
 std::map<std::string, std::string> decodeStatus(char *response);
+std::vector<int> decodePIDS(char *response);
 std::vector<std::string> decodeDTCs(char *response);
 std::string decodeVIN(char * response);
 std::string decodeDescribeProtocol(char * response);
+std::string convertDTCs(std::string dtc);
 float decodeCargaPosicionEGR(char *response);
 float decodeTempGeneral(char *response);
 float decodeAjusteCombustibleEGR(char *response);
@@ -43,17 +44,16 @@ float decodeHexToDec(char *response);
 float decodeRPM(char *response);
 float decodeAvanceTiempo(char *response);
 float decodeVelocidadMAF(char *response);
-struct OxigenoResponse decodeSensorOxigeno(char *response);
 float decodePresionCombColector(char *response);
 float decodePresionMedidorCombustible(char *response);
-struct OxigenoResponse decodeRelacionCombAire(char *response);
 float decodePresionVapor(char *response);
-struct OxigenoResponse decodeRelacionCombAireActual(char *response);
 float decodeTempCatalizador(char *response);
 float decodeVoltajeControl(char *response);
 float decodeRelacionCombAireBasica(char *response);
+struct OxigenoResponse decodeSensorOxigeno(char *response);
+struct OxigenoResponse decodeRelacionCombAire(char *response);
+struct OxigenoResponse decodeRelacionCombAireActual(char *response);
 struct RelacionesResponse decodeRelaciones(char *response);
 
-std::string convertDTCs(std::string dtc);
 
 #endif
