@@ -169,17 +169,12 @@ public:
 	}
 	
 	void send(Commands command){
-
-		//printf("Mensaje a enviar: %s\n", message);
-
 		std::thread t1(&Obd::polling, this, command);
 
 		char *p;
 		char buf[1024];
 		int len;
 
-		//std::cout << "Esperamos 2 segundos..." << std::endl;
-		//std::this_thread::sleep_for(std::chrono::seconds(2));
 		std::cout << "Enviando mensaje..." << std::endl;
 
 		std::string message = command.getCMD();
@@ -188,19 +183,10 @@ public:
 		strcpy(buf, message.c_str());
 
 		len = strlen(buf);
-		//strcpy(buf, "010C\n");
-
-
-
-			//Mirar si sustituir \n por \r directamente
 		buf[len] = '\n';
 		buf[len+1] = '\0';
 		
-			/* All  messages  to  the ELM327  must  be
-			 * terminated  with  a  carriage  return
-			 * character  (hex  ‘0D’, \r).
-			 */
-		
+		// All  messages  to  the ELM327  must  be terminated  with  a  carriage  return character  (hex  ‘0D’, \r).
 		p = buf;
 		while (*p) {
 			if (*p == '\n')
@@ -209,11 +195,8 @@ public:
 		}
 		
 		printf("Mensaje a enviar: %s\n", buf);
-			//printf("Longitud: %d %d\n", (int) strlen(buf), len);
-
 		write(this->m_cli_s, buf, strlen(buf));
 		
-			//std::cout << "Mensaje " << message << " enviado" << std::endl;
 		t1.join();
 	}
 
@@ -469,8 +452,8 @@ public:
 		std::cout << "Nº de comandos disponibles = " << vecPIDs.size() << std::endl;
 	}
 
-	void initDecoderFunctions(){
-		this->decoderFunctionsFloat = {
+	void initDecoderFunctions(){	
+	this->decoderFunctionsFloat = {
 			{ "decodeCargaPosicionEGR", decodeCargaPosicionEGR},
 			{ "decodeTempGeneral", decodeTempGeneral},
 			{ "decodeAjusteCombustibleEGR", decodeAjusteCombustibleEGR},

@@ -19,52 +19,62 @@ std::string formMessage(std::string macAddress, std::string geoPos, std::string 
 
 int main(int argc, char **argv)
 {
+	//Variable para cargar información de configuración
 	cfgType variablesCfg;
+	//Asigna los valores del archivo de configuración a la variable
 	loadCfg("./configuration.cfg", &variablesCfg);
-	//std::cout << variablesCfg["BT-DISP-NAME"] << std::endl;
 
+	//Intenta conectarse con el dispositivo con el nombre de la configuración
 	Obd connection = Obd(variablesCfg["BT-DISP-NAME"].c_str());
 
+	//Si se ha conectado correctamente se pasa a comprobar los DTC's
 	if(connection.isValid()){
 		std::cout << "Se ha conectado correctamente" << std::endl;
+		//Configuración de dirección y puerto del servidor para enviar los DTC's
 		AlarmFile fileAlr = AlarmFile(variablesCfg["IP"], variablesCfg["PORT"], variablesCfg["ALARM-FILE-NAME"], variablesCfg["ALARM-FILE-NAME"]);
+		//Dirección MAC para identificar el vehículo de origen de los datos
 		std::string macAddress = getmac(variablesCfg["INTERFACE-NAME"].c_str());
-		//connection.send(connection.map_commands.find(argv[2])->second);
+
+		//Bucle infinito que cada cierto tiempo consulta si hay algún DTC
 		while(1){
+			//Espera un periodo para volver a consultar DTC
 			std::this_thread::sleep_for(std::chrono::seconds(std::stoi(variablesCfg["PERIOD"])));
+			//Comprueba si hay DTC en el vehículo
 			std::vector<std::string> vecDTCs = connection.getDTCs();
+			//ELIMINAR EJEMPLO DE COMANDO SPEED!!!
 			//connection.send(connection.map_commands.find("SPEED")->second);
 
 			if(vecDTCs.empty()){
 				std::cout << "No hay DTCs" << std::endl;
 			} else {
+				//Si hay algún DTC se obtiene la geoposición en la que se detectó
 				std::string geoPos = fileAlr.getGeoPos(variablesCfg["PORT-GPS"]);
 				std::cout << "Códigos de errores DTCs:" << std::endl;
 				for (uint32_t i = 0; i < vecDTCs.size(); ++i){
 					std::cout <<  "#############################" << std::endl;
 					std::cout <<  vecDTCs[i] << std::endl;
 					std::cout <<  "#############################" << std::endl;
+					//Forma el mensaje con los datos obtenidos
 					std::string msgToSend = formMessage(macAddress, geoPos, vecDTCs[i]);
+					//Envía la alarma al servidor
 					if (fileAlr.sendAlarm(msgToSend)){
 						std::cout << "Alarma enviada." << std::endl;
 					} else {
 						std::cout << "Mensaje vacío, alarma no enviada." << std::endl;
 					}					
 				}
-				//sleep(std::stoi(variablesCfg["PERIOD"]));
 			}
 		}
 		//connection.printStatus();
-
-
 		//connection.printPIDs();
+		/*
 		if(connection.getVIN().empty()){
 			std::cout << "Vehicle Identification Number no disponible" << std::endl;
 		} else {
 			std::cout << "Vehicle Identification Number = " << connection.getVIN() << std::endl;
 		}
-
-		connection.disconnectBluetooth();
+		*/
+		//connection.disconnectBluetooth();
 	} else {
 		std::cout << "No se ha conectado correctamente" << std::endl;
 	}
