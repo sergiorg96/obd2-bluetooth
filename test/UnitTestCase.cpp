@@ -3,8 +3,18 @@
 
 #include "../src/external/catch.hpp"
 #include "../src/decoders.hpp"
+#include "../test/Obd-test.hpp"
+
 
 using namespace Catch::literals;
+
+TEST_CASE( "Test OBD class", "[OBD]" ) {
+	Obd connection = Obd("OBDII");
+
+	REQUIRE (connection.isValid() == true);
+
+	unlink("fifo_file");
+}
 
 TEST_CASE( "Test Revoluciones Por Minuto", "[decoders]" ) {
     REQUIRE( decodeRPM((char *)"0000") == 0);

@@ -1,12 +1,13 @@
 CXX = g++
 CXXFLAGS = -std=c++11 -Wall -o 
-CXXFLAGS_DEBUG = -g -std=c++11 -Wall -o 
+CXXFLAGS_DEBUG = -g -std=c++11 -Wall -DDEBUG -o 
 ParametroBluetooth = -lbluetooth -lpthread
-HPP = src/Obd.hpp src/Commands.hpp src/decoders.hpp src/picangps.hpp src/alarmfile.hpp
+HPP = src/Obd.hpp src/Commands.hpp src/decoders.hpp src/picangps.hpp src/alarmfile.hpp src/debug.hpp
 CPP = src/main.cpp src/decoders.cpp src/loadcfg.cpp src/picangps.cpp src/alarmfile.cpp
 
-CPP_TEST = test/UnitTestCase.cpp src/decoders.cpp
-HPP_TEST = src/decoders.hpp
+CPP_TEST = test/UnitTestCase.cpp test/MockSocket.cpp src/decoders.cpp
+#HPP_TEST = src/decoders.hpp test/Obd-test.hpp
+HPP_TEST = src/decoders.hpp src/Obd.hpp src/debug.hpp
 
 main: $(CPP) $(HPP)
 	$(CXX) $(CXXFLAGS) main $(CPP) $(HPP) $(ParametroBluetooth) 
@@ -15,4 +16,4 @@ debug: $(CPP) $(HPP)
 	$(CXX) $(CXXFLAGS_DEBUG) main-debug $(CPP) $(HPP) $(ParametroBluetooth) 
 
 test: $(CPP_TEST) $(HPP_TEST)
-	$(CXX) $(CXXFLAGS) test/test $(CPP_TEST) $(HPP_TEST) 
+	$(CXX) $(CXXFLAGS) test/test $(CPP_TEST) $(HPP_TEST) $(ParametroBluetooth)

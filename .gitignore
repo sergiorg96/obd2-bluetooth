@@ -31,6 +31,8 @@
 *.out
 *.app
 main
+main-debug
 obd2-bluetooth.sublime-workspace
 obd2-bluetooth.sublime-project
 test/test
+test/Obd-test.hpp
