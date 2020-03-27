@@ -35,6 +35,11 @@
 #include "loadcfg.hpp"
 #include "debug.hpp"
 
+#ifdef DEBUG
+	#define socket mock_socket
+	#include "../test/MockSocket.cpp"
+#endif
+
 #define MAX_EP_EVTS 20
 
 using json = nlohmann::json;
@@ -61,7 +66,7 @@ public:
 				this->initMessages();
 			}
 		} else {
-			printf("Device %s not found.\n", deviceName);
+			debugLog("Device %s not found.", deviceName);
 		}
 	}
 
@@ -73,7 +78,7 @@ public:
 			// Abrimos socket bluetooh
 			this->m_cli_s = socket(AF_BLUETOOTH, SOCK_STREAM, BTPROTO_RFCOMM);
 			//Borrar tras test
-			printf("socket: %d\n", this->m_cli_s);
+			debugLog("socket: %d", this->m_cli_s);
 			if (this->m_cli_s < 0) {
 				throw std::string("error opening BT/RFCOMM socket");
 			}
@@ -82,7 +87,7 @@ public:
 			str2ba(this->dest, &addr.rc_bdaddr );
 			addr.rc_channel = (uint8_t) 1;
 
-			printf("connecting to %s (channel %d)\n", this->dest, addr.rc_channel);
+			debugLog("connecting to %s (channel %d)", this->dest, addr.rc_channel);
 
 			statusConnection = connect(this->m_cli_s, (struct sockaddr *)&addr, sizeof(addr));
 
@@ -91,11 +96,10 @@ public:
 				throw std::string("unable to connect");
 			}
 
-			printf("connected\n");
+			debugLog("connected");
 			this->m_status = true;
 
 			this->epoll_fd = epoll_create(1);
-			std::cout << this->epoll_fd << std::endl;
 			if (this->epoll_fd < 0) {
 				perror("Unable to create epoll");
 				close(this->m_cli_s);
@@ -156,7 +160,7 @@ public:
 			memset(name, 0, sizeof(name));
 			if (hci_read_remote_name(sock, &(ii+i)->bdaddr, sizeof(name), name, 0) < 0)
 				strcpy(name, "[unknown]");
-			printf("%s  %s\n", addr, name);
+			debugLog("%s  %s", addr, name);
 			//Si la cadena introducida a la función es igual al dispositivo encontrado guardamos la dirección
 			if(strcmp(deviceName, name) == 0){
 				this->m_deviceFound = true;
@@ -178,7 +182,7 @@ public:
 		char buf[1024];
 		int len;
 
-		std::cout << "Enviando mensaje..." << std::endl;
+		debugLog("Enviando mensaje...");
 
 		std::string message = command.getCMD();
 
@@ -197,7 +201,7 @@ public:
 			p++;
 		}
 		
-		printf("Mensaje a enviar: %s\n", buf);
+		debugLog("Mensaje a enviar: %s", buf);
 		write(this->m_cli_s, buf, strlen(buf));
 		
 		t1.join();
@@ -208,15 +212,17 @@ public:
 		int nfds;
 		bool continuar = true;
 
-		printf("Polling function\n");
+		debugLog("Polling function");
+
 		// Bucle infinito para el envío de datos por bluetooth al conector OBD
 		while(continuar) {
 		// Buffer para enviar y recibir
 			char message_rcv[1024], buf[1024], *p;
 			ssize_t len;
 			int i;
-
-			nfds = epoll_wait(this->epoll_fd, events, MAX_EP_EVTS, -1);			
+			//debugLog("Antes de recoger eventos");
+			nfds = epoll_wait(this->epoll_fd, events, MAX_EP_EVTS, -1);
+			//debugLog("Nº de eventos = %d", nfds);			
 			if (nfds < 0) {
 				perror("epoll error");
 				break;
@@ -224,7 +230,7 @@ public:
 			//printf("Se ha detectado un evento(nfds): %d\n", nfds);
 			for (i = 0; i < nfds; i++) {
 				if ((events[i].events & EPOLLERR) || (events[i].events & EPOLLHUP)) {
-					fprintf(stderr, "epoll error\n");
+					debugError("epoll error");
 				}
 
 				if (events[i].data.fd == this->m_cli_s) {
@@ -234,6 +240,7 @@ public:
 						continue;
 					}
 					//printf("RECIBIDO: %s\n", buf);
+					//debugLog("Evento leído: %s", buf);
 					strcat(message_rcv, buf);
 					if(strstr(buf, ">") != NULL) {
 						len = strlen(message_rcv);
@@ -246,17 +253,17 @@ public:
 							p++;
 						}
 						//Transformar respuesta
-						printf("Mensaje recibido:\n%s", message_rcv);
+						debugLog("Mensaje recibido:\n%s", message_rcv);
 
 						char * ocurrencia = message_rcv;
 						//printf("He recibido: %s\n", message_rcv);
 						if((ocurrencia=strstr(ocurrencia, command.getCMDResponse().c_str())) != NULL){
 							while((ocurrencia=strstr(ocurrencia, command.getCMDResponse().c_str())) != NULL){
-								printf("Ocurrencia encontrada\n");
+								debugLog("Ocurrencia encontrada");
 								char info[1024];
 								memset(info, '\0', sizeof(info));
 								strncpy(info, ocurrencia + command.getCMD().size() , command.getBytesResponse());
-								printf("Info: %s\n", info);
+								debugLog("Info: %s", info);
 								std::string type_data = command.getTypeData();
 								//HAY QUE CAMBIAR DECODERFUNCTIONS
 								if (!type_data.compare("float")){
@@ -344,7 +351,7 @@ public:
 								auto varResultado = this->decoderFunctionsStr[command.getDecoder().c_str()](info);
 								this->currentProtocolNumber = varResultado;
 							} else {
-								printf("Mensaje recibido no entendido!\n");
+								debugLog("Mensaje recibido no entendido!");
 							}
 							memset(message_rcv, '\0', sizeof(message_rcv));							
 							continuar = false;
@@ -353,7 +360,7 @@ public:
 
 					memset(buf, '\0', sizeof(buf));
 				} else {
-					fprintf(stderr, "unknown event");
+					debugError("unknown event");
 				}
 			}
 		}

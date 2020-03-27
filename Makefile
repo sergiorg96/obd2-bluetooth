@@ -5,7 +5,7 @@ ParametroBluetooth = -lbluetooth -lpthread
 HPP = src/Obd.hpp src/Commands.hpp src/decoders.hpp src/picangps.hpp src/alarmfile.hpp src/debug.hpp
 CPP = src/main.cpp src/decoders.cpp src/loadcfg.cpp src/picangps.cpp src/alarmfile.cpp
 
-CPP_TEST = test/UnitTestCase.cpp test/MockSocket.cpp src/decoders.cpp
+CPP_TEST = test/UnitTestCase.cpp src/decoders.cpp
 #HPP_TEST = src/decoders.hpp test/Obd-test.hpp
 HPP_TEST = src/decoders.hpp src/Obd.hpp src/debug.hpp
 
@@ -16,4 +16,4 @@ debug: $(CPP) $(HPP)
 	$(CXX) $(CXXFLAGS_DEBUG) main-debug $(CPP) $(HPP) $(ParametroBluetooth) 
 
 test: $(CPP_TEST) $(HPP_TEST)
-	$(CXX) $(CXXFLAGS) test/test $(CPP_TEST) $(HPP_TEST) $(ParametroBluetooth)
+	$(CXX) $(CXXFLAGS_DEBUG) test/test $(CPP_TEST) $(HPP_TEST) $(ParametroBluetooth)

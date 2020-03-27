@@ -49,20 +49,24 @@ AlarmFile::AlarmFile(std::string AlarmHost,
   memset ((char *)&iTu_, 0, sizeof(struct sockaddr_in));
   iTu_.sin_family      = AF_INET;  
   iTu_.sin_addr.s_addr = inet_addr(alarmHost_.c_str()); 
-  iTu_.sin_port        = htons(alarmPort_);     
+  iTu_.sin_port        = htons(alarmPort_);
 }
 
 
 bool AlarmFile::sendAlarm(std::string msg)
 {
   if ( "" != msg ){
-    int cc =  sendto(s_,
-                   msg.c_str(),
-                   strlen(msg.c_str()),
-                   0,
-                   (struct sockaddr *)&iTu_,
-                   sizeof(iTu_));
+    int cc =  sendto(s_, msg.c_str(), strlen(msg.c_str()), 0,(struct sockaddr *)&iTu_, sizeof(iTu_));
   
+    //printf("ITU: %d - %d\n", iTu_.sin_addr.s_addr, iTu_.sin_port);
+    //printf("ITU: %s - %d\n", alarmHost_.c_str(), alarmPort_);    
+    //printf("Socket: %d\nMensaje a enviar: %s\n", s_, msg.c_str());
+
+    if (cc < 0){
+      perror("Error is ");
+      fprintf(stderr, "Value of errno: %d\n", errno);
+    }
+
     fprintf(stderr, "Alarma enviada (%d): %s a %s:%d\n", cc, msg.c_str(), inet_ntoa(iTu_.sin_addr), (int) ntohs(iTu_.sin_port));
 
     return true;

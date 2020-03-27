@@ -29,9 +29,10 @@ int main(int argc, char **argv)
 
 	//Si se ha conectado correctamente se pasa a comprobar los DTC's
 	if(connection.isValid()){
-		std::cout << "Se ha conectado correctamente" << std::endl;
+		debugLog("Se ha conectado correctamente");
+		debugLog("Valores pasados:\nIP: %s\nPuerto: %s", variablesCfg["IP"].c_str(), variablesCfg["PORT"].c_str());
 		//Configuración de dirección y puerto del servidor para enviar los DTC's
-		AlarmFile fileAlr = AlarmFile(variablesCfg["IP"], variablesCfg["PORT"], variablesCfg["ALARM-FILE-NAME"], variablesCfg["ALARM-FILE-NAME"]);
+		AlarmFile fileAlr = AlarmFile(variablesCfg["IP"].c_str(), variablesCfg["PORT"].c_str(), variablesCfg["ALARM-FILE-NAME"].c_str(), variablesCfg["ALARM-FILE-NAME"].c_str());
 		//Dirección MAC para identificar el vehículo de origen de los datos
 		std::string macAddress = getmac(variablesCfg["INTERFACE-NAME"].c_str());
 
@@ -48,7 +49,7 @@ int main(int argc, char **argv)
 				std::cout << "No hay DTCs" << std::endl;
 			} else {
 				//Si hay algún DTC se obtiene la geoposición en la que se detectó
-				std::string geoPos = fileAlr.getGeoPos(variablesCfg["PORT-GPS"]);
+				std::string geoPos = fileAlr.getGeoPos(variablesCfg["PORT-GPS"].c_str());
 				std::cout << "Códigos de errores DTCs:" << std::endl;
 				for (uint32_t i = 0; i < vecDTCs.size(); ++i){
 					std::cout <<  "#############################" << std::endl;
@@ -76,7 +77,7 @@ int main(int argc, char **argv)
 		*/
 		//connection.disconnectBluetooth();
 	} else {
-		std::cout << "No se ha conectado correctamente" << std::endl;
+		debugError("No se ha conectado correctamente");
 	}
 
 	return 0;

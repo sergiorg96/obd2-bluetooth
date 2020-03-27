@@ -6,7 +6,7 @@
  	#define debugLog(info, args...) \
 		fprintf (stderr, "[%s %s][LOG][%s][%s][Line %i] ", __DATE__, __TIME__, __FILE__, __FUNCTION__, __LINE__); \
 		fprintf (stderr, info "\n", ##args);
-	#define debugError(format, args...) \
+	#define debugError(info, args...) \
         fprintf (stderr, "[%s %s][ERROR][%s][%s][Line %i] ", __DATE__, __TIME__, __FILE__, __FUNCTION__, __LINE__); \
         fprintf (stderr, info "\n", ##args);
 #else

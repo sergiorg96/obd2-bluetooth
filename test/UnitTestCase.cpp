@@ -3,17 +3,86 @@
 
 #include "../src/external/catch.hpp"
 #include "../src/decoders.hpp"
-#include "../test/Obd-test.hpp"
+#include "../src/Obd.hpp"
 
 
 using namespace Catch::literals;
 
+std::string findDevPTS(){
+
+    system("ls /dev/pts | tail -2 | head -1 > tmpPTSfile.txt");
+
+    int ultPts;
+    std::ifstream input_file("tmpPTSfile.txt");
+    int tempVar;
+    while ( input_file >> tempVar )
+    {
+        ultPts = tempVar;
+    }
+
+    std::string devFile = "/dev/pts/" + std::to_string(ultPts);
+
+    std::cout << devFile << std::endl;
+
+    std::string minicomCommand = "minicom -p " + devFile + " &";
+
+    std::cout << minicomCommand << std::endl;
+
+
+    return devFile;
+}
+
+void initOBDSIM(){
+
+    
+    system("obdsim -g gui_fltk &");
+
+    // 5 segundos para configurar parámetros para el test
+    sleep(5);
+
+
+    std::string s = findDevPTS();
+    char comando[s.size() + 1];
+    s.copy(comando, s.size() + 1);
+    comando[s.size()] = '\0';
+    // Se abre terminal en el test con minicom, porque el primer mensaje obdsim no envía >
+    // a nivel de código, pero si con un terminal con minicom
+    system("minicom -p /dev/pts/3 &");
+    // system(comando);
+
+    sleep(1);
+
+    // Se mata el proceso minicom, ya que, no es necesario
+    system("pkill minicom");
+
+    sleep(1);
+}
+
+void closeOBDSIM(){
+    system("pkill obdsim");
+}
+
 TEST_CASE( "Test OBD class", "[OBD]" ) {
+    
+    // Iniciamos el simulador OBDSIM para las pruebas
+    initOBDSIM();
+
+
 	Obd connection = Obd("OBDII");
+
+	
 
 	REQUIRE (connection.isValid() == true);
 
-	unlink("fifo_file");
+
+
+	connection.getDTCs();
+	connection.printPIDs();
+
+	connection.send(connection.map_commands.find("SPEED")->second);
+	connection.send(connection.map_commands.find("RPM")->second);
+
+    closeOBDSIM();
 }
 
 TEST_CASE( "Test Revoluciones Por Minuto", "[decoders]" ) {
