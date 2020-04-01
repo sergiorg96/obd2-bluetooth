@@ -12,6 +12,23 @@
 #include <sys/stat.h>
 #include "../src/debug.hpp"
 
+std::string findDevPTS(){
+    system("ls /dev/pts | tail -2 | head -1 > tmpPTSfile.txt");
+
+    int ultPts;
+    int tempVar;
+    std::ifstream input_file("tmpPTSfile.txt");
+    while ( input_file >> tempVar )
+    {
+        ultPts = tempVar;
+    }
+
+    std::string devFile = "/dev/pts/" + std::to_string(ultPts);
+    remove("tmpPTSfile.txt");
+
+    return devFile;
+}
+
 int mock_socket(int domain, int type, int protocol){
 	// Crear socket con FIFO
 
@@ -24,10 +41,14 @@ int mock_socket(int domain, int type, int protocol){
     //if (err == -1)
     //	return err;
 
+
+
 	printf("He llegado a mock_socket\n");
 
+	std::string devFile = findDevPTS();
+
     //int filedesc = open(myfifo, O_RDWR);
-    int filedesc = open("/dev/pts/3", O_RDWR);
+    int filedesc = open(devFile.c_str(), O_RDWR);
     if (filedesc < 0) {
     	debugError("Error al abrir socket %d.", filedesc);
     }

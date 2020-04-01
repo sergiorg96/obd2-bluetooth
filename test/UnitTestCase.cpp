@@ -5,50 +5,33 @@
 #include "../src/decoders.hpp"
 #include "../src/Obd.hpp"
 
+#define BUFSIZE 30
+#define WAIT_OBDSIM 5
+
 
 using namespace Catch::literals;
 
-std::string findDevPTS(){
+void getMinicomCMD(char * cmd){
 
-    system("ls /dev/pts | tail -2 | head -1 > tmpPTSfile.txt");
+    std::string devFile = findDevPTS();
 
-    int ultPts;
-    std::ifstream input_file("tmpPTSfile.txt");
-    int tempVar;
-    while ( input_file >> tempVar )
-    {
-        ultPts = tempVar;
-    }
-
-    std::string devFile = "/dev/pts/" + std::to_string(ultPts);
-
-    std::cout << devFile << std::endl;
-
-    std::string minicomCommand = "minicom -p " + devFile + " &";
-
-    std::cout << minicomCommand << std::endl;
-
-
-    return devFile;
+    snprintf(cmd, BUFSIZE, "minicom -p %s &", devFile.c_str());
 }
 
 void initOBDSIM(){
 
-    
+    char cmd[BUFSIZE];
+
     system("obdsim -g gui_fltk &");
-
     // 5 segundos para configurar parámetros para el test
-    sleep(5);
+    sleep(WAIT_OBDSIM);
 
+    getMinicomCMD(cmd);
 
-    std::string s = findDevPTS();
-    char comando[s.size() + 1];
-    s.copy(comando, s.size() + 1);
-    comando[s.size()] = '\0';
     // Se abre terminal en el test con minicom, porque el primer mensaje obdsim no envía >
     // a nivel de código, pero si con un terminal con minicom
-    system("minicom -p /dev/pts/3 &");
-    // system(comando);
+    //system("minicom -p /dev/pts/3 &");
+    system(cmd);
 
     sleep(1);
 

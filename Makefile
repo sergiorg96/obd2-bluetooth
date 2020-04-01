@@ -12,8 +12,8 @@ HPP_TEST = src/decoders.hpp src/Obd.hpp src/debug.hpp
 main: $(CPP) $(HPP)
 	$(CXX) $(CXXFLAGS) main $(CPP) $(HPP) $(ParametroBluetooth) 
 
-debug: $(CPP) $(HPP)
+debug: $(CPP) $(HPP) test/MockSocket
 	$(CXX) $(CXXFLAGS_DEBUG) main-debug $(CPP) $(HPP) $(ParametroBluetooth) 
 
-test: $(CPP_TEST) $(HPP_TEST)
+test: $(CPP_TEST) $(HPP_TEST) test/MockSocket.cpp
 	$(CXX) $(CXXFLAGS_DEBUG) test/test $(CPP_TEST) $(HPP_TEST) $(ParametroBluetooth)
