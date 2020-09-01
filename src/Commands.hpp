@@ -2,8 +2,10 @@
 #define COMMANDS_HPP
 
 #include <iostream>
+#include <any>
 
 #include "external/json.hpp"
+#include "decoders.hpp"
 
 using json = nlohmann::json;
 
@@ -31,30 +33,65 @@ public:
 	float getMAX(){ return this->m_max_unit; }
 	std::string getUnits(){ return this->m_units; }
 	std::string getTypeData(){ return this->m_type_data; }
+	std::any getResValue(){ return this->m_resValue; }
 
 	json getJson(){
-		/*
-		json command = {
-			{"name", this->m_name},
-			{"description", this->m_description},
-			{"cmd", this->m_cmd},
-			{"bytes_response", this->m_bytes_response},
-			{"m_decoder", this->m_decoder}
-		};*/
-		json command;
-		command["name"] = this->m_name;
-		command["description"] = this->m_description;
-		command["cmd"] = this->m_cmd;
-		command["bytes_response"] = this->m_bytes_response;
-		command["decoder"] = this->m_decoder;
-		command["min_unit"] = this->m_min_unit;
-		command["max_unit"] = this->m_max_unit;
-		command["units"] = this->m_units;
-		command["type_data"] = this->m_type_data;
+		json data;
+
+		try{
+			if (getTypeData() == "int"){
+				auto resValue = std::any_cast<int>(this->m_resValue);
+				data["value"] = std::to_string(resValue);
+			}
+			else if (getTypeData() == "float"){
+				auto resValue = std::any_cast<float>(this->m_resValue);
+				data["value"] = std::to_string(resValue);
+			}
+			else if (getTypeData() == "string"){
+				auto resValue = std::any_cast<std::string>(this->m_resValue);
+				data["value"] = resValue;
+			}
+			else if (getTypeData() == "vectorStr"){
+				auto resValue = std::any_cast<std::vector<std::string>>(this->m_resValue);
+				data["value"] = resValue;
+			}
+			else if (getTypeData() == "vectorInt"){
+				auto resValue = std::any_cast<std::vector<int>>(this->m_resValue);
+				data["value"] = resValue;
+			}
+			else if (getTypeData() == "map"){
+				auto resValue = std::any_cast<std::map<std::string, std::string>>(this->m_resValue);
+				data["value"] = resValue;
+			}
+			else if (getTypeData() == "OxigenoResponse"){
+				auto resValue = std::any_cast<struct OxigenoResponse>(this->m_resValue);
+				std::map<std::string, float> mapResValue;
+				mapResValue["A"] = resValue.A;
+				mapResValue["B"] = resValue.B;
+				data["value"] = mapResValue;
+			}
+			else if (getTypeData() == "RelacionesResponse"){
+				auto resValue = std::any_cast<struct RelacionesResponse>(this->m_resValue);
+				std::map<std::string, int> mapResValue;
+				mapResValue["A"] = resValue.A;
+				mapResValue["B"] = resValue.B;
+				mapResValue["C"] = resValue.C;
+				mapResValue["D"] = resValue.D;
+				data["value"] = mapResValue;
+			}
+
+		} catch(const std::bad_any_cast& e) {
+			std::cerr << e.what() << std::endl;
+		}
+		data["name"] = this->m_name;
+		data["description"] = this->m_description;
+		data["units"] = this->m_units;
 		
-		return command;
+
+		return data;
 	}
 
+	//Obtiene la cadena de respuesta sustituyendo el 0 por el 4 en el mensaje OBD
 	std::string getCMDResponse() {
 		std::string CMDResponse;
 		CMDResponse = this->m_cmd;
@@ -71,8 +108,9 @@ public:
 	void setMAX(float max_unit) { this->m_max_unit = max_unit; }
 	void setUnits(std::string units) { this->m_units = units; }
 	void setTypeData(std::string type_data) { this->m_type_data = type_data; }
+	void setResValue(auto resValue) { this->m_resValue = resValue; }
 private:
-      // Datos miembro de la clase "Commands"
+    // Atributos privados de la clase "Commands"
 	std::string m_name;
 	std::string m_description;
 	std::string m_cmd;
@@ -82,6 +120,7 @@ private:
 	float m_max_unit;
 	std::string m_units;
 	std::string m_type_data;
+	std::any m_resValue;
 };
 
 

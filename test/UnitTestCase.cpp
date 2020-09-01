@@ -6,7 +6,7 @@
 #include "../src/Obd.hpp"
 
 #define BUFSIZE 30
-#define WAIT_OBDSIM 5
+#define WAIT_OBDSIM 15
 
 
 using namespace Catch::literals;
@@ -53,17 +53,17 @@ TEST_CASE( "Test OBD class", "[OBD]" ) {
 
 	Obd connection = Obd("OBDII");
 
-	
-
 	REQUIRE (connection.isValid() == true);
-
 
 
 	connection.getDTCs();
 	connection.printPIDs();
 
 	connection.send(connection.map_commands.find("SPEED")->second);
-	connection.send(connection.map_commands.find("RPM")->second);
+
+    std::cout << connection.map_commands.find("SPEED")->second.getJson().dump(4) << std::endl;
+
+    std::cout << connection.map_commands.find("GET_DTC")->second.getJson().dump(4) << std::endl;
 
     closeOBDSIM();
 }

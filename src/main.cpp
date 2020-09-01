@@ -4,6 +4,7 @@
 
 typedef  std::map <std::string, std::string> cfgType;
 
+//Formato general de envío de datos
 std::string formMessage(std::string macAddress, std::string geoPos, std::string DTC){
 	std::string msg;
 
@@ -12,12 +13,51 @@ std::string formMessage(std::string macAddress, std::string geoPos, std::string 
 	msg.append(geoPos);
 	msg.append(";");
 	msg.append(DTC);
-	//msg.append(";");
 
 	return msg;
 }
 
-int main(int argc, char **argv)
+//Formato JSON para el envío al servidor web
+std::string formMessageJSON(std::string macAddress, std::string geoPos, std::string DTC){
+	std::string msg;
+
+	json data;
+
+	std::vector<int> coordenadas;
+	
+	char* geoPosChar = const_cast<char*>(geoPos.c_str());
+
+	for (int i = 0; i < 4; ++i){
+		    char* token = strtok(geoPosChar, ",");
+    		if(token != NULL){
+        		while(token != NULL){
+            	// Sólo en la primera pasamos la cadena; en las siguientes pasamos NULL
+            	coordenadas.push_back(atoi(token));
+            	token = strtok(NULL, ",");
+        		}
+    		}
+	}
+
+	time_t now = time(0);
+	char* dt = ctime(&now);
+
+	data["date"] = dt;
+	data["coordinates"] = coordenadas;
+	data["vehicle"] = macAddress;
+	data["code"] = DTC;
+
+	//Web que nos proporciona información sobre el DTC y acciones a realizar
+	std::string enlace = "https://codigosdtc.com/" + DTC;
+
+	data["description"] = enlace;
+
+	//Formato de JSON sin espacios con más eficiencia en el envío de datos
+	msg = data.dump();
+
+	return msg;
+}
+
+int main()
 {
 	//Variable para cargar información de configuración
 	cfgType variablesCfg;
@@ -42,8 +82,6 @@ int main(int argc, char **argv)
 			std::this_thread::sleep_for(std::chrono::seconds(std::stoi(variablesCfg["PERIOD"])));
 			//Comprueba si hay DTC en el vehículo
 			std::vector<std::string> vecDTCs = connection.getDTCs();
-			//ELIMINAR EJEMPLO DE COMANDO SPEED!!!
-			//connection.send(connection.map_commands.find("SPEED")->second);
 
 			if(vecDTCs.empty()){
 				std::cout << "No hay DTCs" << std::endl;
@@ -56,7 +94,7 @@ int main(int argc, char **argv)
 					std::cout <<  vecDTCs[i] << std::endl;
 					std::cout <<  "#############################" << std::endl;
 					//Forma el mensaje con los datos obtenidos
-					std::string msgToSend = formMessage(macAddress, geoPos, vecDTCs[i]);
+					std::string msgToSend = formMessageJSON(macAddress, geoPos, vecDTCs[i]);
 					//Envía la alarma al servidor
 					if (fileAlr.sendAlarm(msgToSend)){
 						std::cout << "Alarma enviada." << std::endl;
@@ -66,16 +104,6 @@ int main(int argc, char **argv)
 				}
 			}
 		}
-		//connection.printStatus();
-		//connection.printPIDs();
-		/*
-		if(connection.getVIN().empty()){
-			std::cout << "Vehicle Identification Number no disponible" << std::endl;
-		} else {
-			std::cout << "Vehicle Identification Number = " << connection.getVIN() << std::endl;
-		}
-		*/
-		//connection.disconnectBluetooth();
 	} else {
 		debugError("No se ha conectado correctamente");
 	}

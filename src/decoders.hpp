@@ -12,13 +12,12 @@
 #define STATUS_BITS 8
 
 
-//Declaración estructuras
+//Declaración estructuras para algunos tipos de respuesta
 
 struct OxigenoResponse {
 	float A;
 	float B;
 };
-// Nota: realmente se podría utilizar la estructura OxigenoResponse
 
 struct RelacionesResponse {
 	int A;
