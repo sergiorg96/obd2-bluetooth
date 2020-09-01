@@ -43,7 +43,7 @@ int mock_socket(int domain, int type, int protocol){
 
 
 
-	printf("He llegado a mock_socket\n");
+	//printf("He llegado a mock_socket\n");
 
 	std::string devFile = findDevPTS();
 
