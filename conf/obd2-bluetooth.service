@@ -1,0 +1,17 @@
+# ***Obd2-bluetooth.service***
+[Unit]
+Description=Servicio de conexión bluetooth con el protocolo OBD2
+After=multi-user.target
+
+[Service]
+Type=simple
+ExecStart=/home/sergiorg/GitHubProjects/obd2-bluetooth/main
+User=sergiorg
+RestartSec=10
+WorkingDirectory=/home/sergiorg/GitHubProjects/obd2-bluetooth
+Restart=always
+StandardOutput=syslog
+StandardError=syslog
+
+[Install]
+WantedBy=multi-user.target
