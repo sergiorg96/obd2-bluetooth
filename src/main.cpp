@@ -62,7 +62,7 @@ int main()
 	//Variable para cargar información de configuración
 	cfgType variablesCfg;
 	//Asigna los valores del archivo de configuración a la variable
-	loadCfg("./configuration.cfg", &variablesCfg);
+	loadCfg("./conf/configuration.cfg", &variablesCfg);
 
 	//Intenta conectarse con el dispositivo con el nombre de la configuración
 	Obd connection = Obd(variablesCfg["BT-DISP-NAME"].c_str());
