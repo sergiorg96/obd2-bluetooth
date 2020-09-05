@@ -1,3 +1,11 @@
+/** 
+* @file MockSocket.cpp
+* @author Sergio Román González
+* @date 05/09/2020
+* @brief Archivo que contiene las funciones mock bluetooth para poder realizar las pruebas de integración.
+*/
+
+
 #include <stdio.h>
 #include <fcntl.h>
 #include <sys/socket.h>
@@ -8,6 +16,11 @@
 #include <sys/types.h>
 #include <sys/stat.h>
 #include "../src/debug.hpp"
+
+/**
+* @brief Función de detección del dispositivo para la simulación con OBDSIM.
+* @return String con la ruta del dispositivo al que conectarse para la simulación OBDSIM.
+*/
 
 std::string findDevPTS(){
     system("ls /dev/pts | tail -2 | head -1 > tmpPTSfile.txt");

@@ -1,15 +1,27 @@
+/** 
+* @file UnitTestCase.cpp
+* @author Sergio Román González
+* @date 05/09/2020
+* @brief Archivo que contiene el conjunto de pruebas unitarias y de integración del sistema.
+*/
+
 // Let Catch provide main():
-#define CATCH_CONFIG_MAIN
+#define CATCH_CONFIG_MAIN /**< Macro que permite a la librería catch proporcionar un main() para la ejecución del conjunto de pruebas */
 
 #include "../src/external/catch.hpp"
 #include "../src/decoders.hpp"
 #include "../src/Obd.hpp"
 
-#define BUFSIZE 30
-#define WAIT_OBDSIM 15
+#define BUFSIZE 30 /**< Macro del tamaño del buffer de la cadena de caracteres para el comando Minicom a ejecutar */
+#define WAIT_OBDSIM 15 /**< Macro con el tiempo de espera del simulador OBDSIM para introducir valores */
 
 
 using namespace Catch::literals;
+
+/**
+* @brief Función que obtiene el comando Minicom para la primera conexión con el simulador OBDSIM.
+* @param cmd Puntero a cadena de caracteres para almacenar el comando de minicom a ejecutar.
+*/
 
 void getMinicomCMD(char * cmd){
 
@@ -17,6 +29,13 @@ void getMinicomCMD(char * cmd){
 
     snprintf(cmd, BUFSIZE, "minicom -p %s &", devFile.c_str());
 }
+
+/**
+* @brief Función de inicialización del simulador OBDSIM.
+*
+* Inicializa el simulador con entorno gráfico permitiendo la introducción de DTC y otros valores
+* para las pruebas.
+*/
 
 void initOBDSIM(){
 
@@ -41,9 +60,17 @@ void initOBDSIM(){
     sleep(1);
 }
 
+/**
+* @brief Función de finalización del simulador OBDSIM.
+*/
+
 void closeOBDSIM(){
     system("pkill obdsim");
 }
+
+/**
+* @brief Prueba de integración para el funcionamiento general del sistema.
+*/
 
 TEST_CASE( "Test OBD class", "[OBD]" ) {
     
@@ -68,6 +95,10 @@ TEST_CASE( "Test OBD class", "[OBD]" ) {
     closeOBDSIM();
 }
 
+/**
+* @brief Prueba unitaria del decodificador RPM.
+*/
+
 TEST_CASE( "Test Revoluciones Por Minuto", "[decoders]" ) {
     REQUIRE( decodeRPM((char *)"0000") == 0);
     REQUIRE( decodeRPM((char *)"FFFF") == Approx(16383.75).epsilon(0.01));
@@ -75,11 +106,19 @@ TEST_CASE( "Test Revoluciones Por Minuto", "[decoders]" ) {
     REQUIRE( decodeRPM((char *)"12F2") == Approx(1212.5).epsilon(0.01));
 }
 
+/**
+* @brief Prueba unitaria del decodificador de posición EGR.
+*/
+
 TEST_CASE( "Test Posición EGR", "[decoders]" ) {
     REQUIRE( decodeCargaPosicionEGR((char *)"00") == Approx(0).epsilon(0.01));
     REQUIRE( decodeCargaPosicionEGR((char *)"FF") == Approx(100).epsilon(0.01));
     REQUIRE( decodeCargaPosicionEGR((char *)"7F") == Approx(50).epsilon(0.01));
 }
+
+/**
+* @brief Prueba unitaria del decodificador de la temperatura general.
+*/
 
 TEST_CASE( "Test Temperatura General", "[decoders]" ) {
     REQUIRE( decodeTempGeneral((char *)"00") == Approx(-40).epsilon(0.01));
@@ -87,11 +126,19 @@ TEST_CASE( "Test Temperatura General", "[decoders]" ) {
     REQUIRE( decodeTempGeneral((char *)"7F") == Approx(87).epsilon(0.01));
 }
 
+/**
+* @brief Prueba unitaria del decodificador de la temperatura general.
+*/
+
 TEST_CASE( "Test Ajuste Combustible EGR", "[decoders]" ) {
     REQUIRE( decodeAjusteCombustibleEGR((char *)"00") == Approx(-100).epsilon(0.01));
     REQUIRE( decodeAjusteCombustibleEGR((char *)"FF") == Approx(99.2).epsilon(0.01));
     REQUIRE( decodeAjusteCombustibleEGR((char *)"7F") == Approx(-0.78125).epsilon(0.01));
 }
+
+/**
+* @brief Prueba unitaria del decodificador de la presión del combustible.
+*/
 
 TEST_CASE( "Test Presión Combustible", "[decoders]" ) {
     REQUIRE( decodePresionCombustible((char *)"00") == Approx(0).epsilon(0.01));
@@ -99,11 +146,19 @@ TEST_CASE( "Test Presión Combustible", "[decoders]" ) {
     REQUIRE( decodePresionCombustible((char *)"7F") == Approx(381).epsilon(0.01));
 }
 
+/**
+* @brief Prueba unitaria del decodificador hexadecimal a decimal.
+*/
+
 TEST_CASE( "Test Hexadecimal a Decimal", "[decoders]" ) {
     REQUIRE( decodeHexToDec((char *)"00") == Approx(0).epsilon(0.01));
     REQUIRE( decodeHexToDec((char *)"FF") == Approx(255).epsilon(0.01));
     REQUIRE( decodeHexToDec((char *)"7F") == Approx(127).epsilon(0.01));
 }
+
+/**
+* @brief Prueba unitaria del decodificador del avance del tiempo.
+*/
 
 TEST_CASE( "Test Avance Tiempo", "[decoders]" ) {
     REQUIRE( decodeAvanceTiempo((char *)"00") == Approx(-64).epsilon(0.01));
@@ -111,6 +166,9 @@ TEST_CASE( "Test Avance Tiempo", "[decoders]" ) {
     REQUIRE( decodeAvanceTiempo((char *)"7F") == Approx(-0.5).epsilon(0.01));
 }
 
+/**
+* @brief Prueba unitaria del decodificador de la tasa de flujo del aire (MAF).
+*/
 
 TEST_CASE( "Test Velocidad Flujo Aire MAF", "[decoders]" ) {
     REQUIRE( decodeVelocidadMAF((char *)"0000") == Approx(0).epsilon(0.01));
@@ -118,11 +176,19 @@ TEST_CASE( "Test Velocidad Flujo Aire MAF", "[decoders]" ) {
     REQUIRE( decodeVelocidadMAF((char *)"7FFF") == Approx(327.67).epsilon(0.01));
 }
 
+/**
+* @brief Prueba unitaria del decodificador de presión de combustible relativa al colector de vacío.
+*/
+
 TEST_CASE( "Test Presión del Combustible, relativa al colector de vacío", "[decoders]" ) {
     REQUIRE( decodePresionCombColector((char *)"0000") == Approx(0).epsilon(0.01));
     REQUIRE( decodePresionCombColector((char *)"FFFF") == Approx(5177.265).epsilon(0.01));
     REQUIRE( decodePresionCombColector((char *)"7FFF") == Approx(2588.593).epsilon(0.01));
 }
+
+/**
+* @brief Prueba unitaria del decodificador de presión de combusible (Diese o inyección directa de gasolina).
+*/
 
 TEST_CASE( "Test Presión del Combustible (Diesel o inyección directa de gasolina)", "[decoders]" ) {
     REQUIRE( decodePresionMedidorCombustible((char *)"0000") == Approx(0).epsilon(0.01));
@@ -130,11 +196,19 @@ TEST_CASE( "Test Presión del Combustible (Diesel o inyección directa de gasoli
     REQUIRE( decodePresionMedidorCombustible((char *)"7FFF") == Approx(327670).epsilon(0.01));
 }
 
+/**
+* @brief Prueba unitaria del decodificador de Vapor del Sistema Evaporativo.
+*/
+
 TEST_CASE( "Test Presión de Vapor del Sistema Evaporativo", "[decoders]" ) {
     REQUIRE( decodePresionVapor((char *)"0000") == Approx(-8192).epsilon(0.01));
     REQUIRE( decodePresionVapor((char *)"FFFF") == Approx(8191.75).epsilon(0.01));
     REQUIRE( decodePresionVapor((char *)"7FFF") == Approx(-0.25).epsilon(0.01));
 }
+
+/**
+* @brief Prueba unitaria del decodificador de Temperatura del Catalizador.
+*/
 
 TEST_CASE( "Test Temperatura del Catalizador", "[decoders]" ) {
     REQUIRE( decodeTempCatalizador((char *)"0000") == Approx(-40).epsilon(0.01));
@@ -142,17 +216,29 @@ TEST_CASE( "Test Temperatura del Catalizador", "[decoders]" ) {
     REQUIRE( decodeTempCatalizador((char *)"7FFF") == Approx(3236.7).epsilon(0.01));
 }
 
+/**
+* @brief Prueba unitaria del decodificador de Voltaje del Módulo de Control.
+*/
+
 TEST_CASE( "Test Voltaje del Módulo de Control", "[decoders]" ) {
     REQUIRE( decodeVoltajeControl((char *)"0000") == Approx(0).epsilon(0.01));
     REQUIRE( decodeVoltajeControl((char *)"FFFF") == Approx(65.535).epsilon(0.01));
     REQUIRE( decodeVoltajeControl((char *)"7FFF") == Approx(32.767).epsilon(0.01));
 }
 
+/**
+* @brief Prueba unitaria del decodificador de Relación Equivaliente Comandada de Combustible.
+*/
+
 TEST_CASE( "Test Relación Equivaliente Comandada de Combustible", "[decoders]" ) {
     REQUIRE( decodeRelacionCombAireBasica((char *)"0000") == Approx(0).epsilon(0.01));
     REQUIRE( decodeRelacionCombAireBasica((char *)"FFFF") == Approx(2).epsilon(0.01));
     REQUIRE( decodeRelacionCombAireBasica((char *)"7FFF") == Approx(1).epsilon(0.01));
 }
+
+/**
+* @brief Prueba unitaria del conversor del primer byte DTC.
+*/
 
 TEST_CASE( "Comprobación Diagnostic Trouble Codes", "[DTC]" ) {
     REQUIRE( convertDTCs("0123") == "P0123");
@@ -173,15 +259,27 @@ TEST_CASE( "Comprobación Diagnostic Trouble Codes", "[DTC]" ) {
     REQUIRE( convertDTCs("F012") == "U3012");
 }
 
+/**
+* @brief Prueba unitaria del Número de Identificación del vehículo.
+*/
+
 TEST_CASE( "Test VIN (Vehicle Identification Number)", "[decoders]" ) {
     REQUIRE( decodeVIN((char *)"01573056\n1:3058455036384A\n2:34313430303530") == "W0V0XEP68J4140050");
     REQUIRE( decodeVIN((char *)"01314434\n1:47503030523535\n2:42313233343536") == "1D4GP00R55B123456");
 }
 
+/**
+* @brief Prueba unitaria del decodificador de descriptor del protocolo actual.
+*/
+
 TEST_CASE( "Test Describir el Protocolo Actual", "[decoders]" ) {
     REQUIRE( decodeDescribeProtocol((char *)"AUTO, ISO 15765-4 (CAN 11/500)") == "AUTO, ISO 15765-4 (CAN 11/500)");
     REQUIRE( decodeDescribeProtocol((char *)"ISO 9141-2") == "ISO 9141-2");
 }
+
+/**
+* @brief Escenario de pruebas con distintos test de los sensores de oxígeno.
+*/
 
 SCENARIO( "Test de Sensores de Oxígeno", "[decoders]" ) {
     GIVEN("La estructura OxigenoResponse con valores 0") {
@@ -233,6 +331,10 @@ SCENARIO( "Test de Sensores de Oxígeno", "[decoders]" ) {
     }
 }
 
+/**
+* @brief Escenario de pruebas con distintos test de la relación equivalente combustible-aire.
+*/
+
 SCENARIO( "Test de Relación Equivalente Combustible-Aire", "[decoders]" ) {
     GIVEN("La estructura OxigenoResponse con valores 0") {
         struct OxigenoResponse datosOX = {0,0};
@@ -283,6 +385,10 @@ SCENARIO( "Test de Relación Equivalente Combustible-Aire", "[decoders]" ) {
     }
 }
 
+/**
+* @brief Escenario de pruebas con distintos test de la relación equivalente combustible-aire actual.
+*/
+
 SCENARIO( "Test de Relación Equivalente Combustible-Aire Actual", "[decoders]" ) {
     GIVEN("La estructura OxigenoResponse con valores 0") {
         struct OxigenoResponse datosOX = {0,0};
@@ -332,6 +438,10 @@ SCENARIO( "Test de Relación Equivalente Combustible-Aire Actual", "[decoders]" 
         }
     }
 }
+
+/**
+* @brief Escenario de pruebas con distintos test de valores máximo relación de combustible-aire, voltaje, corriente y presión absoluta.
+*/
 
 SCENARIO( "Test de Valores máximos relación de combustible-aire, voltaje, corriente y presión absoluta", "[decoders]" ) {
     GIVEN("La estructura RelacionesResponse con valores 0") {
@@ -415,6 +525,10 @@ SCENARIO( "Test de Valores máximos relación de combustible-aire, voltaje, corr
     }
 }
 
+/**
+* @brief Escenario de pruebas con distintos test de DTC activos.
+*/
+
 SCENARIO( "Test de decodificación de Data Trouble Codes (DTC)", "[decoders]" ) {
     GIVEN("Vector vacío cuyos componentes son strings (DTC's)") {
     	std::vector<std::string> vec_dtcs;
@@ -450,6 +564,10 @@ SCENARIO( "Test de decodificación de Data Trouble Codes (DTC)", "[decoders]" ) 
         }
     }
 }
+
+/**
+* @brief Escenario de pruebas con distintos test los PIDS implementados en el vehículo.
+*/
 
 SCENARIO( "Test de decodificación PIDs disponibles", "[decoders]" ) {
     GIVEN("Vector vacío cuyos componentes son int (DTC's)") {
@@ -511,7 +629,11 @@ SCENARIO( "Test de decodificación PIDs disponibles", "[decoders]" ) {
         }
     }
 }
-//Añadir otro caso más si hiciera falta
+
+/**
+* @brief Escenario de pruebas con distintos valores de los monitores de diagnóstico tras las pruebas del vehículo.
+*/
+
 SCENARIO( "Test de decodificación del estado del coche", "[decoders]" ) {
     GIVEN("Map de <string, string> de estado vacío") {
     	std::map<std::string, std::string> status;

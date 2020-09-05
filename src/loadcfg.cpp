@@ -1,3 +1,10 @@
+/** 
+* @file loadcfg.cpp
+* @author Juan Manuel Vozmediano Torres
+* @date 09/04/2019
+* @brief Archivo que contiene la definición de las funciones para la lectura de un fichero de configuración del tipo clave=valor.
+*/
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -29,12 +36,6 @@ perror("Error is ");
 exit(1);
 }
 
-/**
-  * Loads config file (unix like format, VAR'='VALUE, # are comments, spaces trimmed
-  * and stores variables and values in a map
-  * @param filename config file name
-  * @param pcgf pointer to config map
-  */
 void loadCfg (const char* filename, cfgType* pcfg)
 {
    std::ifstream cFile (filename);

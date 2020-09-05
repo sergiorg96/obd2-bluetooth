@@ -1,3 +1,10 @@
+/** 
+* @file decoders.cpp
+* @author Sergio Román González
+* @date 05/09/2020
+* @brief Archivo que contiene la definición de las funciones de decodificación de las respuestas del dispositivo ELM327.
+*/
+
 #include "decoders.hpp"
 
 /*

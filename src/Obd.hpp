@@ -1,3 +1,10 @@
+/** 
+* @file Obd.hpp
+* @author Sergio Román González
+* @date 05/09/2020
+* @brief Archivo que contiene la clase con la implementación de la conexión y envío de mensajes OBD con el dispositivo ELM327.
+*/
+
 #ifndef OBD_HPP
 #define OBD_HPP
 
@@ -40,16 +47,39 @@
 	#include "../test/MockSocket.cpp"
 #endif
 
-#define MAX_EP_EVTS 20
 
-using json = nlohmann::json;
+
+#define MAX_EP_EVTS 20 /**< Macro con el número máximo de eventos en la recepción de la instancia epoll */
+
+/**
+* @brief Utilización de la librería externa nlohmann::json a través del tipo definido json.
+*/
+
+using json = nlohmann::json; 
+
+/** 
+* @brief Definición del tipo pair para la asignación de los objetos Commands a la clase Obd.
+*/
 
 typedef std::pair<std::string, Commands> tupla;
 
+/** 
+* @brief Clase que representa el acceso a la conexión con el dispositivo ELM327.
+*
+* Clase principal que contiene los atributos y métodos necesarios para la conexión bluetooth
+* con el dispositivo ELM327 y el posterior envío y recepción de mensajes OBD. 
+*/
+
 class Obd {
 public:
-	std::map<std::string, Commands> map_commands;
-      // Constructor
+	std::map<std::string, Commands> map_commands; /**< Map para asignación del nombre al comando correspondiente */
+    
+	/** 
+ 	* @brief Constructor de la clase Obd.
+ 	* @param deviceName Cadena de caracteres con el nombre del dispositivo bluetooth OBDII al que conectar.
+ 	* @return Devuelve una instancia de la clase Obd.
+ 	*/ 
+
 	Obd(const char *deviceName){
 		// Comenzamos el descubrimiento del dipositivo Bluetooth
 		debugLog("Iniciando descubrimiento del dispositivo %s", deviceName);
@@ -69,6 +99,70 @@ public:
 			debugLog("Dispositivo %s no encontrado.", deviceName);
 		}
 	}
+
+	/**
+	* @brief Método que realiza el descubrimiento bluetooth del dispositivo ELM327.
+	* @param deviceName Cadena de caracteres con el nombre del dispositivo bluetooth OBDII del que obtener la dirección física de conexión.
+	* @param deviceAddress Dirección física del dispositivo al que conectar tras el descubrimiento.
+	*
+	* Función que realiza un escaneo de todos los dispositivos bluetooth disponibles y mediante un bucle
+	* filtra la dirección física del dispositivo bluetooth ELM327 pasado como primera parámetro.
+	*/
+
+	void discoverDeviceAddress(const char * deviceName, char *deviceAddress){
+		inquiry_info *ii = NULL;
+		int max_rsp, num_rsp;
+		int dev_id, sock, len, flags;
+		int i;
+		char addr[19] = { 0 };
+		char name[248] = { 0 };
+
+		//Identificamos la interfaz bluetooth del dispositivo
+		dev_id = hci_get_route(NULL);
+		//Abrimos socket para esta interfaz
+		sock = hci_open_dev( dev_id );
+		if (dev_id < 0 || sock < 0) {
+			perror("Abriendo socket");
+			exit(1);
+		}
+
+		len  = 8;
+		max_rsp = 255;
+		flags = IREQ_CACHE_FLUSH;
+		ii = (inquiry_info*)malloc(max_rsp * sizeof(inquiry_info));
+
+		//Iniciamos el descubrimiento de dispositivos bluetooth
+		num_rsp = hci_inquiry(dev_id, len, max_rsp, NULL, &ii, flags);
+		if( num_rsp < 0 ) perror("hci_inquiry");
+
+		//Entre todas las respuestas buscamos el dispositivo bluetooth de OBDII
+		for (i = 0; i < num_rsp; i++) {
+			ba2str(&(ii+i)->bdaddr, addr);
+			memset(name, 0, sizeof(name));
+			if (hci_read_remote_name(sock, &(ii+i)->bdaddr, sizeof(name), name, 0) < 0)
+				strcpy(name, "[unknown]");
+			debugLog("%s  %s", addr, name);
+			//Si la cadena introducida a la función es igual al dispositivo encontrado guardamos la dirección
+			if(strcmp(deviceName, name) == 0){
+				this->m_deviceFound = true;
+				strcpy(deviceAddress, addr);
+				debugLog("Dispositivo %s encontrado", deviceName);
+				break;
+			}
+		}
+
+		free( ii );
+		close( sock );
+	}	
+
+	/**
+	* @brief Método que realiza la conexión con el dispositivo bluetooth ELM327.
+	*
+	* Función que lleva a cabo la conexión con la interfaz bluetooth de ELM327. Crea un socket del tipo
+	* AF_BLUETOOTH y configura los parámetros de conexión de éste con la dirección física obtenida tras el descubrimiento.
+	* Se crea una instancia epoll que permite monitorizar descriptores de ficheros y obtener notificaciones de ellos,
+	* en este caso para el socket de conexión bluetooth.
+	*/
 
 	void connectBluetooth(){
 		try{
@@ -124,6 +218,13 @@ public:
 		}
 	}
 
+	/**
+	* @brief Método de lectura del fichero de PIDS en formato json
+	*
+	* Utiliza la librería externa json.hpp para la lectura de los PIDS en formato JSON
+	* que permite obtener a la clase Obd los Commands a ejecutar.
+	*/
+
 	void readFileData(){
 		std::ifstream ifs("data/PIDS.json");
 		auto j = json::parse(ifs);
@@ -134,53 +235,16 @@ public:
 			this->map_commands.insert(tupla(j[i]["name"], Commands(j[i])));
 		}
 	}
-
-	void discoverDeviceAddress(const char * deviceName, char *deviceAddress){
-		inquiry_info *ii = NULL;
-		int max_rsp, num_rsp;
-		int dev_id, sock, len, flags;
-		int i;
-		char addr[19] = { 0 };
-		char name[248] = { 0 };
-
-		//Identificamos la interfaz bluetooth del dispositivo
-		dev_id = hci_get_route(NULL);
-		//Abrimos socket para esta interfaz
-		sock = hci_open_dev( dev_id );
-		if (dev_id < 0 || sock < 0) {
-			perror("Abriendo socket");
-			exit(1);
-		}
-
-		len  = 8;
-		max_rsp = 255;
-		flags = IREQ_CACHE_FLUSH;
-		ii = (inquiry_info*)malloc(max_rsp * sizeof(inquiry_info));
-
-		//Iniciamos el descubrimiento de dispositivos bluetooth
-		num_rsp = hci_inquiry(dev_id, len, max_rsp, NULL, &ii, flags);
-		if( num_rsp < 0 ) perror("hci_inquiry");
-
-		//Entre todas las respuestas buscamos el dispositivo bluetooth de OBDII
-		for (i = 0; i < num_rsp; i++) {
-			ba2str(&(ii+i)->bdaddr, addr);
-			memset(name, 0, sizeof(name));
-			if (hci_read_remote_name(sock, &(ii+i)->bdaddr, sizeof(name), name, 0) < 0)
-				strcpy(name, "[unknown]");
-			debugLog("%s  %s", addr, name);
-			//Si la cadena introducida a la función es igual al dispositivo encontrado guardamos la dirección
-			if(strcmp(deviceName, name) == 0){
-				this->m_deviceFound = true;
-				strcpy(deviceAddress, addr);
-				debugLog("Dispositivo %s encontrado", deviceName);
-				break;
-			}
-		}
-
-		free( ii );
-		close( sock );
-	}	
 	
+	/**
+	* @brief Método de envío de mensajes AT y OBD al dispositivo ELM327.
+	* @param command Objeto del tipo Commands con la información del comando a enviar.
+	*
+	* Función que se encarga de la creación de un hilo de ejecución que ejecute la función polling
+	* para la recepción del comando a enviar y del formateo de éste a través del socket
+	* creado al conectar con el dispositivo ELM327.
+	*/
+
 	void send(Commands command){
 		//Iniciamos en un hilo de ejecución la función polling de recepción de datos
 		std::thread t1(&Obd::polling, this, command);
@@ -212,6 +276,18 @@ public:
 		//Queda a la espera de finalización de ejecución del hilo de recepción del mensaje OBD
 		t1.join();
 	}
+
+	/**
+	* @brief Método de recepción de mensajes enviados por el dispositivo ELM327.
+	* @param command Objeto del tipo Commands con la información del comando a recepcionar.
+	*
+	* Función que se encarga de mantenerse a la espera del mensaje de respuesta del dispositivo ELM327
+	* al mensaje anteriormente enviado por la función send. Mediante un bucle y la instancia epoll creada
+	* se recogen los eventos de mensajes recibidos, y se filtra su contenido para conocer
+	* la finalización del mensaje. Tras esto, se realiza una búsqueda de la información útil
+	* del mensaje y una decodificación dependiendo del tipo de dato a recibir. Por útimo, se almacena
+	* la respuesta en el propio objeto Commands para poder recuperarla posteriormente.
+	*/
 
 	void polling(Commands command){
 		struct epoll_event events[MAX_EP_EVTS];
@@ -382,6 +458,17 @@ public:
 		}
 	}
 
+	/**
+	* @brief Método de inicialización de parámetros de conexión con ELM327.
+	*
+	* Se realiza una secuencia de paso de mensajes que permiten obtener los datos en un formato normalizado.
+	* En primer lugar, se hace un RESET del dispositivo ELM327, se establecen los valores por defecto,
+	* se configura las respuestas sin eco, sin cabecera y sin espacio y se establece el protocolo automático.
+	* Por último, se realiza un escaneo general del estado del vehículo con distintas pruebas establecidas
+	* por el comando STATUS, se obtiene el VIN del vehículo y se obtiene el número de comandos disponibles
+	* tras un escaneo con los PIDS específicos para ello.
+	*/
+
 	void initMessages(){
 		//Inicialización de la conexión con ELM327
 		std::map<std::string, std::string> listPIDs = {
@@ -409,6 +496,13 @@ public:
 		}
 		debugLog("Nº de comandos disponibles = %zu", vecPIDs.size());
 	}
+
+	/**
+	* @brief Método de inicialización de funciones de decodificación de mensajes OBD.
+	*
+	* Función que agrupa los decodificadores dependiendo del tipo de dato a obtener para poder
+	* utilizarlos en la función polling y obtener el dato solicitado.
+	*/
 
 	void initDecoderFunctions(){
 	//Inicia las funciones dependiendo del tipo de dato de respuesta	
@@ -445,11 +539,23 @@ public:
 		this->noDecodeFunctionAT["noDecodeAT"] = noDecodeAT;
 	}
 
+	/**
+	* @brief Método de desconexión bluetooth con el dispositivo ELM327.
+	*
+	* Cierra el socket e instancia epoll abiertas.
+	*/
+
 	void disconnectBluetooth(){
 		debugLog("Desconectando dispositivo Bluetooth");
 		close(this->m_cli_s);
 		close(this->epoll_fd);
 	}
+
+	/**
+	* @brief Método de comprobación de existencia de un PID implemetado en el vehículo.
+	* @param command String del comando a comprobar de su existencia entre los comandos disponibles.
+	* @return Devuelve true si existe y false en caso contrario. 
+	*/
 
 	bool existPID(std::string command){
 		bool exists = false;
@@ -463,6 +569,12 @@ public:
 		return exists;
 	}
 	
+	/**
+	* @brief Método de impresión de la lista de PIDS implementados en el vehículo.
+	* 
+	* Realiza una búsqueda iterativa que obtiene por consola los PIDS disponibles en el vehículo
+	* encontrados en la inicialización del dispositivo ELM327.
+	*/
 
 	void printPIDs(){
 		//Iteración para imprimir por consola los PIDs disponibles
@@ -478,7 +590,11 @@ public:
 		}
 	}
 
-
+	/**
+	* @brief Método de impresión de las pruebas realizadas en el vehículo.
+	*
+	* Muestra por consola cada una de las pruebas realizadas en el vehículo y su resultado.
+	*/
 
 	void printStatus(){
 		//Imprime por consola los resultados de las pruebas del comando STATUS
@@ -487,11 +603,24 @@ public:
 		}
 	}
 
+	/**
+	* @brief Método que permite obtener el Número de Identificación del Vehículo (VIN).
+	* @return String del VIN de 17 dígitos del vehículo.
+	*/
+
 	std::string getVIN(){
 		//Devuelve el número de identificación del vehículo
 		return this->vin;
 	}
 	
+	/**
+	* @brief Método que permite obtener los DTC activos en el vehículo.
+	* @return Vector de strings con los DTC activos en el vehículo
+	*
+	* Realiza la comprobación de existencia del número de DTC con el comando STATUS
+	* y si existen, obtiene su DTC con el comando GET_DTC.
+	*/
+
 	std::vector<std::string> getDTCs(){
 		time_t curr_time;
 		tm *curr_tm;
@@ -514,6 +643,10 @@ public:
 		return this->vecDTCs;
 	}
 
+	/**
+	* @brief Método de validación del estado de la conexion.
+	* @return Devuelve true si la conexión está establecida correctamente y false en caso contrario.
+	*/
 
 	bool isValid(){
 		//Bool del estado de la conexión bluetooth
@@ -521,39 +654,28 @@ public:
 	}
 private:
     // Atributos privados de la clase "Obd"
-    //Vector con PIDs disponibles
-	std::vector<std::string> vecPIDs;
-	//Vector con DTCs activos
-	std::vector<std::string> vecDTCs;
-	//Cadena VIN
-	std::string vin;
-	//Cadena con el protocolo actual de comunicación
-	std::string currentProtocol;
-	//Cadena con el número del protocolo actual de comunicación
-	std::string currentProtocolNumber;
-	//Map con los valores de las pruebas realizadas en el vehículo
-	std::map<std::string, std::string> mapStatus;
+	std::vector<std::string> vecPIDs; /**< Vector de strings con PIDs disponibles. */
+	std::vector<std::string> vecDTCs; /**< Vector de strings con DTCs activos. */
+	std::string vin; /**< String con el Número de Identificación del Vehículo (VIN). */
+	std::string currentProtocol; /**< String con el protocolo actual de comunicación. */
+	std::string currentProtocolNumber; /**< String con el número del protocolo actual de comunicación. */
+	std::map<std::string, std::string> mapStatus; /**< Map con los valores de las pruebas realizadas en el vehículo. */
 
-	//Maps para decodificadores
-	std::map<std::string, std::function<void()>> noDecodeFunctionAT;
-	std::map<std::string, std::function<float(char *)>> decoderFunctionsFloat;
-	std::map<std::string, std::function<struct OxigenoResponse(char *)>> decoderFunctionsStructOx;
-	std::map<std::string, std::function<struct RelacionesResponse(char *)>> decoderFunctionsStructRel;
-	std::map<std::string, std::function<std::vector<int>(char *)>> decoderFunctionsVectorInt;
-	std::map<std::string, std::function<std::vector<std::string>(char *)>> decoderFunctionsVectorStr;
-	std::map<std::string, std::function<std::string(char *)>> decoderFunctionsStr;
-	std::map<std::string, std::function<std::map<std::string, std::string>(char *)>> decoderFunctionsMap;
+	std::map<std::string, std::function<void()>> noDecodeFunctionAT; /**< Map de decodificadores de comandos del tipo AT. */
+	std::map<std::string, std::function<float(char *)>> decoderFunctionsFloat; /**< Map de decodificadores de comandos del tipo float. */
+	std::map<std::string, std::function<struct OxigenoResponse(char *)>> decoderFunctionsStructOx; /**< Map de decodificadores de comandos del tipo OxigenoResponse. */
+	std::map<std::string, std::function<struct RelacionesResponse(char *)>> decoderFunctionsStructRel; /**< Map de decodificadores de comandos del tipo RelacionesResponse. */
+	std::map<std::string, std::function<std::vector<int>(char *)>> decoderFunctionsVectorInt; /**< Map de decodificadores de comandos del tipo vector de enteros. */
+	std::map<std::string, std::function<std::vector<std::string>(char *)>> decoderFunctionsVectorStr; /**< Map de decodificadores de comandos del tipo vector de strings. */
+	std::map<std::string, std::function<std::string(char *)>> decoderFunctionsStr; /**< Map de decodificadores de comandos del tipo strings. */
+	std::map<std::string, std::function<std::map<std::string, std::string>(char *)>> decoderFunctionsMap; /**< Map de decodificadores de comandos del tipo map de string/string. */
 
-	//Cadena de identificación del dispositivo físico bluetooth
-	char dest[19] = { 0 };
-	//Socket de comunicación
-	int m_cli_s;
-	//Booleanos de estado de la conexión del dispositivo bluetooth
-	bool m_deviceFound = false;
-	bool m_status = false;
-	//Variables de control del socket de conexión OBD
-	int epoll_fd;
-	struct epoll_event ev;
+	char dest[19] = { 0 }; /**< Cadena de caracteres con la identificación del dispositivo físico bluetooth. */
+	int m_cli_s; /**< Entero con el descriptor del fichero del socket de conexión. */
+	bool m_deviceFound = false; /**< Booleano que indica si se ha encontrado el dispositivo bluetooth ELM327 en el proceso de descubrimiento. */
+	bool m_status = false; /**< Booleano de estado de la conexión bluetooth. */
+	int epoll_fd; /**< Entero con la instancia epoll de control del socket de conexión OBD. */
+	struct epoll_event ev; /**< Estructura con los datos de la instancica epoll. */
 };
 
 

@@ -1,3 +1,10 @@
+/** 
+* @file alarmfile.cpp
+* @author Juan Manuel Vozmediano Torres
+* @date 09/04/2019
+* @brief Archivo que contiene la definición de la clase para la configuración y envío de un mensaje a un servidor remoto.
+*/
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -57,10 +64,6 @@ bool AlarmFile::sendAlarm(std::string msg)
 {
   if ( "" != msg ){
     int cc =  sendto(s_, msg.c_str(), strlen(msg.c_str()), 0,(struct sockaddr *)&iTu_, sizeof(iTu_));
-  
-    //printf("ITU: %d - %d\n", iTu_.sin_addr.s_addr, iTu_.sin_port);
-    //printf("ITU: %s - %d\n", alarmHost_.c_str(), alarmPort_);    
-    //printf("Socket: %d\nMensaje a enviar: %s\n", s_, msg.c_str());
 
     if (cc < 0){
       perror("Error is ");
