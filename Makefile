@@ -69,5 +69,8 @@ libobd2-bluetooth-test.a: Obd-test.o decoders.o alarmfile.o loadcfg.o picangps.o
 clean:
 	rm -f *.o src/*.gch
 
+install:
+	./conf/installService.sh
+
 .PHONY: all
 all: monDTC monDTC-debug test clean

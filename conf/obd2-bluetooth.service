@@ -5,10 +5,10 @@ After=multi-user.target
 
 [Service]
 Type=simple
-ExecStart=/home/sergiorg/GitHubProjects/obd2-bluetooth/main
-User=sergiorg
+ExecStart=/RUTA-AL-DIRECTORIO-DE-DESCARGA-GITHUB/obd2-bluetooth/main
+User=USUARIO-DEL-SISTEMA
 RestartSec=10
-WorkingDirectory=/home/sergiorg/GitHubProjects/obd2-bluetooth
+WorkingDirectory=/RUTA-AL-DIRECTORIO-DE-DESCARGA-GITHUB/obd2-bluetooth
 Restart=always
 StandardOutput=syslog
 StandardError=syslog
