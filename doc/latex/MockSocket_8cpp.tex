@@ -1,0 +1,85 @@
+\hypertarget{MockSocket_8cpp}{}\section{Referencia del Archivo Mock\+Socket.\+cpp}
+\label{MockSocket_8cpp}\index{Mock\+Socket.\+cpp@{Mock\+Socket.\+cpp}}
+
+
+Archivo que contiene las funciones mock bluetooth para poder realizar las pruebas de integración.  
+
+
+{\ttfamily \#include $<$stdio.\+h$>$}\newline
+{\ttfamily \#include $<$fcntl.\+h$>$}\newline
+{\ttfamily \#include $<$sys/socket.\+h$>$}\newline
+{\ttfamily \#include $<$bluetooth/bluetooth.\+h$>$}\newline
+{\ttfamily \#include $<$bluetooth/hci.\+h$>$}\newline
+{\ttfamily \#include $<$bluetooth/hci\+\_\+lib.\+h$>$}\newline
+{\ttfamily \#include $<$sys/types.\+h$>$}\newline
+{\ttfamily \#include $<$sys/stat.\+h$>$}\newline
+{\ttfamily \#include \char`\"{}../src/debug.\+hpp\char`\"{}}\newline
+Dependencia gráfica adjunta para Mock\+Socket.\+cpp\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{MockSocket_8cpp__incl}
+\end{center}
+\end{figure}
+\subsection*{Funciones}
+\begin{DoxyCompactItemize}
+\item 
+std\+::string \hyperlink{MockSocket_8cpp_a33fe4c99996c8de03c33962525663851}{find\+Dev\+P\+TS} ()
+\begin{DoxyCompactList}\small\item\em Función de detección del dispositivo para la simulación con O\+B\+D\+S\+IM. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{MockSocket_8cpp_a4a2f66700fda067cbe3c0359a1f2d322}\label{MockSocket_8cpp_a4a2f66700fda067cbe3c0359a1f2d322}} 
+int {\bfseries mock\+\_\+socket} (int domain, int type, int protocol)
+\item 
+\mbox{\Hypertarget{MockSocket_8cpp_a15db829e0b19aaa762f8e948093adf9b}\label{MockSocket_8cpp_a15db829e0b19aaa762f8e948093adf9b}} 
+int {\bfseries hci\+\_\+get\+\_\+route} (bdaddr\+\_\+t $\ast$bdaddr)
+\item 
+\mbox{\Hypertarget{MockSocket_8cpp_aa660cb83f384b213749967fe29081dce}\label{MockSocket_8cpp_aa660cb83f384b213749967fe29081dce}} 
+int {\bfseries hci\+\_\+open\+\_\+dev} (int dev\+\_\+id)
+\item 
+\mbox{\Hypertarget{MockSocket_8cpp_aa5ca411ebbb471eb7a245e6855f348b9}\label{MockSocket_8cpp_aa5ca411ebbb471eb7a245e6855f348b9}} 
+int {\bfseries hci\+\_\+inquiry} (int dev\+\_\+id, int len, int max\+\_\+rsp, const uint8\+\_\+t $\ast$lap, inquiry\+\_\+info $\ast$$\ast$ii, long flags)
+\item 
+\mbox{\Hypertarget{MockSocket_8cpp_a01613c596f2b223f00cdacf9d07aa9e6}\label{MockSocket_8cpp_a01613c596f2b223f00cdacf9d07aa9e6}} 
+int {\bfseries hci\+\_\+read\+\_\+remote\+\_\+name} (int sock, const bdaddr\+\_\+t $\ast$ba, int len, char $\ast$name, int timeout)
+\item 
+\mbox{\Hypertarget{MockSocket_8cpp_acdfd99b6c59c833776412fbb0c539efb}\label{MockSocket_8cpp_acdfd99b6c59c833776412fbb0c539efb}} 
+int {\bfseries connect} (int sockfd, const struct sockaddr $\ast$addr, socklen\+\_\+t addrlen)
+\item 
+\mbox{\Hypertarget{MockSocket_8cpp_a157efc8751463fb02c017857aff94b92}\label{MockSocket_8cpp_a157efc8751463fb02c017857aff94b92}} 
+void {\bfseries write\+Socket} ()
+\end{DoxyCompactItemize}
+
+
+\subsection{Descripción detallada}
+Archivo que contiene las funciones mock bluetooth para poder realizar las pruebas de integración. 
+
+\begin{DoxyAuthor}{Autor}
+Sergio Román González 
+\end{DoxyAuthor}
+\begin{DoxyDate}{Fecha}
+05/09/2020 
+\end{DoxyDate}
+
+
+Definición en el archivo \hyperlink{MockSocket_8cpp_source}{Mock\+Socket.\+cpp}.
+
+
+
+\subsection{Documentación de las funciones}
+\mbox{\Hypertarget{MockSocket_8cpp_a33fe4c99996c8de03c33962525663851}\label{MockSocket_8cpp_a33fe4c99996c8de03c33962525663851}} 
+\index{Mock\+Socket.\+cpp@{Mock\+Socket.\+cpp}!find\+Dev\+P\+TS@{find\+Dev\+P\+TS}}
+\index{find\+Dev\+P\+TS@{find\+Dev\+P\+TS}!Mock\+Socket.\+cpp@{Mock\+Socket.\+cpp}}
+\subsubsection{\texorpdfstring{find\+Dev\+P\+T\+S()}{findDevPTS()}}
+{\footnotesize\ttfamily std\+::string find\+Dev\+P\+TS (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Función de detección del dispositivo para la simulación con O\+B\+D\+S\+IM. 
+
+\begin{DoxyReturn}{Devuelve}
+String con la ruta del dispositivo al que conectarse para la simulación O\+B\+D\+S\+IM. 
+\end{DoxyReturn}
+
+
+Definición en la línea \hyperlink{MockSocket_8cpp_source_l00025}{25} del archivo \hyperlink{MockSocket_8cpp_source}{Mock\+Socket.\+cpp}.
+

@@ -1,0 +1,95 @@
+\hypertarget{Obd_8hpp}{}\section{Referencia del Archivo Obd.\+hpp}
+\label{Obd_8hpp}\index{Obd.\+hpp@{Obd.\+hpp}}
+
+
+Archivo que contiene la clase con la implementación de la conexión y envío de mensajes O\+BD con el dispositivo E\+L\+M327.  
+
+
+{\ttfamily \#include $<$iostream$>$}\newline
+{\ttfamily \#include $<$fstream$>$}\newline
+{\ttfamily \#include $<$thread$>$}\newline
+{\ttfamily \#include $<$bitset$>$}\newline
+{\ttfamily \#include $<$vector$>$}\newline
+{\ttfamily \#include $<$sstream$>$}\newline
+{\ttfamily \#include $<$algorithm$>$}\newline
+{\ttfamily \#include $<$utility$>$}\newline
+{\ttfamily \#include $<$map$>$}\newline
+{\ttfamily \#include $<$typeinfo$>$}\newline
+{\ttfamily \#include $<$netinet/in.\+h$>$}\newline
+{\ttfamily \#include $<$arpa/inet.\+h$>$}\newline
+{\ttfamily \#include $<$sys/types.\+h$>$}\newline
+{\ttfamily \#include $<$sys/socket.\+h$>$}\newline
+{\ttfamily \#include $<$sys/epoll.\+h$>$}\newline
+{\ttfamily \#include $<$bluetooth/bluetooth.\+h$>$}\newline
+{\ttfamily \#include $<$bluetooth/rfcomm.\+h$>$}\newline
+{\ttfamily \#include $<$bluetooth/hci.\+h$>$}\newline
+{\ttfamily \#include $<$bluetooth/hci\+\_\+lib.\+h$>$}\newline
+{\ttfamily \#include $<$unistd.\+h$>$}\newline
+{\ttfamily \#include $<$ctime$>$}\newline
+{\ttfamily \#include \char`\"{}Commands.\+hpp\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}decoders.\+hpp\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}loadcfg.\+hpp\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}debug.\+hpp\char`\"{}}\newline
+Dependencia gráfica adjunta para Obd.\+hpp\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{Obd_8hpp__incl}
+\end{center}
+\end{figure}
+Gráfico de los archivos que directa o indirectamente incluyen a este archivo\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=250pt]{Obd_8hpp__dep__incl}
+\end{center}
+\end{figure}
+\subsection*{Estructuras de datos}
+\begin{DoxyCompactItemize}
+\item 
+class \hyperlink{classObd}{Obd}
+\begin{DoxyCompactList}\small\item\em Clase que representa el acceso a la conexión con el dispositivo E\+L\+M327. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{defines}
+\begin{DoxyCompactItemize}
+\item 
+\#define \hyperlink{Obd_8hpp_a115fbf8b5fd0f0b7e912dd166068415b}{M\+A\+X\+\_\+\+E\+P\+\_\+\+E\+V\+TS}~20
+\end{DoxyCompactItemize}
+\subsection*{typedefs}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{Obd_8hpp_ab701e3ac61a85b337ec5c1abaad6742d}\label{Obd_8hpp_ab701e3ac61a85b337ec5c1abaad6742d}} 
+using \hyperlink{Obd_8hpp_ab701e3ac61a85b337ec5c1abaad6742d}{json} = nlohmann\+::json
+\begin{DoxyCompactList}\small\item\em Utilización de la librería externa nlohmann\+::json a través del tipo definido json. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{Obd_8hpp_aaa63a77fc61ef01154d73b6fac67f1af}\label{Obd_8hpp_aaa63a77fc61ef01154d73b6fac67f1af}} 
+typedef std\+::pair$<$ std\+::string, \hyperlink{classCommands}{Commands} $>$ \hyperlink{Obd_8hpp_aaa63a77fc61ef01154d73b6fac67f1af}{tupla}
+\begin{DoxyCompactList}\small\item\em Definición del tipo pair para la asignación de los objetos \hyperlink{classCommands}{Commands} a la clase \hyperlink{classObd}{Obd}. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Descripción detallada}
+Archivo que contiene la clase con la implementación de la conexión y envío de mensajes O\+BD con el dispositivo E\+L\+M327. 
+
+\begin{DoxyAuthor}{Autor}
+Sergio Román González 
+\end{DoxyAuthor}
+\begin{DoxyDate}{Fecha}
+05/09/2020 
+\end{DoxyDate}
+
+
+Definición en el archivo \hyperlink{Obd_8hpp_source}{Obd.\+hpp}.
+
+
+
+\subsection{Documentación de los \textquotesingle{}defines\textquotesingle{}}
+\mbox{\Hypertarget{Obd_8hpp_a115fbf8b5fd0f0b7e912dd166068415b}\label{Obd_8hpp_a115fbf8b5fd0f0b7e912dd166068415b}} 
+\index{Obd.\+hpp@{Obd.\+hpp}!M\+A\+X\+\_\+\+E\+P\+\_\+\+E\+V\+TS@{M\+A\+X\+\_\+\+E\+P\+\_\+\+E\+V\+TS}}
+\index{M\+A\+X\+\_\+\+E\+P\+\_\+\+E\+V\+TS@{M\+A\+X\+\_\+\+E\+P\+\_\+\+E\+V\+TS}!Obd.\+hpp@{Obd.\+hpp}}
+\subsubsection{\texorpdfstring{M\+A\+X\+\_\+\+E\+P\+\_\+\+E\+V\+TS}{MAX\_EP\_EVTS}}
+{\footnotesize\ttfamily \#define M\+A\+X\+\_\+\+E\+P\+\_\+\+E\+V\+TS~20}
+
+Macro con el número máximo de eventos en la recepción de la instancia epoll 
+
+Definición en la línea \hyperlink{Obd_8hpp_source_l00052}{52} del archivo \hyperlink{Obd_8hpp_source}{Obd.\+hpp}.
+

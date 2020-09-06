@@ -1,0 +1,496 @@
+\hypertarget{classCommands}{}\section{Referencia de la Clase Commands}
+\label{classCommands}\index{Commands@{Commands}}
+
+
+Clase que representa los comandos AT y P\+I\+DS que se necesitan en el intercambio de mensajes con el dispositivo E\+L\+M327.  
+
+
+
+
+{\ttfamily \#include $<$Commands.\+hpp$>$}
+
+\subsection*{Métodos públicos}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classCommands_ad71a0aafa9f942580b6c316ca07aef48}{Commands} (\hyperlink{Commands_8hpp_ab701e3ac61a85b337ec5c1abaad6742d}{json} data)
+\begin{DoxyCompactList}\small\item\em Constructor de la clase \hyperlink{classCommands}{Commands}. \end{DoxyCompactList}\item 
+std\+::string \hyperlink{classCommands_adf3d8a96310b1f4e57a6ecf0f2f153ea}{get\+Name} ()
+\begin{DoxyCompactList}\small\item\em Método que obtiene el nombre del comando. \end{DoxyCompactList}\item 
+std\+::string \hyperlink{classCommands_ad82fe7dfcf1908423bdb59d048020e26}{get\+Description} ()
+\begin{DoxyCompactList}\small\item\em Método que obtiene la descripción del comando. \end{DoxyCompactList}\item 
+std\+::string \hyperlink{classCommands_a9aee21ab91fdfc8e9daa59e1e8f20b73}{get\+C\+MD} ()
+\begin{DoxyCompactList}\small\item\em Método que obtiene el comando en hexadecimal que se envía al dispositivo E\+L\+M327. \end{DoxyCompactList}\item 
+int \hyperlink{classCommands_a9b3d961dbebbd25f141d18cd5a267738}{get\+Bytes\+Response} ()
+\begin{DoxyCompactList}\small\item\em Método que obtiene el número de bytes de la respuesta del comando a enviar. \end{DoxyCompactList}\item 
+std\+::string \hyperlink{classCommands_a8b4c2a655d8dd3de334338d6684d469c}{get\+Decoder} ()
+\begin{DoxyCompactList}\small\item\em Método que obtiene la función de decodificación que se debe ejecutar en la respuesta. \end{DoxyCompactList}\item 
+float \hyperlink{classCommands_af0a1e2ea65b5a57997c721a8d77a1013}{get\+M\+IN} ()
+\begin{DoxyCompactList}\small\item\em Método que obtiene el valor mínimo que puede tener la respuesta al comando. \end{DoxyCompactList}\item 
+float \hyperlink{classCommands_afbad1051313d0cdecba276384cb7fc6b}{get\+M\+AX} ()
+\begin{DoxyCompactList}\small\item\em Método que obtiene el valor máximo que puede tener la respuesta al comando. \end{DoxyCompactList}\item 
+std\+::string \hyperlink{classCommands_ac67214a4fbd93fbb4d8ebb2dd815a3fa}{get\+Units} ()
+\begin{DoxyCompactList}\small\item\em Método que obtiene en qué unidades se mide la respuesta del comando. \end{DoxyCompactList}\item 
+std\+::string \hyperlink{classCommands_a7d983e153465d335db0b3ad7724b8ef6}{get\+Type\+Data} ()
+\begin{DoxyCompactList}\small\item\em Método que obtiene el tipo de dato que se obtiene en la respuesta del comando. \end{DoxyCompactList}\item 
+std\+::any \hyperlink{classCommands_a72801682a4ac2ba214b0ca0d4b85b974}{get\+Res\+Value} ()
+\begin{DoxyCompactList}\small\item\em Método que obtiene el valor decodificado de la respuesta del comando. \end{DoxyCompactList}\item 
+\hyperlink{Commands_8hpp_ab701e3ac61a85b337ec5c1abaad6742d}{json} \hyperlink{classCommands_a0359da788a50c6aad69153dc0f2644e4}{get\+Json} ()
+\begin{DoxyCompactList}\small\item\em Método que obtiene información del comando y el valor de la respuesta decodificado en formato J\+S\+ON. \end{DoxyCompactList}\item 
+std\+::string \hyperlink{classCommands_ab4806a2fda5c80e10ab4446faa1e39b5}{get\+C\+M\+D\+Response} ()
+\begin{DoxyCompactList}\small\item\em Método para obtener el comando de respuesta al P\+ID solicitado. \end{DoxyCompactList}\item 
+void \hyperlink{classCommands_a8fd31a6ed848078dd67bf7ae303cfb9b}{set\+Name} (std\+::string name)
+\begin{DoxyCompactList}\small\item\em Método para asignar un nombre a un comando. \end{DoxyCompactList}\item 
+void \hyperlink{classCommands_aa430824877071f732b1a9aa9ff1bbf94}{set\+Description} (std\+::string description)
+\begin{DoxyCompactList}\small\item\em Método para asignar una descripción a un comando. \end{DoxyCompactList}\item 
+void \hyperlink{classCommands_a8ef86479788a98de99cc6ad6a78da9a4}{set\+C\+MD} (std\+::string cmd)
+\begin{DoxyCompactList}\small\item\em Método para asignar el comando en hexadecimal a enviar al dispositivo E\+L\+M327. \end{DoxyCompactList}\item 
+void \hyperlink{classCommands_a77c946b91fa3f3b7dbdc51ea1cc8208a}{set\+Bytes\+Response} (int bytes\+\_\+response)
+\begin{DoxyCompactList}\small\item\em Método para asignar el número de bytes de respuesta a un comando. \end{DoxyCompactList}\item 
+void \hyperlink{classCommands_acf92f3f0134534808bf6dcfb4496cf97}{set\+Decoder} (std\+::string decoder)
+\begin{DoxyCompactList}\small\item\em Método para asignar un decodificador a un comando. \end{DoxyCompactList}\item 
+void \hyperlink{classCommands_a073788fa37adc5fc91d3a40b869b8e67}{set\+M\+IN} (float min\+\_\+unit)
+\begin{DoxyCompactList}\small\item\em Método para asignar el valor mínimo de la respuesta a un comando. \end{DoxyCompactList}\item 
+void \hyperlink{classCommands_a364530a20f17fb20420c5980b1b07ea2}{set\+M\+AX} (float max\+\_\+unit)
+\begin{DoxyCompactList}\small\item\em Método para asignar el valor máximo de la respuesta a un comando. \end{DoxyCompactList}\item 
+void \hyperlink{classCommands_a35d92f904b7e1d2e806f7f7d92b23952}{set\+Units} (std\+::string units)
+\begin{DoxyCompactList}\small\item\em Método para asignar las unidades de medida de la respuesta a un comando. \end{DoxyCompactList}\item 
+void \hyperlink{classCommands_a1b2c552b493828ef9465d153809be3f2}{set\+Type\+Data} (std\+::string type\+\_\+data)
+\begin{DoxyCompactList}\small\item\em Método para asignar el tipo de dato que se debe de obtener en la respuesta del comando. \end{DoxyCompactList}\item 
+void \hyperlink{classCommands_a5c8eb30ed986a5071daf5f1135c2eb15}{set\+Res\+Value} (auto res\+Value)
+\begin{DoxyCompactList}\small\item\em Método para asignar el valor decodificado de la respuesta al comando. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Descripción detallada}
+Clase que representa los comandos AT y P\+I\+DS que se necesitan en el intercambio de mensajes con el dispositivo E\+L\+M327. 
+
+Clase utilizada por la clase \hyperlink{classObd}{Obd} con la información relativa a los comandos O\+BD. 
+
+Definición en la línea \hyperlink{Commands_8hpp_source_l00029}{29} del archivo \hyperlink{Commands_8hpp_source}{Commands.\+hpp}.
+
+
+
+\subsection{Documentación del constructor y destructor}
+\mbox{\Hypertarget{classCommands_ad71a0aafa9f942580b6c316ca07aef48}\label{classCommands_ad71a0aafa9f942580b6c316ca07aef48}} 
+\index{Commands@{Commands}!Commands@{Commands}}
+\index{Commands@{Commands}!Commands@{Commands}}
+\subsubsection{\texorpdfstring{Commands()}{Commands()}}
+{\footnotesize\ttfamily Commands\+::\+Commands (\begin{DoxyParamCaption}\item[{\hyperlink{Commands_8hpp_ab701e3ac61a85b337ec5c1abaad6742d}{json}}]{data }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Constructor de la clase \hyperlink{classCommands}{Commands}. 
+
+
+\begin{DoxyParams}{Parámetros}
+{\em data} & Tipo de datos json con la lista de comandos AT y O\+BD genéricos. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Devuelve}
+Devuelve una instancia de la clase \hyperlink{classCommands}{Commands}. 
+\end{DoxyReturn}
+
+
+Definición en la línea \hyperlink{Commands_8hpp_source_l00038}{38} del archivo \hyperlink{Commands_8hpp_source}{Commands.\+hpp}.
+
+
+
+\subsection{Documentación de las funciones miembro}
+\mbox{\Hypertarget{classCommands_a9b3d961dbebbd25f141d18cd5a267738}\label{classCommands_a9b3d961dbebbd25f141d18cd5a267738}} 
+\index{Commands@{Commands}!get\+Bytes\+Response@{get\+Bytes\+Response}}
+\index{get\+Bytes\+Response@{get\+Bytes\+Response}!Commands@{Commands}}
+\subsubsection{\texorpdfstring{get\+Bytes\+Response()}{getBytesResponse()}}
+{\footnotesize\ttfamily int Commands\+::get\+Bytes\+Response (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Método que obtiene el número de bytes de la respuesta del comando a enviar. 
+
+\begin{DoxyReturn}{Devuelve}
+Entero con el número de bytes de la respuesta del comando a enviar. 
+\end{DoxyReturn}
+
+
+Definición en la línea \hyperlink{Commands_8hpp_source_l00076}{76} del archivo \hyperlink{Commands_8hpp_source}{Commands.\+hpp}.
+
+\mbox{\Hypertarget{classCommands_a9aee21ab91fdfc8e9daa59e1e8f20b73}\label{classCommands_a9aee21ab91fdfc8e9daa59e1e8f20b73}} 
+\index{Commands@{Commands}!get\+C\+MD@{get\+C\+MD}}
+\index{get\+C\+MD@{get\+C\+MD}!Commands@{Commands}}
+\subsubsection{\texorpdfstring{get\+C\+M\+D()}{getCMD()}}
+{\footnotesize\ttfamily std\+::string Commands\+::get\+C\+MD (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Método que obtiene el comando en hexadecimal que se envía al dispositivo E\+L\+M327. 
+
+\begin{DoxyReturn}{Devuelve}
+String con el comando en hexadecimal que se envía al dispositivo E\+L\+M327. 
+\end{DoxyReturn}
+
+
+Definición en la línea \hyperlink{Commands_8hpp_source_l00069}{69} del archivo \hyperlink{Commands_8hpp_source}{Commands.\+hpp}.
+
+\mbox{\Hypertarget{classCommands_ab4806a2fda5c80e10ab4446faa1e39b5}\label{classCommands_ab4806a2fda5c80e10ab4446faa1e39b5}} 
+\index{Commands@{Commands}!get\+C\+M\+D\+Response@{get\+C\+M\+D\+Response}}
+\index{get\+C\+M\+D\+Response@{get\+C\+M\+D\+Response}!Commands@{Commands}}
+\subsubsection{\texorpdfstring{get\+C\+M\+D\+Response()}{getCMDResponse()}}
+{\footnotesize\ttfamily std\+::string Commands\+::get\+C\+M\+D\+Response (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Método para obtener el comando de respuesta al P\+ID solicitado. 
+
+\begin{DoxyReturn}{Devuelve}
+String con la cadena de respuesta sustituyendo el 0 por el 4 en el mensaje O\+BD.
+\end{DoxyReturn}
+Se utiliza para identificar los bytes útiles de la respuesta que se encuentran tras esta cadena. 
+
+Definición en la línea \hyperlink{Commands_8hpp_source_l00195}{195} del archivo \hyperlink{Commands_8hpp_source}{Commands.\+hpp}.
+
+\mbox{\Hypertarget{classCommands_a8b4c2a655d8dd3de334338d6684d469c}\label{classCommands_a8b4c2a655d8dd3de334338d6684d469c}} 
+\index{Commands@{Commands}!get\+Decoder@{get\+Decoder}}
+\index{get\+Decoder@{get\+Decoder}!Commands@{Commands}}
+\subsubsection{\texorpdfstring{get\+Decoder()}{getDecoder()}}
+{\footnotesize\ttfamily std\+::string Commands\+::get\+Decoder (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Método que obtiene la función de decodificación que se debe ejecutar en la respuesta. 
+
+\begin{DoxyReturn}{Devuelve}
+String del decodificador que se debe ejecutar en la respuesta. 
+\end{DoxyReturn}
+
+
+Definición en la línea \hyperlink{Commands_8hpp_source_l00083}{83} del archivo \hyperlink{Commands_8hpp_source}{Commands.\+hpp}.
+
+\mbox{\Hypertarget{classCommands_ad82fe7dfcf1908423bdb59d048020e26}\label{classCommands_ad82fe7dfcf1908423bdb59d048020e26}} 
+\index{Commands@{Commands}!get\+Description@{get\+Description}}
+\index{get\+Description@{get\+Description}!Commands@{Commands}}
+\subsubsection{\texorpdfstring{get\+Description()}{getDescription()}}
+{\footnotesize\ttfamily std\+::string Commands\+::get\+Description (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Método que obtiene la descripción del comando. 
+
+\begin{DoxyReturn}{Devuelve}
+String con la descripción del comando. 
+\end{DoxyReturn}
+
+
+Definición en la línea \hyperlink{Commands_8hpp_source_l00062}{62} del archivo \hyperlink{Commands_8hpp_source}{Commands.\+hpp}.
+
+\mbox{\Hypertarget{classCommands_a0359da788a50c6aad69153dc0f2644e4}\label{classCommands_a0359da788a50c6aad69153dc0f2644e4}} 
+\index{Commands@{Commands}!get\+Json@{get\+Json}}
+\index{get\+Json@{get\+Json}!Commands@{Commands}}
+\subsubsection{\texorpdfstring{get\+Json()}{getJson()}}
+{\footnotesize\ttfamily \hyperlink{Commands_8hpp_ab701e3ac61a85b337ec5c1abaad6742d}{json} Commands\+::get\+Json (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Método que obtiene información del comando y el valor de la respuesta decodificado en formato J\+S\+ON. 
+
+\begin{DoxyReturn}{Devuelve}
+Tipo json definido con el valor de la respuesta decodificado del comando, su nombre, descripción y unidades.
+\end{DoxyReturn}
+Función desarrollada con el fin de facilitar el envío de información en formato J\+S\+ON a un servidor remoto o para el almacenamiento local. 
+
+Definición en la línea \hyperlink{Commands_8hpp_source_l00132}{132} del archivo \hyperlink{Commands_8hpp_source}{Commands.\+hpp}.
+
+\mbox{\Hypertarget{classCommands_afbad1051313d0cdecba276384cb7fc6b}\label{classCommands_afbad1051313d0cdecba276384cb7fc6b}} 
+\index{Commands@{Commands}!get\+M\+AX@{get\+M\+AX}}
+\index{get\+M\+AX@{get\+M\+AX}!Commands@{Commands}}
+\subsubsection{\texorpdfstring{get\+M\+A\+X()}{getMAX()}}
+{\footnotesize\ttfamily float Commands\+::get\+M\+AX (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Método que obtiene el valor máximo que puede tener la respuesta al comando. 
+
+\begin{DoxyReturn}{Devuelve}
+Flotante con el valor máximo que puede tener la respuesta al comando. 
+\end{DoxyReturn}
+
+
+Definición en la línea \hyperlink{Commands_8hpp_source_l00097}{97} del archivo \hyperlink{Commands_8hpp_source}{Commands.\+hpp}.
+
+\mbox{\Hypertarget{classCommands_af0a1e2ea65b5a57997c721a8d77a1013}\label{classCommands_af0a1e2ea65b5a57997c721a8d77a1013}} 
+\index{Commands@{Commands}!get\+M\+IN@{get\+M\+IN}}
+\index{get\+M\+IN@{get\+M\+IN}!Commands@{Commands}}
+\subsubsection{\texorpdfstring{get\+M\+I\+N()}{getMIN()}}
+{\footnotesize\ttfamily float Commands\+::get\+M\+IN (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Método que obtiene el valor mínimo que puede tener la respuesta al comando. 
+
+\begin{DoxyReturn}{Devuelve}
+Flotante con el valor mínimo que puede tener la respuesta al comando. 
+\end{DoxyReturn}
+
+
+Definición en la línea \hyperlink{Commands_8hpp_source_l00090}{90} del archivo \hyperlink{Commands_8hpp_source}{Commands.\+hpp}.
+
+\mbox{\Hypertarget{classCommands_adf3d8a96310b1f4e57a6ecf0f2f153ea}\label{classCommands_adf3d8a96310b1f4e57a6ecf0f2f153ea}} 
+\index{Commands@{Commands}!get\+Name@{get\+Name}}
+\index{get\+Name@{get\+Name}!Commands@{Commands}}
+\subsubsection{\texorpdfstring{get\+Name()}{getName()}}
+{\footnotesize\ttfamily std\+::string Commands\+::get\+Name (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Método que obtiene el nombre del comando. 
+
+\begin{DoxyReturn}{Devuelve}
+String con el nombre del comando. 
+\end{DoxyReturn}
+
+
+Definición en la línea \hyperlink{Commands_8hpp_source_l00055}{55} del archivo \hyperlink{Commands_8hpp_source}{Commands.\+hpp}.
+
+\mbox{\Hypertarget{classCommands_a72801682a4ac2ba214b0ca0d4b85b974}\label{classCommands_a72801682a4ac2ba214b0ca0d4b85b974}} 
+\index{Commands@{Commands}!get\+Res\+Value@{get\+Res\+Value}}
+\index{get\+Res\+Value@{get\+Res\+Value}!Commands@{Commands}}
+\subsubsection{\texorpdfstring{get\+Res\+Value()}{getResValue()}}
+{\footnotesize\ttfamily std\+::any Commands\+::get\+Res\+Value (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Método que obtiene el valor decodificado de la respuesta del comando. 
+
+\begin{DoxyReturn}{Devuelve}
+El tipo de dato correspondiente con el comando y el valor decodificado de la respuesta. 
+\end{DoxyReturn}
+
+
+Definición en la línea \hyperlink{Commands_8hpp_source_l00122}{122} del archivo \hyperlink{Commands_8hpp_source}{Commands.\+hpp}.
+
+\mbox{\Hypertarget{classCommands_a7d983e153465d335db0b3ad7724b8ef6}\label{classCommands_a7d983e153465d335db0b3ad7724b8ef6}} 
+\index{Commands@{Commands}!get\+Type\+Data@{get\+Type\+Data}}
+\index{get\+Type\+Data@{get\+Type\+Data}!Commands@{Commands}}
+\subsubsection{\texorpdfstring{get\+Type\+Data()}{getTypeData()}}
+{\footnotesize\ttfamily std\+::string Commands\+::get\+Type\+Data (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Método que obtiene el tipo de dato que se obtiene en la respuesta del comando. 
+
+\begin{DoxyReturn}{Devuelve}
+String del tipo de dato de la respuesta del comando.
+\end{DoxyReturn}
+El tipo de dato se utiliza para filtrar entre los tipos de decodificadores de respuesta. Sus valores pueden ser\+: string, float, vector$<$int$>$, vector$<$string$>$, map$<$string, string$>$, struct \hyperlink{structOxigenoResponse}{Oxigeno\+Response} y struct \hyperlink{structRelacionesResponse}{Relaciones\+Response}. 
+
+Definición en la línea \hyperlink{Commands_8hpp_source_l00115}{115} del archivo \hyperlink{Commands_8hpp_source}{Commands.\+hpp}.
+
+\mbox{\Hypertarget{classCommands_ac67214a4fbd93fbb4d8ebb2dd815a3fa}\label{classCommands_ac67214a4fbd93fbb4d8ebb2dd815a3fa}} 
+\index{Commands@{Commands}!get\+Units@{get\+Units}}
+\index{get\+Units@{get\+Units}!Commands@{Commands}}
+\subsubsection{\texorpdfstring{get\+Units()}{getUnits()}}
+{\footnotesize\ttfamily std\+::string Commands\+::get\+Units (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Método que obtiene en qué unidades se mide la respuesta del comando. 
+
+\begin{DoxyReturn}{Devuelve}
+String de la unidad de medida de la respuesta del comando. 
+\end{DoxyReturn}
+
+
+Definición en la línea \hyperlink{Commands_8hpp_source_l00104}{104} del archivo \hyperlink{Commands_8hpp_source}{Commands.\+hpp}.
+
+\mbox{\Hypertarget{classCommands_a77c946b91fa3f3b7dbdc51ea1cc8208a}\label{classCommands_a77c946b91fa3f3b7dbdc51ea1cc8208a}} 
+\index{Commands@{Commands}!set\+Bytes\+Response@{set\+Bytes\+Response}}
+\index{set\+Bytes\+Response@{set\+Bytes\+Response}!Commands@{Commands}}
+\subsubsection{\texorpdfstring{set\+Bytes\+Response()}{setBytesResponse()}}
+{\footnotesize\ttfamily void Commands\+::set\+Bytes\+Response (\begin{DoxyParamCaption}\item[{int}]{bytes\+\_\+response }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Método para asignar el número de bytes de respuesta a un comando. 
+
+
+\begin{DoxyParams}{Parámetros}
+{\em bytes\+\_\+response} & Entero con el número de bytes de respuesta a asignar al comando. \\
+\hline
+\end{DoxyParams}
+
+
+Definición en la línea \hyperlink{Commands_8hpp_source_l00228}{228} del archivo \hyperlink{Commands_8hpp_source}{Commands.\+hpp}.
+
+\mbox{\Hypertarget{classCommands_a8ef86479788a98de99cc6ad6a78da9a4}\label{classCommands_a8ef86479788a98de99cc6ad6a78da9a4}} 
+\index{Commands@{Commands}!set\+C\+MD@{set\+C\+MD}}
+\index{set\+C\+MD@{set\+C\+MD}!Commands@{Commands}}
+\subsubsection{\texorpdfstring{set\+C\+M\+D()}{setCMD()}}
+{\footnotesize\ttfamily void Commands\+::set\+C\+MD (\begin{DoxyParamCaption}\item[{std\+::string}]{cmd }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Método para asignar el comando en hexadecimal a enviar al dispositivo E\+L\+M327. 
+
+
+\begin{DoxyParams}{Parámetros}
+{\em cmd} & String con el comando en hexadecimal a enviar al dispositivo E\+L\+M327. \\
+\hline
+\end{DoxyParams}
+
+
+Definición en la línea \hyperlink{Commands_8hpp_source_l00221}{221} del archivo \hyperlink{Commands_8hpp_source}{Commands.\+hpp}.
+
+\mbox{\Hypertarget{classCommands_acf92f3f0134534808bf6dcfb4496cf97}\label{classCommands_acf92f3f0134534808bf6dcfb4496cf97}} 
+\index{Commands@{Commands}!set\+Decoder@{set\+Decoder}}
+\index{set\+Decoder@{set\+Decoder}!Commands@{Commands}}
+\subsubsection{\texorpdfstring{set\+Decoder()}{setDecoder()}}
+{\footnotesize\ttfamily void Commands\+::set\+Decoder (\begin{DoxyParamCaption}\item[{std\+::string}]{decoder }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Método para asignar un decodificador a un comando. 
+
+
+\begin{DoxyParams}{Parámetros}
+{\em decoder} & String con el nombre del decodificador que utiliza el comando. \\
+\hline
+\end{DoxyParams}
+
+
+Definición en la línea \hyperlink{Commands_8hpp_source_l00235}{235} del archivo \hyperlink{Commands_8hpp_source}{Commands.\+hpp}.
+
+\mbox{\Hypertarget{classCommands_aa430824877071f732b1a9aa9ff1bbf94}\label{classCommands_aa430824877071f732b1a9aa9ff1bbf94}} 
+\index{Commands@{Commands}!set\+Description@{set\+Description}}
+\index{set\+Description@{set\+Description}!Commands@{Commands}}
+\subsubsection{\texorpdfstring{set\+Description()}{setDescription()}}
+{\footnotesize\ttfamily void Commands\+::set\+Description (\begin{DoxyParamCaption}\item[{std\+::string}]{description }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Método para asignar una descripción a un comando. 
+
+
+\begin{DoxyParams}{Parámetros}
+{\em description} & String con la descripción a asignar al comando. \\
+\hline
+\end{DoxyParams}
+
+
+Definición en la línea \hyperlink{Commands_8hpp_source_l00214}{214} del archivo \hyperlink{Commands_8hpp_source}{Commands.\+hpp}.
+
+\mbox{\Hypertarget{classCommands_a364530a20f17fb20420c5980b1b07ea2}\label{classCommands_a364530a20f17fb20420c5980b1b07ea2}} 
+\index{Commands@{Commands}!set\+M\+AX@{set\+M\+AX}}
+\index{set\+M\+AX@{set\+M\+AX}!Commands@{Commands}}
+\subsubsection{\texorpdfstring{set\+M\+A\+X()}{setMAX()}}
+{\footnotesize\ttfamily void Commands\+::set\+M\+AX (\begin{DoxyParamCaption}\item[{float}]{max\+\_\+unit }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Método para asignar el valor máximo de la respuesta a un comando. 
+
+
+\begin{DoxyParams}{Parámetros}
+{\em max\+\_\+unit} & Flotante con el valor máximo de la respuesta a un comando. \\
+\hline
+\end{DoxyParams}
+
+
+Definición en la línea \hyperlink{Commands_8hpp_source_l00249}{249} del archivo \hyperlink{Commands_8hpp_source}{Commands.\+hpp}.
+
+\mbox{\Hypertarget{classCommands_a073788fa37adc5fc91d3a40b869b8e67}\label{classCommands_a073788fa37adc5fc91d3a40b869b8e67}} 
+\index{Commands@{Commands}!set\+M\+IN@{set\+M\+IN}}
+\index{set\+M\+IN@{set\+M\+IN}!Commands@{Commands}}
+\subsubsection{\texorpdfstring{set\+M\+I\+N()}{setMIN()}}
+{\footnotesize\ttfamily void Commands\+::set\+M\+IN (\begin{DoxyParamCaption}\item[{float}]{min\+\_\+unit }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Método para asignar el valor mínimo de la respuesta a un comando. 
+
+
+\begin{DoxyParams}{Parámetros}
+{\em min\+\_\+unit} & Flotante con el valor mínimo de la respuesta a un comando. \\
+\hline
+\end{DoxyParams}
+
+
+Definición en la línea \hyperlink{Commands_8hpp_source_l00242}{242} del archivo \hyperlink{Commands_8hpp_source}{Commands.\+hpp}.
+
+\mbox{\Hypertarget{classCommands_a8fd31a6ed848078dd67bf7ae303cfb9b}\label{classCommands_a8fd31a6ed848078dd67bf7ae303cfb9b}} 
+\index{Commands@{Commands}!set\+Name@{set\+Name}}
+\index{set\+Name@{set\+Name}!Commands@{Commands}}
+\subsubsection{\texorpdfstring{set\+Name()}{setName()}}
+{\footnotesize\ttfamily void Commands\+::set\+Name (\begin{DoxyParamCaption}\item[{std\+::string}]{name }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Método para asignar un nombre a un comando. 
+
+
+\begin{DoxyParams}{Parámetros}
+{\em name} & String con el nombre a asignar al comando. \\
+\hline
+\end{DoxyParams}
+
+
+Definición en la línea \hyperlink{Commands_8hpp_source_l00207}{207} del archivo \hyperlink{Commands_8hpp_source}{Commands.\+hpp}.
+
+\mbox{\Hypertarget{classCommands_a5c8eb30ed986a5071daf5f1135c2eb15}\label{classCommands_a5c8eb30ed986a5071daf5f1135c2eb15}} 
+\index{Commands@{Commands}!set\+Res\+Value@{set\+Res\+Value}}
+\index{set\+Res\+Value@{set\+Res\+Value}!Commands@{Commands}}
+\subsubsection{\texorpdfstring{set\+Res\+Value()}{setResValue()}}
+{\footnotesize\ttfamily void Commands\+::set\+Res\+Value (\begin{DoxyParamCaption}\item[{auto}]{res\+Value }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Método para asignar el valor decodificado de la respuesta al comando. 
+
+
+\begin{DoxyParams}{Parámetros}
+{\em res\+Value} & Tipo de dato dependiente del tipo de dato del comando con el valor de la respuesta decodificada.\\
+\hline
+\end{DoxyParams}
+Función utilizada para el almacenamiento en memoria del valor solicitado con un comando. 
+
+Definición en la línea \hyperlink{Commands_8hpp_source_l00272}{272} del archivo \hyperlink{Commands_8hpp_source}{Commands.\+hpp}.
+
+\mbox{\Hypertarget{classCommands_a1b2c552b493828ef9465d153809be3f2}\label{classCommands_a1b2c552b493828ef9465d153809be3f2}} 
+\index{Commands@{Commands}!set\+Type\+Data@{set\+Type\+Data}}
+\index{set\+Type\+Data@{set\+Type\+Data}!Commands@{Commands}}
+\subsubsection{\texorpdfstring{set\+Type\+Data()}{setTypeData()}}
+{\footnotesize\ttfamily void Commands\+::set\+Type\+Data (\begin{DoxyParamCaption}\item[{std\+::string}]{type\+\_\+data }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Método para asignar el tipo de dato que se debe de obtener en la respuesta del comando. 
+
+
+\begin{DoxyParams}{Parámetros}
+{\em type\+\_\+data} & String con el tipo de dato que se debe de obtener en la respuesta del comando. \\
+\hline
+\end{DoxyParams}
+
+
+Definición en la línea \hyperlink{Commands_8hpp_source_l00263}{263} del archivo \hyperlink{Commands_8hpp_source}{Commands.\+hpp}.
+
+\mbox{\Hypertarget{classCommands_a35d92f904b7e1d2e806f7f7d92b23952}\label{classCommands_a35d92f904b7e1d2e806f7f7d92b23952}} 
+\index{Commands@{Commands}!set\+Units@{set\+Units}}
+\index{set\+Units@{set\+Units}!Commands@{Commands}}
+\subsubsection{\texorpdfstring{set\+Units()}{setUnits()}}
+{\footnotesize\ttfamily void Commands\+::set\+Units (\begin{DoxyParamCaption}\item[{std\+::string}]{units }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Método para asignar las unidades de medida de la respuesta a un comando. 
+
+
+\begin{DoxyParams}{Parámetros}
+{\em units} & String con las unidades de medida de la respuesta del comando. \\
+\hline
+\end{DoxyParams}
+
+
+Definición en la línea \hyperlink{Commands_8hpp_source_l00256}{256} del archivo \hyperlink{Commands_8hpp_source}{Commands.\+hpp}.
+
+
+
+La documentación para esta clase fue generada a partir del siguiente fichero\+:\begin{DoxyCompactItemize}
+\item 
+\hyperlink{Commands_8hpp}{Commands.\+hpp}\end{DoxyCompactItemize}

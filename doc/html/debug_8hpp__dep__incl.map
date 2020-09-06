@@ -1,0 +1,6 @@
+<map id="debug.hpp" name="debug.hpp">
+<area shape="rect" id="node2" href="$Obd_8hpp.html" title="Archivo que contiene la clase con la implementación de la conexión y envío de mensajes OBD con el dis..." alt="" coords="70,80,141,107"/>
+<area shape="rect" id="node5" href="$MockSocket_8cpp.html" title="Archivo que contiene las funciones mock bluetooth para poder realizar las pruebas de integración..." alt="" coords="165,80,285,107"/>
+<area shape="rect" id="node3" href="$main_8cpp_source.html" title="main.cpp" alt="" coords="5,155,80,181"/>
+<area shape="rect" id="node4" href="$UnitTestCase_8cpp.html" title="Archivo que contiene el conjunto de pruebas unitarias y de integración del sistema. " alt="" coords="104,155,232,181"/>
+</map>

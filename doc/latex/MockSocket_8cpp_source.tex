@@ -1,0 +1,78 @@
+\hypertarget{MockSocket_8cpp_source}{}\section{Mock\+Socket.\+cpp}
+\label{MockSocket_8cpp_source}\index{Mock\+Socket.\+cpp@{Mock\+Socket.\+cpp}}
+
+\begin{DoxyCode}
+00001 
+00009 \textcolor{preprocessor}{#include <stdio.h>}
+00010 \textcolor{preprocessor}{#include <fcntl.h>}
+00011 \textcolor{preprocessor}{#include <sys/socket.h>}
+00012 \textcolor{preprocessor}{#include <bluetooth/bluetooth.h>}
+00013 \textcolor{preprocessor}{#include <bluetooth/hci.h>}
+00014 \textcolor{preprocessor}{#include <bluetooth/hci\_lib.h>}
+00015 \textcolor{comment}{//Para mkfifo}
+00016 \textcolor{preprocessor}{#include <sys/types.h>}
+00017 \textcolor{preprocessor}{#include <sys/stat.h>}
+00018 \textcolor{preprocessor}{#include "../src/debug.hpp"}
+00019 
+\Hypertarget{MockSocket_8cpp_source_l00025}\hyperlink{MockSocket_8cpp_a33fe4c99996c8de03c33962525663851}{00025} std::string \hyperlink{MockSocket_8cpp_a33fe4c99996c8de03c33962525663851}{findDevPTS}()\{
+00026     system(\textcolor{stringliteral}{"ls /dev/pts | tail -2 | head -1 > tmpPTSfile.txt"});
+00027 
+00028     \textcolor{keywordtype}{int} ultPts;
+00029     \textcolor{keywordtype}{int} tempVar;
+00030     std::ifstream input\_file(\textcolor{stringliteral}{"tmpPTSfile.txt"});
+00031     \textcolor{keywordflow}{while} ( input\_file >> tempVar )
+00032     \{
+00033         ultPts = tempVar;
+00034     \}
+00035 
+00036     std::string devFile = \textcolor{stringliteral}{"/dev/pts/"} + std::to\_string(ultPts);
+00037     \textcolor{keyword}{remove}(\textcolor{stringliteral}{"tmpPTSfile.txt"});
+00038 
+00039     \textcolor{keywordflow}{return} devFile;
+00040 \}
+00041 
+00042 \textcolor{keywordtype}{int} mock\_socket(\textcolor{keywordtype}{int} domain, \textcolor{keywordtype}{int} type, \textcolor{keywordtype}{int} protocol)\{
+00043 
+00044     std::string devFile = \hyperlink{MockSocket_8cpp_a33fe4c99996c8de03c33962525663851}{findDevPTS}();
+00045 
+00046     \textcolor{keywordtype}{int} filedesc = open(devFile.c\_str(), O\_RDWR);
+00047     \textcolor{keywordflow}{if} (filedesc < 0) \{
+00048         \hyperlink{debug_8hpp_a06cd512b8b15b6da31a5a557445f7027}{debugError}(\textcolor{stringliteral}{"Error al abrir socket %d."}, filedesc);
+00049     \}
+00050 
+00051     \textcolor{keywordflow}{return} filedesc;
+00052 \}
+00053 
+00054 \textcolor{keywordtype}{int} hci\_get\_route( bdaddr\_t *bdaddr )\{
+00055     \textcolor{keywordtype}{int} value = 0;
+00056     \textcolor{keywordflow}{return} value;
+00057 \}
+00058 
+00059 \textcolor{keywordtype}{int} hci\_open\_dev( \textcolor{keywordtype}{int} dev\_id )\{
+00060     \textcolor{keywordtype}{int} filedesc = open(\textcolor{stringliteral}{"/dev/null"}, O\_RDONLY); 
+00061     \textcolor{keywordflow}{if}(filedesc < 0)
+00062         filedesc = -1;
+00063     \textcolor{keywordflow}{return} filedesc;
+00064 \}
+00065 
+00066 \textcolor{keywordtype}{int} hci\_inquiry(\textcolor{keywordtype}{int} dev\_id, \textcolor{keywordtype}{int} len, \textcolor{keywordtype}{int} max\_rsp, \textcolor{keyword}{const} uint8\_t *lap, inquiry\_info **ii, \textcolor{keywordtype}{long} flags)\{
+00067     \textcolor{keywordtype}{int} value = 1;
+00068     \textcolor{keywordflow}{return} value;
+00069 \}
+00070 
+00071 
+00072 \textcolor{keywordtype}{int} hci\_read\_remote\_name(\textcolor{keywordtype}{int} sock, \textcolor{keyword}{const} bdaddr\_t *ba, \textcolor{keywordtype}{int} len, \textcolor{keywordtype}{char} *name, \textcolor{keywordtype}{int} timeout)\{
+00073     \textcolor{keywordtype}{int} value = 1;
+00074     strcpy(name, \textcolor{stringliteral}{"OBDII"});
+00075     \textcolor{keywordflow}{return} value;   
+00076 \}
+00077 
+00078 \textcolor{keywordtype}{int} connect(\textcolor{keywordtype}{int} sockfd, \textcolor{keyword}{const} \textcolor{keyword}{struct} sockaddr *addr, socklen\_t addrlen)\{
+00079     \textcolor{keywordtype}{int} value = 0;
+00080     \textcolor{keywordflow}{return} value;
+00081 \}
+00082 
+00083 \textcolor{keywordtype}{void} writeSocket()\{
+00084     
+00085 \}
+\end{DoxyCode}

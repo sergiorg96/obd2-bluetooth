@@ -1,0 +1,28 @@
+\hypertarget{debug_8hpp_source}{}\section{debug.\+hpp}
+\label{debug_8hpp_source}\index{debug.\+hpp@{debug.\+hpp}}
+
+\begin{DoxyCode}
+00001 
+00008 \textcolor{preprocessor}{#include <stdio.h>}
+00009 
+00010 \textcolor{preprocessor}{#ifndef DEBUG\_HPP}
+00011 \textcolor{preprocessor}{#define DEBUG\_HPP}
+00012 \textcolor{preprocessor}{#ifdef DEBUG}
+00013 
+00016 \textcolor{preprocessor}{    #define debugLog(info, args...) \(\backslash\)}
+00017 \textcolor{preprocessor}{        fprintf (stderr, "[%s %s][LOG][%s][%s][Line %i] ", \_\_DATE\_\_, \_\_TIME\_\_, \_\_FILE\_\_, \_\_FUNCTION\_\_,
+       \_\_LINE\_\_); \(\backslash\)}
+00018 \textcolor{preprocessor}{        fprintf (stderr, info "\(\backslash\)n", ##args);}
+00019 
+00022 \textcolor{preprocessor}{    #define debugError(info, args...) \(\backslash\)}
+00023 \textcolor{preprocessor}{        fprintf (stderr, "[%s %s][ERROR][%s][%s][Line %i] ", \_\_DATE\_\_, \_\_TIME\_\_, \_\_FILE\_\_, \_\_FUNCTION\_\_,
+       \_\_LINE\_\_); \(\backslash\)}
+00024 \textcolor{preprocessor}{        fprintf (stderr, info "\(\backslash\)n", ##args);}
+00025 \textcolor{preprocessor}{#else}
+00026 
+\Hypertarget{debug_8hpp_source_l00029}\hyperlink{debug_8hpp_a55f41cf7b0585224496de3d7adbc101c}{00029} \textcolor{preprocessor}{    #define debugLog(format, args...) do\{\} while(0);}
+00030 
+\Hypertarget{debug_8hpp_source_l00033}\hyperlink{debug_8hpp_a06cd512b8b15b6da31a5a557445f7027}{00033} \textcolor{preprocessor}{    #define debugError(format, args...) do\{\} while(0);}
+00034 \textcolor{preprocessor}{#endif}
+00035 \textcolor{preprocessor}{#endif}
+\end{DoxyCode}

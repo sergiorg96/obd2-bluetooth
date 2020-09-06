@@ -1,0 +1,373 @@
+\begin{theindex}
+
+  \item {A}
+    \subitem {Oxigeno\+Response}, \hyperpage{25}
+    \subitem {Relaciones\+Response}, \hyperpage{26}
+  \item {Alarm\+File}, \hyperpage{7}
+    \subitem {Alarm\+File}, \hyperpage{7}
+    \subitem {get\+Geo\+Pos}, \hyperpage{8}
+    \subitem {Gps}, \hyperpage{8}
+    \subitem {has\+Gps}, \hyperpage{9}
+    \subitem {send\+Alarm}, \hyperpage{9}
+  \item {alarmfile.\+cpp}, \hyperpage{29, 30}
+  \item {alarmfile.\+hpp}, \hyperpage{30}, \hyperpage{32}
+
+  \indexspace
+
+  \item {B}
+    \subitem {Oxigeno\+Response}, \hyperpage{26}
+    \subitem {Relaciones\+Response}, \hyperpage{27}
+  \item {B\+U\+F\+S\+I\+ZE}
+    \subitem {Unit\+Test\+Case.\+cpp}, \hyperpage{86}
+
+  \indexspace
+
+  \item {C}
+    \subitem {Relaciones\+Response}, \hyperpage{27}
+  \item {C\+A\+T\+C\+H\+\_\+\+C\+O\+N\+F\+I\+G\+\_\+\+M\+A\+IN}
+    \subitem {Unit\+Test\+Case.\+cpp}, \hyperpage{86}
+  \item {Commands}, \hyperpage{9}
+    \subitem {Commands}, \hyperpage{11}
+    \subitem {get\+Bytes\+Response}, \hyperpage{11}
+    \subitem {get\+C\+M\+D\+Response}, \hyperpage{12}
+    \subitem {get\+C\+MD}, \hyperpage{11}
+    \subitem {get\+Decoder}, \hyperpage{12}
+    \subitem {get\+Description}, \hyperpage{12}
+    \subitem {get\+Json}, \hyperpage{13}
+    \subitem {get\+M\+AX}, \hyperpage{13}
+    \subitem {get\+M\+IN}, \hyperpage{13}
+    \subitem {get\+Name}, \hyperpage{14}
+    \subitem {get\+Res\+Value}, \hyperpage{14}
+    \subitem {get\+Type\+Data}, \hyperpage{14}
+    \subitem {get\+Units}, \hyperpage{14}
+    \subitem {set\+Bytes\+Response}, \hyperpage{15}
+    \subitem {set\+C\+MD}, \hyperpage{15}
+    \subitem {set\+Decoder}, \hyperpage{15}
+    \subitem {set\+Description}, \hyperpage{16}
+    \subitem {set\+M\+AX}, \hyperpage{16}
+    \subitem {set\+M\+IN}, \hyperpage{16}
+    \subitem {set\+Name}, \hyperpage{17}
+    \subitem {set\+Res\+Value}, \hyperpage{17}
+    \subitem {set\+Type\+Data}, \hyperpage{17}
+    \subitem {set\+Units}, \hyperpage{18}
+  \item {Commands.\+hpp}, \hyperpage{32}, \hyperpage{34}
+  \item {connect\+Bluetooth}
+    \subitem {Obd}, \hyperpage{19}
+  \item {convert\+D\+T\+Cs}
+    \subitem {decoders.\+cpp}, \hyperpage{39}
+    \subitem {decoders.\+hpp}, \hyperpage{57}
+
+  \indexspace
+
+  \item {D}
+    \subitem {Relaciones\+Response}, \hyperpage{27}
+  \item {debug.\+hpp}, \hyperpage{35}, \hyperpage{37}
+  \item {decode\+Ajuste\+Combustible\+E\+GR}
+    \subitem {decoders.\+cpp}, \hyperpage{39}
+    \subitem {decoders.\+hpp}, \hyperpage{58}
+  \item {decode\+Avance\+Tiempo}
+    \subitem {decoders.\+cpp}, \hyperpage{40}
+    \subitem {decoders.\+hpp}, \hyperpage{58}
+  \item {decode\+Carga\+Posicion\+E\+GR}
+    \subitem {decoders.\+cpp}, \hyperpage{40}
+    \subitem {decoders.\+hpp}, \hyperpage{58}
+  \item {decode\+D\+T\+Cs}
+    \subitem {decoders.\+cpp}, \hyperpage{41}
+    \subitem {decoders.\+hpp}, \hyperpage{59}
+  \item {decode\+Describe\+Protocol}
+    \subitem {decoders.\+cpp}, \hyperpage{40}
+    \subitem {decoders.\+hpp}, \hyperpage{59}
+  \item {decode\+Hex\+To\+Dec}
+    \subitem {decoders.\+cpp}, \hyperpage{41}
+    \subitem {decoders.\+hpp}, \hyperpage{60}
+  \item {decode\+P\+I\+DS}
+    \subitem {decoders.\+cpp}, \hyperpage{41}
+    \subitem {decoders.\+hpp}, \hyperpage{60}
+  \item {decode\+Presion\+Comb\+Colector}
+    \subitem {decoders.\+cpp}, \hyperpage{42}
+    \subitem {decoders.\+hpp}, \hyperpage{60}
+  \item {decode\+Presion\+Combustible}
+    \subitem {decoders.\+cpp}, \hyperpage{42}
+    \subitem {decoders.\+hpp}, \hyperpage{61}
+  \item {decode\+Presion\+Medidor\+Combustible}
+    \subitem {decoders.\+cpp}, \hyperpage{43}
+    \subitem {decoders.\+hpp}, \hyperpage{61}
+  \item {decode\+Presion\+Vapor}
+    \subitem {decoders.\+cpp}, \hyperpage{43}
+    \subitem {decoders.\+hpp}, \hyperpage{61}
+  \item {decode\+R\+PM}
+    \subitem {decoders.\+cpp}, \hyperpage{45}
+    \subitem {decoders.\+hpp}, \hyperpage{63}
+  \item {decode\+Relacion\+Comb\+Aire}
+    \subitem {decoders.\+cpp}, \hyperpage{43}
+    \subitem {decoders.\+hpp}, \hyperpage{62}
+  \item {decode\+Relacion\+Comb\+Aire\+Actual}
+    \subitem {decoders.\+cpp}, \hyperpage{44}
+    \subitem {decoders.\+hpp}, \hyperpage{62}
+  \item {decode\+Relacion\+Comb\+Aire\+Basica}
+    \subitem {decoders.\+cpp}, \hyperpage{44}
+    \subitem {decoders.\+hpp}, \hyperpage{63}
+  \item {decode\+Relaciones}
+    \subitem {decoders.\+cpp}, \hyperpage{44}
+    \subitem {decoders.\+hpp}, \hyperpage{63}
+  \item {decode\+Sensor\+Oxigeno}
+    \subitem {decoders.\+cpp}, \hyperpage{45}
+    \subitem {decoders.\+hpp}, \hyperpage{64}
+  \item {decode\+Status}
+    \subitem {decoders.\+cpp}, \hyperpage{46}
+    \subitem {decoders.\+hpp}, \hyperpage{64}
+  \item {decode\+Temp\+Catalizador}
+    \subitem {decoders.\+cpp}, \hyperpage{46}
+    \subitem {decoders.\+hpp}, \hyperpage{65}
+  \item {decode\+Temp\+General}
+    \subitem {decoders.\+cpp}, \hyperpage{46}
+    \subitem {decoders.\+hpp}, \hyperpage{65}
+  \item {decode\+V\+IN}
+    \subitem {decoders.\+cpp}, \hyperpage{47}
+    \subitem {decoders.\+hpp}, \hyperpage{66}
+  \item {decode\+Velocidad\+M\+AF}
+    \subitem {decoders.\+cpp}, \hyperpage{47}
+    \subitem {decoders.\+hpp}, \hyperpage{65}
+  \item {decode\+Voltaje\+Control}
+    \subitem {decoders.\+cpp}, \hyperpage{47}
+    \subitem {decoders.\+hpp}, \hyperpage{66}
+  \item {decoders.\+cpp}, \hyperpage{37}, \hyperpage{48}
+    \subitem {convert\+D\+T\+Cs}, \hyperpage{39}
+    \subitem {decode\+Ajuste\+Combustible\+E\+GR}, \hyperpage{39}
+    \subitem {decode\+Avance\+Tiempo}, \hyperpage{40}
+    \subitem {decode\+Carga\+Posicion\+E\+GR}, \hyperpage{40}
+    \subitem {decode\+D\+T\+Cs}, \hyperpage{41}
+    \subitem {decode\+Describe\+Protocol}, \hyperpage{40}
+    \subitem {decode\+Hex\+To\+Dec}, \hyperpage{41}
+    \subitem {decode\+P\+I\+DS}, \hyperpage{41}
+    \subitem {decode\+Presion\+Comb\+Colector}, \hyperpage{42}
+    \subitem {decode\+Presion\+Combustible}, \hyperpage{42}
+    \subitem {decode\+Presion\+Medidor\+Combustible}, \hyperpage{43}
+    \subitem {decode\+Presion\+Vapor}, \hyperpage{43}
+    \subitem {decode\+R\+PM}, \hyperpage{45}
+    \subitem {decode\+Relacion\+Comb\+Aire}, \hyperpage{43}
+    \subitem {decode\+Relacion\+Comb\+Aire\+Actual}, \hyperpage{44}
+    \subitem {decode\+Relacion\+Comb\+Aire\+Basica}, \hyperpage{44}
+    \subitem {decode\+Relaciones}, \hyperpage{44}
+    \subitem {decode\+Sensor\+Oxigeno}, \hyperpage{45}
+    \subitem {decode\+Status}, \hyperpage{46}
+    \subitem {decode\+Temp\+Catalizador}, \hyperpage{46}
+    \subitem {decode\+Temp\+General}, \hyperpage{46}
+    \subitem {decode\+V\+IN}, \hyperpage{47}
+    \subitem {decode\+Velocidad\+M\+AF}, \hyperpage{47}
+    \subitem {decode\+Voltaje\+Control}, \hyperpage{47}
+  \item {decoders.\+hpp}, \hyperpage{54}, \hyperpage{67}
+    \subitem {convert\+D\+T\+Cs}, \hyperpage{57}
+    \subitem {decode\+Ajuste\+Combustible\+E\+GR}, \hyperpage{58}
+    \subitem {decode\+Avance\+Tiempo}, \hyperpage{58}
+    \subitem {decode\+Carga\+Posicion\+E\+GR}, \hyperpage{58}
+    \subitem {decode\+D\+T\+Cs}, \hyperpage{59}
+    \subitem {decode\+Describe\+Protocol}, \hyperpage{59}
+    \subitem {decode\+Hex\+To\+Dec}, \hyperpage{60}
+    \subitem {decode\+P\+I\+DS}, \hyperpage{60}
+    \subitem {decode\+Presion\+Comb\+Colector}, \hyperpage{60}
+    \subitem {decode\+Presion\+Combustible}, \hyperpage{61}
+    \subitem {decode\+Presion\+Medidor\+Combustible}, \hyperpage{61}
+    \subitem {decode\+Presion\+Vapor}, \hyperpage{61}
+    \subitem {decode\+R\+PM}, \hyperpage{63}
+    \subitem {decode\+Relacion\+Comb\+Aire}, \hyperpage{62}
+    \subitem {decode\+Relacion\+Comb\+Aire\+Actual}, \hyperpage{62}
+    \subitem {decode\+Relacion\+Comb\+Aire\+Basica}, \hyperpage{63}
+    \subitem {decode\+Relaciones}, \hyperpage{63}
+    \subitem {decode\+Sensor\+Oxigeno}, \hyperpage{64}
+    \subitem {decode\+Status}, \hyperpage{64}
+    \subitem {decode\+Temp\+Catalizador}, \hyperpage{65}
+    \subitem {decode\+Temp\+General}, \hyperpage{65}
+    \subitem {decode\+V\+IN}, \hyperpage{66}
+    \subitem {decode\+Velocidad\+M\+AF}, \hyperpage{65}
+    \subitem {decode\+Voltaje\+Control}, \hyperpage{66}
+    \subitem {P\+I\+D\+\_\+\+B\+I\+TS}, \hyperpage{57}
+    \subitem {S\+T\+A\+T\+U\+S\+\_\+\+B\+I\+TS}, \hyperpage{57}
+  \item {disconnect\+Bluetooth}
+    \subitem {Obd}, \hyperpage{20}
+  \item {discover\+Device\+Address}
+    \subitem {Obd}, \hyperpage{20}
+
+  \indexspace
+
+  \item {exist\+P\+ID}
+    \subitem {Obd}, \hyperpage{20}
+
+  \indexspace
+
+  \item {find\+Dev\+P\+TS}
+    \subitem {Mock\+Socket.\+cpp}, \hyperpage{74}
+
+  \indexspace
+
+  \item {get\+Bytes\+Response}
+    \subitem {Commands}, \hyperpage{11}
+  \item {get\+C\+M\+D\+Response}
+    \subitem {Commands}, \hyperpage{12}
+  \item {get\+C\+MD}
+    \subitem {Commands}, \hyperpage{11}
+  \item {get\+D\+T\+Cs}
+    \subitem {Obd}, \hyperpage{22}
+  \item {get\+Decoder}
+    \subitem {Commands}, \hyperpage{12}
+  \item {get\+Description}
+    \subitem {Commands}, \hyperpage{12}
+  \item {get\+Geo\+Pos}
+    \subitem {Alarm\+File}, \hyperpage{8}
+  \item {get\+Json}
+    \subitem {Commands}, \hyperpage{13}
+  \item {get\+M\+AX}
+    \subitem {Commands}, \hyperpage{13}
+  \item {get\+M\+IN}
+    \subitem {Commands}, \hyperpage{13}
+  \item {get\+Minicom\+C\+MD}
+    \subitem {Unit\+Test\+Case.\+cpp}, \hyperpage{87}
+  \item {get\+Name}
+    \subitem {Commands}, \hyperpage{14}
+  \item {get\+Res\+Value}
+    \subitem {Commands}, \hyperpage{14}
+  \item {get\+Type\+Data}
+    \subitem {Commands}, \hyperpage{14}
+  \item {get\+Units}
+    \subitem {Commands}, \hyperpage{14}
+  \item {get\+V\+IN}
+    \subitem {Obd}, \hyperpage{22}
+  \item {getmac}
+    \subitem {loadcfg.\+cpp}, \hyperpage{69}
+    \subitem {loadcfg.\+hpp}, \hyperpage{72}
+  \item {Gps}
+    \subitem {Alarm\+File}, \hyperpage{8}
+
+  \indexspace
+
+  \item {has\+Gps}
+    \subitem {Alarm\+File}, \hyperpage{9}
+
+  \indexspace
+
+  \item {init\+Decoder\+Functions}
+    \subitem {Obd}, \hyperpage{22}
+  \item {init\+Messages}
+    \subitem {Obd}, \hyperpage{22}
+  \item {init\+O\+B\+D\+S\+IM}
+    \subitem {Unit\+Test\+Case.\+cpp}, \hyperpage{87}
+  \item {is\+Valid}
+    \subitem {Obd}, \hyperpage{23}
+
+  \indexspace
+
+  \item {load\+Cfg}
+    \subitem {loadcfg.\+cpp}, \hyperpage{69}
+    \subitem {loadcfg.\+hpp}, \hyperpage{72}
+  \item {loadcfg.\+cpp}, \hyperpage{68}, \hyperpage{70}
+    \subitem {getmac}, \hyperpage{69}
+    \subitem {load\+Cfg}, \hyperpage{69}
+    \subitem {shit}, \hyperpage{69}
+  \item {loadcfg.\+hpp}, \hyperpage{71}, \hyperpage{73}
+    \subitem {getmac}, \hyperpage{72}
+    \subitem {load\+Cfg}, \hyperpage{72}
+    \subitem {shit}, \hyperpage{73}
+
+  \indexspace
+
+  \item {M\+A\+X\+\_\+\+E\+P\+\_\+\+E\+V\+TS}
+    \subitem {Obd.\+hpp}, \hyperpage{77}
+  \item {map\+\_\+commands}
+    \subitem {Obd}, \hyperpage{25}
+  \item {Mock\+Socket.\+cpp}, \hyperpage{73}, \hyperpage{75}
+    \subitem {find\+Dev\+P\+TS}, \hyperpage{74}
+
+  \indexspace
+
+  \item {Obd}, \hyperpage{18}
+    \subitem {connect\+Bluetooth}, \hyperpage{19}
+    \subitem {disconnect\+Bluetooth}, \hyperpage{20}
+    \subitem {discover\+Device\+Address}, \hyperpage{20}
+    \subitem {exist\+P\+ID}, \hyperpage{20}
+    \subitem {get\+D\+T\+Cs}, \hyperpage{22}
+    \subitem {get\+V\+IN}, \hyperpage{22}
+    \subitem {init\+Decoder\+Functions}, \hyperpage{22}
+    \subitem {init\+Messages}, \hyperpage{22}
+    \subitem {is\+Valid}, \hyperpage{23}
+    \subitem {map\+\_\+commands}, \hyperpage{25}
+    \subitem {Obd}, \hyperpage{19}
+    \subitem {polling}, \hyperpage{23}
+    \subitem {print\+P\+I\+Ds}, \hyperpage{23}
+    \subitem {print\+Status}, \hyperpage{24}
+    \subitem {read\+File\+Data}, \hyperpage{24}
+    \subitem {send}, \hyperpage{24}
+  \item {Obd.\+hpp}, \hyperpage{75}, \hyperpage{78}
+    \subitem {M\+A\+X\+\_\+\+E\+P\+\_\+\+E\+V\+TS}, \hyperpage{77}
+  \item {Oxigeno\+Response}, \hyperpage{25}
+    \subitem {A}, \hyperpage{25}
+    \subitem {B}, \hyperpage{26}
+
+  \indexspace
+
+  \item {P\+I\+D\+\_\+\+B\+I\+TS}
+    \subitem {decoders.\+hpp}, \hyperpage{57}
+  \item {polling}
+    \subitem {Obd}, \hyperpage{23}
+  \item {print\+P\+I\+Ds}
+    \subitem {Obd}, \hyperpage{23}
+  \item {print\+Status}
+    \subitem {Obd}, \hyperpage{24}
+
+  \indexspace
+
+  \item {read\+File\+Data}
+    \subitem {Obd}, \hyperpage{24}
+  \item {Relaciones\+Response}, \hyperpage{26}
+    \subitem {A}, \hyperpage{26}
+    \subitem {B}, \hyperpage{27}
+    \subitem {C}, \hyperpage{27}
+    \subitem {D}, \hyperpage{27}
+
+  \indexspace
+
+  \item {S\+T\+A\+T\+U\+S\+\_\+\+B\+I\+TS}
+    \subitem {decoders.\+hpp}, \hyperpage{57}
+  \item {send}
+    \subitem {Obd}, \hyperpage{24}
+  \item {send\+Alarm}
+    \subitem {Alarm\+File}, \hyperpage{9}
+  \item {set\+Bytes\+Response}
+    \subitem {Commands}, \hyperpage{15}
+  \item {set\+C\+MD}
+    \subitem {Commands}, \hyperpage{15}
+  \item {set\+Decoder}
+    \subitem {Commands}, \hyperpage{15}
+  \item {set\+Description}
+    \subitem {Commands}, \hyperpage{16}
+  \item {set\+M\+AX}
+    \subitem {Commands}, \hyperpage{16}
+  \item {set\+M\+IN}
+    \subitem {Commands}, \hyperpage{16}
+  \item {set\+Name}
+    \subitem {Commands}, \hyperpage{17}
+  \item {set\+Res\+Value}
+    \subitem {Commands}, \hyperpage{17}
+  \item {set\+Type\+Data}
+    \subitem {Commands}, \hyperpage{17}
+  \item {set\+Units}
+    \subitem {Commands}, \hyperpage{18}
+  \item {shit}
+    \subitem {loadcfg.\+cpp}, \hyperpage{69}
+    \subitem {loadcfg.\+hpp}, \hyperpage{73}
+
+  \indexspace
+
+  \item {Unit\+Test\+Case.\+cpp}, \hyperpage{84}, \hyperpage{88}
+    \subitem {B\+U\+F\+S\+I\+ZE}, \hyperpage{86}
+    \subitem {C\+A\+T\+C\+H\+\_\+\+C\+O\+N\+F\+I\+G\+\_\+\+M\+A\+IN}, 
+		\hyperpage{86}
+    \subitem {get\+Minicom\+C\+MD}, \hyperpage{87}
+    \subitem {init\+O\+B\+D\+S\+IM}, \hyperpage{87}
+    \subitem {W\+A\+I\+T\+\_\+\+O\+B\+D\+S\+IM}, \hyperpage{87}
+
+  \indexspace
+
+  \item {W\+A\+I\+T\+\_\+\+O\+B\+D\+S\+IM}
+    \subitem {Unit\+Test\+Case.\+cpp}, \hyperpage{87}
+
+\end{theindex}

@@ -8,6 +8,8 @@
 #ifndef LOADCFG_HPP
 #define LOADCFG_HPP
 
+#include <map>
+
 /** 
 * @brief Definición del tipo cfgType para referenciar los parámetros de configuración y sus valores.
 */

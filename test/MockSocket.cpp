@@ -16,6 +16,8 @@
 #include <sys/types.h>
 #include <sys/stat.h>
 #include "../src/debug.hpp"
+#include <map>
+#include <fstream>
 
 /**
 * @brief Función de detección del dispositivo para la simulación con OBDSIM.
@@ -23,7 +25,9 @@
 */
 
 std::string findDevPTS(){
-    system("ls /dev/pts | tail -2 | head -1 > tmpPTSfile.txt");
+    if(system("ls /dev/pts | tail -2 | head -1 > tmpPTSfile.txt") == -1){
+        perror("Error ejecutando comando ");
+    }
 
     int ultPts;
     int tempVar;

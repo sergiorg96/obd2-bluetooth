@@ -1,0 +1,331 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=9"/>
+<meta name="generator" content="Doxygen 1.8.13"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>obd2-bluetooth: Referencia del Archivo UnitTestCase.cpp</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr style="height: 56px;">
+  <td id="projectlogo"><img alt="Logo" src="favicon.ico"/></td>
+  <td id="projectalign" style="padding-left: 0.5em;">
+   <div id="projectname">obd2-bluetooth
+   &#160;<span id="projectnumber">1.0</span>
+   </div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Generado por Doxygen 1.8.13 -->
+<script type="text/javascript">
+var searchBox = new SearchBox("searchBox", "search",false,'Buscar');
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+$(function() {
+  initMenu('',true,false,'search.php','Buscar');
+  $(document).ready(function() { init_search(); });
+});
+</script>
+<div id="main-nav"></div>
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<iframe src="javascript:void(0)" frameborder="0" 
+        name="MSearchResults" id="MSearchResults">
+</iframe>
+</div>
+
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="dir_13e138d54eb8818da29c3992edef070a.html">test</a></li>  </ul>
+</div>
+</div><!-- top -->
+<div class="header">
+  <div class="summary">
+<a href="#define-members">defines</a> &#124;
+<a href="#func-members">Funciones</a>  </div>
+  <div class="headertitle">
+<div class="title">Referencia del Archivo UnitTestCase.cpp</div>  </div>
+</div><!--header-->
+<div class="contents">
+
+<p>Archivo que contiene el conjunto de pruebas unitarias y de integración del sistema.  
+<a href="#details">Más...</a></p>
+<div class="textblock"><code>#include &quot;../src/external/catch.hpp&quot;</code><br />
+<code>#include &quot;<a class="el" href="decoders_8hpp_source.html">../src/decoders.hpp</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="Obd_8hpp_source.html">../src/Obd.hpp</a>&quot;</code><br />
+</div><div class="textblock"><div class="dynheader">
+Dependencia gráfica adjunta para UnitTestCase.cpp:</div>
+<div class="dyncontent">
+<div class="center"><img src="UnitTestCase_8cpp__incl.png" border="0" usemap="#UnitTestCase_8cpp" alt=""/></div>
+<map name="UnitTestCase_8cpp" id="UnitTestCase_8cpp">
+<area shape="rect" id="node40" href="decoders_8hpp.html" title="Archivo que contiene la declaración de las funciones de decodificación de las respuestas del disposit..." alt="" coords="1214,155,1349,181"/>
+<area shape="rect" id="node45" href="Obd_8hpp.html" title="Archivo que contiene la clase con la implementación de la conexión y envío de mensajes OBD con el dis..." alt="" coords="746,80,851,107"/>
+</map>
+</div>
+</div>
+<p><a href="UnitTestCase_8cpp_source.html">Ir al código fuente de este archivo.</a></p>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="define-members"></a>
+defines</h2></td></tr>
+<tr class="memitem:a656eb5868e824d59f489f910db438420"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="UnitTestCase_8cpp.html#a656eb5868e824d59f489f910db438420">CATCH_CONFIG_MAIN</a></td></tr>
+<tr class="separator:a656eb5868e824d59f489f910db438420"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aeca034f67218340ecb2261a22c2f3dcd"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="UnitTestCase_8cpp.html#aeca034f67218340ecb2261a22c2f3dcd">BUFSIZE</a>&#160;&#160;&#160;30</td></tr>
+<tr class="separator:aeca034f67218340ecb2261a22c2f3dcd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a39116fcd47bddafea0487b3f674b9609"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="UnitTestCase_8cpp.html#a39116fcd47bddafea0487b3f674b9609">WAIT_OBDSIM</a>&#160;&#160;&#160;15</td></tr>
+<tr class="separator:a39116fcd47bddafea0487b3f674b9609"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
+Funciones</h2></td></tr>
+<tr class="memitem:ae9f15809d7998bb4a7404d34bb87a5e3"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="UnitTestCase_8cpp.html#ae9f15809d7998bb4a7404d34bb87a5e3">getMinicomCMD</a> (char *cmd)</td></tr>
+<tr class="memdesc:ae9f15809d7998bb4a7404d34bb87a5e3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Función que obtiene el comando Minicom para la primera conexión con el simulador OBDSIM.  <a href="#ae9f15809d7998bb4a7404d34bb87a5e3">Más...</a><br /></td></tr>
+<tr class="separator:ae9f15809d7998bb4a7404d34bb87a5e3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4460093e274738a0e1bbb551c1d1d3fd"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="UnitTestCase_8cpp.html#a4460093e274738a0e1bbb551c1d1d3fd">initOBDSIM</a> ()</td></tr>
+<tr class="memdesc:a4460093e274738a0e1bbb551c1d1d3fd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Función de inicialización del simulador OBDSIM.  <a href="#a4460093e274738a0e1bbb551c1d1d3fd">Más...</a><br /></td></tr>
+<tr class="separator:a4460093e274738a0e1bbb551c1d1d3fd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad24bf860f798931c63aaa488e08b8b4e"><td class="memItemLeft" align="right" valign="top"><a id="ad24bf860f798931c63aaa488e08b8b4e"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="UnitTestCase_8cpp.html#ad24bf860f798931c63aaa488e08b8b4e">closeOBDSIM</a> ()</td></tr>
+<tr class="memdesc:ad24bf860f798931c63aaa488e08b8b4e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Función de finalización del simulador OBDSIM. <br /></td></tr>
+<tr class="separator:ad24bf860f798931c63aaa488e08b8b4e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a094ceea8956a9b495823bde621ea759a"><td class="memItemLeft" align="right" valign="top"><a id="a094ceea8956a9b495823bde621ea759a"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="UnitTestCase_8cpp.html#a094ceea8956a9b495823bde621ea759a">TEST_CASE</a> (&quot;Test OBD class&quot;, &quot;[OBD]&quot;)</td></tr>
+<tr class="memdesc:a094ceea8956a9b495823bde621ea759a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Prueba de integración para el funcionamiento general del sistema. <br /></td></tr>
+<tr class="separator:a094ceea8956a9b495823bde621ea759a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa01bede4cf032808617f744cfdc34e85"><td class="memItemLeft" align="right" valign="top"><a id="aa01bede4cf032808617f744cfdc34e85"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="UnitTestCase_8cpp.html#aa01bede4cf032808617f744cfdc34e85">TEST_CASE</a> (&quot;Test Revoluciones Por Minuto&quot;, &quot;[decoders]&quot;)</td></tr>
+<tr class="memdesc:aa01bede4cf032808617f744cfdc34e85"><td class="mdescLeft">&#160;</td><td class="mdescRight">Prueba unitaria del decodificador RPM. <br /></td></tr>
+<tr class="separator:aa01bede4cf032808617f744cfdc34e85"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6de3b92394355f7de997d66ffda41110"><td class="memItemLeft" align="right" valign="top"><a id="a6de3b92394355f7de997d66ffda41110"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="UnitTestCase_8cpp.html#a6de3b92394355f7de997d66ffda41110">TEST_CASE</a> (&quot;Test Posición EGR&quot;, &quot;[decoders]&quot;)</td></tr>
+<tr class="memdesc:a6de3b92394355f7de997d66ffda41110"><td class="mdescLeft">&#160;</td><td class="mdescRight">Prueba unitaria del decodificador de posición EGR. <br /></td></tr>
+<tr class="separator:a6de3b92394355f7de997d66ffda41110"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a376ac0e4b8eef0360ec825760e4b6b15"><td class="memItemLeft" align="right" valign="top"><a id="a376ac0e4b8eef0360ec825760e4b6b15"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="UnitTestCase_8cpp.html#a376ac0e4b8eef0360ec825760e4b6b15">TEST_CASE</a> (&quot;Test Temperatura General&quot;, &quot;[decoders]&quot;)</td></tr>
+<tr class="memdesc:a376ac0e4b8eef0360ec825760e4b6b15"><td class="mdescLeft">&#160;</td><td class="mdescRight">Prueba unitaria del decodificador de la temperatura general. <br /></td></tr>
+<tr class="separator:a376ac0e4b8eef0360ec825760e4b6b15"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afd7d9244b2b8c27b86ea397d397a6cf6"><td class="memItemLeft" align="right" valign="top"><a id="afd7d9244b2b8c27b86ea397d397a6cf6"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="UnitTestCase_8cpp.html#afd7d9244b2b8c27b86ea397d397a6cf6">TEST_CASE</a> (&quot;Test Ajuste Combustible EGR&quot;, &quot;[decoders]&quot;)</td></tr>
+<tr class="memdesc:afd7d9244b2b8c27b86ea397d397a6cf6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Prueba unitaria del decodificador de la temperatura general. <br /></td></tr>
+<tr class="separator:afd7d9244b2b8c27b86ea397d397a6cf6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae4019c68e76a6f985cf7295357db9853"><td class="memItemLeft" align="right" valign="top"><a id="ae4019c68e76a6f985cf7295357db9853"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="UnitTestCase_8cpp.html#ae4019c68e76a6f985cf7295357db9853">TEST_CASE</a> (&quot;Test Presión Combustible&quot;, &quot;[decoders]&quot;)</td></tr>
+<tr class="memdesc:ae4019c68e76a6f985cf7295357db9853"><td class="mdescLeft">&#160;</td><td class="mdescRight">Prueba unitaria del decodificador de la presión del combustible. <br /></td></tr>
+<tr class="separator:ae4019c68e76a6f985cf7295357db9853"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a282584e8fd720d07b04a2fd106c9a32c"><td class="memItemLeft" align="right" valign="top"><a id="a282584e8fd720d07b04a2fd106c9a32c"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="UnitTestCase_8cpp.html#a282584e8fd720d07b04a2fd106c9a32c">TEST_CASE</a> (&quot;Test Hexadecimal a Decimal&quot;, &quot;[decoders]&quot;)</td></tr>
+<tr class="memdesc:a282584e8fd720d07b04a2fd106c9a32c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Prueba unitaria del decodificador hexadecimal a decimal. <br /></td></tr>
+<tr class="separator:a282584e8fd720d07b04a2fd106c9a32c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8c2e41bed6c672541f7b95ac1edecf0d"><td class="memItemLeft" align="right" valign="top"><a id="a8c2e41bed6c672541f7b95ac1edecf0d"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="UnitTestCase_8cpp.html#a8c2e41bed6c672541f7b95ac1edecf0d">TEST_CASE</a> (&quot;Test Avance Tiempo&quot;, &quot;[decoders]&quot;)</td></tr>
+<tr class="memdesc:a8c2e41bed6c672541f7b95ac1edecf0d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Prueba unitaria del decodificador del avance del tiempo. <br /></td></tr>
+<tr class="separator:a8c2e41bed6c672541f7b95ac1edecf0d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af5a76ba4da5f3b2cafb3b5366118dbcd"><td class="memItemLeft" align="right" valign="top"><a id="af5a76ba4da5f3b2cafb3b5366118dbcd"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="UnitTestCase_8cpp.html#af5a76ba4da5f3b2cafb3b5366118dbcd">TEST_CASE</a> (&quot;Test Velocidad Flujo Aire MAF&quot;, &quot;[decoders]&quot;)</td></tr>
+<tr class="memdesc:af5a76ba4da5f3b2cafb3b5366118dbcd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Prueba unitaria del decodificador de la tasa de flujo del aire (MAF). <br /></td></tr>
+<tr class="separator:af5a76ba4da5f3b2cafb3b5366118dbcd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af9cb80dc5e3813608e63479be181d3d7"><td class="memItemLeft" align="right" valign="top"><a id="af9cb80dc5e3813608e63479be181d3d7"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="UnitTestCase_8cpp.html#af9cb80dc5e3813608e63479be181d3d7">TEST_CASE</a> (&quot;Test Presión del Combustible, relativa al colector de vacío&quot;, &quot;[decoders]&quot;)</td></tr>
+<tr class="memdesc:af9cb80dc5e3813608e63479be181d3d7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Prueba unitaria del decodificador de presión de combustible relativa al colector de vacío. <br /></td></tr>
+<tr class="separator:af9cb80dc5e3813608e63479be181d3d7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a578a25cbf0eb039b82b3f9c2c9934672"><td class="memItemLeft" align="right" valign="top"><a id="a578a25cbf0eb039b82b3f9c2c9934672"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="UnitTestCase_8cpp.html#a578a25cbf0eb039b82b3f9c2c9934672">TEST_CASE</a> (&quot;Test Presión del Combustible (Diesel o inyección directa de gasolina)&quot;, &quot;[decoders]&quot;)</td></tr>
+<tr class="memdesc:a578a25cbf0eb039b82b3f9c2c9934672"><td class="mdescLeft">&#160;</td><td class="mdescRight">Prueba unitaria del decodificador de presión de combusible (Diese o inyección directa de gasolina). <br /></td></tr>
+<tr class="separator:a578a25cbf0eb039b82b3f9c2c9934672"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0a88bc70e4d8ddcd9617e864ec5a4f05"><td class="memItemLeft" align="right" valign="top"><a id="a0a88bc70e4d8ddcd9617e864ec5a4f05"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="UnitTestCase_8cpp.html#a0a88bc70e4d8ddcd9617e864ec5a4f05">TEST_CASE</a> (&quot;Test Presión de Vapor del Sistema Evaporativo&quot;, &quot;[decoders]&quot;)</td></tr>
+<tr class="memdesc:a0a88bc70e4d8ddcd9617e864ec5a4f05"><td class="mdescLeft">&#160;</td><td class="mdescRight">Prueba unitaria del decodificador de Vapor del Sistema Evaporativo. <br /></td></tr>
+<tr class="separator:a0a88bc70e4d8ddcd9617e864ec5a4f05"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4203cd502f06e1bb0b83e603e04c10cf"><td class="memItemLeft" align="right" valign="top"><a id="a4203cd502f06e1bb0b83e603e04c10cf"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="UnitTestCase_8cpp.html#a4203cd502f06e1bb0b83e603e04c10cf">TEST_CASE</a> (&quot;Test Temperatura del Catalizador&quot;, &quot;[decoders]&quot;)</td></tr>
+<tr class="memdesc:a4203cd502f06e1bb0b83e603e04c10cf"><td class="mdescLeft">&#160;</td><td class="mdescRight">Prueba unitaria del decodificador de Temperatura del Catalizador. <br /></td></tr>
+<tr class="separator:a4203cd502f06e1bb0b83e603e04c10cf"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a358bfaf15b84777b24d4304fb9c2f88b"><td class="memItemLeft" align="right" valign="top"><a id="a358bfaf15b84777b24d4304fb9c2f88b"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="UnitTestCase_8cpp.html#a358bfaf15b84777b24d4304fb9c2f88b">TEST_CASE</a> (&quot;Test Voltaje del Módulo de Control&quot;, &quot;[decoders]&quot;)</td></tr>
+<tr class="memdesc:a358bfaf15b84777b24d4304fb9c2f88b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Prueba unitaria del decodificador de Voltaje del Módulo de Control. <br /></td></tr>
+<tr class="separator:a358bfaf15b84777b24d4304fb9c2f88b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6c2278eca15c6834d6c78885a09497c4"><td class="memItemLeft" align="right" valign="top"><a id="a6c2278eca15c6834d6c78885a09497c4"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="UnitTestCase_8cpp.html#a6c2278eca15c6834d6c78885a09497c4">TEST_CASE</a> (&quot;Test Relación Equivaliente Comandada de Combustible&quot;, &quot;[decoders]&quot;)</td></tr>
+<tr class="memdesc:a6c2278eca15c6834d6c78885a09497c4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Prueba unitaria del decodificador de Relación Equivaliente Comandada de Combustible. <br /></td></tr>
+<tr class="separator:a6c2278eca15c6834d6c78885a09497c4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a27f82a7800b27dd78331e6ee707cb5f8"><td class="memItemLeft" align="right" valign="top"><a id="a27f82a7800b27dd78331e6ee707cb5f8"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="UnitTestCase_8cpp.html#a27f82a7800b27dd78331e6ee707cb5f8">TEST_CASE</a> (&quot;Comprobación Diagnostic Trouble Codes&quot;, &quot;[DTC]&quot;)</td></tr>
+<tr class="memdesc:a27f82a7800b27dd78331e6ee707cb5f8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Prueba unitaria del conversor del primer byte DTC. <br /></td></tr>
+<tr class="separator:a27f82a7800b27dd78331e6ee707cb5f8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a666839d6a4f130bd11ac0466c9796884"><td class="memItemLeft" align="right" valign="top"><a id="a666839d6a4f130bd11ac0466c9796884"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="UnitTestCase_8cpp.html#a666839d6a4f130bd11ac0466c9796884">TEST_CASE</a> (&quot;Test VIN (Vehicle Identification Number)&quot;, &quot;[decoders]&quot;)</td></tr>
+<tr class="memdesc:a666839d6a4f130bd11ac0466c9796884"><td class="mdescLeft">&#160;</td><td class="mdescRight">Prueba unitaria del Número de Identificación del vehículo. <br /></td></tr>
+<tr class="separator:a666839d6a4f130bd11ac0466c9796884"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ada6898123ac1c26cdb74330eea16b825"><td class="memItemLeft" align="right" valign="top"><a id="ada6898123ac1c26cdb74330eea16b825"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="UnitTestCase_8cpp.html#ada6898123ac1c26cdb74330eea16b825">TEST_CASE</a> (&quot;Test Describir el Protocolo Actual&quot;, &quot;[decoders]&quot;)</td></tr>
+<tr class="memdesc:ada6898123ac1c26cdb74330eea16b825"><td class="mdescLeft">&#160;</td><td class="mdescRight">Prueba unitaria del decodificador de descriptor del protocolo actual. <br /></td></tr>
+<tr class="separator:ada6898123ac1c26cdb74330eea16b825"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa6afb62ebdd4c3e07996c995f623eb6b"><td class="memItemLeft" align="right" valign="top"><a id="aa6afb62ebdd4c3e07996c995f623eb6b"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="UnitTestCase_8cpp.html#aa6afb62ebdd4c3e07996c995f623eb6b">SCENARIO</a> (&quot;Test de Sensores de Oxígeno&quot;, &quot;[decoders]&quot;)</td></tr>
+<tr class="memdesc:aa6afb62ebdd4c3e07996c995f623eb6b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Escenario de pruebas con distintos test de los sensores de oxígeno. <br /></td></tr>
+<tr class="separator:aa6afb62ebdd4c3e07996c995f623eb6b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad6f2a6821f17834d70717ea1d0b38dee"><td class="memItemLeft" align="right" valign="top"><a id="ad6f2a6821f17834d70717ea1d0b38dee"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="UnitTestCase_8cpp.html#ad6f2a6821f17834d70717ea1d0b38dee">SCENARIO</a> (&quot;Test de Relación Equivalente Combustible-Aire&quot;, &quot;[decoders]&quot;)</td></tr>
+<tr class="memdesc:ad6f2a6821f17834d70717ea1d0b38dee"><td class="mdescLeft">&#160;</td><td class="mdescRight">Escenario de pruebas con distintos test de la relación equivalente combustible-aire. <br /></td></tr>
+<tr class="separator:ad6f2a6821f17834d70717ea1d0b38dee"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab8cb04c98de551d82acba45293028c77"><td class="memItemLeft" align="right" valign="top"><a id="ab8cb04c98de551d82acba45293028c77"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="UnitTestCase_8cpp.html#ab8cb04c98de551d82acba45293028c77">SCENARIO</a> (&quot;Test de Relación Equivalente Combustible-Aire Actual&quot;, &quot;[decoders]&quot;)</td></tr>
+<tr class="memdesc:ab8cb04c98de551d82acba45293028c77"><td class="mdescLeft">&#160;</td><td class="mdescRight">Escenario de pruebas con distintos test de la relación equivalente combustible-aire actual. <br /></td></tr>
+<tr class="separator:ab8cb04c98de551d82acba45293028c77"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a40a3028fa1222aa3915042e8d9c0c4d2"><td class="memItemLeft" align="right" valign="top"><a id="a40a3028fa1222aa3915042e8d9c0c4d2"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="UnitTestCase_8cpp.html#a40a3028fa1222aa3915042e8d9c0c4d2">SCENARIO</a> (&quot;Test de Valores máximos relación de combustible-aire, voltaje, corriente y presión absoluta&quot;, &quot;[decoders]&quot;)</td></tr>
+<tr class="memdesc:a40a3028fa1222aa3915042e8d9c0c4d2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Escenario de pruebas con distintos test de valores máximo relación de combustible-aire, voltaje, corriente y presión absoluta. <br /></td></tr>
+<tr class="separator:a40a3028fa1222aa3915042e8d9c0c4d2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a32f4d6ded472fa78eead34a000bb2bbd"><td class="memItemLeft" align="right" valign="top"><a id="a32f4d6ded472fa78eead34a000bb2bbd"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="UnitTestCase_8cpp.html#a32f4d6ded472fa78eead34a000bb2bbd">SCENARIO</a> (&quot;Test de decodificación de Data Trouble Codes (DTC)&quot;, &quot;[decoders]&quot;)</td></tr>
+<tr class="memdesc:a32f4d6ded472fa78eead34a000bb2bbd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Escenario de pruebas con distintos test de DTC activos. <br /></td></tr>
+<tr class="separator:a32f4d6ded472fa78eead34a000bb2bbd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afcf7b592e5ac913ea9c83936bfc18227"><td class="memItemLeft" align="right" valign="top"><a id="afcf7b592e5ac913ea9c83936bfc18227"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="UnitTestCase_8cpp.html#afcf7b592e5ac913ea9c83936bfc18227">SCENARIO</a> (&quot;Test de decodificación PIDs disponibles&quot;, &quot;[decoders]&quot;)</td></tr>
+<tr class="memdesc:afcf7b592e5ac913ea9c83936bfc18227"><td class="mdescLeft">&#160;</td><td class="mdescRight">Escenario de pruebas con distintos test los PIDS implementados en el vehículo. <br /></td></tr>
+<tr class="separator:afcf7b592e5ac913ea9c83936bfc18227"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a856763231cf6f39f98e63e778fa453b1"><td class="memItemLeft" align="right" valign="top"><a id="a856763231cf6f39f98e63e778fa453b1"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="UnitTestCase_8cpp.html#a856763231cf6f39f98e63e778fa453b1">SCENARIO</a> (&quot;Test de decodificación del estado del coche&quot;, &quot;[decoders]&quot;)</td></tr>
+<tr class="memdesc:a856763231cf6f39f98e63e778fa453b1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Escenario de pruebas con distintos valores de los monitores de diagnóstico tras las pruebas del vehículo. <br /></td></tr>
+<tr class="separator:a856763231cf6f39f98e63e778fa453b1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<a name="details" id="details"></a><h2 class="groupheader">Descripción detallada</h2>
+<div class="textblock"><p>Archivo que contiene el conjunto de pruebas unitarias y de integración del sistema. </p>
+<dl class="section author"><dt>Autor</dt><dd>Sergio Román González </dd></dl>
+<dl class="section date"><dt>Fecha</dt><dd>05/09/2020 </dd></dl>
+
+<p class="definition">Definición en el archivo <a class="el" href="UnitTestCase_8cpp_source.html">UnitTestCase.cpp</a>.</p>
+</div><h2 class="groupheader">Documentación de los 'defines'</h2>
+<a id="aeca034f67218340ecb2261a22c2f3dcd"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aeca034f67218340ecb2261a22c2f3dcd">&#9670;&nbsp;</a></span>BUFSIZE</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define BUFSIZE&#160;&#160;&#160;30</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Macro del tamaño del buffer de la cadena de caracteres para el comando Minicom a ejecutar </p>
+
+<p class="definition">Definición en la línea <a class="el" href="UnitTestCase_8cpp_source.html#l00015">15</a> del archivo <a class="el" href="UnitTestCase_8cpp_source.html">UnitTestCase.cpp</a>.</p>
+
+</div>
+</div>
+<a id="a656eb5868e824d59f489f910db438420"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a656eb5868e824d59f489f910db438420">&#9670;&nbsp;</a></span>CATCH_CONFIG_MAIN</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define CATCH_CONFIG_MAIN</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Macro que permite a la librería catch proporcionar un main() para la ejecución del conjunto de pruebas </p>
+
+<p class="definition">Definición en la línea <a class="el" href="UnitTestCase_8cpp_source.html#l00009">9</a> del archivo <a class="el" href="UnitTestCase_8cpp_source.html">UnitTestCase.cpp</a>.</p>
+
+</div>
+</div>
+<a id="a39116fcd47bddafea0487b3f674b9609"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a39116fcd47bddafea0487b3f674b9609">&#9670;&nbsp;</a></span>WAIT_OBDSIM</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define WAIT_OBDSIM&#160;&#160;&#160;15</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Macro con el tiempo de espera del simulador OBDSIM para introducir valores </p>
+
+<p class="definition">Definición en la línea <a class="el" href="UnitTestCase_8cpp_source.html#l00016">16</a> del archivo <a class="el" href="UnitTestCase_8cpp_source.html">UnitTestCase.cpp</a>.</p>
+
+</div>
+</div>
+<h2 class="groupheader">Documentación de las funciones</h2>
+<a id="ae9f15809d7998bb4a7404d34bb87a5e3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae9f15809d7998bb4a7404d34bb87a5e3">&#9670;&nbsp;</a></span>getMinicomCMD()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void getMinicomCMD </td>
+          <td>(</td>
+          <td class="paramtype">char *&#160;</td>
+          <td class="paramname"><em>cmd</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Función que obtiene el comando Minicom para la primera conexión con el simulador OBDSIM. </p>
+<dl class="params"><dt>Parámetros</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">cmd</td><td>Puntero a cadena de caracteres para almacenar el comando de minicom a ejecutar. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definición en la línea <a class="el" href="UnitTestCase_8cpp_source.html#l00026">26</a> del archivo <a class="el" href="UnitTestCase_8cpp_source.html">UnitTestCase.cpp</a>.</p>
+
+</div>
+</div>
+<a id="a4460093e274738a0e1bbb551c1d1d3fd"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4460093e274738a0e1bbb551c1d1d3fd">&#9670;&nbsp;</a></span>initOBDSIM()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void initOBDSIM </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Función de inicialización del simulador OBDSIM. </p>
+<p>Inicializa el simulador con entorno gráfico permitiendo la introducción de DTC y otros valores para las pruebas. </p>
+
+<p class="definition">Definición en la línea <a class="el" href="UnitTestCase_8cpp_source.html#l00040">40</a> del archivo <a class="el" href="UnitTestCase_8cpp_source.html">UnitTestCase.cpp</a>.</p>
+
+</div>
+</div>
+</div><!-- contents -->
+<!-- start footer part -->
+<hr class="footer"/><address class="footer"><small>
+Generado por &#160;<a href="http://www.doxygen.org/index.html">
+<img class="footer" src="doxygen.png" alt="doxygen"/>
+</a> 1.8.13
+</small></address>
+</body>
+</html>

@@ -1,0 +1,22 @@
+\hypertarget{picangps_8hpp_source}{}\section{picangps.\+hpp}
+\label{picangps_8hpp_source}\index{picangps.\+hpp@{picangps.\+hpp}}
+
+\begin{DoxyCode}
+00001 \textcolor{preprocessor}{#ifndef PICANGPS\_HPP}
+00002 \textcolor{preprocessor}{#define PICANGPS\_HPP}
+00003 
+00004 \textcolor{preprocessor}{#include <string>}
+00005 \textcolor{preprocessor}{#include <termios.h>}
+00006 \textcolor{preprocessor}{#include <unistd.h>}
+00007 \textcolor{preprocessor}{#include <fcntl.h>}
+00008 \textcolor{preprocessor}{#include <cstring>}
+00009 \textcolor{preprocessor}{#include <sys/file.h>}
+00010 
+00011 
+00012 \textcolor{keywordtype}{int} openGPS (std::string tty);
+00013 \textcolor{keywordtype}{bool} readPicanGPS(\textcolor{keywordtype}{int} fd, \textcolor{keywordtype}{char}* buffer, \textcolor{keywordtype}{int} maxsiz, \textcolor{keywordtype}{int} seconds);
+00014 \textcolor{keywordtype}{char}* explore (\textcolor{keywordtype}{int} field, \textcolor{keywordtype}{char} sep, \textcolor{keywordtype}{char}* s);
+00015 std::string PicanGetGPS (std::string serialPort);
+00016 
+00017 \textcolor{preprocessor}{#endif}
+\end{DoxyCode}

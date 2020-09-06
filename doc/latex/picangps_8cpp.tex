@@ -1,0 +1,51 @@
+\hypertarget{picangps_8cpp}{}\section{Referencia del Archivo /home/sergiorg/\+Git\+Hub\+Projects/obd2-\/bluetooth/src/picangps.cpp}
+\label{picangps_8cpp}\index{/home/sergiorg/\+Git\+Hub\+Projects/obd2-\/bluetooth/src/picangps.\+cpp@{/home/sergiorg/\+Git\+Hub\+Projects/obd2-\/bluetooth/src/picangps.\+cpp}}
+{\ttfamily \#include \char`\"{}picangps.\+hpp\char`\"{}}\newline
+Dependencia gráfica adjunta para picangps.\+cpp\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{picangps_8cpp__incl}
+\end{center}
+\end{figure}
+\subsection*{Funciones}
+\begin{DoxyCompactItemize}
+\item 
+int \hyperlink{picangps_8cpp_a0242f725513f2a18dacc0d5b8c4b067e}{open\+G\+PS} (std\+::string tty)
+\item 
+bool \hyperlink{picangps_8cpp_a0f5a0b4dce5d0e7f60d84d86a1f1dec3}{read\+Pican\+G\+PS} (int fd, char $\ast$buffer, int maxsiz, int seconds)
+\item 
+char $\ast$ \hyperlink{picangps_8cpp_afb64a796832b5341a74f512042507ed3}{explore} (int field, char sep, char $\ast$s)
+\item 
+std\+::string \hyperlink{picangps_8cpp_ad73dec060af578834584f203e1b3121a}{Pican\+Get\+G\+PS} (std\+::string serial\+Port)
+\end{DoxyCompactItemize}
+
+
+\subsection{Documentación de las funciones}
+\mbox{\Hypertarget{picangps_8cpp_afb64a796832b5341a74f512042507ed3}\label{picangps_8cpp_afb64a796832b5341a74f512042507ed3}} 
+\index{picangps.\+cpp@{picangps.\+cpp}!explore@{explore}}
+\index{explore@{explore}!picangps.\+cpp@{picangps.\+cpp}}
+\subsubsection{\texorpdfstring{explore()}{explore()}}
+{\footnotesize\ttfamily char$\ast$ explore (\begin{DoxyParamCaption}\item[{int}]{field,  }\item[{char}]{sep,  }\item[{char $\ast$}]{s }\end{DoxyParamCaption})}
+
+\$\+G\+P\+R\+MC,123519,A,4807.\+038,N,01131.\+000,E,022.\+4,084.\+4,230394,003.\+1,W$\ast$6A
+
+Where\+: R\+MC Recommended Minimum sentence C 123519 Fix taken at 12\+:35\+:19 U\+TC A Status A=active or V=Void. 4807.\+038,N Latitude 48 deg 07.\+038\textquotesingle{} N 01131.\+000,E Longitude 11 deg 31.\+000\textquotesingle{} E 022.\+4 Speed over the ground in knots 084.\+4 Track angle in degrees True 230394 Date -\/ 23rd of March 1994 003.\+1,W Magnetic Variation $\ast$6A The checksum data, always begins with $\ast$ Returns pointer to the field-\/th field in s, fields separated by sep. \mbox{\Hypertarget{picangps_8cpp_a0242f725513f2a18dacc0d5b8c4b067e}\label{picangps_8cpp_a0242f725513f2a18dacc0d5b8c4b067e}} 
+\index{picangps.\+cpp@{picangps.\+cpp}!open\+G\+PS@{open\+G\+PS}}
+\index{open\+G\+PS@{open\+G\+PS}!picangps.\+cpp@{picangps.\+cpp}}
+\subsubsection{\texorpdfstring{open\+G\+P\+S()}{openGPS()}}
+{\footnotesize\ttfamily int open\+G\+PS (\begin{DoxyParamCaption}\item[{std\+::string}]{tty }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{picangps_8cpp_ad73dec060af578834584f203e1b3121a}\label{picangps_8cpp_ad73dec060af578834584f203e1b3121a}} 
+\index{picangps.\+cpp@{picangps.\+cpp}!Pican\+Get\+G\+PS@{Pican\+Get\+G\+PS}}
+\index{Pican\+Get\+G\+PS@{Pican\+Get\+G\+PS}!picangps.\+cpp@{picangps.\+cpp}}
+\subsubsection{\texorpdfstring{Pican\+Get\+G\+P\+S()}{PicanGetGPS()}}
+{\footnotesize\ttfamily std\+::string Pican\+Get\+G\+PS (\begin{DoxyParamCaption}\item[{std\+::string}]{serial\+Port }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{picangps_8cpp_a0f5a0b4dce5d0e7f60d84d86a1f1dec3}\label{picangps_8cpp_a0f5a0b4dce5d0e7f60d84d86a1f1dec3}} 
+\index{picangps.\+cpp@{picangps.\+cpp}!read\+Pican\+G\+PS@{read\+Pican\+G\+PS}}
+\index{read\+Pican\+G\+PS@{read\+Pican\+G\+PS}!picangps.\+cpp@{picangps.\+cpp}}
+\subsubsection{\texorpdfstring{read\+Pican\+G\+P\+S()}{readPicanGPS()}}
+{\footnotesize\ttfamily bool read\+Pican\+G\+PS (\begin{DoxyParamCaption}\item[{int}]{fd,  }\item[{char $\ast$}]{buffer,  }\item[{int}]{maxsiz,  }\item[{int}]{seconds }\end{DoxyParamCaption})}
+

@@ -959,7 +959,7 @@
 	{
 		"bytes_response": 4,
 		"cmd": "014D",
-		"decoder": "",
+		"decoder": "decodeHexToDec",
 		"description": "Time run with MIL on",
 		"name": "RUN_TIME_MIL",
 		"min_unit": 0,
@@ -970,7 +970,7 @@
 	{
 		"bytes_response": 4,
 		"cmd": "014E",
-		"decoder": "",
+		"decoder": "decodeHexToDec",
 		"description": "Time since trouble codes cleared",
 		"name": "TIME_SINCE_DTC_CLEARED",
 		"min_unit": 0,

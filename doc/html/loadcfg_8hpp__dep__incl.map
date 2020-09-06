@@ -1,0 +1,6 @@
+<map id="loadcfg.hpp" name="loadcfg.hpp">
+<area shape="rect" id="node2" href="$loadcfg_8cpp.html" title="Archivo que contiene la definición de las funciones para la lectura de un fichero de configuración de..." alt="" coords="5,80,95,107"/>
+<area shape="rect" id="node3" href="$Obd_8hpp.html" title="Archivo que contiene la clase con la implementación de la conexión y envío de mensajes OBD con el dis..." alt="" coords="119,80,189,107"/>
+<area shape="rect" id="node4" href="$main_8cpp_source.html" title="main.cpp" alt="" coords="54,155,129,181"/>
+<area shape="rect" id="node5" href="$UnitTestCase_8cpp.html" title="Archivo que contiene el conjunto de pruebas unitarias y de integración del sistema. " alt="" coords="153,155,281,181"/>
+</map>

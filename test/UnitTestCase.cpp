@@ -13,10 +13,11 @@
 #include "../src/Obd.hpp"
 
 #define BUFSIZE 30 /**< Macro del tamaño del buffer de la cadena de caracteres para el comando Minicom a ejecutar */
-#define WAIT_OBDSIM 15 /**< Macro con el tiempo de espera del simulador OBDSIM para introducir valores */
+#define WAIT_OBDSIM 15 /**< Macro con el tiempo de espera en segundos del simulador OBDSIM para introducir valores */
 
 
 using namespace Catch::literals;
+
 
 /**
 * @brief Función que obtiene el comando Minicom para la primera conexión con el simulador OBDSIM.
@@ -25,37 +26,62 @@ using namespace Catch::literals;
 
 void getMinicomCMD(char * cmd){
 
+    debugLog("Principio función getMinicomCMD.");
+
     std::string devFile = findDevPTS();
+
+    debugLog("Dispositivo a conectarnos %s", devFile.c_str());
 
     snprintf(cmd, BUFSIZE, "minicom -p %s &", devFile.c_str());
 }
 
 /**
 * @brief Función de inicialización del simulador OBDSIM.
+* @param tipoSimulador String para indicar el tipo de simulador a iniciar.
+* @param tiempoEspera Entero con el número de segundos de espera del simulador.
 *
 * Inicializa el simulador con entorno gráfico permitiendo la introducción de DTC y otros valores
 * para las pruebas.
 */
 
-void initOBDSIM(){
+void initOBDSIM(std::string tipoSimulador, int tiempoEspera){
 
     char cmd[BUFSIZE];
 
-    system("obdsim -g gui_fltk &");
+    debugLog("Ejecutamos OBDSIM.");
+
+    char cmdTipoSimulador[BUFSIZE];
+
+    snprintf(cmdTipoSimulador, BUFSIZE, "obdsim -g %s &", tipoSimulador.c_str());
+
+    if(system(cmdTipoSimulador) == -1){
+        perror("Error ejecutando comando ");
+    }
     // 5 segundos para configurar parámetros para el test
-    sleep(WAIT_OBDSIM);
+    //debugLog("Esperamos la introducción de valores.");
+
+    sleep(tiempoEspera);
+
+    debugLog("Llamamos a la función de Minicom.");
 
     getMinicomCMD(cmd);
 
     // Se abre terminal en el test con minicom, porque el primer mensaje obdsim no envía >
     // a nivel de código, pero si con un terminal con minicom
     //system("minicom -p /dev/pts/3 &");
-    system(cmd);
+    debugLog("Ejecutamos minicom.");
+
+    if(system(cmd) == -1){
+        perror("Error ejecutando comando ");
+    }
 
     sleep(1);
 
+    debugLog("Matamos minicom.");
     // Se mata el proceso minicom, ya que, no es necesario
-    system("pkill minicom");
+    if(system("pkill minicom") == -1){
+        perror("Error ejecutando comando ");
+    }
 
     sleep(1);
 }
@@ -65,32 +91,63 @@ void initOBDSIM(){
 */
 
 void closeOBDSIM(){
-    system("pkill obdsim");
+    if(system("pkill obdsim") == -1){
+        perror("Error ejecutando comando ");
+    }
 }
 
 /**
 * @brief Prueba de integración para el funcionamiento general del sistema.
 */
 
-TEST_CASE( "Test OBD class", "[OBD]" ) {
+TEST_CASE( "Test OBD class DTC", "[OBD]" ) {
     
-    // Iniciamos el simulador OBDSIM para las pruebas
-    initOBDSIM();
+    debugLog("Comenzando test OBD class");
 
+    debugLog("Iniciamos el simulador OBDSIM");
+    // Iniciamos el simulador OBDSIM para las pruebas
+    initOBDSIM("gui_fltk", WAIT_OBDSIM);
+
+    debugLog("Iniciamos conexión OBD");
 
 	Obd connection = Obd("OBDII");
 
+    debugLog("Finalizado el proceso de inicio de conexión OBD");
+
 	REQUIRE (connection.isValid() == true);
 
-
 	connection.getDTCs();
-	connection.printPIDs();
-
-	connection.send(connection.map_commands.find("SPEED")->second);
-
-    std::cout << connection.map_commands.find("SPEED")->second.getJson().dump(4) << std::endl;
 
     std::cout << connection.map_commands.find("GET_DTC")->second.getJson().dump(4) << std::endl;
+
+    closeOBDSIM();
+}
+
+TEST_CASE( "Test OBD class data SPEED", "[OBD]" ) {
+    
+    debugLog("Comenzando test OBD class");
+
+    debugLog("Iniciamos el simulador OBDSIM");
+    // Iniciamos el simulador OBDSIM para las pruebas
+    initOBDSIM("Cycle", 1);
+
+    debugLog("Iniciamos conexión OBD");
+
+    Obd connection = Obd("OBDII");
+
+    debugLog("Finalizado el proceso de inicio de conexión OBD");
+
+    REQUIRE (connection.isValid() == true);
+
+    connection.printPIDs();
+
+    for (int i = 0; i < 15; ++i){
+        connection.send(connection.map_commands.find("SPEED")->second);
+
+        sleep(1);
+
+        std::cout << connection.map_commands.find("SPEED")->second.getJson().dump(4) << std::endl;
+    }
 
     closeOBDSIM();
 }

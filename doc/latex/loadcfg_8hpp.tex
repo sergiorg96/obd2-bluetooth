@@ -1,0 +1,110 @@
+\hypertarget{loadcfg_8hpp}{}\section{Referencia del Archivo loadcfg.\+hpp}
+\label{loadcfg_8hpp}\index{loadcfg.\+hpp@{loadcfg.\+hpp}}
+
+
+Archivo que contiene la declaración de las funciones para la lectura de un fichero de configuración del tipo clave=valor.  
+
+
+Gráfico de los archivos que directa o indirectamente incluyen a este archivo\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=287pt]{loadcfg_8hpp__dep__incl}
+\end{center}
+\end{figure}
+\subsection*{typedefs}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{loadcfg_8hpp_a3bc0e674227412446fc364a733cebde6}\label{loadcfg_8hpp_a3bc0e674227412446fc364a733cebde6}} 
+typedef std\+::map$<$ std\+::string, std\+::string $>$ \hyperlink{loadcfg_8hpp_a3bc0e674227412446fc364a733cebde6}{cfg\+Type}
+\begin{DoxyCompactList}\small\item\em Definición del tipo cfg\+Type para referenciar los parámetros de configuración y sus valores. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Funciones}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{loadcfg_8hpp_a91f772c379dc1d6c6088d077aa722574}{shit} (const char $\ast$mens)
+\begin{DoxyCompactList}\small\item\em Función para indicar error en el código y terminar la ejecución. \end{DoxyCompactList}\item 
+void \hyperlink{loadcfg_8hpp_a4667fdb45ba6b04ab678f894e58a2fcb}{load\+Cfg} (const char $\ast$filename, \hyperlink{loadcfg_8hpp_a3bc0e674227412446fc364a733cebde6}{cfg\+Type} $\ast$pcfg)
+\begin{DoxyCompactList}\small\item\em Función cargar la configuración y almacenarla para su utilización. \end{DoxyCompactList}\item 
+std\+::string \hyperlink{loadcfg_8hpp_ae4db05d33445e6b6ca0c4a6a0ba23bf3}{getmac} (const char $\ast$name)
+\begin{DoxyCompactList}\small\item\em Función que obtiene la M\+AC de una interfaz de red indicada. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Descripción detallada}
+Archivo que contiene la declaración de las funciones para la lectura de un fichero de configuración del tipo clave=valor. 
+
+\begin{DoxyAuthor}{Autor}
+Juan Manuel Vozmediano Torres 
+\end{DoxyAuthor}
+\begin{DoxyDate}{Fecha}
+09/04/2019 
+\end{DoxyDate}
+
+
+Definición en el archivo \hyperlink{loadcfg_8hpp_source}{loadcfg.\+hpp}.
+
+
+
+\subsection{Documentación de las funciones}
+\mbox{\Hypertarget{loadcfg_8hpp_ae4db05d33445e6b6ca0c4a6a0ba23bf3}\label{loadcfg_8hpp_ae4db05d33445e6b6ca0c4a6a0ba23bf3}} 
+\index{loadcfg.\+hpp@{loadcfg.\+hpp}!getmac@{getmac}}
+\index{getmac@{getmac}!loadcfg.\+hpp@{loadcfg.\+hpp}}
+\subsubsection{\texorpdfstring{getmac()}{getmac()}}
+{\footnotesize\ttfamily std\+::string getmac (\begin{DoxyParamCaption}\item[{const char $\ast$}]{name }\end{DoxyParamCaption})}
+
+
+
+Función que obtiene la M\+AC de una interfaz de red indicada. 
+
+
+\begin{DoxyParams}{Parámetros}
+{\em name} & Cadena de caracteres indicando el nombre de la interfaz de red de la que obtener su M\+AC. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Devuelve}
+String de la M\+AC de la interfaz de red indicada. 
+\end{DoxyReturn}
+
+
+Definición en la línea \hyperlink{loadcfg_8cpp_source_l00059}{59} del archivo \hyperlink{loadcfg_8cpp_source}{loadcfg.\+cpp}.
+
+\mbox{\Hypertarget{loadcfg_8hpp_a4667fdb45ba6b04ab678f894e58a2fcb}\label{loadcfg_8hpp_a4667fdb45ba6b04ab678f894e58a2fcb}} 
+\index{loadcfg.\+hpp@{loadcfg.\+hpp}!load\+Cfg@{load\+Cfg}}
+\index{load\+Cfg@{load\+Cfg}!loadcfg.\+hpp@{loadcfg.\+hpp}}
+\subsubsection{\texorpdfstring{load\+Cfg()}{loadCfg()}}
+{\footnotesize\ttfamily void load\+Cfg (\begin{DoxyParamCaption}\item[{const char $\ast$}]{filename,  }\item[{\hyperlink{loadcfg_8hpp_a3bc0e674227412446fc364a733cebde6}{cfg\+Type} $\ast$}]{pcfg }\end{DoxyParamCaption})}
+
+
+
+Función cargar la configuración y almacenarla para su utilización. 
+
+
+\begin{DoxyParams}{Parámetros}
+{\em filename} & Cadena de caracteres del archivo de configuración a leer. \\
+\hline
+{\em pcfg} & Variable de tipo puntero a cfg\+Type para referenciar la variable donde se almacenará la configuración. \\
+\hline
+\end{DoxyParams}
+
+
+Definición en la línea \hyperlink{loadcfg_8cpp_source_l00039}{39} del archivo \hyperlink{loadcfg_8cpp_source}{loadcfg.\+cpp}.
+
+\mbox{\Hypertarget{loadcfg_8hpp_a91f772c379dc1d6c6088d077aa722574}\label{loadcfg_8hpp_a91f772c379dc1d6c6088d077aa722574}} 
+\index{loadcfg.\+hpp@{loadcfg.\+hpp}!shit@{shit}}
+\index{shit@{shit}!loadcfg.\+hpp@{loadcfg.\+hpp}}
+\subsubsection{\texorpdfstring{shit()}{shit()}}
+{\footnotesize\ttfamily void shit (\begin{DoxyParamCaption}\item[{const char $\ast$}]{mens }\end{DoxyParamCaption})}
+
+
+
+Función para indicar error en el código y terminar la ejecución. 
+
+
+\begin{DoxyParams}{Parámetros}
+{\em mens} & Cadena de caracteres para mostrar en el error producido. \\
+\hline
+\end{DoxyParams}
+
+
+Definición en la línea \hyperlink{loadcfg_8cpp_source_l00032}{32} del archivo \hyperlink{loadcfg_8cpp_source}{loadcfg.\+cpp}.
+

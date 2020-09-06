@@ -1,0 +1,83 @@
+\hypertarget{decoders_8hpp_source}{}\section{decoders.\+hpp}
+\label{decoders_8hpp_source}\index{decoders.\+hpp@{decoders.\+hpp}}
+
+\begin{DoxyCode}
+00001 
+00008 \textcolor{preprocessor}{#ifndef DECODERS\_HPP}
+00009 \textcolor{preprocessor}{#define DECODERS\_HPP}
+00010 
+00011 \textcolor{preprocessor}{#include <stdio.h>}
+00012 \textcolor{preprocessor}{#include <stdlib.h>}
+00013 \textcolor{preprocessor}{#include <string.h>}
+00014 \textcolor{preprocessor}{#include <bitset>}
+00015 \textcolor{preprocessor}{#include <vector>}
+00016 \textcolor{preprocessor}{#include <map>}
+00017 
+\Hypertarget{decoders_8hpp_source_l00018}\hyperlink{decoders_8hpp_a8a092c91721f7da8bb812b510993ad3e}{00018} \textcolor{preprocessor}{#define PID\_BITS 32 }
+\Hypertarget{decoders_8hpp_source_l00019}\hyperlink{decoders_8hpp_ad3ef8a4a578a81438303e48d4c5f9458}{00019} \textcolor{preprocessor}{#define STATUS\_BITS 8 }
+\Hypertarget{decoders_8hpp_source_l00025}\hyperlink{structOxigenoResponse}{00025} \textcolor{preprocessor}{struct OxigenoResponse \{}
+\Hypertarget{decoders_8hpp_source_l00026}\hyperlink{structOxigenoResponse_a068c403e5746226cf22bb020b4c786d3}{00026}     \textcolor{keywordtype}{float} \hyperlink{structOxigenoResponse_a068c403e5746226cf22bb020b4c786d3}{A}; 
+\Hypertarget{decoders_8hpp_source_l00027}\hyperlink{structOxigenoResponse_a96b19152dd001e19d1351e2d97f22736}{00027}     \textcolor{keywordtype}{float} \hyperlink{structOxigenoResponse_a96b19152dd001e19d1351e2d97f22736}{B}; 
+00028 \};
+00029 
+\Hypertarget{decoders_8hpp_source_l00034}\hyperlink{structRelacionesResponse}{00034} \textcolor{keyword}{struct }\hyperlink{structRelacionesResponse}{RelacionesResponse} \{
+\Hypertarget{decoders_8hpp_source_l00035}\hyperlink{structRelacionesResponse_a560d1e6af01b999625b467ef3f858181}{00035}     \textcolor{keywordtype}{int} \hyperlink{structRelacionesResponse_a560d1e6af01b999625b467ef3f858181}{A}; 
+\Hypertarget{decoders_8hpp_source_l00036}\hyperlink{structRelacionesResponse_a1216f6019af393dd85853f352533ed9d}{00036}     \textcolor{keywordtype}{int} \hyperlink{structRelacionesResponse_a1216f6019af393dd85853f352533ed9d}{B}; 
+\Hypertarget{decoders_8hpp_source_l00037}\hyperlink{structRelacionesResponse_a37feda02f128b77f4f2d61cabcddc9e7}{00037}     \textcolor{keywordtype}{int} \hyperlink{structRelacionesResponse_a37feda02f128b77f4f2d61cabcddc9e7}{C}; 
+\Hypertarget{decoders_8hpp_source_l00038}\hyperlink{structRelacionesResponse_ab76f55b12df3754a9bb5b102a1c06cbc}{00038}     \textcolor{keywordtype}{int} \hyperlink{structRelacionesResponse_ab76f55b12df3754a9bb5b102a1c06cbc}{D}; 
+00039 \};
+00040 
+00045 \textcolor{keywordtype}{void} \hyperlink{decoders_8hpp_a8ee851a37675f190ea728d6b2f0cdc92}{noDecodeAT}();
+00046 
+00053 std::map<std::string, std::string> \hyperlink{decoders_8hpp_aca9cad863d8603615597a0291804c8ae}{decodeStatus}(\textcolor{keywordtype}{char} *response);
+00054 
+00061 std::vector<int> \hyperlink{decoders_8hpp_aef44cca306ed9c74b146d2b7dd058763}{decodePIDS}(\textcolor{keywordtype}{char} *response);
+00062 
+00069 std::vector<std::string> \hyperlink{decoders_8hpp_aac9b3d4ea17ee4dbbdf755b0b510137a}{decodeDTCs}(\textcolor{keywordtype}{char} *response);
+00070 
+00077 std::string \hyperlink{decoders_8hpp_a4f18f411252f4c60fae4af320989c262}{convertDTCs}(std::string dtc);
+00078 
+00085 std::string \hyperlink{decoders_8hpp_a66754738119854c13a74265e209083e4}{decodeVIN}(\textcolor{keywordtype}{char} * response);
+00086 
+00093 std::string \hyperlink{decoders_8hpp_ab83ce79cd098ea655f3812488e304a0c}{decodeDescribeProtocol}(\textcolor{keywordtype}{char} * response);
+00094 
+00101 \textcolor{keywordtype}{float} \hyperlink{decoders_8hpp_adbe68794075963c37e654d53b8a46f68}{decodeCargaPosicionEGR}(\textcolor{keywordtype}{char} *response);
+00102 
+00109 \textcolor{keywordtype}{float} \hyperlink{decoders_8hpp_af581438645d7ff67766fa2e5eba5eaf9}{decodeTempGeneral}(\textcolor{keywordtype}{char} *response);
+00110 
+00117 \textcolor{keywordtype}{float} \hyperlink{decoders_8hpp_aeee9e6d8511a934b3a3644b19de3f2b7}{decodeAjusteCombustibleEGR}(\textcolor{keywordtype}{char} *response);
+00118 
+00125 \textcolor{keywordtype}{float} \hyperlink{decoders_8hpp_ab1c03e72734d4127a1c48f3b5a44a2e2}{decodePresionCombustible}(\textcolor{keywordtype}{char} *response);
+00126 
+00133 \textcolor{keywordtype}{float} \hyperlink{decoders_8hpp_aa7c5243702d5462e4b638450e750624e}{decodeHexToDec}(\textcolor{keywordtype}{char} *response);
+00134 
+00141 \textcolor{keywordtype}{float} \hyperlink{decoders_8hpp_a889868c7b1e554aee496e6aed7101cc4}{decodeRPM}(\textcolor{keywordtype}{char} *response);
+00142 
+00149 \textcolor{keywordtype}{float} \hyperlink{decoders_8hpp_a7a2fee87eace8ad6c86c628f5f91b3b5}{decodeAvanceTiempo}(\textcolor{keywordtype}{char} *response);
+00150 
+00157 \textcolor{keywordtype}{float} \hyperlink{decoders_8hpp_adceefeb78a70b295b378f4c472630aa1}{decodeVelocidadMAF}(\textcolor{keywordtype}{char} *response);
+00158 
+00165 \textcolor{keywordtype}{float} \hyperlink{decoders_8hpp_a3e32aaf8ced989570e141f01210564f3}{decodePresionCombColector}(\textcolor{keywordtype}{char} *response);
+00166 
+00173 \textcolor{keywordtype}{float} \hyperlink{decoders_8hpp_a228605d8cad0901a691ba4155a2326fc}{decodePresionMedidorCombustible}(\textcolor{keywordtype}{char} *response);
+00174 
+00181 \textcolor{keywordtype}{float} \hyperlink{decoders_8hpp_ab86bda1fcefda784e048796e2d892475}{decodePresionVapor}(\textcolor{keywordtype}{char} *response);
+00182 
+00189 \textcolor{keywordtype}{float} \hyperlink{decoders_8hpp_a8251853ca2e5b8b2e88c75f50d53bc8d}{decodeTempCatalizador}(\textcolor{keywordtype}{char} *response);
+00190 
+00197 \textcolor{keywordtype}{float} \hyperlink{decoders_8hpp_a5937fc059394faad8c9c96a0b27a8796}{decodeVoltajeControl}(\textcolor{keywordtype}{char} *response);
+00198 
+00205 \textcolor{keywordtype}{float} \hyperlink{decoders_8hpp_ade77bb9f8d8a2ba3aa431cdf9bdd0c32}{decodeRelacionCombAireBasica}(\textcolor{keywordtype}{char} *response);
+00206 
+00213 \textcolor{keyword}{struct }\hyperlink{structOxigenoResponse}{OxigenoResponse} \hyperlink{decoders_8hpp_a5b53fc5fc37fbee9c5e389f6c8c18438}{decodeSensorOxigeno}(char *response);
+00214 
+00221 \textcolor{keyword}{struct }\hyperlink{structOxigenoResponse}{OxigenoResponse} \hyperlink{decoders_8hpp_a363bd4f505969098be58a175f02b9b50}{decodeRelacionCombAire}(char *response);
+00222 
+00229 \textcolor{keyword}{struct }\hyperlink{structOxigenoResponse}{OxigenoResponse} \hyperlink{decoders_8hpp_a4cedb500095b25b3d4fff382094b0eb9}{decodeRelacionCombAireActual}(char *
+      response);
+00230 
+00239 \textcolor{keyword}{struct }\hyperlink{structRelacionesResponse}{RelacionesResponse} \hyperlink{decoders_8hpp_a88d7079325bf81705583d9f2101cfa15}{decodeRelaciones}(char *response);
+00240 
+00241 
+00242 \textcolor{preprocessor}{#endif}
+\end{DoxyCode}

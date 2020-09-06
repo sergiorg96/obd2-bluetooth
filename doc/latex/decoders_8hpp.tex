@@ -1,0 +1,666 @@
+\hypertarget{decoders_8hpp}{}\section{Referencia del Archivo decoders.\+hpp}
+\label{decoders_8hpp}\index{decoders.\+hpp@{decoders.\+hpp}}
+
+
+Archivo que contiene la declaración de las funciones de decodificación de las respuestas del dispositivo E\+L\+M327.  
+
+
+{\ttfamily \#include $<$stdio.\+h$>$}\newline
+{\ttfamily \#include $<$stdlib.\+h$>$}\newline
+{\ttfamily \#include $<$string.\+h$>$}\newline
+{\ttfamily \#include $<$bitset$>$}\newline
+{\ttfamily \#include $<$vector$>$}\newline
+{\ttfamily \#include $<$map$>$}\newline
+Dependencia gráfica adjunta para decoders.\+hpp\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{decoders_8hpp__incl}
+\end{center}
+\end{figure}
+Gráfico de los archivos que directa o indirectamente incluyen a este archivo\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=336pt]{decoders_8hpp__dep__incl}
+\end{center}
+\end{figure}
+\subsection*{Estructuras de datos}
+\begin{DoxyCompactItemize}
+\item 
+struct \hyperlink{structOxigenoResponse}{Oxigeno\+Response}
+\begin{DoxyCompactList}\small\item\em Estructura de datos para las respuesta de dos valores en P\+I\+DS relacionados con gases de escape. \end{DoxyCompactList}\item 
+struct \hyperlink{structRelacionesResponse}{Relaciones\+Response}
+\begin{DoxyCompactList}\small\item\em Estructura de datos para las respuesta de cuatro valores en P\+I\+DS relacionados con gases de escape. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{defines}
+\begin{DoxyCompactItemize}
+\item 
+\#define \hyperlink{decoders_8hpp_a8a092c91721f7da8bb812b510993ad3e}{P\+I\+D\+\_\+\+B\+I\+TS}~32
+\item 
+\#define \hyperlink{decoders_8hpp_ad3ef8a4a578a81438303e48d4c5f9458}{S\+T\+A\+T\+U\+S\+\_\+\+B\+I\+TS}~8
+\end{DoxyCompactItemize}
+\subsection*{Funciones}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{decoders_8hpp_a8ee851a37675f190ea728d6b2f0cdc92}\label{decoders_8hpp_a8ee851a37675f190ea728d6b2f0cdc92}} 
+void \hyperlink{decoders_8hpp_a8ee851a37675f190ea728d6b2f0cdc92}{no\+Decode\+AT} ()
+\begin{DoxyCompactList}\small\item\em Función que no realiza decodificación para comandos AT. \end{DoxyCompactList}\item 
+std\+::map$<$ std\+::string, std\+::string $>$ \hyperlink{decoders_8hpp_aca9cad863d8603615597a0291804c8ae}{decode\+Status} (char $\ast$response)
+\begin{DoxyCompactList}\small\item\em Función de decodificación del P\+ID S\+T\+A\+T\+US. \end{DoxyCompactList}\item 
+std\+::vector$<$ int $>$ \hyperlink{decoders_8hpp_aef44cca306ed9c74b146d2b7dd058763}{decode\+P\+I\+DS} (char $\ast$response)
+\begin{DoxyCompactList}\small\item\em Función de decodificación de los P\+I\+DS disponibles en el vehículo. \end{DoxyCompactList}\item 
+std\+::vector$<$ std\+::string $>$ \hyperlink{decoders_8hpp_aac9b3d4ea17ee4dbbdf755b0b510137a}{decode\+D\+T\+Cs} (char $\ast$response)
+\begin{DoxyCompactList}\small\item\em Función de decodificación de los D\+TC activos en el vehículo. \end{DoxyCompactList}\item 
+std\+::string \hyperlink{decoders_8hpp_a4f18f411252f4c60fae4af320989c262}{convert\+D\+T\+Cs} (std\+::string dtc)
+\begin{DoxyCompactList}\small\item\em Función de conversión del primer byte del D\+TC en su valor correspondiente. \end{DoxyCompactList}\item 
+std\+::string \hyperlink{decoders_8hpp_a66754738119854c13a74265e209083e4}{decode\+V\+IN} (char $\ast$response)
+\begin{DoxyCompactList}\small\item\em Función de decodificación del Número de Identificación del Vehículo (V\+IN). \end{DoxyCompactList}\item 
+std\+::string \hyperlink{decoders_8hpp_ab83ce79cd098ea655f3812488e304a0c}{decode\+Describe\+Protocol} (char $\ast$response)
+\begin{DoxyCompactList}\small\item\em Función de decodificación del protocolo de funcionamiento actual. \end{DoxyCompactList}\item 
+float \hyperlink{decoders_8hpp_adbe68794075963c37e654d53b8a46f68}{decode\+Carga\+Posicion\+E\+GR} (char $\ast$response)
+\begin{DoxyCompactList}\small\item\em Función de decodificación de la posición E\+GR. \end{DoxyCompactList}\item 
+float \hyperlink{decoders_8hpp_af581438645d7ff67766fa2e5eba5eaf9}{decode\+Temp\+General} (char $\ast$response)
+\begin{DoxyCompactList}\small\item\em Función de decodificación de la temperatura. \end{DoxyCompactList}\item 
+float \hyperlink{decoders_8hpp_aeee9e6d8511a934b3a3644b19de3f2b7}{decode\+Ajuste\+Combustible\+E\+GR} (char $\ast$response)
+\begin{DoxyCompactList}\small\item\em Función de decodificación del ajuste de combustible E\+GR. \end{DoxyCompactList}\item 
+float \hyperlink{decoders_8hpp_ab1c03e72734d4127a1c48f3b5a44a2e2}{decode\+Presion\+Combustible} (char $\ast$response)
+\begin{DoxyCompactList}\small\item\em Función de decodificación de la presión del combustible. \end{DoxyCompactList}\item 
+float \hyperlink{decoders_8hpp_aa7c5243702d5462e4b638450e750624e}{decode\+Hex\+To\+Dec} (char $\ast$response)
+\begin{DoxyCompactList}\small\item\em Función de decodificación de hexadecimal a decimal. \end{DoxyCompactList}\item 
+float \hyperlink{decoders_8hpp_a889868c7b1e554aee496e6aed7101cc4}{decode\+R\+PM} (char $\ast$response)
+\begin{DoxyCompactList}\small\item\em Función de decodificación de las R\+PM del motor. \end{DoxyCompactList}\item 
+float \hyperlink{decoders_8hpp_a7a2fee87eace8ad6c86c628f5f91b3b5}{decode\+Avance\+Tiempo} (char $\ast$response)
+\begin{DoxyCompactList}\small\item\em Función de decodificación del avance del tiempo. \end{DoxyCompactList}\item 
+float \hyperlink{decoders_8hpp_adceefeb78a70b295b378f4c472630aa1}{decode\+Velocidad\+M\+AF} (char $\ast$response)
+\begin{DoxyCompactList}\small\item\em Función de decodificación de la tasa de flujo del aire (M\+AF). \end{DoxyCompactList}\item 
+float \hyperlink{decoders_8hpp_a3e32aaf8ced989570e141f01210564f3}{decode\+Presion\+Comb\+Colector} (char $\ast$response)
+\begin{DoxyCompactList}\small\item\em Función de decodificación de la presión del combustible del colector de vacío. \end{DoxyCompactList}\item 
+float \hyperlink{decoders_8hpp_a228605d8cad0901a691ba4155a2326fc}{decode\+Presion\+Medidor\+Combustible} (char $\ast$response)
+\begin{DoxyCompactList}\small\item\em Función de decodificación de la presión del medidor del tren de combustible. \end{DoxyCompactList}\item 
+float \hyperlink{decoders_8hpp_ab86bda1fcefda784e048796e2d892475}{decode\+Presion\+Vapor} (char $\ast$response)
+\begin{DoxyCompactList}\small\item\em Función de decodificación de la presión de vapor del sistema evaporativo . \end{DoxyCompactList}\item 
+float \hyperlink{decoders_8hpp_a8251853ca2e5b8b2e88c75f50d53bc8d}{decode\+Temp\+Catalizador} (char $\ast$response)
+\begin{DoxyCompactList}\small\item\em Función de decodificación de la temperatura del catalizador. \end{DoxyCompactList}\item 
+float \hyperlink{decoders_8hpp_a5937fc059394faad8c9c96a0b27a8796}{decode\+Voltaje\+Control} (char $\ast$response)
+\begin{DoxyCompactList}\small\item\em Función de decodificación del voltaje del módulo de control. \end{DoxyCompactList}\item 
+float \hyperlink{decoders_8hpp_ade77bb9f8d8a2ba3aa431cdf9bdd0c32}{decode\+Relacion\+Comb\+Aire\+Basica} (char $\ast$response)
+\begin{DoxyCompactList}\small\item\em Función de decodificación de la relación equivaliente comandada de combustible -\/ aire. \end{DoxyCompactList}\item 
+struct \hyperlink{structOxigenoResponse}{Oxigeno\+Response} \hyperlink{decoders_8hpp_a5b53fc5fc37fbee9c5e389f6c8c18438}{decode\+Sensor\+Oxigeno} (char $\ast$response)
+\begin{DoxyCompactList}\small\item\em Función de decodificación de los sensores de oxígeno. \end{DoxyCompactList}\item 
+struct \hyperlink{structOxigenoResponse}{Oxigeno\+Response} \hyperlink{decoders_8hpp_a363bd4f505969098be58a175f02b9b50}{decode\+Relacion\+Comb\+Aire} (char $\ast$response)
+\begin{DoxyCompactList}\small\item\em Función de decodificación de los sensores de oxígeno y la relación de combustible. \end{DoxyCompactList}\item 
+struct \hyperlink{structOxigenoResponse}{Oxigeno\+Response} \hyperlink{decoders_8hpp_a4cedb500095b25b3d4fff382094b0eb9}{decode\+Relacion\+Comb\+Aire\+Actual} (char $\ast$response)
+\begin{DoxyCompactList}\small\item\em Función de decodificación de los sensores de oxígeno y la relación de combustible actual. \end{DoxyCompactList}\item 
+struct \hyperlink{structRelacionesResponse}{Relaciones\+Response} \hyperlink{decoders_8hpp_a88d7079325bf81705583d9f2101cfa15}{decode\+Relaciones} (char $\ast$response)
+\begin{DoxyCompactList}\small\item\em Función de decodificación del alor máximo de la relación de equivalencia de combustible -\/ aire, voltaje del sensor de oxígenos, corriente del sensor de oxígenos y presión absoluta del colector de entrada. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Descripción detallada}
+Archivo que contiene la declaración de las funciones de decodificación de las respuestas del dispositivo E\+L\+M327. 
+
+\begin{DoxyAuthor}{Autor}
+Sergio Román González 
+\end{DoxyAuthor}
+\begin{DoxyDate}{Fecha}
+05/09/2020 
+\end{DoxyDate}
+
+
+Definición en el archivo \hyperlink{decoders_8hpp_source}{decoders.\+hpp}.
+
+
+
+\subsection{Documentación de los \textquotesingle{}defines\textquotesingle{}}
+\mbox{\Hypertarget{decoders_8hpp_a8a092c91721f7da8bb812b510993ad3e}\label{decoders_8hpp_a8a092c91721f7da8bb812b510993ad3e}} 
+\index{decoders.\+hpp@{decoders.\+hpp}!P\+I\+D\+\_\+\+B\+I\+TS@{P\+I\+D\+\_\+\+B\+I\+TS}}
+\index{P\+I\+D\+\_\+\+B\+I\+TS@{P\+I\+D\+\_\+\+B\+I\+TS}!decoders.\+hpp@{decoders.\+hpp}}
+\subsubsection{\texorpdfstring{P\+I\+D\+\_\+\+B\+I\+TS}{PID\_BITS}}
+{\footnotesize\ttfamily \#define P\+I\+D\+\_\+\+B\+I\+TS~32}
+
+Macro con el número de bits de respuesta para la solicitud de P\+I\+Ds disponibles 
+
+Definición en la línea \hyperlink{decoders_8hpp_source_l00018}{18} del archivo \hyperlink{decoders_8hpp_source}{decoders.\+hpp}.
+
+\mbox{\Hypertarget{decoders_8hpp_ad3ef8a4a578a81438303e48d4c5f9458}\label{decoders_8hpp_ad3ef8a4a578a81438303e48d4c5f9458}} 
+\index{decoders.\+hpp@{decoders.\+hpp}!S\+T\+A\+T\+U\+S\+\_\+\+B\+I\+TS@{S\+T\+A\+T\+U\+S\+\_\+\+B\+I\+TS}}
+\index{S\+T\+A\+T\+U\+S\+\_\+\+B\+I\+TS@{S\+T\+A\+T\+U\+S\+\_\+\+B\+I\+TS}!decoders.\+hpp@{decoders.\+hpp}}
+\subsubsection{\texorpdfstring{S\+T\+A\+T\+U\+S\+\_\+\+B\+I\+TS}{STATUS\_BITS}}
+{\footnotesize\ttfamily \#define S\+T\+A\+T\+U\+S\+\_\+\+B\+I\+TS~8}
+
+Macro con el número de bits de respuesta para las pruebas del P\+ID S\+T\+A\+T\+US 
+
+Definición en la línea \hyperlink{decoders_8hpp_source_l00019}{19} del archivo \hyperlink{decoders_8hpp_source}{decoders.\+hpp}.
+
+
+
+\subsection{Documentación de las funciones}
+\mbox{\Hypertarget{decoders_8hpp_a4f18f411252f4c60fae4af320989c262}\label{decoders_8hpp_a4f18f411252f4c60fae4af320989c262}} 
+\index{decoders.\+hpp@{decoders.\+hpp}!convert\+D\+T\+Cs@{convert\+D\+T\+Cs}}
+\index{convert\+D\+T\+Cs@{convert\+D\+T\+Cs}!decoders.\+hpp@{decoders.\+hpp}}
+\subsubsection{\texorpdfstring{convert\+D\+T\+Cs()}{convertDTCs()}}
+{\footnotesize\ttfamily std\+::string convert\+D\+T\+Cs (\begin{DoxyParamCaption}\item[{std\+::string}]{dtc }\end{DoxyParamCaption})}
+
+
+
+Función de conversión del primer byte del D\+TC en su valor correspondiente. 
+
+
+\begin{DoxyParams}{Parámetros}
+{\em dtc} & String con los bytes del D\+TC. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Devuelve}
+String de D\+TC con el primer byte convertido. 
+\end{DoxyReturn}
+
+
+Definición en la línea \hyperlink{decoders_8cpp_source_l00047}{47} del archivo \hyperlink{decoders_8cpp_source}{decoders.\+cpp}.
+
+\mbox{\Hypertarget{decoders_8hpp_aeee9e6d8511a934b3a3644b19de3f2b7}\label{decoders_8hpp_aeee9e6d8511a934b3a3644b19de3f2b7}} 
+\index{decoders.\+hpp@{decoders.\+hpp}!decode\+Ajuste\+Combustible\+E\+GR@{decode\+Ajuste\+Combustible\+E\+GR}}
+\index{decode\+Ajuste\+Combustible\+E\+GR@{decode\+Ajuste\+Combustible\+E\+GR}!decoders.\+hpp@{decoders.\+hpp}}
+\subsubsection{\texorpdfstring{decode\+Ajuste\+Combustible\+E\+G\+R()}{decodeAjusteCombustibleEGR()}}
+{\footnotesize\ttfamily float decode\+Ajuste\+Combustible\+E\+GR (\begin{DoxyParamCaption}\item[{char $\ast$}]{response }\end{DoxyParamCaption})}
+
+
+
+Función de decodificación del ajuste de combustible E\+GR. 
+
+
+\begin{DoxyParams}{Parámetros}
+{\em response} & Cadena de caracteres con los bytes útiles de la respuesta del dispositivo E\+L\+M327. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Devuelve}
+Float del valor de la respuesta decodificada. 
+\end{DoxyReturn}
+
+
+Definición en la línea \hyperlink{decoders_8cpp_source_l00284}{284} del archivo \hyperlink{decoders_8cpp_source}{decoders.\+cpp}.
+
+\mbox{\Hypertarget{decoders_8hpp_a7a2fee87eace8ad6c86c628f5f91b3b5}\label{decoders_8hpp_a7a2fee87eace8ad6c86c628f5f91b3b5}} 
+\index{decoders.\+hpp@{decoders.\+hpp}!decode\+Avance\+Tiempo@{decode\+Avance\+Tiempo}}
+\index{decode\+Avance\+Tiempo@{decode\+Avance\+Tiempo}!decoders.\+hpp@{decoders.\+hpp}}
+\subsubsection{\texorpdfstring{decode\+Avance\+Tiempo()}{decodeAvanceTiempo()}}
+{\footnotesize\ttfamily float decode\+Avance\+Tiempo (\begin{DoxyParamCaption}\item[{char $\ast$}]{response }\end{DoxyParamCaption})}
+
+
+
+Función de decodificación del avance del tiempo. 
+
+
+\begin{DoxyParams}{Parámetros}
+{\em response} & Cadena de caracteres con los bytes útiles de la respuesta del dispositivo E\+L\+M327. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Devuelve}
+Float del valor de la respuesta decodificada. 
+\end{DoxyReturn}
+
+
+Definición en la línea \hyperlink{decoders_8cpp_source_l00316}{316} del archivo \hyperlink{decoders_8cpp_source}{decoders.\+cpp}.
+
+\mbox{\Hypertarget{decoders_8hpp_adbe68794075963c37e654d53b8a46f68}\label{decoders_8hpp_adbe68794075963c37e654d53b8a46f68}} 
+\index{decoders.\+hpp@{decoders.\+hpp}!decode\+Carga\+Posicion\+E\+GR@{decode\+Carga\+Posicion\+E\+GR}}
+\index{decode\+Carga\+Posicion\+E\+GR@{decode\+Carga\+Posicion\+E\+GR}!decoders.\+hpp@{decoders.\+hpp}}
+\subsubsection{\texorpdfstring{decode\+Carga\+Posicion\+E\+G\+R()}{decodeCargaPosicionEGR()}}
+{\footnotesize\ttfamily float decode\+Carga\+Posicion\+E\+GR (\begin{DoxyParamCaption}\item[{char $\ast$}]{response }\end{DoxyParamCaption})}
+
+
+
+Función de decodificación de la posición E\+GR. 
+
+
+\begin{DoxyParams}{Parámetros}
+{\em response} & Cadena de caracteres con los bytes útiles de la respuesta del dispositivo E\+L\+M327. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Devuelve}
+Float del valor de la respuesta decodificada. 
+\end{DoxyReturn}
+
+
+Definición en la línea \hyperlink{decoders_8cpp_source_l00270}{270} del archivo \hyperlink{decoders_8cpp_source}{decoders.\+cpp}.
+
+\mbox{\Hypertarget{decoders_8hpp_ab83ce79cd098ea655f3812488e304a0c}\label{decoders_8hpp_ab83ce79cd098ea655f3812488e304a0c}} 
+\index{decoders.\+hpp@{decoders.\+hpp}!decode\+Describe\+Protocol@{decode\+Describe\+Protocol}}
+\index{decode\+Describe\+Protocol@{decode\+Describe\+Protocol}!decoders.\+hpp@{decoders.\+hpp}}
+\subsubsection{\texorpdfstring{decode\+Describe\+Protocol()}{decodeDescribeProtocol()}}
+{\footnotesize\ttfamily std\+::string decode\+Describe\+Protocol (\begin{DoxyParamCaption}\item[{char $\ast$}]{response }\end{DoxyParamCaption})}
+
+
+
+Función de decodificación del protocolo de funcionamiento actual. 
+
+
+\begin{DoxyParams}{Parámetros}
+{\em response} & Cadena de caracteres con los bytes útiles de la respuesta del dispositivo E\+L\+M327. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Devuelve}
+String del protocolo de funcionamiento actual. 
+\end{DoxyReturn}
+
+
+Definición en la línea \hyperlink{decoders_8cpp_source_l00016}{16} del archivo \hyperlink{decoders_8cpp_source}{decoders.\+cpp}.
+
+\mbox{\Hypertarget{decoders_8hpp_aac9b3d4ea17ee4dbbdf755b0b510137a}\label{decoders_8hpp_aac9b3d4ea17ee4dbbdf755b0b510137a}} 
+\index{decoders.\+hpp@{decoders.\+hpp}!decode\+D\+T\+Cs@{decode\+D\+T\+Cs}}
+\index{decode\+D\+T\+Cs@{decode\+D\+T\+Cs}!decoders.\+hpp@{decoders.\+hpp}}
+\subsubsection{\texorpdfstring{decode\+D\+T\+Cs()}{decodeDTCs()}}
+{\footnotesize\ttfamily std\+::vector$<$std\+::string$>$ decode\+D\+T\+Cs (\begin{DoxyParamCaption}\item[{char $\ast$}]{response }\end{DoxyParamCaption})}
+
+
+
+Función de decodificación de los D\+TC activos en el vehículo. 
+
+
+\begin{DoxyParams}{Parámetros}
+{\em response} & Cadena de caracteres con los bytes útiles de la respuesta del dispositivo E\+L\+M327. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Devuelve}
+Vector de strings con los D\+TC activos en el vehículo. 
+\end{DoxyReturn}
+
+
+Definición en la línea \hyperlink{decoders_8cpp_source_l00086}{86} del archivo \hyperlink{decoders_8cpp_source}{decoders.\+cpp}.
+
+\mbox{\Hypertarget{decoders_8hpp_aa7c5243702d5462e4b638450e750624e}\label{decoders_8hpp_aa7c5243702d5462e4b638450e750624e}} 
+\index{decoders.\+hpp@{decoders.\+hpp}!decode\+Hex\+To\+Dec@{decode\+Hex\+To\+Dec}}
+\index{decode\+Hex\+To\+Dec@{decode\+Hex\+To\+Dec}!decoders.\+hpp@{decoders.\+hpp}}
+\subsubsection{\texorpdfstring{decode\+Hex\+To\+Dec()}{decodeHexToDec()}}
+{\footnotesize\ttfamily float decode\+Hex\+To\+Dec (\begin{DoxyParamCaption}\item[{char $\ast$}]{response }\end{DoxyParamCaption})}
+
+
+
+Función de decodificación de hexadecimal a decimal. 
+
+
+\begin{DoxyParams}{Parámetros}
+{\em response} & Cadena de caracteres con los bytes útiles de la respuesta del dispositivo E\+L\+M327. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Devuelve}
+Float del valor de la respuesta decodificada. 
+\end{DoxyReturn}
+
+
+Definición en la línea \hyperlink{decoders_8cpp_source_l00298}{298} del archivo \hyperlink{decoders_8cpp_source}{decoders.\+cpp}.
+
+\mbox{\Hypertarget{decoders_8hpp_aef44cca306ed9c74b146d2b7dd058763}\label{decoders_8hpp_aef44cca306ed9c74b146d2b7dd058763}} 
+\index{decoders.\+hpp@{decoders.\+hpp}!decode\+P\+I\+DS@{decode\+P\+I\+DS}}
+\index{decode\+P\+I\+DS@{decode\+P\+I\+DS}!decoders.\+hpp@{decoders.\+hpp}}
+\subsubsection{\texorpdfstring{decode\+P\+I\+D\+S()}{decodePIDS()}}
+{\footnotesize\ttfamily std\+::vector$<$int$>$ decode\+P\+I\+DS (\begin{DoxyParamCaption}\item[{char $\ast$}]{response }\end{DoxyParamCaption})}
+
+
+
+Función de decodificación de los P\+I\+DS disponibles en el vehículo. 
+
+
+\begin{DoxyParams}{Parámetros}
+{\em response} & Cadena de caracteres con los bytes útiles de la respuesta del dispositivo E\+L\+M327. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Devuelve}
+Vector de enteros con los P\+I\+DS disponibles en el vehículo. 
+\end{DoxyReturn}
+
+
+Definición en la línea \hyperlink{decoders_8cpp_source_l00112}{112} del archivo \hyperlink{decoders_8cpp_source}{decoders.\+cpp}.
+
+\mbox{\Hypertarget{decoders_8hpp_a3e32aaf8ced989570e141f01210564f3}\label{decoders_8hpp_a3e32aaf8ced989570e141f01210564f3}} 
+\index{decoders.\+hpp@{decoders.\+hpp}!decode\+Presion\+Comb\+Colector@{decode\+Presion\+Comb\+Colector}}
+\index{decode\+Presion\+Comb\+Colector@{decode\+Presion\+Comb\+Colector}!decoders.\+hpp@{decoders.\+hpp}}
+\subsubsection{\texorpdfstring{decode\+Presion\+Comb\+Colector()}{decodePresionCombColector()}}
+{\footnotesize\ttfamily float decode\+Presion\+Comb\+Colector (\begin{DoxyParamCaption}\item[{char $\ast$}]{response }\end{DoxyParamCaption})}
+
+
+
+Función de decodificación de la presión del combustible del colector de vacío. 
+
+
+\begin{DoxyParams}{Parámetros}
+{\em response} & Cadena de caracteres con los bytes útiles de la respuesta del dispositivo E\+L\+M327. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Devuelve}
+Float del valor de la respuesta decodificada. 
+\end{DoxyReturn}
+
+
+Definición en la línea \hyperlink{decoders_8cpp_source_l00384}{384} del archivo \hyperlink{decoders_8cpp_source}{decoders.\+cpp}.
+
+\mbox{\Hypertarget{decoders_8hpp_ab1c03e72734d4127a1c48f3b5a44a2e2}\label{decoders_8hpp_ab1c03e72734d4127a1c48f3b5a44a2e2}} 
+\index{decoders.\+hpp@{decoders.\+hpp}!decode\+Presion\+Combustible@{decode\+Presion\+Combustible}}
+\index{decode\+Presion\+Combustible@{decode\+Presion\+Combustible}!decoders.\+hpp@{decoders.\+hpp}}
+\subsubsection{\texorpdfstring{decode\+Presion\+Combustible()}{decodePresionCombustible()}}
+{\footnotesize\ttfamily float decode\+Presion\+Combustible (\begin{DoxyParamCaption}\item[{char $\ast$}]{response }\end{DoxyParamCaption})}
+
+
+
+Función de decodificación de la presión del combustible. 
+
+
+\begin{DoxyParams}{Parámetros}
+{\em response} & Cadena de caracteres con los bytes útiles de la respuesta del dispositivo E\+L\+M327. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Devuelve}
+Float del valor de la respuesta decodificada. 
+\end{DoxyReturn}
+
+
+Definición en la línea \hyperlink{decoders_8cpp_source_l00291}{291} del archivo \hyperlink{decoders_8cpp_source}{decoders.\+cpp}.
+
+\mbox{\Hypertarget{decoders_8hpp_a228605d8cad0901a691ba4155a2326fc}\label{decoders_8hpp_a228605d8cad0901a691ba4155a2326fc}} 
+\index{decoders.\+hpp@{decoders.\+hpp}!decode\+Presion\+Medidor\+Combustible@{decode\+Presion\+Medidor\+Combustible}}
+\index{decode\+Presion\+Medidor\+Combustible@{decode\+Presion\+Medidor\+Combustible}!decoders.\+hpp@{decoders.\+hpp}}
+\subsubsection{\texorpdfstring{decode\+Presion\+Medidor\+Combustible()}{decodePresionMedidorCombustible()}}
+{\footnotesize\ttfamily float decode\+Presion\+Medidor\+Combustible (\begin{DoxyParamCaption}\item[{char $\ast$}]{response }\end{DoxyParamCaption})}
+
+
+
+Función de decodificación de la presión del medidor del tren de combustible. 
+
+
+\begin{DoxyParams}{Parámetros}
+{\em response} & Cadena de caracteres con los bytes útiles de la respuesta del dispositivo E\+L\+M327. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Devuelve}
+Float del valor de la respuesta decodificada. 
+\end{DoxyReturn}
+
+
+Definición en la línea \hyperlink{decoders_8cpp_source_l00391}{391} del archivo \hyperlink{decoders_8cpp_source}{decoders.\+cpp}.
+
+\mbox{\Hypertarget{decoders_8hpp_ab86bda1fcefda784e048796e2d892475}\label{decoders_8hpp_ab86bda1fcefda784e048796e2d892475}} 
+\index{decoders.\+hpp@{decoders.\+hpp}!decode\+Presion\+Vapor@{decode\+Presion\+Vapor}}
+\index{decode\+Presion\+Vapor@{decode\+Presion\+Vapor}!decoders.\+hpp@{decoders.\+hpp}}
+\subsubsection{\texorpdfstring{decode\+Presion\+Vapor()}{decodePresionVapor()}}
+{\footnotesize\ttfamily float decode\+Presion\+Vapor (\begin{DoxyParamCaption}\item[{char $\ast$}]{response }\end{DoxyParamCaption})}
+
+
+
+Función de decodificación de la presión de vapor del sistema evaporativo . 
+
+
+\begin{DoxyParams}{Parámetros}
+{\em response} & Cadena de caracteres con los bytes útiles de la respuesta del dispositivo E\+L\+M327. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Devuelve}
+Float del valor de la respuesta decodificada. 
+\end{DoxyReturn}
+
+
+Definición en la línea \hyperlink{decoders_8cpp_source_l00442}{442} del archivo \hyperlink{decoders_8cpp_source}{decoders.\+cpp}.
+
+\mbox{\Hypertarget{decoders_8hpp_a363bd4f505969098be58a175f02b9b50}\label{decoders_8hpp_a363bd4f505969098be58a175f02b9b50}} 
+\index{decoders.\+hpp@{decoders.\+hpp}!decode\+Relacion\+Comb\+Aire@{decode\+Relacion\+Comb\+Aire}}
+\index{decode\+Relacion\+Comb\+Aire@{decode\+Relacion\+Comb\+Aire}!decoders.\+hpp@{decoders.\+hpp}}
+\subsubsection{\texorpdfstring{decode\+Relacion\+Comb\+Aire()}{decodeRelacionCombAire()}}
+{\footnotesize\ttfamily struct \hyperlink{structOxigenoResponse}{Oxigeno\+Response} decode\+Relacion\+Comb\+Aire (\begin{DoxyParamCaption}\item[{char $\ast$}]{response }\end{DoxyParamCaption})}
+
+
+
+Función de decodificación de los sensores de oxígeno y la relación de combustible. 
+
+
+\begin{DoxyParams}{Parámetros}
+{\em response} & Cadena de caracteres con los bytes útiles de la respuesta del dispositivo E\+L\+M327. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Devuelve}
+Estructura \hyperlink{structOxigenoResponse}{Oxigeno\+Response} con el valor A y B correspondiente al comando solicitado. 
+\end{DoxyReturn}
+
+
+Definición en la línea \hyperlink{decoders_8cpp_source_l00398}{398} del archivo \hyperlink{decoders_8cpp_source}{decoders.\+cpp}.
+
+\mbox{\Hypertarget{decoders_8hpp_a4cedb500095b25b3d4fff382094b0eb9}\label{decoders_8hpp_a4cedb500095b25b3d4fff382094b0eb9}} 
+\index{decoders.\+hpp@{decoders.\+hpp}!decode\+Relacion\+Comb\+Aire\+Actual@{decode\+Relacion\+Comb\+Aire\+Actual}}
+\index{decode\+Relacion\+Comb\+Aire\+Actual@{decode\+Relacion\+Comb\+Aire\+Actual}!decoders.\+hpp@{decoders.\+hpp}}
+\subsubsection{\texorpdfstring{decode\+Relacion\+Comb\+Aire\+Actual()}{decodeRelacionCombAireActual()}}
+{\footnotesize\ttfamily struct \hyperlink{structOxigenoResponse}{Oxigeno\+Response} decode\+Relacion\+Comb\+Aire\+Actual (\begin{DoxyParamCaption}\item[{char $\ast$}]{response }\end{DoxyParamCaption})}
+
+
+
+Función de decodificación de los sensores de oxígeno y la relación de combustible actual. 
+
+
+\begin{DoxyParams}{Parámetros}
+{\em response} & Cadena de caracteres con los bytes útiles de la respuesta del dispositivo E\+L\+M327. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Devuelve}
+Estructura \hyperlink{structOxigenoResponse}{Oxigeno\+Response} con el valor A y B correspondiente al comando solicitado. 
+\end{DoxyReturn}
+
+
+Definición en la línea \hyperlink{decoders_8cpp_source_l00453}{453} del archivo \hyperlink{decoders_8cpp_source}{decoders.\+cpp}.
+
+\mbox{\Hypertarget{decoders_8hpp_ade77bb9f8d8a2ba3aa431cdf9bdd0c32}\label{decoders_8hpp_ade77bb9f8d8a2ba3aa431cdf9bdd0c32}} 
+\index{decoders.\+hpp@{decoders.\+hpp}!decode\+Relacion\+Comb\+Aire\+Basica@{decode\+Relacion\+Comb\+Aire\+Basica}}
+\index{decode\+Relacion\+Comb\+Aire\+Basica@{decode\+Relacion\+Comb\+Aire\+Basica}!decoders.\+hpp@{decoders.\+hpp}}
+\subsubsection{\texorpdfstring{decode\+Relacion\+Comb\+Aire\+Basica()}{decodeRelacionCombAireBasica()}}
+{\footnotesize\ttfamily float decode\+Relacion\+Comb\+Aire\+Basica (\begin{DoxyParamCaption}\item[{char $\ast$}]{response }\end{DoxyParamCaption})}
+
+
+
+Función de decodificación de la relación equivaliente comandada de combustible -\/ aire. 
+
+
+\begin{DoxyParams}{Parámetros}
+{\em response} & Cadena de caracteres con los bytes útiles de la respuesta del dispositivo E\+L\+M327. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Devuelve}
+Float del valor de la respuesta decodificada. 
+\end{DoxyReturn}
+
+
+Definición en la línea \hyperlink{decoders_8cpp_source_l00496}{496} del archivo \hyperlink{decoders_8cpp_source}{decoders.\+cpp}.
+
+\mbox{\Hypertarget{decoders_8hpp_a88d7079325bf81705583d9f2101cfa15}\label{decoders_8hpp_a88d7079325bf81705583d9f2101cfa15}} 
+\index{decoders.\+hpp@{decoders.\+hpp}!decode\+Relaciones@{decode\+Relaciones}}
+\index{decode\+Relaciones@{decode\+Relaciones}!decoders.\+hpp@{decoders.\+hpp}}
+\subsubsection{\texorpdfstring{decode\+Relaciones()}{decodeRelaciones()}}
+{\footnotesize\ttfamily struct \hyperlink{structRelacionesResponse}{Relaciones\+Response} decode\+Relaciones (\begin{DoxyParamCaption}\item[{char $\ast$}]{response }\end{DoxyParamCaption})}
+
+
+
+Función de decodificación del alor máximo de la relación de equivalencia de combustible -\/ aire, voltaje del sensor de oxígenos, corriente del sensor de oxígenos y presión absoluta del colector de entrada. 
+
+
+\begin{DoxyParams}{Parámetros}
+{\em response} & Cadena de caracteres con los bytes útiles de la respuesta del dispositivo E\+L\+M327. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Devuelve}
+Estructura \hyperlink{structOxigenoResponse}{Oxigeno\+Response} con el valor A y B correspondiente al comando solicitado. 
+\end{DoxyReturn}
+
+
+Definición en la línea \hyperlink{decoders_8cpp_source_l00520}{520} del archivo \hyperlink{decoders_8cpp_source}{decoders.\+cpp}.
+
+\mbox{\Hypertarget{decoders_8hpp_a889868c7b1e554aee496e6aed7101cc4}\label{decoders_8hpp_a889868c7b1e554aee496e6aed7101cc4}} 
+\index{decoders.\+hpp@{decoders.\+hpp}!decode\+R\+PM@{decode\+R\+PM}}
+\index{decode\+R\+PM@{decode\+R\+PM}!decoders.\+hpp@{decoders.\+hpp}}
+\subsubsection{\texorpdfstring{decode\+R\+P\+M()}{decodeRPM()}}
+{\footnotesize\ttfamily float decode\+R\+PM (\begin{DoxyParamCaption}\item[{char $\ast$}]{response }\end{DoxyParamCaption})}
+
+
+
+Función de decodificación de las R\+PM del motor. 
+
+
+\begin{DoxyParams}{Parámetros}
+{\em response} & Cadena de caracteres con los bytes útiles de la respuesta del dispositivo E\+L\+M327. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Devuelve}
+Float del valor de la respuesta decodificada. 
+\end{DoxyReturn}
+
+
+Definición en la línea \hyperlink{decoders_8cpp_source_l00305}{305} del archivo \hyperlink{decoders_8cpp_source}{decoders.\+cpp}.
+
+\mbox{\Hypertarget{decoders_8hpp_a5b53fc5fc37fbee9c5e389f6c8c18438}\label{decoders_8hpp_a5b53fc5fc37fbee9c5e389f6c8c18438}} 
+\index{decoders.\+hpp@{decoders.\+hpp}!decode\+Sensor\+Oxigeno@{decode\+Sensor\+Oxigeno}}
+\index{decode\+Sensor\+Oxigeno@{decode\+Sensor\+Oxigeno}!decoders.\+hpp@{decoders.\+hpp}}
+\subsubsection{\texorpdfstring{decode\+Sensor\+Oxigeno()}{decodeSensorOxigeno()}}
+{\footnotesize\ttfamily struct \hyperlink{structOxigenoResponse}{Oxigeno\+Response} decode\+Sensor\+Oxigeno (\begin{DoxyParamCaption}\item[{char $\ast$}]{response }\end{DoxyParamCaption})}
+
+
+
+Función de decodificación de los sensores de oxígeno. 
+
+
+\begin{DoxyParams}{Parámetros}
+{\em response} & Cadena de caracteres con los bytes útiles de la respuesta del dispositivo E\+L\+M327. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Devuelve}
+Estructura \hyperlink{structOxigenoResponse}{Oxigeno\+Response} con el valor A y B correspondiente al comando solicitado. 
+\end{DoxyReturn}
+
+
+Definición en la línea \hyperlink{decoders_8cpp_source_l00341}{341} del archivo \hyperlink{decoders_8cpp_source}{decoders.\+cpp}.
+
+\mbox{\Hypertarget{decoders_8hpp_aca9cad863d8603615597a0291804c8ae}\label{decoders_8hpp_aca9cad863d8603615597a0291804c8ae}} 
+\index{decoders.\+hpp@{decoders.\+hpp}!decode\+Status@{decode\+Status}}
+\index{decode\+Status@{decode\+Status}!decoders.\+hpp@{decoders.\+hpp}}
+\subsubsection{\texorpdfstring{decode\+Status()}{decodeStatus()}}
+{\footnotesize\ttfamily std\+::map$<$std\+::string, std\+::string$>$ decode\+Status (\begin{DoxyParamCaption}\item[{char $\ast$}]{response }\end{DoxyParamCaption})}
+
+
+
+Función de decodificación del P\+ID S\+T\+A\+T\+US. 
+
+
+\begin{DoxyParams}{Parámetros}
+{\em response} & Cadena de caracteres con los bytes útiles de la respuesta del dispositivo E\+L\+M327. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Devuelve}
+Mapa string/string con el estado de los monitores de diagnóstico. 
+\end{DoxyReturn}
+
+
+Definición en la línea \hyperlink{decoders_8cpp_source_l00128}{128} del archivo \hyperlink{decoders_8cpp_source}{decoders.\+cpp}.
+
+\mbox{\Hypertarget{decoders_8hpp_a8251853ca2e5b8b2e88c75f50d53bc8d}\label{decoders_8hpp_a8251853ca2e5b8b2e88c75f50d53bc8d}} 
+\index{decoders.\+hpp@{decoders.\+hpp}!decode\+Temp\+Catalizador@{decode\+Temp\+Catalizador}}
+\index{decode\+Temp\+Catalizador@{decode\+Temp\+Catalizador}!decoders.\+hpp@{decoders.\+hpp}}
+\subsubsection{\texorpdfstring{decode\+Temp\+Catalizador()}{decodeTempCatalizador()}}
+{\footnotesize\ttfamily float decode\+Temp\+Catalizador (\begin{DoxyParamCaption}\item[{char $\ast$}]{response }\end{DoxyParamCaption})}
+
+
+
+Función de decodificación de la temperatura del catalizador. 
+
+
+\begin{DoxyParams}{Parámetros}
+{\em response} & Cadena de caracteres con los bytes útiles de la respuesta del dispositivo E\+L\+M327. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Devuelve}
+Float del valor de la respuesta decodificada. 
+\end{DoxyReturn}
+
+
+Definición en la línea \hyperlink{decoders_8cpp_source_l00476}{476} del archivo \hyperlink{decoders_8cpp_source}{decoders.\+cpp}.
+
+\mbox{\Hypertarget{decoders_8hpp_af581438645d7ff67766fa2e5eba5eaf9}\label{decoders_8hpp_af581438645d7ff67766fa2e5eba5eaf9}} 
+\index{decoders.\+hpp@{decoders.\+hpp}!decode\+Temp\+General@{decode\+Temp\+General}}
+\index{decode\+Temp\+General@{decode\+Temp\+General}!decoders.\+hpp@{decoders.\+hpp}}
+\subsubsection{\texorpdfstring{decode\+Temp\+General()}{decodeTempGeneral()}}
+{\footnotesize\ttfamily float decode\+Temp\+General (\begin{DoxyParamCaption}\item[{char $\ast$}]{response }\end{DoxyParamCaption})}
+
+
+
+Función de decodificación de la temperatura. 
+
+
+\begin{DoxyParams}{Parámetros}
+{\em response} & Cadena de caracteres con los bytes útiles de la respuesta del dispositivo E\+L\+M327. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Devuelve}
+Float del valor de la respuesta decodificada. 
+\end{DoxyReturn}
+
+
+Definición en la línea \hyperlink{decoders_8cpp_source_l00277}{277} del archivo \hyperlink{decoders_8cpp_source}{decoders.\+cpp}.
+
+\mbox{\Hypertarget{decoders_8hpp_adceefeb78a70b295b378f4c472630aa1}\label{decoders_8hpp_adceefeb78a70b295b378f4c472630aa1}} 
+\index{decoders.\+hpp@{decoders.\+hpp}!decode\+Velocidad\+M\+AF@{decode\+Velocidad\+M\+AF}}
+\index{decode\+Velocidad\+M\+AF@{decode\+Velocidad\+M\+AF}!decoders.\+hpp@{decoders.\+hpp}}
+\subsubsection{\texorpdfstring{decode\+Velocidad\+M\+A\+F()}{decodeVelocidadMAF()}}
+{\footnotesize\ttfamily float decode\+Velocidad\+M\+AF (\begin{DoxyParamCaption}\item[{char $\ast$}]{response }\end{DoxyParamCaption})}
+
+
+
+Función de decodificación de la tasa de flujo del aire (M\+AF). 
+
+
+\begin{DoxyParams}{Parámetros}
+{\em response} & Cadena de caracteres con los bytes útiles de la respuesta del dispositivo E\+L\+M327. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Devuelve}
+Float del valor de la respuesta decodificada. 
+\end{DoxyReturn}
+
+
+Definición en la línea \hyperlink{decoders_8cpp_source_l00327}{327} del archivo \hyperlink{decoders_8cpp_source}{decoders.\+cpp}.
+
+\mbox{\Hypertarget{decoders_8hpp_a66754738119854c13a74265e209083e4}\label{decoders_8hpp_a66754738119854c13a74265e209083e4}} 
+\index{decoders.\+hpp@{decoders.\+hpp}!decode\+V\+IN@{decode\+V\+IN}}
+\index{decode\+V\+IN@{decode\+V\+IN}!decoders.\+hpp@{decoders.\+hpp}}
+\subsubsection{\texorpdfstring{decode\+V\+I\+N()}{decodeVIN()}}
+{\footnotesize\ttfamily std\+::string decode\+V\+IN (\begin{DoxyParamCaption}\item[{char $\ast$}]{response }\end{DoxyParamCaption})}
+
+
+
+Función de decodificación del Número de Identificación del Vehículo (V\+IN). 
+
+
+\begin{DoxyParams}{Parámetros}
+{\em response} & Cadena de caracteres con los bytes útiles de la respuesta del dispositivo E\+L\+M327. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Devuelve}
+String con el Número de Identificación del Vehículo (V\+IN). 
+\end{DoxyReturn}
+
+
+Definición en la línea \hyperlink{decoders_8cpp_source_l00021}{21} del archivo \hyperlink{decoders_8cpp_source}{decoders.\+cpp}.
+
+\mbox{\Hypertarget{decoders_8hpp_a5937fc059394faad8c9c96a0b27a8796}\label{decoders_8hpp_a5937fc059394faad8c9c96a0b27a8796}} 
+\index{decoders.\+hpp@{decoders.\+hpp}!decode\+Voltaje\+Control@{decode\+Voltaje\+Control}}
+\index{decode\+Voltaje\+Control@{decode\+Voltaje\+Control}!decoders.\+hpp@{decoders.\+hpp}}
+\subsubsection{\texorpdfstring{decode\+Voltaje\+Control()}{decodeVoltajeControl()}}
+{\footnotesize\ttfamily float decode\+Voltaje\+Control (\begin{DoxyParamCaption}\item[{char $\ast$}]{response }\end{DoxyParamCaption})}
+
+
+
+Función de decodificación del voltaje del módulo de control. 
+
+
+\begin{DoxyParams}{Parámetros}
+{\em response} & Cadena de caracteres con los bytes útiles de la respuesta del dispositivo E\+L\+M327. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Devuelve}
+Float del valor de la respuesta decodificada. 
+\end{DoxyReturn}
+
+
+Definición en la línea \hyperlink{decoders_8cpp_source_l00485}{485} del archivo \hyperlink{decoders_8cpp_source}{decoders.\+cpp}.
+

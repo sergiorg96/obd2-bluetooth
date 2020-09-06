@@ -1,0 +1,84 @@
+\hypertarget{loadcfg_8cpp_source}{}\section{loadcfg.\+cpp}
+\label{loadcfg_8cpp_source}\index{loadcfg.\+cpp@{loadcfg.\+cpp}}
+
+\begin{DoxyCode}
+00001 
+00008 \textcolor{preprocessor}{#include <stdio.h>}
+00009 \textcolor{preprocessor}{#include <stdlib.h>}
+00010 \textcolor{preprocessor}{#include <string.h>}
+00011 \textcolor{preprocessor}{#include <sys/time.h>}
+00012 \textcolor{preprocessor}{#include <time.h>}
+00013 \textcolor{preprocessor}{#include <sys/types.h>}
+00014 \textcolor{preprocessor}{#include <sys/socket.h>}
+00015 \textcolor{preprocessor}{#include <netinet/in.h>}
+00016 \textcolor{preprocessor}{#include <arpa/inet.h>}
+00017 \textcolor{preprocessor}{#include <netdb.h>}
+00018 \textcolor{preprocessor}{#include <errno.h>}
+00019 \textcolor{preprocessor}{#include <iostream>}
+00020 \textcolor{preprocessor}{#include <fstream>}
+00021 \textcolor{preprocessor}{#include <algorithm>}
+00022 \textcolor{preprocessor}{#include <map>}
+00023 \textcolor{preprocessor}{#include <string>}
+00024 \textcolor{preprocessor}{#include <ifaddrs.h>}
+00025 \textcolor{preprocessor}{#include <ctype.h>}
+00026 \textcolor{preprocessor}{#include <unistd.h>}
+00027 \textcolor{preprocessor}{#include <stdexcept>}
+00028 \textcolor{preprocessor}{#include <sstream>}
+00029 \textcolor{preprocessor}{#include <netpacket/packet.h>}
+00030 \textcolor{preprocessor}{#include "\hyperlink{loadcfg_8hpp}{loadcfg.hpp}"}
+00031 
+\Hypertarget{loadcfg_8cpp_source_l00032}\hyperlink{loadcfg_8hpp_a91f772c379dc1d6c6088d077aa722574}{00032} \textcolor{keywordtype}{void} \hyperlink{loadcfg_8cpp_a91f772c379dc1d6c6088d077aa722574}{shit} (\textcolor{keyword}{const} \textcolor{keywordtype}{char}* mens)
+00033 \{
+00034 std::cerr << \textcolor{stringliteral}{"ABORTING: "} << mens << \textcolor{stringliteral}{" - "} << errno << \textcolor{stringliteral}{"\(\backslash\)n"};
+00035 perror(\textcolor{stringliteral}{"Error is "});
+00036 exit(1);
+00037 \}
+00038 
+\Hypertarget{loadcfg_8cpp_source_l00039}\hyperlink{loadcfg_8hpp_a4667fdb45ba6b04ab678f894e58a2fcb}{00039} \textcolor{keywordtype}{void} \hyperlink{loadcfg_8cpp_a4667fdb45ba6b04ab678f894e58a2fcb}{loadCfg} (\textcolor{keyword}{const} \textcolor{keywordtype}{char}* filename, \hyperlink{loadcfg_8hpp_a3bc0e674227412446fc364a733cebde6}{cfgType}* pcfg)
+00040 \{
+00041    std::ifstream cFile (filename);
+00042    \textcolor{keywordflow}{if} (cFile.is\_open())\{
+00043      std::string line;
+00044      \textcolor{keywordflow}{while}(getline(cFile, line))\{
+00045        line.erase(std::remove\_if(line.begin(), line.end(), ::isspace), line.end());
+00046        \textcolor{keywordflow}{if}(line[0] == \textcolor{charliteral}{'#'} || line.empty())
+00047          \textcolor{keywordflow}{continue};
+00048        \textcolor{keywordtype}{int} delimiterPos = line.find(\textcolor{stringliteral}{"="});
+00049        std::string name = line.substr(0, delimiterPos).c\_str();
+00050        std::string value = line.substr(delimiterPos + 1).c\_str();
+00051        (*pcfg)[name] = value;
+00052      \}
+00053    \}
+00054    \textcolor{keywordflow}{else} \{
+00055      \hyperlink{loadcfg_8cpp_a91f772c379dc1d6c6088d077aa722574}{shit}(\textcolor{stringliteral}{"Couldn't open config file for reading.\(\backslash\)n"});
+00056    \}
+00057 \}
+00058 
+\Hypertarget{loadcfg_8cpp_source_l00059}\hyperlink{loadcfg_8hpp_ae4db05d33445e6b6ca0c4a6a0ba23bf3}{00059} std::string \hyperlink{loadcfg_8cpp_ae4db05d33445e6b6ca0c4a6a0ba23bf3}{getmac} (\textcolor{keyword}{const} \textcolor{keywordtype}{char}* name)
+00060 \{
+00061    \textcolor{keywordtype}{int} i;
+00062    \textcolor{keyword}{struct }ifaddrs *addrs,*tmp;
+00063    std::stringstream macaddress;
+00064    \textcolor{keywordtype}{char} mymac[18];
+00065    getifaddrs(&addrs);
+00066    tmp = addrs;
+00067 
+00068    memset (mymac, 0, 18);
+00069    \textcolor{keywordflow}{while} (tmp) \{
+00070      \textcolor{keywordflow}{if} (!strcmp(name, tmp->ifa\_name))\{
+00071           \textcolor{keyword}{struct }sockaddr\_ll *s = (\textcolor{keyword}{struct }sockaddr\_ll*)tmp->ifa\_addr;
+00072           for (i=0; i <s->sll\_halen; i++)\{
+00073          sprintf(mymac, \textcolor{stringliteral}{"%s%02x%c"},
+00074                                 mymac,
+00075                                 (s->sll\_addr[i]),
+00076                                 (i+1!=s->sll\_halen)?\textcolor{charliteral}{':'}:0);
+00077           \}
+00078           macaddress << mymac;
+00079           \textcolor{keywordflow}{return} macaddress.str();
+00080         \}
+00081      tmp = tmp->ifa\_next;
+00082    \}
+00083    freeifaddrs(addrs);
+00084    \textcolor{keywordflow}{return} std::string(\textcolor{stringliteral}{"ff:ff:ff:ff:ff:ff"});
+00085 \}
+\end{DoxyCode}

@@ -1,0 +1,154 @@
+\hypertarget{picangps_8cpp_source}{}\section{picangps.\+cpp}
+\label{picangps_8cpp_source}\index{picangps.\+cpp@{picangps.\+cpp}}
+
+\begin{DoxyCode}
+00001 \textcolor{preprocessor}{#include "picangps.hpp"}
+00002 
+00003 \textcolor{keywordtype}{int} openGPS (std::string tty) \{ 
+00004   \textcolor{keywordtype}{int} fd;
+00005   \textcolor{keyword}{struct }termios options;
+00006   
+00007   fd=open(tty.c\_str(), O\_RDONLY | O\_NOCTTY | O\_NDELAY);
+00008   \textcolor{comment}{//int result = flock(fd, LOCK\_EX);}
+00009   \textcolor{comment}{//if(result==0)\{}
+00010     fcntl(fd, F\_SETFL, 0);
+00011     \textcolor{keywordflow}{if}( 0 != tcgetattr(fd, &options))
+00012      \textcolor{keywordflow}{return} -1;
+00013 
+00014    options.c\_cflag &= ~PARENB;
+00015    options.c\_cflag &= ~CSTOPB;
+00016    options.c\_cflag &= ~CSIZE;
+00017    options.c\_cflag |= CS8;
+00018 
+00019    options.c\_cflag |= (CLOCAL | CREAD);
+00020 
+00021   options.c\_lflag &= ~(ICANON | ECHO | ECHOE | ISIG); \textcolor{comment}{/* raw input */}
+00022 
+00023    options.c\_oflag &= ~OPOST;
+00024 
+00025    options.c\_cc[VMIN]  = 0;
+00026    options.c\_cc[VTIME] = 0;
+00027 
+00028    cfsetispeed(&options, B9600);
+00029    cfsetospeed(&options, B9600);
+00030    \textcolor{keywordflow}{if} (0 != tcsetattr(fd, TCSANOW, &options))
+00031      \textcolor{keywordflow}{return} -1;
+00032    \textcolor{keywordflow}{return} fd;
+00033  \textcolor{comment}{//\}}
+00034 \}
+00035 
+00036 \textcolor{keywordtype}{bool} readPicanGPS(\textcolor{keywordtype}{int} fd, \textcolor{keywordtype}{char}* buffer, \textcolor{keywordtype}{int} maxsiz, \textcolor{keywordtype}{int} seconds)
+00037 \{
+00038   fd\_set rfds;
+00039   \textcolor{keywordtype}{int} ret;
+00040   \textcolor{keyword}{struct }timeval tv;
+00041   \textcolor{keywordtype}{char}* bufptr;
+00042   \textcolor{keywordtype}{int}  maxchars = 800;
+00043   \textcolor{keywordtype}{int}  nbytes;       \textcolor{comment}{/* Number of bytes read */}
+00044   \textcolor{keyword}{const} \textcolor{keywordtype}{char}* tag = \textcolor{stringliteral}{"$GPRMC,"};
+00045   \textcolor{keywordtype}{char}* startline;
+00046   \textcolor{keywordtype}{char}* endline;
+00047   
+00048   \textcolor{keywordflow}{if} (fd < 0) 
+00049     \textcolor{keywordflow}{return} \textcolor{keyword}{false};
+00050   
+00051   bufptr = buffer;
+00052   \textcolor{keywordflow}{for}(;maxchars>0;)\{
+00053     \textcolor{comment}{//  fprintf(stderr, "->Select GPS\(\backslash\)n");}
+00054     tv.tv\_sec = seconds;
+00055     tv.tv\_usec = 0;
+00056     FD\_ZERO(&rfds);
+00057     FD\_SET(fd, &rfds);
+00058     ret = select(fd+1, &rfds, NULL, NULL, &tv);
+00059 
+00060     \textcolor{comment}{//  fprintf(stderr, "ret is %d\(\backslash\)n",ret);}
+00061     \textcolor{keywordflow}{if} (ret == 0) \{ \textcolor{comment}{/* timeout, return invalid data */}
+00062       \textcolor{keywordflow}{return} \textcolor{keyword}{false};
+00063     \}
+00064     \textcolor{keywordflow}{if} (FD\_ISSET(fd, &rfds))\{
+00065       \textcolor{comment}{//      nbytes = read(fd, bufptr, buffer + sizeof(buffer) - bufptr - 1);}
+00066       nbytes = read(fd, bufptr, buffer - bufptr + maxsiz - 1);
+00067       maxchars -= nbytes;
+00068       bufptr += nbytes;
+00069       *bufptr = \textcolor{charliteral}{'\(\backslash\)0'};
+00070       \textcolor{comment}{//      fprintf(stderr, "Reading %d bytes from fd \(\backslash\)"%s\(\backslash\)"\(\backslash\)n", nbytes, buffer);}
+00071 
+00072       \textcolor{keywordflow}{if} (strlen(buffer)>5*strlen(tag))\{
+00073         startline = strstr(buffer, tag);
+00074         \textcolor{keywordflow}{if} ( NULL == startline )\{
+00075           bufptr = buffer;
+00076           \textcolor{keywordflow}{continue};
+00077         \}
+00078         \textcolor{comment}{// else got line header}
+00079         endline = strstr(startline, \textcolor{stringliteral}{"\(\backslash\)n"});
+00080         \textcolor{keywordflow}{if} ( NULL == endline )\{
+00081           \textcolor{comment}{// gather more data}
+00082           \textcolor{keywordflow}{continue};
+00083         \}
+00084         \textcolor{keywordflow}{else} \{
+00085           \textcolor{comment}{//move to start of buffer and return}
+00086           \textcolor{keywordtype}{char}* pc=startline;
+00087           bufptr = buffer;
+00088           \textcolor{keywordflow}{for}(;pc<=endline;pc++, bufptr++)
+00089             *bufptr = *pc;
+00090           *bufptr=\textcolor{charliteral}{'\(\backslash\)0'};
+00091           \textcolor{keywordflow}{return} \textcolor{keyword}{true};
+00092         \}
+00093       \}
+00094       \textcolor{keywordflow}{else} \{
+00095         ;
+00096         \textcolor{comment}{//fprintf(stderr, "get more data\(\backslash\)n");}
+00097       \}
+00098     \}
+00099   \}
+00100   \textcolor{comment}{//fprintf(stderr, "too many tries\(\backslash\)n");}
+00101   \textcolor{keywordflow}{return} \textcolor{keyword}{false};
+00102 \}
+00103 
+00121 \textcolor{comment}{/* field, long */}
+00122 
+00123 
+00124 
+00128 \textcolor{keywordtype}{char}* explore (\textcolor{keywordtype}{int} field, \textcolor{keywordtype}{char} sep, \textcolor{keywordtype}{char}* s)
+00129 \{
+00130   \textcolor{keywordflow}{for} (; field; field--)\{
+00131     \textcolor{keywordflow}{for} (; *s && *s != sep; s++);
+00132     \textcolor{keywordflow}{if}(*s == sep)
+00133       s++;
+00134     \textcolor{keywordflow}{else}
+00135       \textcolor{keywordflow}{return} 0;
+00136   \}
+00137   \textcolor{keywordflow}{return} s;
+00138 \}
+00139 
+00140 std::string PicanGetGPS (std::string serialPort)
+00141 \{
+00142   \textcolor{keyword}{const} \textcolor{keywordtype}{int} maxbuf = 2560;
+00143   \textcolor{keywordtype}{char} buffer [maxbuf];
+00144   \textcolor{keywordtype}{char} msg[]    = \textcolor{stringliteral}{"hhmmss,ddmmyy,llll.lll,N,yyyyy.yyy,E"}; 
+00145 
+00146   memset(buffer, 0, maxbuf);
+00147   std::string retval(\textcolor{stringliteral}{",,,,,"});
+00148 
+00149   \textcolor{keywordtype}{int}      fd = openGPS(serialPort); 
+00150   \textcolor{keywordtype}{bool}  valid = readPicanGPS(fd, buffer, maxbuf, 3);
+00151   close(fd);
+00152   \textcolor{keywordflow}{if} (!valid)
+00153     \textcolor{keywordflow}{return} retval;
+00154 
+00155   \textcolor{keywordtype}{char}* pc;
+00156   pc = explore(2, \textcolor{charliteral}{','}, buffer);
+00157   \textcolor{keywordflow}{if} (\textcolor{charliteral}{'A'} != *pc)   
+00158     \textcolor{keywordflow}{return} retval;
+00159       
+00160   strncpy(&msg[0],   explore(1, \textcolor{charliteral}{','}, buffer), 6);
+00161   strncpy(&msg[7],   explore(9, \textcolor{charliteral}{','}, buffer), 6);
+00162   strncpy(&msg[14],  explore(3, \textcolor{charliteral}{','}, buffer), 8);
+00163   strncpy(&msg[23],  explore(4, \textcolor{charliteral}{','}, buffer), 1);
+00164   strncpy(&msg[25],  explore(5, \textcolor{charliteral}{','}, buffer), 9);
+00165   strncpy(&msg[35],  explore(6, \textcolor{charliteral}{','}, buffer), 1);
+00166 
+00167   \textcolor{keywordflow}{return} std::string(msg);
+00168 \}
+00169 
+\end{DoxyCode}

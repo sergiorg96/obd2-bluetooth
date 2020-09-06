@@ -271,7 +271,9 @@ public:
 		
 		debugLog("Mensaje a enviar: %s", buf);
 		debugLog("Enviando mensaje...");
-		write(this->m_cli_s, buf, strlen(buf));
+		if(write(this->m_cli_s, buf, strlen(buf)) != (ssize_t) strlen(buf)){
+			debugError("Error enviando mensaje.");
+		}
 		
 		//Queda a la espera de finalización de ejecución del hilo de recepción del mensaje OBD
 		t1.join();

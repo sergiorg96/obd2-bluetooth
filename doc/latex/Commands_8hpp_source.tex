@@ -1,0 +1,151 @@
+\hypertarget{Commands_8hpp_source}{}\section{Commands.\+hpp}
+\label{Commands_8hpp_source}\index{Commands.\+hpp@{Commands.\+hpp}}
+
+\begin{DoxyCode}
+00001 
+00008 \textcolor{preprocessor}{#ifndef COMMANDS\_HPP}
+00009 \textcolor{preprocessor}{#define COMMANDS\_HPP}
+00010 
+00011 \textcolor{preprocessor}{#include <iostream>}
+00012 \textcolor{preprocessor}{#include <any>}
+00013 
+00014 \textcolor{preprocessor}{#include "external/json.hpp"}
+00015 \textcolor{preprocessor}{#include "\hyperlink{decoders_8hpp}{decoders.hpp}"}
+00016 
+\Hypertarget{Commands_8hpp_source_l00021}\hyperlink{Commands_8hpp_ab701e3ac61a85b337ec5c1abaad6742d}{00021} \textcolor{keyword}{using} \hyperlink{Commands_8hpp_ab701e3ac61a85b337ec5c1abaad6742d}{json} = \hyperlink{Commands_8hpp_ab701e3ac61a85b337ec5c1abaad6742d}{nlohmann::json};
+00022 
+\Hypertarget{Commands_8hpp_source_l00029}\hyperlink{classCommands}{00029} \textcolor{keyword}{class }\hyperlink{classCommands}{Commands} \{
+00030 \textcolor{keyword}{public}:
+00031 
+\Hypertarget{Commands_8hpp_source_l00038}\hyperlink{classCommands_ad71a0aafa9f942580b6c316ca07aef48}{00038}     \hyperlink{classCommands_ad71a0aafa9f942580b6c316ca07aef48}{Commands}(\hyperlink{Commands_8hpp_ab701e3ac61a85b337ec5c1abaad6742d}{json} data) 
+00039     :   m\_name(data[\textcolor{stringliteral}{"name"}]),
+00040         m\_description(data[\textcolor{stringliteral}{"description"}]),
+00041         m\_cmd(data[\textcolor{stringliteral}{"cmd"}]),
+00042         m\_bytes\_response(data[\textcolor{stringliteral}{"bytes\_response"}]),
+00043         m\_decoder(data[\textcolor{stringliteral}{"decoder"}]),
+00044         m\_min\_unit(data[\textcolor{stringliteral}{"min\_unit"}]),
+00045         m\_max\_unit(data[\textcolor{stringliteral}{"max\_unit"}]),
+00046         m\_units(data[\textcolor{stringliteral}{"units"}]),
+00047         m\_type\_data(data[\textcolor{stringliteral}{"type\_data"}])
+00048     \{\}
+00049     
+\Hypertarget{Commands_8hpp_source_l00055}\hyperlink{classCommands_adf3d8a96310b1f4e57a6ecf0f2f153ea}{00055}     std::string \hyperlink{classCommands_adf3d8a96310b1f4e57a6ecf0f2f153ea}{getName}()\{ \textcolor{keywordflow}{return} this->m\_name; \}
+00056 
+\Hypertarget{Commands_8hpp_source_l00062}\hyperlink{classCommands_ad82fe7dfcf1908423bdb59d048020e26}{00062}     std::string \hyperlink{classCommands_ad82fe7dfcf1908423bdb59d048020e26}{getDescription}()\{ \textcolor{keywordflow}{return} this->m\_description; \}
+00063 
+\Hypertarget{Commands_8hpp_source_l00069}\hyperlink{classCommands_a9aee21ab91fdfc8e9daa59e1e8f20b73}{00069}     std::string \hyperlink{classCommands_a9aee21ab91fdfc8e9daa59e1e8f20b73}{getCMD}()\{ \textcolor{keywordflow}{return} this->m\_cmd; \}
+00070 
+\Hypertarget{Commands_8hpp_source_l00076}\hyperlink{classCommands_a9b3d961dbebbd25f141d18cd5a267738}{00076}     \textcolor{keywordtype}{int} \hyperlink{classCommands_a9b3d961dbebbd25f141d18cd5a267738}{getBytesResponse}()\{ \textcolor{keywordflow}{return} this->m\_bytes\_response; \}
+00077 
+\Hypertarget{Commands_8hpp_source_l00083}\hyperlink{classCommands_a8b4c2a655d8dd3de334338d6684d469c}{00083}     std::string \hyperlink{classCommands_a8b4c2a655d8dd3de334338d6684d469c}{getDecoder}()\{ \textcolor{keywordflow}{return} this->m\_decoder; \}
+00084 
+\Hypertarget{Commands_8hpp_source_l00090}\hyperlink{classCommands_af0a1e2ea65b5a57997c721a8d77a1013}{00090}     \textcolor{keywordtype}{float} \hyperlink{classCommands_af0a1e2ea65b5a57997c721a8d77a1013}{getMIN}()\{ \textcolor{keywordflow}{return} this->m\_min\_unit; \}
+00091 
+\Hypertarget{Commands_8hpp_source_l00097}\hyperlink{classCommands_afbad1051313d0cdecba276384cb7fc6b}{00097}     \textcolor{keywordtype}{float} \hyperlink{classCommands_afbad1051313d0cdecba276384cb7fc6b}{getMAX}()\{ \textcolor{keywordflow}{return} this->m\_max\_unit; \}
+00098 
+\Hypertarget{Commands_8hpp_source_l00104}\hyperlink{classCommands_ac67214a4fbd93fbb4d8ebb2dd815a3fa}{00104}     std::string \hyperlink{classCommands_ac67214a4fbd93fbb4d8ebb2dd815a3fa}{getUnits}()\{ \textcolor{keywordflow}{return} this->m\_units; \}
+00105 
+\Hypertarget{Commands_8hpp_source_l00115}\hyperlink{classCommands_a7d983e153465d335db0b3ad7724b8ef6}{00115}     std::string \hyperlink{classCommands_a7d983e153465d335db0b3ad7724b8ef6}{getTypeData}()\{ \textcolor{keywordflow}{return} this->m\_type\_data; \}
+00116 
+\Hypertarget{Commands_8hpp_source_l00122}\hyperlink{classCommands_a72801682a4ac2ba214b0ca0d4b85b974}{00122}     std::any \hyperlink{classCommands_a72801682a4ac2ba214b0ca0d4b85b974}{getResValue}()\{ \textcolor{keywordflow}{return} this->m\_resValue; \}
+00123 
+\Hypertarget{Commands_8hpp_source_l00132}\hyperlink{classCommands_a0359da788a50c6aad69153dc0f2644e4}{00132}     \hyperlink{Commands_8hpp_ab701e3ac61a85b337ec5c1abaad6742d}{json} \hyperlink{classCommands_a0359da788a50c6aad69153dc0f2644e4}{getJson}()\{
+00133         \hyperlink{Commands_8hpp_ab701e3ac61a85b337ec5c1abaad6742d}{json} data;
+00134 
+00135         \textcolor{keywordflow}{try}\{
+00136             \textcolor{keywordflow}{if} (\hyperlink{classCommands_a7d983e153465d335db0b3ad7724b8ef6}{getTypeData}() == \textcolor{stringliteral}{"int"})\{
+00137                 \textcolor{keyword}{auto} resValue = std::any\_cast<\textcolor{keywordtype}{int}>(this->m\_resValue);
+00138                 data[\textcolor{stringliteral}{"value"}] = std::to\_string(resValue);
+00139             \}
+00140             \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (\hyperlink{classCommands_a7d983e153465d335db0b3ad7724b8ef6}{getTypeData}() == \textcolor{stringliteral}{"float"})\{
+00141                 \textcolor{keyword}{auto} resValue = std::any\_cast<\textcolor{keywordtype}{float}>(this->m\_resValue);
+00142                 data[\textcolor{stringliteral}{"value"}] = std::to\_string(resValue);
+00143             \}
+00144             \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (\hyperlink{classCommands_a7d983e153465d335db0b3ad7724b8ef6}{getTypeData}() == \textcolor{stringliteral}{"string"})\{
+00145                 \textcolor{keyword}{auto} resValue = std::any\_cast<std::string>(this->m\_resValue);
+00146                 data[\textcolor{stringliteral}{"value"}] = resValue;
+00147             \}
+00148             \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (\hyperlink{classCommands_a7d983e153465d335db0b3ad7724b8ef6}{getTypeData}() == \textcolor{stringliteral}{"vectorStr"})\{
+00149                 \textcolor{keyword}{auto} resValue = std::any\_cast<std::vector<std::string>>(this->m\_resValue);
+00150                 data[\textcolor{stringliteral}{"value"}] = resValue;
+00151             \}
+00152             \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (\hyperlink{classCommands_a7d983e153465d335db0b3ad7724b8ef6}{getTypeData}() == \textcolor{stringliteral}{"vectorInt"})\{
+00153                 \textcolor{keyword}{auto} resValue = std::any\_cast<std::vector<int>>(this->m\_resValue);
+00154                 data[\textcolor{stringliteral}{"value"}] = resValue;
+00155             \}
+00156             \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (\hyperlink{classCommands_a7d983e153465d335db0b3ad7724b8ef6}{getTypeData}() == \textcolor{stringliteral}{"map"})\{
+00157                 \textcolor{keyword}{auto} resValue = std::any\_cast<std::map<std::string, std::string>>(this->m\_resValue);
+00158                 data[\textcolor{stringliteral}{"value"}] = resValue;
+00159             \}
+00160             \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (\hyperlink{classCommands_a7d983e153465d335db0b3ad7724b8ef6}{getTypeData}() == \textcolor{stringliteral}{"OxigenoResponse"})\{
+00161                 \textcolor{keyword}{auto} resValue = std::any\_cast<\textcolor{keyword}{struct }\hyperlink{structOxigenoResponse}{OxigenoResponse}>(this->m\_resValue);
+00162                 std::map<std::string, float> mapResValue;
+00163                 mapResValue[\textcolor{stringliteral}{"A"}] = resValue.\hyperlink{structOxigenoResponse_a068c403e5746226cf22bb020b4c786d3}{A};
+00164                 mapResValue[\textcolor{stringliteral}{"B"}] = resValue.B;
+00165                 data[\textcolor{stringliteral}{"value"}] = mapResValue;
+00166             \}
+00167             \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (\hyperlink{classCommands_a7d983e153465d335db0b3ad7724b8ef6}{getTypeData}() == \textcolor{stringliteral}{"RelacionesResponse"})\{
+00168                 \textcolor{keyword}{auto} resValue = std::any\_cast<\textcolor{keyword}{struct }\hyperlink{structRelacionesResponse}{RelacionesResponse}>(this->m\_resValue
+      );
+00169                 std::map<std::string, int> mapResValue;
+00170                 mapResValue[\textcolor{stringliteral}{"A"}] = resValue.\hyperlink{structRelacionesResponse_a560d1e6af01b999625b467ef3f858181}{A};
+00171                 mapResValue[\textcolor{stringliteral}{"B"}] = resValue.B;
+00172                 mapResValue[\textcolor{stringliteral}{"C"}] = resValue.C;
+00173                 mapResValue[\textcolor{stringliteral}{"D"}] = resValue.D;
+00174                 data[\textcolor{stringliteral}{"value"}] = mapResValue;
+00175             \}
+00176 
+00177         \} \textcolor{keywordflow}{catch}(\textcolor{keyword}{const} std::bad\_any\_cast& e) \{
+00178             std::cerr << e.what() << std::endl;
+00179         \}
+00180         data[\textcolor{stringliteral}{"name"}] = this->m\_name;
+00181         data[\textcolor{stringliteral}{"description"}] = this->m\_description;
+00182         data[\textcolor{stringliteral}{"units"}] = this->m\_units;
+00183         
+00184 
+00185         \textcolor{keywordflow}{return} data;
+00186     \}
+00187 
+\Hypertarget{Commands_8hpp_source_l00195}\hyperlink{classCommands_ab4806a2fda5c80e10ab4446faa1e39b5}{00195}     std::string \hyperlink{classCommands_ab4806a2fda5c80e10ab4446faa1e39b5}{getCMDResponse}() \{
+00196         std::string CMDResponse;
+00197         CMDResponse = this->m\_cmd;
+00198         CMDResponse.replace(0, 1, \textcolor{stringliteral}{"4"});
+00199         \textcolor{keywordflow}{return} CMDResponse;
+00200     \}
+00201 
+\Hypertarget{Commands_8hpp_source_l00207}\hyperlink{classCommands_a8fd31a6ed848078dd67bf7ae303cfb9b}{00207}     \textcolor{keywordtype}{void} \hyperlink{classCommands_a8fd31a6ed848078dd67bf7ae303cfb9b}{setName}(std::string name) \{ this->m\_name = name; \}
+00208 
+\Hypertarget{Commands_8hpp_source_l00214}\hyperlink{classCommands_aa430824877071f732b1a9aa9ff1bbf94}{00214}     \textcolor{keywordtype}{void} \hyperlink{classCommands_aa430824877071f732b1a9aa9ff1bbf94}{setDescription}(std::string description) \{ this->m\_description = description; \}
+00215 
+\Hypertarget{Commands_8hpp_source_l00221}\hyperlink{classCommands_a8ef86479788a98de99cc6ad6a78da9a4}{00221}     \textcolor{keywordtype}{void} \hyperlink{classCommands_a8ef86479788a98de99cc6ad6a78da9a4}{setCMD}(std::string cmd) \{ this->m\_cmd = cmd; \}
+00222 
+\Hypertarget{Commands_8hpp_source_l00228}\hyperlink{classCommands_a77c946b91fa3f3b7dbdc51ea1cc8208a}{00228}     \textcolor{keywordtype}{void} \hyperlink{classCommands_a77c946b91fa3f3b7dbdc51ea1cc8208a}{setBytesResponse}(\textcolor{keywordtype}{int} bytes\_response) \{ this->m\_bytes\_response = bytes\_response; \}
+00229 
+\Hypertarget{Commands_8hpp_source_l00235}\hyperlink{classCommands_acf92f3f0134534808bf6dcfb4496cf97}{00235}     \textcolor{keywordtype}{void} \hyperlink{classCommands_acf92f3f0134534808bf6dcfb4496cf97}{setDecoder}(std::string decoder) \{ this->m\_decoder = decoder; \}
+00236 
+\Hypertarget{Commands_8hpp_source_l00242}\hyperlink{classCommands_a073788fa37adc5fc91d3a40b869b8e67}{00242}     \textcolor{keywordtype}{void} \hyperlink{classCommands_a073788fa37adc5fc91d3a40b869b8e67}{setMIN}(\textcolor{keywordtype}{float} min\_unit) \{ this->m\_min\_unit = min\_unit; \}
+00243 
+\Hypertarget{Commands_8hpp_source_l00249}\hyperlink{classCommands_a364530a20f17fb20420c5980b1b07ea2}{00249}     \textcolor{keywordtype}{void} \hyperlink{classCommands_a364530a20f17fb20420c5980b1b07ea2}{setMAX}(\textcolor{keywordtype}{float} max\_unit) \{ this->m\_max\_unit = max\_unit; \}
+00250 
+\Hypertarget{Commands_8hpp_source_l00256}\hyperlink{classCommands_a35d92f904b7e1d2e806f7f7d92b23952}{00256}     \textcolor{keywordtype}{void} \hyperlink{classCommands_a35d92f904b7e1d2e806f7f7d92b23952}{setUnits}(std::string units) \{ this->m\_units = units; \}
+00257 
+\Hypertarget{Commands_8hpp_source_l00263}\hyperlink{classCommands_a1b2c552b493828ef9465d153809be3f2}{00263}     \textcolor{keywordtype}{void} \hyperlink{classCommands_a1b2c552b493828ef9465d153809be3f2}{setTypeData}(std::string type\_data) \{ this->m\_type\_data = type\_data; \}
+00264 
+\Hypertarget{Commands_8hpp_source_l00272}\hyperlink{classCommands_a5c8eb30ed986a5071daf5f1135c2eb15}{00272}     \textcolor{keywordtype}{void} \hyperlink{classCommands_a5c8eb30ed986a5071daf5f1135c2eb15}{setResValue}(\textcolor{keyword}{auto} resValue) \{ this->m\_resValue = resValue; \}
+00273 \textcolor{keyword}{private}:
+00274     \textcolor{comment}{// Atributos privados de la clase "Commands"}
+00275     std::string m\_name; 
+00276     std::string m\_description; 
+00277     std::string m\_cmd; 
+00278     \textcolor{keywordtype}{int} m\_bytes\_response; 
+00279     std::string m\_decoder; 
+00280     \textcolor{keywordtype}{float} m\_min\_unit; 
+00281     \textcolor{keywordtype}{float} m\_max\_unit; 
+00282     std::string m\_units; 
+00283     std::string m\_type\_data; 
+00284     std::any m\_resValue; 
+00285 \};
+00286 
+00287 
+00288 \textcolor{preprocessor}{#endif}
+\end{DoxyCode}

@@ -1,0 +1,196 @@
+\hypertarget{UnitTestCase_8cpp}{}\section{Referencia del Archivo Unit\+Test\+Case.\+cpp}
+\label{UnitTestCase_8cpp}\index{Unit\+Test\+Case.\+cpp@{Unit\+Test\+Case.\+cpp}}
+
+
+Archivo que contiene el conjunto de pruebas unitarias y de integración del sistema.  
+
+
+{\ttfamily \#include \char`\"{}../src/external/catch.\+hpp\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}../src/decoders.\+hpp\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}../src/\+Obd.\+hpp\char`\"{}}\newline
+Dependencia gráfica adjunta para Unit\+Test\+Case.\+cpp\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{UnitTestCase_8cpp__incl}
+\end{center}
+\end{figure}
+\subsection*{defines}
+\begin{DoxyCompactItemize}
+\item 
+\#define \hyperlink{UnitTestCase_8cpp_a656eb5868e824d59f489f910db438420}{C\+A\+T\+C\+H\+\_\+\+C\+O\+N\+F\+I\+G\+\_\+\+M\+A\+IN}
+\item 
+\#define \hyperlink{UnitTestCase_8cpp_aeca034f67218340ecb2261a22c2f3dcd}{B\+U\+F\+S\+I\+ZE}~30
+\item 
+\#define \hyperlink{UnitTestCase_8cpp_a39116fcd47bddafea0487b3f674b9609}{W\+A\+I\+T\+\_\+\+O\+B\+D\+S\+IM}~15
+\end{DoxyCompactItemize}
+\subsection*{Funciones}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{UnitTestCase_8cpp_ae9f15809d7998bb4a7404d34bb87a5e3}{get\+Minicom\+C\+MD} (char $\ast$cmd)
+\begin{DoxyCompactList}\small\item\em Función que obtiene el comando Minicom para la primera conexión con el simulador O\+B\+D\+S\+IM. \end{DoxyCompactList}\item 
+void \hyperlink{UnitTestCase_8cpp_a4460093e274738a0e1bbb551c1d1d3fd}{init\+O\+B\+D\+S\+IM} ()
+\begin{DoxyCompactList}\small\item\em Función de inicialización del simulador O\+B\+D\+S\+IM. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{UnitTestCase_8cpp_ad24bf860f798931c63aaa488e08b8b4e}\label{UnitTestCase_8cpp_ad24bf860f798931c63aaa488e08b8b4e}} 
+void \hyperlink{UnitTestCase_8cpp_ad24bf860f798931c63aaa488e08b8b4e}{close\+O\+B\+D\+S\+IM} ()
+\begin{DoxyCompactList}\small\item\em Función de finalización del simulador O\+B\+D\+S\+IM. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{UnitTestCase_8cpp_a094ceea8956a9b495823bde621ea759a}\label{UnitTestCase_8cpp_a094ceea8956a9b495823bde621ea759a}} 
+\hyperlink{UnitTestCase_8cpp_a094ceea8956a9b495823bde621ea759a}{T\+E\+S\+T\+\_\+\+C\+A\+SE} (\char`\"{}Test O\+BD class\char`\"{}, \char`\"{}\mbox{[}O\+BD\mbox{]}\char`\"{})
+\begin{DoxyCompactList}\small\item\em Prueba de integración para el funcionamiento general del sistema. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{UnitTestCase_8cpp_aa01bede4cf032808617f744cfdc34e85}\label{UnitTestCase_8cpp_aa01bede4cf032808617f744cfdc34e85}} 
+\hyperlink{UnitTestCase_8cpp_aa01bede4cf032808617f744cfdc34e85}{T\+E\+S\+T\+\_\+\+C\+A\+SE} (\char`\"{}Test Revoluciones Por Minuto\char`\"{}, \char`\"{}\mbox{[}decoders\mbox{]}\char`\"{})
+\begin{DoxyCompactList}\small\item\em Prueba unitaria del decodificador R\+PM. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{UnitTestCase_8cpp_a6de3b92394355f7de997d66ffda41110}\label{UnitTestCase_8cpp_a6de3b92394355f7de997d66ffda41110}} 
+\hyperlink{UnitTestCase_8cpp_a6de3b92394355f7de997d66ffda41110}{T\+E\+S\+T\+\_\+\+C\+A\+SE} (\char`\"{}Test Posición E\+GR\char`\"{}, \char`\"{}\mbox{[}decoders\mbox{]}\char`\"{})
+\begin{DoxyCompactList}\small\item\em Prueba unitaria del decodificador de posición E\+GR. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{UnitTestCase_8cpp_a376ac0e4b8eef0360ec825760e4b6b15}\label{UnitTestCase_8cpp_a376ac0e4b8eef0360ec825760e4b6b15}} 
+\hyperlink{UnitTestCase_8cpp_a376ac0e4b8eef0360ec825760e4b6b15}{T\+E\+S\+T\+\_\+\+C\+A\+SE} (\char`\"{}Test Temperatura General\char`\"{}, \char`\"{}\mbox{[}decoders\mbox{]}\char`\"{})
+\begin{DoxyCompactList}\small\item\em Prueba unitaria del decodificador de la temperatura general. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{UnitTestCase_8cpp_afd7d9244b2b8c27b86ea397d397a6cf6}\label{UnitTestCase_8cpp_afd7d9244b2b8c27b86ea397d397a6cf6}} 
+\hyperlink{UnitTestCase_8cpp_afd7d9244b2b8c27b86ea397d397a6cf6}{T\+E\+S\+T\+\_\+\+C\+A\+SE} (\char`\"{}Test Ajuste Combustible E\+GR\char`\"{}, \char`\"{}\mbox{[}decoders\mbox{]}\char`\"{})
+\begin{DoxyCompactList}\small\item\em Prueba unitaria del decodificador de la temperatura general. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{UnitTestCase_8cpp_ae4019c68e76a6f985cf7295357db9853}\label{UnitTestCase_8cpp_ae4019c68e76a6f985cf7295357db9853}} 
+\hyperlink{UnitTestCase_8cpp_ae4019c68e76a6f985cf7295357db9853}{T\+E\+S\+T\+\_\+\+C\+A\+SE} (\char`\"{}Test Presión Combustible\char`\"{}, \char`\"{}\mbox{[}decoders\mbox{]}\char`\"{})
+\begin{DoxyCompactList}\small\item\em Prueba unitaria del decodificador de la presión del combustible. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{UnitTestCase_8cpp_a282584e8fd720d07b04a2fd106c9a32c}\label{UnitTestCase_8cpp_a282584e8fd720d07b04a2fd106c9a32c}} 
+\hyperlink{UnitTestCase_8cpp_a282584e8fd720d07b04a2fd106c9a32c}{T\+E\+S\+T\+\_\+\+C\+A\+SE} (\char`\"{}Test Hexadecimal a Decimal\char`\"{}, \char`\"{}\mbox{[}decoders\mbox{]}\char`\"{})
+\begin{DoxyCompactList}\small\item\em Prueba unitaria del decodificador hexadecimal a decimal. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{UnitTestCase_8cpp_a8c2e41bed6c672541f7b95ac1edecf0d}\label{UnitTestCase_8cpp_a8c2e41bed6c672541f7b95ac1edecf0d}} 
+\hyperlink{UnitTestCase_8cpp_a8c2e41bed6c672541f7b95ac1edecf0d}{T\+E\+S\+T\+\_\+\+C\+A\+SE} (\char`\"{}Test Avance Tiempo\char`\"{}, \char`\"{}\mbox{[}decoders\mbox{]}\char`\"{})
+\begin{DoxyCompactList}\small\item\em Prueba unitaria del decodificador del avance del tiempo. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{UnitTestCase_8cpp_af5a76ba4da5f3b2cafb3b5366118dbcd}\label{UnitTestCase_8cpp_af5a76ba4da5f3b2cafb3b5366118dbcd}} 
+\hyperlink{UnitTestCase_8cpp_af5a76ba4da5f3b2cafb3b5366118dbcd}{T\+E\+S\+T\+\_\+\+C\+A\+SE} (\char`\"{}Test Velocidad Flujo Aire M\+AF\char`\"{}, \char`\"{}\mbox{[}decoders\mbox{]}\char`\"{})
+\begin{DoxyCompactList}\small\item\em Prueba unitaria del decodificador de la tasa de flujo del aire (M\+AF). \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{UnitTestCase_8cpp_af9cb80dc5e3813608e63479be181d3d7}\label{UnitTestCase_8cpp_af9cb80dc5e3813608e63479be181d3d7}} 
+\hyperlink{UnitTestCase_8cpp_af9cb80dc5e3813608e63479be181d3d7}{T\+E\+S\+T\+\_\+\+C\+A\+SE} (\char`\"{}Test Presión del Combustible, relativa al colector de vacío\char`\"{}, \char`\"{}\mbox{[}decoders\mbox{]}\char`\"{})
+\begin{DoxyCompactList}\small\item\em Prueba unitaria del decodificador de presión de combustible relativa al colector de vacío. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{UnitTestCase_8cpp_a578a25cbf0eb039b82b3f9c2c9934672}\label{UnitTestCase_8cpp_a578a25cbf0eb039b82b3f9c2c9934672}} 
+\hyperlink{UnitTestCase_8cpp_a578a25cbf0eb039b82b3f9c2c9934672}{T\+E\+S\+T\+\_\+\+C\+A\+SE} (\char`\"{}Test Presión del Combustible (Diesel o inyección directa de gasolina)\char`\"{}, \char`\"{}\mbox{[}decoders\mbox{]}\char`\"{})
+\begin{DoxyCompactList}\small\item\em Prueba unitaria del decodificador de presión de combusible (Diese o inyección directa de gasolina). \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{UnitTestCase_8cpp_a0a88bc70e4d8ddcd9617e864ec5a4f05}\label{UnitTestCase_8cpp_a0a88bc70e4d8ddcd9617e864ec5a4f05}} 
+\hyperlink{UnitTestCase_8cpp_a0a88bc70e4d8ddcd9617e864ec5a4f05}{T\+E\+S\+T\+\_\+\+C\+A\+SE} (\char`\"{}Test Presión de Vapor del Sistema Evaporativo\char`\"{}, \char`\"{}\mbox{[}decoders\mbox{]}\char`\"{})
+\begin{DoxyCompactList}\small\item\em Prueba unitaria del decodificador de Vapor del Sistema Evaporativo. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{UnitTestCase_8cpp_a4203cd502f06e1bb0b83e603e04c10cf}\label{UnitTestCase_8cpp_a4203cd502f06e1bb0b83e603e04c10cf}} 
+\hyperlink{UnitTestCase_8cpp_a4203cd502f06e1bb0b83e603e04c10cf}{T\+E\+S\+T\+\_\+\+C\+A\+SE} (\char`\"{}Test Temperatura del Catalizador\char`\"{}, \char`\"{}\mbox{[}decoders\mbox{]}\char`\"{})
+\begin{DoxyCompactList}\small\item\em Prueba unitaria del decodificador de Temperatura del Catalizador. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{UnitTestCase_8cpp_a358bfaf15b84777b24d4304fb9c2f88b}\label{UnitTestCase_8cpp_a358bfaf15b84777b24d4304fb9c2f88b}} 
+\hyperlink{UnitTestCase_8cpp_a358bfaf15b84777b24d4304fb9c2f88b}{T\+E\+S\+T\+\_\+\+C\+A\+SE} (\char`\"{}Test Voltaje del Módulo de Control\char`\"{}, \char`\"{}\mbox{[}decoders\mbox{]}\char`\"{})
+\begin{DoxyCompactList}\small\item\em Prueba unitaria del decodificador de Voltaje del Módulo de Control. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{UnitTestCase_8cpp_a6c2278eca15c6834d6c78885a09497c4}\label{UnitTestCase_8cpp_a6c2278eca15c6834d6c78885a09497c4}} 
+\hyperlink{UnitTestCase_8cpp_a6c2278eca15c6834d6c78885a09497c4}{T\+E\+S\+T\+\_\+\+C\+A\+SE} (\char`\"{}Test Relación Equivaliente Comandada de Combustible\char`\"{}, \char`\"{}\mbox{[}decoders\mbox{]}\char`\"{})
+\begin{DoxyCompactList}\small\item\em Prueba unitaria del decodificador de Relación Equivaliente Comandada de Combustible. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{UnitTestCase_8cpp_a27f82a7800b27dd78331e6ee707cb5f8}\label{UnitTestCase_8cpp_a27f82a7800b27dd78331e6ee707cb5f8}} 
+\hyperlink{UnitTestCase_8cpp_a27f82a7800b27dd78331e6ee707cb5f8}{T\+E\+S\+T\+\_\+\+C\+A\+SE} (\char`\"{}Comprobación Diagnostic Trouble Codes\char`\"{}, \char`\"{}\mbox{[}D\+TC\mbox{]}\char`\"{})
+\begin{DoxyCompactList}\small\item\em Prueba unitaria del conversor del primer byte D\+TC. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{UnitTestCase_8cpp_a666839d6a4f130bd11ac0466c9796884}\label{UnitTestCase_8cpp_a666839d6a4f130bd11ac0466c9796884}} 
+\hyperlink{UnitTestCase_8cpp_a666839d6a4f130bd11ac0466c9796884}{T\+E\+S\+T\+\_\+\+C\+A\+SE} (\char`\"{}Test V\+IN (Vehicle Identification Number)\char`\"{}, \char`\"{}\mbox{[}decoders\mbox{]}\char`\"{})
+\begin{DoxyCompactList}\small\item\em Prueba unitaria del Número de Identificación del vehículo. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{UnitTestCase_8cpp_ada6898123ac1c26cdb74330eea16b825}\label{UnitTestCase_8cpp_ada6898123ac1c26cdb74330eea16b825}} 
+\hyperlink{UnitTestCase_8cpp_ada6898123ac1c26cdb74330eea16b825}{T\+E\+S\+T\+\_\+\+C\+A\+SE} (\char`\"{}Test Describir el Protocolo Actual\char`\"{}, \char`\"{}\mbox{[}decoders\mbox{]}\char`\"{})
+\begin{DoxyCompactList}\small\item\em Prueba unitaria del decodificador de descriptor del protocolo actual. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{UnitTestCase_8cpp_aa6afb62ebdd4c3e07996c995f623eb6b}\label{UnitTestCase_8cpp_aa6afb62ebdd4c3e07996c995f623eb6b}} 
+\hyperlink{UnitTestCase_8cpp_aa6afb62ebdd4c3e07996c995f623eb6b}{S\+C\+E\+N\+A\+R\+IO} (\char`\"{}Test de Sensores de Oxígeno\char`\"{}, \char`\"{}\mbox{[}decoders\mbox{]}\char`\"{})
+\begin{DoxyCompactList}\small\item\em Escenario de pruebas con distintos test de los sensores de oxígeno. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{UnitTestCase_8cpp_ad6f2a6821f17834d70717ea1d0b38dee}\label{UnitTestCase_8cpp_ad6f2a6821f17834d70717ea1d0b38dee}} 
+\hyperlink{UnitTestCase_8cpp_ad6f2a6821f17834d70717ea1d0b38dee}{S\+C\+E\+N\+A\+R\+IO} (\char`\"{}Test de Relación Equivalente Combustible-\/Aire\char`\"{}, \char`\"{}\mbox{[}decoders\mbox{]}\char`\"{})
+\begin{DoxyCompactList}\small\item\em Escenario de pruebas con distintos test de la relación equivalente combustible-\/aire. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{UnitTestCase_8cpp_ab8cb04c98de551d82acba45293028c77}\label{UnitTestCase_8cpp_ab8cb04c98de551d82acba45293028c77}} 
+\hyperlink{UnitTestCase_8cpp_ab8cb04c98de551d82acba45293028c77}{S\+C\+E\+N\+A\+R\+IO} (\char`\"{}Test de Relación Equivalente Combustible-\/Aire Actual\char`\"{}, \char`\"{}\mbox{[}decoders\mbox{]}\char`\"{})
+\begin{DoxyCompactList}\small\item\em Escenario de pruebas con distintos test de la relación equivalente combustible-\/aire actual. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{UnitTestCase_8cpp_a40a3028fa1222aa3915042e8d9c0c4d2}\label{UnitTestCase_8cpp_a40a3028fa1222aa3915042e8d9c0c4d2}} 
+\hyperlink{UnitTestCase_8cpp_a40a3028fa1222aa3915042e8d9c0c4d2}{S\+C\+E\+N\+A\+R\+IO} (\char`\"{}Test de Valores máximos relación de combustible-\/aire, voltaje, corriente y presión absoluta\char`\"{}, \char`\"{}\mbox{[}decoders\mbox{]}\char`\"{})
+\begin{DoxyCompactList}\small\item\em Escenario de pruebas con distintos test de valores máximo relación de combustible-\/aire, voltaje, corriente y presión absoluta. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{UnitTestCase_8cpp_a32f4d6ded472fa78eead34a000bb2bbd}\label{UnitTestCase_8cpp_a32f4d6ded472fa78eead34a000bb2bbd}} 
+\hyperlink{UnitTestCase_8cpp_a32f4d6ded472fa78eead34a000bb2bbd}{S\+C\+E\+N\+A\+R\+IO} (\char`\"{}Test de decodificación de Data Trouble Codes (D\+TC)\char`\"{}, \char`\"{}\mbox{[}decoders\mbox{]}\char`\"{})
+\begin{DoxyCompactList}\small\item\em Escenario de pruebas con distintos test de D\+TC activos. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{UnitTestCase_8cpp_afcf7b592e5ac913ea9c83936bfc18227}\label{UnitTestCase_8cpp_afcf7b592e5ac913ea9c83936bfc18227}} 
+\hyperlink{UnitTestCase_8cpp_afcf7b592e5ac913ea9c83936bfc18227}{S\+C\+E\+N\+A\+R\+IO} (\char`\"{}Test de decodificación P\+I\+Ds disponibles\char`\"{}, \char`\"{}\mbox{[}decoders\mbox{]}\char`\"{})
+\begin{DoxyCompactList}\small\item\em Escenario de pruebas con distintos test los P\+I\+DS implementados en el vehículo. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{UnitTestCase_8cpp_a856763231cf6f39f98e63e778fa453b1}\label{UnitTestCase_8cpp_a856763231cf6f39f98e63e778fa453b1}} 
+\hyperlink{UnitTestCase_8cpp_a856763231cf6f39f98e63e778fa453b1}{S\+C\+E\+N\+A\+R\+IO} (\char`\"{}Test de decodificación del estado del coche\char`\"{}, \char`\"{}\mbox{[}decoders\mbox{]}\char`\"{})
+\begin{DoxyCompactList}\small\item\em Escenario de pruebas con distintos valores de los monitores de diagnóstico tras las pruebas del vehículo. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Descripción detallada}
+Archivo que contiene el conjunto de pruebas unitarias y de integración del sistema. 
+
+\begin{DoxyAuthor}{Autor}
+Sergio Román González 
+\end{DoxyAuthor}
+\begin{DoxyDate}{Fecha}
+05/09/2020 
+\end{DoxyDate}
+
+
+Definición en el archivo \hyperlink{UnitTestCase_8cpp_source}{Unit\+Test\+Case.\+cpp}.
+
+
+
+\subsection{Documentación de los \textquotesingle{}defines\textquotesingle{}}
+\mbox{\Hypertarget{UnitTestCase_8cpp_aeca034f67218340ecb2261a22c2f3dcd}\label{UnitTestCase_8cpp_aeca034f67218340ecb2261a22c2f3dcd}} 
+\index{Unit\+Test\+Case.\+cpp@{Unit\+Test\+Case.\+cpp}!B\+U\+F\+S\+I\+ZE@{B\+U\+F\+S\+I\+ZE}}
+\index{B\+U\+F\+S\+I\+ZE@{B\+U\+F\+S\+I\+ZE}!Unit\+Test\+Case.\+cpp@{Unit\+Test\+Case.\+cpp}}
+\subsubsection{\texorpdfstring{B\+U\+F\+S\+I\+ZE}{BUFSIZE}}
+{\footnotesize\ttfamily \#define B\+U\+F\+S\+I\+ZE~30}
+
+Macro del tamaño del buffer de la cadena de caracteres para el comando Minicom a ejecutar 
+
+Definición en la línea \hyperlink{UnitTestCase_8cpp_source_l00015}{15} del archivo \hyperlink{UnitTestCase_8cpp_source}{Unit\+Test\+Case.\+cpp}.
+
+\mbox{\Hypertarget{UnitTestCase_8cpp_a656eb5868e824d59f489f910db438420}\label{UnitTestCase_8cpp_a656eb5868e824d59f489f910db438420}} 
+\index{Unit\+Test\+Case.\+cpp@{Unit\+Test\+Case.\+cpp}!C\+A\+T\+C\+H\+\_\+\+C\+O\+N\+F\+I\+G\+\_\+\+M\+A\+IN@{C\+A\+T\+C\+H\+\_\+\+C\+O\+N\+F\+I\+G\+\_\+\+M\+A\+IN}}
+\index{C\+A\+T\+C\+H\+\_\+\+C\+O\+N\+F\+I\+G\+\_\+\+M\+A\+IN@{C\+A\+T\+C\+H\+\_\+\+C\+O\+N\+F\+I\+G\+\_\+\+M\+A\+IN}!Unit\+Test\+Case.\+cpp@{Unit\+Test\+Case.\+cpp}}
+\subsubsection{\texorpdfstring{C\+A\+T\+C\+H\+\_\+\+C\+O\+N\+F\+I\+G\+\_\+\+M\+A\+IN}{CATCH\_CONFIG\_MAIN}}
+{\footnotesize\ttfamily \#define C\+A\+T\+C\+H\+\_\+\+C\+O\+N\+F\+I\+G\+\_\+\+M\+A\+IN}
+
+Macro que permite a la librería catch proporcionar un main() para la ejecución del conjunto de pruebas 
+
+Definición en la línea \hyperlink{UnitTestCase_8cpp_source_l00009}{9} del archivo \hyperlink{UnitTestCase_8cpp_source}{Unit\+Test\+Case.\+cpp}.
+
+\mbox{\Hypertarget{UnitTestCase_8cpp_a39116fcd47bddafea0487b3f674b9609}\label{UnitTestCase_8cpp_a39116fcd47bddafea0487b3f674b9609}} 
+\index{Unit\+Test\+Case.\+cpp@{Unit\+Test\+Case.\+cpp}!W\+A\+I\+T\+\_\+\+O\+B\+D\+S\+IM@{W\+A\+I\+T\+\_\+\+O\+B\+D\+S\+IM}}
+\index{W\+A\+I\+T\+\_\+\+O\+B\+D\+S\+IM@{W\+A\+I\+T\+\_\+\+O\+B\+D\+S\+IM}!Unit\+Test\+Case.\+cpp@{Unit\+Test\+Case.\+cpp}}
+\subsubsection{\texorpdfstring{W\+A\+I\+T\+\_\+\+O\+B\+D\+S\+IM}{WAIT\_OBDSIM}}
+{\footnotesize\ttfamily \#define W\+A\+I\+T\+\_\+\+O\+B\+D\+S\+IM~15}
+
+Macro con el tiempo de espera del simulador O\+B\+D\+S\+IM para introducir valores 
+
+Definición en la línea \hyperlink{UnitTestCase_8cpp_source_l00016}{16} del archivo \hyperlink{UnitTestCase_8cpp_source}{Unit\+Test\+Case.\+cpp}.
+
+
+
+\subsection{Documentación de las funciones}
+\mbox{\Hypertarget{UnitTestCase_8cpp_ae9f15809d7998bb4a7404d34bb87a5e3}\label{UnitTestCase_8cpp_ae9f15809d7998bb4a7404d34bb87a5e3}} 
+\index{Unit\+Test\+Case.\+cpp@{Unit\+Test\+Case.\+cpp}!get\+Minicom\+C\+MD@{get\+Minicom\+C\+MD}}
+\index{get\+Minicom\+C\+MD@{get\+Minicom\+C\+MD}!Unit\+Test\+Case.\+cpp@{Unit\+Test\+Case.\+cpp}}
+\subsubsection{\texorpdfstring{get\+Minicom\+C\+M\+D()}{getMinicomCMD()}}
+{\footnotesize\ttfamily void get\+Minicom\+C\+MD (\begin{DoxyParamCaption}\item[{char $\ast$}]{cmd }\end{DoxyParamCaption})}
+
+
+
+Función que obtiene el comando Minicom para la primera conexión con el simulador O\+B\+D\+S\+IM. 
+
+
+\begin{DoxyParams}{Parámetros}
+{\em cmd} & Puntero a cadena de caracteres para almacenar el comando de minicom a ejecutar. \\
+\hline
+\end{DoxyParams}
+
+
+Definición en la línea \hyperlink{UnitTestCase_8cpp_source_l00026}{26} del archivo \hyperlink{UnitTestCase_8cpp_source}{Unit\+Test\+Case.\+cpp}.
+
+\mbox{\Hypertarget{UnitTestCase_8cpp_a4460093e274738a0e1bbb551c1d1d3fd}\label{UnitTestCase_8cpp_a4460093e274738a0e1bbb551c1d1d3fd}} 
+\index{Unit\+Test\+Case.\+cpp@{Unit\+Test\+Case.\+cpp}!init\+O\+B\+D\+S\+IM@{init\+O\+B\+D\+S\+IM}}
+\index{init\+O\+B\+D\+S\+IM@{init\+O\+B\+D\+S\+IM}!Unit\+Test\+Case.\+cpp@{Unit\+Test\+Case.\+cpp}}
+\subsubsection{\texorpdfstring{init\+O\+B\+D\+S\+I\+M()}{initOBDSIM()}}
+{\footnotesize\ttfamily void init\+O\+B\+D\+S\+IM (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Función de inicialización del simulador O\+B\+D\+S\+IM. 
+
+Inicializa el simulador con entorno gráfico permitiendo la introducción de D\+TC y otros valores para las pruebas. 
+
+Definición en la línea \hyperlink{UnitTestCase_8cpp_source_l00040}{40} del archivo \hyperlink{UnitTestCase_8cpp_source}{Unit\+Test\+Case.\+cpp}.
+

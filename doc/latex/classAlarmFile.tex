@@ -1,0 +1,153 @@
+\hypertarget{classAlarmFile}{}\section{Referencia de la Clase Alarm\+File}
+\label{classAlarmFile}\index{Alarm\+File@{Alarm\+File}}
+
+
+Clase que representa la conexión con el servidor remoto para el envío de un mensaje (alarma).  
+
+
+
+
+{\ttfamily \#include $<$alarmfile.\+hpp$>$}
+
+\subsection*{Métodos públicos}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classAlarmFile_ab5b7a78583764cd70d8b5b93a243439d}{Alarm\+File} (std\+::string Alarm\+Host, std\+::string Alarm\+Port, std\+::string Alarm\+Filename, std\+::string Last\+Alarm\+Filename)
+\begin{DoxyCompactList}\small\item\em Constructor de la clase \hyperlink{classAlarmFile}{Alarm\+File}. \end{DoxyCompactList}\item 
+std\+::string \hyperlink{classAlarmFile_a4865f7e404e938960e45b7e805956401}{get\+Geo\+Pos} (std\+::string serial\+Port)
+\begin{DoxyCompactList}\small\item\em Método que obtiene la geolocalización del vehículo. \end{DoxyCompactList}\item 
+bool \hyperlink{classAlarmFile_ad75728f6e44f38772372b991f21d9caa}{has\+Gps} ()
+\begin{DoxyCompactList}\small\item\em Método para mostrar si tiene disponible el G\+PS. \end{DoxyCompactList}\item 
+void \hyperlink{classAlarmFile_acfb3c406818e76439ba47aa539178f7d}{Gps} (bool installed)
+\begin{DoxyCompactList}\small\item\em Método para indicar que está disponible el G\+PS. \end{DoxyCompactList}\item 
+bool \hyperlink{classAlarmFile_a37fd701cca3c3458a3009b508383947b}{send\+Alarm} (std\+::string msg)
+\begin{DoxyCompactList}\small\item\em Método para enviar el mensaje/alarma al servidor remoto. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Descripción detallada}
+Clase que representa la conexión con el servidor remoto para el envío de un mensaje (alarma). 
+
+Clase utilizada para el envío de datos del vehículo al servidor remoto. 
+
+Definición en la línea \hyperlink{alarmfile_8hpp_source_l00021}{21} del archivo \hyperlink{alarmfile_8hpp_source}{alarmfile.\+hpp}.
+
+
+
+\subsection{Documentación del constructor y destructor}
+\mbox{\Hypertarget{classAlarmFile_ab5b7a78583764cd70d8b5b93a243439d}\label{classAlarmFile_ab5b7a78583764cd70d8b5b93a243439d}} 
+\index{Alarm\+File@{Alarm\+File}!Alarm\+File@{Alarm\+File}}
+\index{Alarm\+File@{Alarm\+File}!Alarm\+File@{Alarm\+File}}
+\subsubsection{\texorpdfstring{Alarm\+File()}{AlarmFile()}}
+{\footnotesize\ttfamily Alarm\+File\+::\+Alarm\+File (\begin{DoxyParamCaption}\item[{std\+::string}]{Alarm\+Host,  }\item[{std\+::string}]{Alarm\+Port,  }\item[{std\+::string}]{Alarm\+Filename,  }\item[{std\+::string}]{Last\+Alarm\+Filename }\end{DoxyParamCaption})}
+
+
+
+Constructor de la clase \hyperlink{classAlarmFile}{Alarm\+File}. 
+
+
+\begin{DoxyParams}{Parámetros}
+{\em Alarm\+Host} & String con la dirección IP del servidor remoto. \\
+\hline
+{\em Alarm\+Port} & String con el puerto de conexión del servidor remoto. \\
+\hline
+{\em Alarm\+Filename} & String con el nombre del archivo de almacenamiento de la alarma. \\
+\hline
+{\em Last\+Alarm\+Filename} & String con el nombre del último archivo de almacenamiento de la alarma. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Devuelve}
+Devuelve una instancia de la clase \hyperlink{classAlarmFile}{Alarm\+File}. 
+\end{DoxyReturn}
+
+
+Definición en la línea \hyperlink{alarmfile_8cpp_source_l00045}{45} del archivo \hyperlink{alarmfile_8cpp_source}{alarmfile.\+cpp}.
+
+
+
+\subsection{Documentación de las funciones miembro}
+\mbox{\Hypertarget{classAlarmFile_a4865f7e404e938960e45b7e805956401}\label{classAlarmFile_a4865f7e404e938960e45b7e805956401}} 
+\index{Alarm\+File@{Alarm\+File}!get\+Geo\+Pos@{get\+Geo\+Pos}}
+\index{get\+Geo\+Pos@{get\+Geo\+Pos}!Alarm\+File@{Alarm\+File}}
+\subsubsection{\texorpdfstring{get\+Geo\+Pos()}{getGeoPos()}}
+{\footnotesize\ttfamily std\+::string Alarm\+File\+::get\+Geo\+Pos (\begin{DoxyParamCaption}\item[{std\+::string}]{serial\+Port }\end{DoxyParamCaption})}
+
+
+
+Método que obtiene la geolocalización del vehículo. 
+
+
+\begin{DoxyParams}{Parámetros}
+{\em serial\+Port} & String con la ruta al dispositivo G\+PS. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Devuelve}
+String con la geolocalización del dispositivo G\+PS. 
+\end{DoxyReturn}
+
+
+Definición en la línea \hyperlink{alarmfile_8cpp_source_l00024}{24} del archivo \hyperlink{alarmfile_8cpp_source}{alarmfile.\+cpp}.
+
+\mbox{\Hypertarget{classAlarmFile_acfb3c406818e76439ba47aa539178f7d}\label{classAlarmFile_acfb3c406818e76439ba47aa539178f7d}} 
+\index{Alarm\+File@{Alarm\+File}!Gps@{Gps}}
+\index{Gps@{Gps}!Alarm\+File@{Alarm\+File}}
+\subsubsection{\texorpdfstring{Gps()}{Gps()}}
+{\footnotesize\ttfamily void Alarm\+File\+::\+Gps (\begin{DoxyParamCaption}\item[{bool}]{installed }\end{DoxyParamCaption})}
+
+
+
+Método para indicar que está disponible el G\+PS. 
+
+
+\begin{DoxyParams}{Parámetros}
+{\em installed} & Booleano que indica si está instalado el G\+PS (true). \\
+\hline
+\end{DoxyParams}
+
+
+Definición en la línea \hyperlink{alarmfile_8cpp_source_l00034}{34} del archivo \hyperlink{alarmfile_8cpp_source}{alarmfile.\+cpp}.
+
+\mbox{\Hypertarget{classAlarmFile_ad75728f6e44f38772372b991f21d9caa}\label{classAlarmFile_ad75728f6e44f38772372b991f21d9caa}} 
+\index{Alarm\+File@{Alarm\+File}!has\+Gps@{has\+Gps}}
+\index{has\+Gps@{has\+Gps}!Alarm\+File@{Alarm\+File}}
+\subsubsection{\texorpdfstring{has\+Gps()}{hasGps()}}
+{\footnotesize\ttfamily bool Alarm\+File\+::has\+Gps (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Método para mostrar si tiene disponible el G\+PS. 
+
+\begin{DoxyReturn}{Devuelve}
+Booleano, true si está instalado y false en caso contrario. 
+\end{DoxyReturn}
+
+
+Definición en la línea \hyperlink{alarmfile_8cpp_source_l00029}{29} del archivo \hyperlink{alarmfile_8cpp_source}{alarmfile.\+cpp}.
+
+\mbox{\Hypertarget{classAlarmFile_a37fd701cca3c3458a3009b508383947b}\label{classAlarmFile_a37fd701cca3c3458a3009b508383947b}} 
+\index{Alarm\+File@{Alarm\+File}!send\+Alarm@{send\+Alarm}}
+\index{send\+Alarm@{send\+Alarm}!Alarm\+File@{Alarm\+File}}
+\subsubsection{\texorpdfstring{send\+Alarm()}{sendAlarm()}}
+{\footnotesize\ttfamily bool Alarm\+File\+::send\+Alarm (\begin{DoxyParamCaption}\item[{std\+::string}]{msg }\end{DoxyParamCaption})}
+
+
+
+Método para enviar el mensaje/alarma al servidor remoto. 
+
+
+\begin{DoxyParams}{Parámetros}
+{\em msg} & String con el mensaje a enviar al servidor remoto. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Devuelve}
+Booleano, true si el mensaje fue enviado correctamente y false en caso contrario. 
+\end{DoxyReturn}
+
+
+Definición en la línea \hyperlink{alarmfile_8cpp_source_l00063}{63} del archivo \hyperlink{alarmfile_8cpp_source}{alarmfile.\+cpp}.
+
+
+
+La documentación para esta clase fue generada a partir de los siguientes ficheros\+:\begin{DoxyCompactItemize}
+\item 
+\hyperlink{alarmfile_8hpp}{alarmfile.\+hpp}\item 
+\hyperlink{alarmfile_8cpp}{alarmfile.\+cpp}\end{DoxyCompactItemize}

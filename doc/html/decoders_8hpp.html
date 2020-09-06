@@ -1,0 +1,947 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=9"/>
+<meta name="generator" content="Doxygen 1.8.13"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>obd2-bluetooth: Referencia del Archivo decoders.hpp</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr style="height: 56px;">
+  <td id="projectlogo"><img alt="Logo" src="favicon.ico"/></td>
+  <td id="projectalign" style="padding-left: 0.5em;">
+   <div id="projectname">obd2-bluetooth
+   &#160;<span id="projectnumber">1.0</span>
+   </div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Generado por Doxygen 1.8.13 -->
+<script type="text/javascript">
+var searchBox = new SearchBox("searchBox", "search",false,'Buscar');
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+$(function() {
+  initMenu('',true,false,'search.php','Buscar');
+  $(document).ready(function() { init_search(); });
+});
+</script>
+<div id="main-nav"></div>
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<iframe src="javascript:void(0)" frameborder="0" 
+        name="MSearchResults" id="MSearchResults">
+</iframe>
+</div>
+
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li>  </ul>
+</div>
+</div><!-- top -->
+<div class="header">
+  <div class="summary">
+<a href="#nested-classes">Estructuras de datos</a> &#124;
+<a href="#define-members">defines</a> &#124;
+<a href="#func-members">Funciones</a>  </div>
+  <div class="headertitle">
+<div class="title">Referencia del Archivo decoders.hpp</div>  </div>
+</div><!--header-->
+<div class="contents">
+
+<p>Archivo que contiene la declaración de las funciones de decodificación de las respuestas del dispositivo ELM327.  
+<a href="#details">Más...</a></p>
+<div class="textblock"><code>#include &lt;stdio.h&gt;</code><br />
+<code>#include &lt;stdlib.h&gt;</code><br />
+<code>#include &lt;string.h&gt;</code><br />
+<code>#include &lt;bitset&gt;</code><br />
+<code>#include &lt;vector&gt;</code><br />
+<code>#include &lt;map&gt;</code><br />
+</div><div class="textblock"><div class="dynheader">
+Dependencia gráfica adjunta para decoders.hpp:</div>
+<div class="dyncontent">
+<div class="center"><img src="decoders_8hpp__incl.png" border="0" usemap="#decoders_8hpp" alt=""/></div>
+<map name="decoders_8hpp" id="decoders_8hpp">
+</map>
+</div>
+</div><div class="textblock"><div class="dynheader">
+Gráfico de los archivos que directa o indirectamente incluyen a este archivo:</div>
+<div class="dyncontent">
+<div class="center"><img src="decoders_8hpp__dep__incl.png" border="0" usemap="#decoders_8hppdep" alt=""/></div>
+<map name="decoders_8hppdep" id="decoders_8hppdep">
+<area shape="rect" id="node2" href="Commands_8hpp.html" title="Archivo que contiene la clase con la definición de la estructura de los comandos AT y OBD..." alt="" coords="5,80,120,107"/>
+<area shape="rect" id="node3" href="Obd_8hpp.html" title="Archivo que contiene la clase con la implementación de la conexión y envío de mensajes OBD con el dis..." alt="" coords="73,155,143,181"/>
+<area shape="rect" id="node5" href="UnitTestCase_8cpp.html" title="Archivo que contiene el conjunto de pruebas unitarias y de integración del sistema. " alt="" coords="144,229,272,256"/>
+<area shape="rect" id="node6" href="decoders_8cpp.html" title="Archivo que contiene la definición de las funciones de decodificación de las respuestas del dispositi..." alt="" coords="246,80,346,107"/>
+<area shape="rect" id="node4" href="main_8cpp_source.html" title="main.cpp" alt="" coords="45,229,120,256"/>
+</map>
+</div>
+</div>
+<p><a href="decoders_8hpp_source.html">Ir al código fuente de este archivo.</a></p>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="nested-classes"></a>
+Estructuras de datos</h2></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structOxigenoResponse.html">OxigenoResponse</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Estructura de datos para las respuesta de dos valores en PIDS relacionados con gases de escape.  <a href="structOxigenoResponse.html#details">Más...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structRelacionesResponse.html">RelacionesResponse</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Estructura de datos para las respuesta de cuatro valores en PIDS relacionados con gases de escape.  <a href="structRelacionesResponse.html#details">Más...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="define-members"></a>
+defines</h2></td></tr>
+<tr class="memitem:a8a092c91721f7da8bb812b510993ad3e"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="decoders_8hpp.html#a8a092c91721f7da8bb812b510993ad3e">PID_BITS</a>&#160;&#160;&#160;32</td></tr>
+<tr class="separator:a8a092c91721f7da8bb812b510993ad3e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad3ef8a4a578a81438303e48d4c5f9458"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="decoders_8hpp.html#ad3ef8a4a578a81438303e48d4c5f9458">STATUS_BITS</a>&#160;&#160;&#160;8</td></tr>
+<tr class="separator:ad3ef8a4a578a81438303e48d4c5f9458"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
+Funciones</h2></td></tr>
+<tr class="memitem:a8ee851a37675f190ea728d6b2f0cdc92"><td class="memItemLeft" align="right" valign="top"><a id="a8ee851a37675f190ea728d6b2f0cdc92"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="decoders_8hpp.html#a8ee851a37675f190ea728d6b2f0cdc92">noDecodeAT</a> ()</td></tr>
+<tr class="memdesc:a8ee851a37675f190ea728d6b2f0cdc92"><td class="mdescLeft">&#160;</td><td class="mdescRight">Función que no realiza decodificación para comandos AT. <br /></td></tr>
+<tr class="separator:a8ee851a37675f190ea728d6b2f0cdc92"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aca9cad863d8603615597a0291804c8ae"><td class="memItemLeft" align="right" valign="top">std::map&lt; std::string, std::string &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="decoders_8hpp.html#aca9cad863d8603615597a0291804c8ae">decodeStatus</a> (char *response)</td></tr>
+<tr class="memdesc:aca9cad863d8603615597a0291804c8ae"><td class="mdescLeft">&#160;</td><td class="mdescRight">Función de decodificación del PID STATUS.  <a href="#aca9cad863d8603615597a0291804c8ae">Más...</a><br /></td></tr>
+<tr class="separator:aca9cad863d8603615597a0291804c8ae"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aef44cca306ed9c74b146d2b7dd058763"><td class="memItemLeft" align="right" valign="top">std::vector&lt; int &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="decoders_8hpp.html#aef44cca306ed9c74b146d2b7dd058763">decodePIDS</a> (char *response)</td></tr>
+<tr class="memdesc:aef44cca306ed9c74b146d2b7dd058763"><td class="mdescLeft">&#160;</td><td class="mdescRight">Función de decodificación de los PIDS disponibles en el vehículo.  <a href="#aef44cca306ed9c74b146d2b7dd058763">Más...</a><br /></td></tr>
+<tr class="separator:aef44cca306ed9c74b146d2b7dd058763"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aac9b3d4ea17ee4dbbdf755b0b510137a"><td class="memItemLeft" align="right" valign="top">std::vector&lt; std::string &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="decoders_8hpp.html#aac9b3d4ea17ee4dbbdf755b0b510137a">decodeDTCs</a> (char *response)</td></tr>
+<tr class="memdesc:aac9b3d4ea17ee4dbbdf755b0b510137a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Función de decodificación de los DTC activos en el vehículo.  <a href="#aac9b3d4ea17ee4dbbdf755b0b510137a">Más...</a><br /></td></tr>
+<tr class="separator:aac9b3d4ea17ee4dbbdf755b0b510137a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4f18f411252f4c60fae4af320989c262"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="decoders_8hpp.html#a4f18f411252f4c60fae4af320989c262">convertDTCs</a> (std::string dtc)</td></tr>
+<tr class="memdesc:a4f18f411252f4c60fae4af320989c262"><td class="mdescLeft">&#160;</td><td class="mdescRight">Función de conversión del primer byte del DTC en su valor correspondiente.  <a href="#a4f18f411252f4c60fae4af320989c262">Más...</a><br /></td></tr>
+<tr class="separator:a4f18f411252f4c60fae4af320989c262"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a66754738119854c13a74265e209083e4"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="decoders_8hpp.html#a66754738119854c13a74265e209083e4">decodeVIN</a> (char *response)</td></tr>
+<tr class="memdesc:a66754738119854c13a74265e209083e4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Función de decodificación del Número de Identificación del Vehículo (VIN).  <a href="#a66754738119854c13a74265e209083e4">Más...</a><br /></td></tr>
+<tr class="separator:a66754738119854c13a74265e209083e4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab83ce79cd098ea655f3812488e304a0c"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="decoders_8hpp.html#ab83ce79cd098ea655f3812488e304a0c">decodeDescribeProtocol</a> (char *response)</td></tr>
+<tr class="memdesc:ab83ce79cd098ea655f3812488e304a0c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Función de decodificación del protocolo de funcionamiento actual.  <a href="#ab83ce79cd098ea655f3812488e304a0c">Más...</a><br /></td></tr>
+<tr class="separator:ab83ce79cd098ea655f3812488e304a0c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adbe68794075963c37e654d53b8a46f68"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="decoders_8hpp.html#adbe68794075963c37e654d53b8a46f68">decodeCargaPosicionEGR</a> (char *response)</td></tr>
+<tr class="memdesc:adbe68794075963c37e654d53b8a46f68"><td class="mdescLeft">&#160;</td><td class="mdescRight">Función de decodificación de la posición EGR.  <a href="#adbe68794075963c37e654d53b8a46f68">Más...</a><br /></td></tr>
+<tr class="separator:adbe68794075963c37e654d53b8a46f68"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af581438645d7ff67766fa2e5eba5eaf9"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="decoders_8hpp.html#af581438645d7ff67766fa2e5eba5eaf9">decodeTempGeneral</a> (char *response)</td></tr>
+<tr class="memdesc:af581438645d7ff67766fa2e5eba5eaf9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Función de decodificación de la temperatura.  <a href="#af581438645d7ff67766fa2e5eba5eaf9">Más...</a><br /></td></tr>
+<tr class="separator:af581438645d7ff67766fa2e5eba5eaf9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aeee9e6d8511a934b3a3644b19de3f2b7"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="decoders_8hpp.html#aeee9e6d8511a934b3a3644b19de3f2b7">decodeAjusteCombustibleEGR</a> (char *response)</td></tr>
+<tr class="memdesc:aeee9e6d8511a934b3a3644b19de3f2b7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Función de decodificación del ajuste de combustible EGR.  <a href="#aeee9e6d8511a934b3a3644b19de3f2b7">Más...</a><br /></td></tr>
+<tr class="separator:aeee9e6d8511a934b3a3644b19de3f2b7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab1c03e72734d4127a1c48f3b5a44a2e2"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="decoders_8hpp.html#ab1c03e72734d4127a1c48f3b5a44a2e2">decodePresionCombustible</a> (char *response)</td></tr>
+<tr class="memdesc:ab1c03e72734d4127a1c48f3b5a44a2e2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Función de decodificación de la presión del combustible.  <a href="#ab1c03e72734d4127a1c48f3b5a44a2e2">Más...</a><br /></td></tr>
+<tr class="separator:ab1c03e72734d4127a1c48f3b5a44a2e2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa7c5243702d5462e4b638450e750624e"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="decoders_8hpp.html#aa7c5243702d5462e4b638450e750624e">decodeHexToDec</a> (char *response)</td></tr>
+<tr class="memdesc:aa7c5243702d5462e4b638450e750624e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Función de decodificación de hexadecimal a decimal.  <a href="#aa7c5243702d5462e4b638450e750624e">Más...</a><br /></td></tr>
+<tr class="separator:aa7c5243702d5462e4b638450e750624e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a889868c7b1e554aee496e6aed7101cc4"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="decoders_8hpp.html#a889868c7b1e554aee496e6aed7101cc4">decodeRPM</a> (char *response)</td></tr>
+<tr class="memdesc:a889868c7b1e554aee496e6aed7101cc4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Función de decodificación de las RPM del motor.  <a href="#a889868c7b1e554aee496e6aed7101cc4">Más...</a><br /></td></tr>
+<tr class="separator:a889868c7b1e554aee496e6aed7101cc4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7a2fee87eace8ad6c86c628f5f91b3b5"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="decoders_8hpp.html#a7a2fee87eace8ad6c86c628f5f91b3b5">decodeAvanceTiempo</a> (char *response)</td></tr>
+<tr class="memdesc:a7a2fee87eace8ad6c86c628f5f91b3b5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Función de decodificación del avance del tiempo.  <a href="#a7a2fee87eace8ad6c86c628f5f91b3b5">Más...</a><br /></td></tr>
+<tr class="separator:a7a2fee87eace8ad6c86c628f5f91b3b5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adceefeb78a70b295b378f4c472630aa1"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="decoders_8hpp.html#adceefeb78a70b295b378f4c472630aa1">decodeVelocidadMAF</a> (char *response)</td></tr>
+<tr class="memdesc:adceefeb78a70b295b378f4c472630aa1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Función de decodificación de la tasa de flujo del aire (MAF).  <a href="#adceefeb78a70b295b378f4c472630aa1">Más...</a><br /></td></tr>
+<tr class="separator:adceefeb78a70b295b378f4c472630aa1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3e32aaf8ced989570e141f01210564f3"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="decoders_8hpp.html#a3e32aaf8ced989570e141f01210564f3">decodePresionCombColector</a> (char *response)</td></tr>
+<tr class="memdesc:a3e32aaf8ced989570e141f01210564f3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Función de decodificación de la presión del combustible del colector de vacío.  <a href="#a3e32aaf8ced989570e141f01210564f3">Más...</a><br /></td></tr>
+<tr class="separator:a3e32aaf8ced989570e141f01210564f3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a228605d8cad0901a691ba4155a2326fc"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="decoders_8hpp.html#a228605d8cad0901a691ba4155a2326fc">decodePresionMedidorCombustible</a> (char *response)</td></tr>
+<tr class="memdesc:a228605d8cad0901a691ba4155a2326fc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Función de decodificación de la presión del medidor del tren de combustible.  <a href="#a228605d8cad0901a691ba4155a2326fc">Más...</a><br /></td></tr>
+<tr class="separator:a228605d8cad0901a691ba4155a2326fc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab86bda1fcefda784e048796e2d892475"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="decoders_8hpp.html#ab86bda1fcefda784e048796e2d892475">decodePresionVapor</a> (char *response)</td></tr>
+<tr class="memdesc:ab86bda1fcefda784e048796e2d892475"><td class="mdescLeft">&#160;</td><td class="mdescRight">Función de decodificación de la presión de vapor del sistema evaporativo .  <a href="#ab86bda1fcefda784e048796e2d892475">Más...</a><br /></td></tr>
+<tr class="separator:ab86bda1fcefda784e048796e2d892475"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8251853ca2e5b8b2e88c75f50d53bc8d"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="decoders_8hpp.html#a8251853ca2e5b8b2e88c75f50d53bc8d">decodeTempCatalizador</a> (char *response)</td></tr>
+<tr class="memdesc:a8251853ca2e5b8b2e88c75f50d53bc8d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Función de decodificación de la temperatura del catalizador.  <a href="#a8251853ca2e5b8b2e88c75f50d53bc8d">Más...</a><br /></td></tr>
+<tr class="separator:a8251853ca2e5b8b2e88c75f50d53bc8d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5937fc059394faad8c9c96a0b27a8796"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="decoders_8hpp.html#a5937fc059394faad8c9c96a0b27a8796">decodeVoltajeControl</a> (char *response)</td></tr>
+<tr class="memdesc:a5937fc059394faad8c9c96a0b27a8796"><td class="mdescLeft">&#160;</td><td class="mdescRight">Función de decodificación del voltaje del módulo de control.  <a href="#a5937fc059394faad8c9c96a0b27a8796">Más...</a><br /></td></tr>
+<tr class="separator:a5937fc059394faad8c9c96a0b27a8796"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ade77bb9f8d8a2ba3aa431cdf9bdd0c32"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="decoders_8hpp.html#ade77bb9f8d8a2ba3aa431cdf9bdd0c32">decodeRelacionCombAireBasica</a> (char *response)</td></tr>
+<tr class="memdesc:ade77bb9f8d8a2ba3aa431cdf9bdd0c32"><td class="mdescLeft">&#160;</td><td class="mdescRight">Función de decodificación de la relación equivaliente comandada de combustible - aire.  <a href="#ade77bb9f8d8a2ba3aa431cdf9bdd0c32">Más...</a><br /></td></tr>
+<tr class="separator:ade77bb9f8d8a2ba3aa431cdf9bdd0c32"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5b53fc5fc37fbee9c5e389f6c8c18438"><td class="memItemLeft" align="right" valign="top">struct <a class="el" href="structOxigenoResponse.html">OxigenoResponse</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="decoders_8hpp.html#a5b53fc5fc37fbee9c5e389f6c8c18438">decodeSensorOxigeno</a> (char *response)</td></tr>
+<tr class="memdesc:a5b53fc5fc37fbee9c5e389f6c8c18438"><td class="mdescLeft">&#160;</td><td class="mdescRight">Función de decodificación de los sensores de oxígeno.  <a href="#a5b53fc5fc37fbee9c5e389f6c8c18438">Más...</a><br /></td></tr>
+<tr class="separator:a5b53fc5fc37fbee9c5e389f6c8c18438"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a363bd4f505969098be58a175f02b9b50"><td class="memItemLeft" align="right" valign="top">struct <a class="el" href="structOxigenoResponse.html">OxigenoResponse</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="decoders_8hpp.html#a363bd4f505969098be58a175f02b9b50">decodeRelacionCombAire</a> (char *response)</td></tr>
+<tr class="memdesc:a363bd4f505969098be58a175f02b9b50"><td class="mdescLeft">&#160;</td><td class="mdescRight">Función de decodificación de los sensores de oxígeno y la relación de combustible.  <a href="#a363bd4f505969098be58a175f02b9b50">Más...</a><br /></td></tr>
+<tr class="separator:a363bd4f505969098be58a175f02b9b50"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4cedb500095b25b3d4fff382094b0eb9"><td class="memItemLeft" align="right" valign="top">struct <a class="el" href="structOxigenoResponse.html">OxigenoResponse</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="decoders_8hpp.html#a4cedb500095b25b3d4fff382094b0eb9">decodeRelacionCombAireActual</a> (char *response)</td></tr>
+<tr class="memdesc:a4cedb500095b25b3d4fff382094b0eb9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Función de decodificación de los sensores de oxígeno y la relación de combustible actual.  <a href="#a4cedb500095b25b3d4fff382094b0eb9">Más...</a><br /></td></tr>
+<tr class="separator:a4cedb500095b25b3d4fff382094b0eb9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a88d7079325bf81705583d9f2101cfa15"><td class="memItemLeft" align="right" valign="top">struct <a class="el" href="structRelacionesResponse.html">RelacionesResponse</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="decoders_8hpp.html#a88d7079325bf81705583d9f2101cfa15">decodeRelaciones</a> (char *response)</td></tr>
+<tr class="memdesc:a88d7079325bf81705583d9f2101cfa15"><td class="mdescLeft">&#160;</td><td class="mdescRight">Función de decodificación del alor máximo de la relación de equivalencia de combustible - aire, voltaje del sensor de oxígenos, corriente del sensor de oxígenos y presión absoluta del colector de entrada.  <a href="#a88d7079325bf81705583d9f2101cfa15">Más...</a><br /></td></tr>
+<tr class="separator:a88d7079325bf81705583d9f2101cfa15"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<a name="details" id="details"></a><h2 class="groupheader">Descripción detallada</h2>
+<div class="textblock"><p>Archivo que contiene la declaración de las funciones de decodificación de las respuestas del dispositivo ELM327. </p>
+<dl class="section author"><dt>Autor</dt><dd>Sergio Román González </dd></dl>
+<dl class="section date"><dt>Fecha</dt><dd>05/09/2020 </dd></dl>
+
+<p class="definition">Definición en el archivo <a class="el" href="decoders_8hpp_source.html">decoders.hpp</a>.</p>
+</div><h2 class="groupheader">Documentación de los 'defines'</h2>
+<a id="a8a092c91721f7da8bb812b510993ad3e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8a092c91721f7da8bb812b510993ad3e">&#9670;&nbsp;</a></span>PID_BITS</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define PID_BITS&#160;&#160;&#160;32</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Macro con el número de bits de respuesta para la solicitud de PIDs disponibles </p>
+
+<p class="definition">Definición en la línea <a class="el" href="decoders_8hpp_source.html#l00018">18</a> del archivo <a class="el" href="decoders_8hpp_source.html">decoders.hpp</a>.</p>
+
+</div>
+</div>
+<a id="ad3ef8a4a578a81438303e48d4c5f9458"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad3ef8a4a578a81438303e48d4c5f9458">&#9670;&nbsp;</a></span>STATUS_BITS</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define STATUS_BITS&#160;&#160;&#160;8</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Macro con el número de bits de respuesta para las pruebas del PID STATUS </p>
+
+<p class="definition">Definición en la línea <a class="el" href="decoders_8hpp_source.html#l00019">19</a> del archivo <a class="el" href="decoders_8hpp_source.html">decoders.hpp</a>.</p>
+
+</div>
+</div>
+<h2 class="groupheader">Documentación de las funciones</h2>
+<a id="a4f18f411252f4c60fae4af320989c262"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4f18f411252f4c60fae4af320989c262">&#9670;&nbsp;</a></span>convertDTCs()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::string convertDTCs </td>
+          <td>(</td>
+          <td class="paramtype">std::string&#160;</td>
+          <td class="paramname"><em>dtc</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Función de conversión del primer byte del DTC en su valor correspondiente. </p>
+<dl class="params"><dt>Parámetros</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">dtc</td><td>String con los bytes del DTC. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Devuelve</dt><dd>String de DTC con el primer byte convertido. </dd></dl>
+
+<p class="definition">Definición en la línea <a class="el" href="decoders_8cpp_source.html#l00047">47</a> del archivo <a class="el" href="decoders_8cpp_source.html">decoders.cpp</a>.</p>
+
+</div>
+</div>
+<a id="aeee9e6d8511a934b3a3644b19de3f2b7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aeee9e6d8511a934b3a3644b19de3f2b7">&#9670;&nbsp;</a></span>decodeAjusteCombustibleEGR()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">float decodeAjusteCombustibleEGR </td>
+          <td>(</td>
+          <td class="paramtype">char *&#160;</td>
+          <td class="paramname"><em>response</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Función de decodificación del ajuste de combustible EGR. </p>
+<dl class="params"><dt>Parámetros</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">response</td><td>Cadena de caracteres con los bytes útiles de la respuesta del dispositivo ELM327. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Devuelve</dt><dd>Float del valor de la respuesta decodificada. </dd></dl>
+
+<p class="definition">Definición en la línea <a class="el" href="decoders_8cpp_source.html#l00284">284</a> del archivo <a class="el" href="decoders_8cpp_source.html">decoders.cpp</a>.</p>
+
+</div>
+</div>
+<a id="a7a2fee87eace8ad6c86c628f5f91b3b5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7a2fee87eace8ad6c86c628f5f91b3b5">&#9670;&nbsp;</a></span>decodeAvanceTiempo()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">float decodeAvanceTiempo </td>
+          <td>(</td>
+          <td class="paramtype">char *&#160;</td>
+          <td class="paramname"><em>response</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Función de decodificación del avance del tiempo. </p>
+<dl class="params"><dt>Parámetros</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">response</td><td>Cadena de caracteres con los bytes útiles de la respuesta del dispositivo ELM327. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Devuelve</dt><dd>Float del valor de la respuesta decodificada. </dd></dl>
+
+<p class="definition">Definición en la línea <a class="el" href="decoders_8cpp_source.html#l00316">316</a> del archivo <a class="el" href="decoders_8cpp_source.html">decoders.cpp</a>.</p>
+
+</div>
+</div>
+<a id="adbe68794075963c37e654d53b8a46f68"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#adbe68794075963c37e654d53b8a46f68">&#9670;&nbsp;</a></span>decodeCargaPosicionEGR()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">float decodeCargaPosicionEGR </td>
+          <td>(</td>
+          <td class="paramtype">char *&#160;</td>
+          <td class="paramname"><em>response</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Función de decodificación de la posición EGR. </p>
+<dl class="params"><dt>Parámetros</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">response</td><td>Cadena de caracteres con los bytes útiles de la respuesta del dispositivo ELM327. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Devuelve</dt><dd>Float del valor de la respuesta decodificada. </dd></dl>
+
+<p class="definition">Definición en la línea <a class="el" href="decoders_8cpp_source.html#l00270">270</a> del archivo <a class="el" href="decoders_8cpp_source.html">decoders.cpp</a>.</p>
+
+</div>
+</div>
+<a id="ab83ce79cd098ea655f3812488e304a0c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab83ce79cd098ea655f3812488e304a0c">&#9670;&nbsp;</a></span>decodeDescribeProtocol()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::string decodeDescribeProtocol </td>
+          <td>(</td>
+          <td class="paramtype">char *&#160;</td>
+          <td class="paramname"><em>response</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Función de decodificación del protocolo de funcionamiento actual. </p>
+<dl class="params"><dt>Parámetros</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">response</td><td>Cadena de caracteres con los bytes útiles de la respuesta del dispositivo ELM327. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Devuelve</dt><dd>String del protocolo de funcionamiento actual. </dd></dl>
+
+<p class="definition">Definición en la línea <a class="el" href="decoders_8cpp_source.html#l00016">16</a> del archivo <a class="el" href="decoders_8cpp_source.html">decoders.cpp</a>.</p>
+
+</div>
+</div>
+<a id="aac9b3d4ea17ee4dbbdf755b0b510137a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aac9b3d4ea17ee4dbbdf755b0b510137a">&#9670;&nbsp;</a></span>decodeDTCs()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::vector&lt;std::string&gt; decodeDTCs </td>
+          <td>(</td>
+          <td class="paramtype">char *&#160;</td>
+          <td class="paramname"><em>response</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Función de decodificación de los DTC activos en el vehículo. </p>
+<dl class="params"><dt>Parámetros</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">response</td><td>Cadena de caracteres con los bytes útiles de la respuesta del dispositivo ELM327. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Devuelve</dt><dd>Vector de strings con los DTC activos en el vehículo. </dd></dl>
+
+<p class="definition">Definición en la línea <a class="el" href="decoders_8cpp_source.html#l00086">86</a> del archivo <a class="el" href="decoders_8cpp_source.html">decoders.cpp</a>.</p>
+
+</div>
+</div>
+<a id="aa7c5243702d5462e4b638450e750624e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa7c5243702d5462e4b638450e750624e">&#9670;&nbsp;</a></span>decodeHexToDec()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">float decodeHexToDec </td>
+          <td>(</td>
+          <td class="paramtype">char *&#160;</td>
+          <td class="paramname"><em>response</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Función de decodificación de hexadecimal a decimal. </p>
+<dl class="params"><dt>Parámetros</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">response</td><td>Cadena de caracteres con los bytes útiles de la respuesta del dispositivo ELM327. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Devuelve</dt><dd>Float del valor de la respuesta decodificada. </dd></dl>
+
+<p class="definition">Definición en la línea <a class="el" href="decoders_8cpp_source.html#l00298">298</a> del archivo <a class="el" href="decoders_8cpp_source.html">decoders.cpp</a>.</p>
+
+</div>
+</div>
+<a id="aef44cca306ed9c74b146d2b7dd058763"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aef44cca306ed9c74b146d2b7dd058763">&#9670;&nbsp;</a></span>decodePIDS()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::vector&lt;int&gt; decodePIDS </td>
+          <td>(</td>
+          <td class="paramtype">char *&#160;</td>
+          <td class="paramname"><em>response</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Función de decodificación de los PIDS disponibles en el vehículo. </p>
+<dl class="params"><dt>Parámetros</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">response</td><td>Cadena de caracteres con los bytes útiles de la respuesta del dispositivo ELM327. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Devuelve</dt><dd>Vector de enteros con los PIDS disponibles en el vehículo. </dd></dl>
+
+<p class="definition">Definición en la línea <a class="el" href="decoders_8cpp_source.html#l00112">112</a> del archivo <a class="el" href="decoders_8cpp_source.html">decoders.cpp</a>.</p>
+
+</div>
+</div>
+<a id="a3e32aaf8ced989570e141f01210564f3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3e32aaf8ced989570e141f01210564f3">&#9670;&nbsp;</a></span>decodePresionCombColector()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">float decodePresionCombColector </td>
+          <td>(</td>
+          <td class="paramtype">char *&#160;</td>
+          <td class="paramname"><em>response</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Función de decodificación de la presión del combustible del colector de vacío. </p>
+<dl class="params"><dt>Parámetros</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">response</td><td>Cadena de caracteres con los bytes útiles de la respuesta del dispositivo ELM327. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Devuelve</dt><dd>Float del valor de la respuesta decodificada. </dd></dl>
+
+<p class="definition">Definición en la línea <a class="el" href="decoders_8cpp_source.html#l00384">384</a> del archivo <a class="el" href="decoders_8cpp_source.html">decoders.cpp</a>.</p>
+
+</div>
+</div>
+<a id="ab1c03e72734d4127a1c48f3b5a44a2e2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab1c03e72734d4127a1c48f3b5a44a2e2">&#9670;&nbsp;</a></span>decodePresionCombustible()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">float decodePresionCombustible </td>
+          <td>(</td>
+          <td class="paramtype">char *&#160;</td>
+          <td class="paramname"><em>response</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Función de decodificación de la presión del combustible. </p>
+<dl class="params"><dt>Parámetros</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">response</td><td>Cadena de caracteres con los bytes útiles de la respuesta del dispositivo ELM327. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Devuelve</dt><dd>Float del valor de la respuesta decodificada. </dd></dl>
+
+<p class="definition">Definición en la línea <a class="el" href="decoders_8cpp_source.html#l00291">291</a> del archivo <a class="el" href="decoders_8cpp_source.html">decoders.cpp</a>.</p>
+
+</div>
+</div>
+<a id="a228605d8cad0901a691ba4155a2326fc"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a228605d8cad0901a691ba4155a2326fc">&#9670;&nbsp;</a></span>decodePresionMedidorCombustible()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">float decodePresionMedidorCombustible </td>
+          <td>(</td>
+          <td class="paramtype">char *&#160;</td>
+          <td class="paramname"><em>response</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Función de decodificación de la presión del medidor del tren de combustible. </p>
+<dl class="params"><dt>Parámetros</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">response</td><td>Cadena de caracteres con los bytes útiles de la respuesta del dispositivo ELM327. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Devuelve</dt><dd>Float del valor de la respuesta decodificada. </dd></dl>
+
+<p class="definition">Definición en la línea <a class="el" href="decoders_8cpp_source.html#l00391">391</a> del archivo <a class="el" href="decoders_8cpp_source.html">decoders.cpp</a>.</p>
+
+</div>
+</div>
+<a id="ab86bda1fcefda784e048796e2d892475"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab86bda1fcefda784e048796e2d892475">&#9670;&nbsp;</a></span>decodePresionVapor()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">float decodePresionVapor </td>
+          <td>(</td>
+          <td class="paramtype">char *&#160;</td>
+          <td class="paramname"><em>response</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Función de decodificación de la presión de vapor del sistema evaporativo . </p>
+<dl class="params"><dt>Parámetros</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">response</td><td>Cadena de caracteres con los bytes útiles de la respuesta del dispositivo ELM327. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Devuelve</dt><dd>Float del valor de la respuesta decodificada. </dd></dl>
+
+<p class="definition">Definición en la línea <a class="el" href="decoders_8cpp_source.html#l00442">442</a> del archivo <a class="el" href="decoders_8cpp_source.html">decoders.cpp</a>.</p>
+
+</div>
+</div>
+<a id="a363bd4f505969098be58a175f02b9b50"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a363bd4f505969098be58a175f02b9b50">&#9670;&nbsp;</a></span>decodeRelacionCombAire()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">struct <a class="el" href="structOxigenoResponse.html">OxigenoResponse</a> decodeRelacionCombAire </td>
+          <td>(</td>
+          <td class="paramtype">char *&#160;</td>
+          <td class="paramname"><em>response</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Función de decodificación de los sensores de oxígeno y la relación de combustible. </p>
+<dl class="params"><dt>Parámetros</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">response</td><td>Cadena de caracteres con los bytes útiles de la respuesta del dispositivo ELM327. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Devuelve</dt><dd>Estructura <a class="el" href="structOxigenoResponse.html" title="Estructura de datos para las respuesta de dos valores en PIDS relacionados con gases de escape...">OxigenoResponse</a> con el valor A y B correspondiente al comando solicitado. </dd></dl>
+
+<p class="definition">Definición en la línea <a class="el" href="decoders_8cpp_source.html#l00398">398</a> del archivo <a class="el" href="decoders_8cpp_source.html">decoders.cpp</a>.</p>
+
+</div>
+</div>
+<a id="a4cedb500095b25b3d4fff382094b0eb9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4cedb500095b25b3d4fff382094b0eb9">&#9670;&nbsp;</a></span>decodeRelacionCombAireActual()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">struct <a class="el" href="structOxigenoResponse.html">OxigenoResponse</a> decodeRelacionCombAireActual </td>
+          <td>(</td>
+          <td class="paramtype">char *&#160;</td>
+          <td class="paramname"><em>response</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Función de decodificación de los sensores de oxígeno y la relación de combustible actual. </p>
+<dl class="params"><dt>Parámetros</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">response</td><td>Cadena de caracteres con los bytes útiles de la respuesta del dispositivo ELM327. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Devuelve</dt><dd>Estructura <a class="el" href="structOxigenoResponse.html" title="Estructura de datos para las respuesta de dos valores en PIDS relacionados con gases de escape...">OxigenoResponse</a> con el valor A y B correspondiente al comando solicitado. </dd></dl>
+
+<p class="definition">Definición en la línea <a class="el" href="decoders_8cpp_source.html#l00453">453</a> del archivo <a class="el" href="decoders_8cpp_source.html">decoders.cpp</a>.</p>
+
+</div>
+</div>
+<a id="ade77bb9f8d8a2ba3aa431cdf9bdd0c32"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ade77bb9f8d8a2ba3aa431cdf9bdd0c32">&#9670;&nbsp;</a></span>decodeRelacionCombAireBasica()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">float decodeRelacionCombAireBasica </td>
+          <td>(</td>
+          <td class="paramtype">char *&#160;</td>
+          <td class="paramname"><em>response</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Función de decodificación de la relación equivaliente comandada de combustible - aire. </p>
+<dl class="params"><dt>Parámetros</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">response</td><td>Cadena de caracteres con los bytes útiles de la respuesta del dispositivo ELM327. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Devuelve</dt><dd>Float del valor de la respuesta decodificada. </dd></dl>
+
+<p class="definition">Definición en la línea <a class="el" href="decoders_8cpp_source.html#l00496">496</a> del archivo <a class="el" href="decoders_8cpp_source.html">decoders.cpp</a>.</p>
+
+</div>
+</div>
+<a id="a88d7079325bf81705583d9f2101cfa15"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a88d7079325bf81705583d9f2101cfa15">&#9670;&nbsp;</a></span>decodeRelaciones()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">struct <a class="el" href="structRelacionesResponse.html">RelacionesResponse</a> decodeRelaciones </td>
+          <td>(</td>
+          <td class="paramtype">char *&#160;</td>
+          <td class="paramname"><em>response</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Función de decodificación del alor máximo de la relación de equivalencia de combustible - aire, voltaje del sensor de oxígenos, corriente del sensor de oxígenos y presión absoluta del colector de entrada. </p>
+<dl class="params"><dt>Parámetros</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">response</td><td>Cadena de caracteres con los bytes útiles de la respuesta del dispositivo ELM327. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Devuelve</dt><dd>Estructura <a class="el" href="structOxigenoResponse.html" title="Estructura de datos para las respuesta de dos valores en PIDS relacionados con gases de escape...">OxigenoResponse</a> con el valor A y B correspondiente al comando solicitado. </dd></dl>
+
+<p class="definition">Definición en la línea <a class="el" href="decoders_8cpp_source.html#l00520">520</a> del archivo <a class="el" href="decoders_8cpp_source.html">decoders.cpp</a>.</p>
+
+</div>
+</div>
+<a id="a889868c7b1e554aee496e6aed7101cc4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a889868c7b1e554aee496e6aed7101cc4">&#9670;&nbsp;</a></span>decodeRPM()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">float decodeRPM </td>
+          <td>(</td>
+          <td class="paramtype">char *&#160;</td>
+          <td class="paramname"><em>response</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Función de decodificación de las RPM del motor. </p>
+<dl class="params"><dt>Parámetros</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">response</td><td>Cadena de caracteres con los bytes útiles de la respuesta del dispositivo ELM327. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Devuelve</dt><dd>Float del valor de la respuesta decodificada. </dd></dl>
+
+<p class="definition">Definición en la línea <a class="el" href="decoders_8cpp_source.html#l00305">305</a> del archivo <a class="el" href="decoders_8cpp_source.html">decoders.cpp</a>.</p>
+
+</div>
+</div>
+<a id="a5b53fc5fc37fbee9c5e389f6c8c18438"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5b53fc5fc37fbee9c5e389f6c8c18438">&#9670;&nbsp;</a></span>decodeSensorOxigeno()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">struct <a class="el" href="structOxigenoResponse.html">OxigenoResponse</a> decodeSensorOxigeno </td>
+          <td>(</td>
+          <td class="paramtype">char *&#160;</td>
+          <td class="paramname"><em>response</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Función de decodificación de los sensores de oxígeno. </p>
+<dl class="params"><dt>Parámetros</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">response</td><td>Cadena de caracteres con los bytes útiles de la respuesta del dispositivo ELM327. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Devuelve</dt><dd>Estructura <a class="el" href="structOxigenoResponse.html" title="Estructura de datos para las respuesta de dos valores en PIDS relacionados con gases de escape...">OxigenoResponse</a> con el valor A y B correspondiente al comando solicitado. </dd></dl>
+
+<p class="definition">Definición en la línea <a class="el" href="decoders_8cpp_source.html#l00341">341</a> del archivo <a class="el" href="decoders_8cpp_source.html">decoders.cpp</a>.</p>
+
+</div>
+</div>
+<a id="aca9cad863d8603615597a0291804c8ae"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aca9cad863d8603615597a0291804c8ae">&#9670;&nbsp;</a></span>decodeStatus()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::map&lt;std::string, std::string&gt; decodeStatus </td>
+          <td>(</td>
+          <td class="paramtype">char *&#160;</td>
+          <td class="paramname"><em>response</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Función de decodificación del PID STATUS. </p>
+<dl class="params"><dt>Parámetros</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">response</td><td>Cadena de caracteres con los bytes útiles de la respuesta del dispositivo ELM327. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Devuelve</dt><dd>Mapa string/string con el estado de los monitores de diagnóstico. </dd></dl>
+
+<p class="definition">Definición en la línea <a class="el" href="decoders_8cpp_source.html#l00128">128</a> del archivo <a class="el" href="decoders_8cpp_source.html">decoders.cpp</a>.</p>
+
+</div>
+</div>
+<a id="a8251853ca2e5b8b2e88c75f50d53bc8d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8251853ca2e5b8b2e88c75f50d53bc8d">&#9670;&nbsp;</a></span>decodeTempCatalizador()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">float decodeTempCatalizador </td>
+          <td>(</td>
+          <td class="paramtype">char *&#160;</td>
+          <td class="paramname"><em>response</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Función de decodificación de la temperatura del catalizador. </p>
+<dl class="params"><dt>Parámetros</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">response</td><td>Cadena de caracteres con los bytes útiles de la respuesta del dispositivo ELM327. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Devuelve</dt><dd>Float del valor de la respuesta decodificada. </dd></dl>
+
+<p class="definition">Definición en la línea <a class="el" href="decoders_8cpp_source.html#l00476">476</a> del archivo <a class="el" href="decoders_8cpp_source.html">decoders.cpp</a>.</p>
+
+</div>
+</div>
+<a id="af581438645d7ff67766fa2e5eba5eaf9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af581438645d7ff67766fa2e5eba5eaf9">&#9670;&nbsp;</a></span>decodeTempGeneral()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">float decodeTempGeneral </td>
+          <td>(</td>
+          <td class="paramtype">char *&#160;</td>
+          <td class="paramname"><em>response</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Función de decodificación de la temperatura. </p>
+<dl class="params"><dt>Parámetros</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">response</td><td>Cadena de caracteres con los bytes útiles de la respuesta del dispositivo ELM327. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Devuelve</dt><dd>Float del valor de la respuesta decodificada. </dd></dl>
+
+<p class="definition">Definición en la línea <a class="el" href="decoders_8cpp_source.html#l00277">277</a> del archivo <a class="el" href="decoders_8cpp_source.html">decoders.cpp</a>.</p>
+
+</div>
+</div>
+<a id="adceefeb78a70b295b378f4c472630aa1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#adceefeb78a70b295b378f4c472630aa1">&#9670;&nbsp;</a></span>decodeVelocidadMAF()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">float decodeVelocidadMAF </td>
+          <td>(</td>
+          <td class="paramtype">char *&#160;</td>
+          <td class="paramname"><em>response</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Función de decodificación de la tasa de flujo del aire (MAF). </p>
+<dl class="params"><dt>Parámetros</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">response</td><td>Cadena de caracteres con los bytes útiles de la respuesta del dispositivo ELM327. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Devuelve</dt><dd>Float del valor de la respuesta decodificada. </dd></dl>
+
+<p class="definition">Definición en la línea <a class="el" href="decoders_8cpp_source.html#l00327">327</a> del archivo <a class="el" href="decoders_8cpp_source.html">decoders.cpp</a>.</p>
+
+</div>
+</div>
+<a id="a66754738119854c13a74265e209083e4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a66754738119854c13a74265e209083e4">&#9670;&nbsp;</a></span>decodeVIN()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::string decodeVIN </td>
+          <td>(</td>
+          <td class="paramtype">char *&#160;</td>
+          <td class="paramname"><em>response</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Función de decodificación del Número de Identificación del Vehículo (VIN). </p>
+<dl class="params"><dt>Parámetros</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">response</td><td>Cadena de caracteres con los bytes útiles de la respuesta del dispositivo ELM327. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Devuelve</dt><dd>String con el Número de Identificación del Vehículo (VIN). </dd></dl>
+
+<p class="definition">Definición en la línea <a class="el" href="decoders_8cpp_source.html#l00021">21</a> del archivo <a class="el" href="decoders_8cpp_source.html">decoders.cpp</a>.</p>
+
+</div>
+</div>
+<a id="a5937fc059394faad8c9c96a0b27a8796"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5937fc059394faad8c9c96a0b27a8796">&#9670;&nbsp;</a></span>decodeVoltajeControl()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">float decodeVoltajeControl </td>
+          <td>(</td>
+          <td class="paramtype">char *&#160;</td>
+          <td class="paramname"><em>response</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Función de decodificación del voltaje del módulo de control. </p>
+<dl class="params"><dt>Parámetros</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">response</td><td>Cadena de caracteres con los bytes útiles de la respuesta del dispositivo ELM327. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Devuelve</dt><dd>Float del valor de la respuesta decodificada. </dd></dl>
+
+<p class="definition">Definición en la línea <a class="el" href="decoders_8cpp_source.html#l00485">485</a> del archivo <a class="el" href="decoders_8cpp_source.html">decoders.cpp</a>.</p>
+
+</div>
+</div>
+</div><!-- contents -->
+<!-- start footer part -->
+<hr class="footer"/><address class="footer"><small>
+Generado por &#160;<a href="http://www.doxygen.org/index.html">
+<img class="footer" src="doxygen.png" alt="doxygen"/>
+</a> 1.8.13
+</small></address>
+</body>
+</html>

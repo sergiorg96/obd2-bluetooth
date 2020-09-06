@@ -1,0 +1,180 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=9"/>
+<meta name="generator" content="Doxygen 1.8.13"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>obd2-bluetooth: Referencia del Archivo Obd.hpp</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr style="height: 56px;">
+  <td id="projectlogo"><img alt="Logo" src="favicon.ico"/></td>
+  <td id="projectalign" style="padding-left: 0.5em;">
+   <div id="projectname">obd2-bluetooth
+   &#160;<span id="projectnumber">1.0</span>
+   </div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Generado por Doxygen 1.8.13 -->
+<script type="text/javascript">
+var searchBox = new SearchBox("searchBox", "search",false,'Buscar');
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+$(function() {
+  initMenu('',true,false,'search.php','Buscar');
+  $(document).ready(function() { init_search(); });
+});
+</script>
+<div id="main-nav"></div>
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<iframe src="javascript:void(0)" frameborder="0" 
+        name="MSearchResults" id="MSearchResults">
+</iframe>
+</div>
+
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li>  </ul>
+</div>
+</div><!-- top -->
+<div class="header">
+  <div class="summary">
+<a href="#nested-classes">Estructuras de datos</a> &#124;
+<a href="#define-members">defines</a> &#124;
+<a href="#typedef-members">typedefs</a>  </div>
+  <div class="headertitle">
+<div class="title">Referencia del Archivo Obd.hpp</div>  </div>
+</div><!--header-->
+<div class="contents">
+
+<p>Archivo que contiene la clase con la implementación de la conexión y envío de mensajes OBD con el dispositivo ELM327.  
+<a href="#details">Más...</a></p>
+<div class="textblock"><code>#include &lt;iostream&gt;</code><br />
+<code>#include &lt;fstream&gt;</code><br />
+<code>#include &lt;thread&gt;</code><br />
+<code>#include &lt;bitset&gt;</code><br />
+<code>#include &lt;vector&gt;</code><br />
+<code>#include &lt;sstream&gt;</code><br />
+<code>#include &lt;algorithm&gt;</code><br />
+<code>#include &lt;utility&gt;</code><br />
+<code>#include &lt;map&gt;</code><br />
+<code>#include &lt;typeinfo&gt;</code><br />
+<code>#include &lt;netinet/in.h&gt;</code><br />
+<code>#include &lt;arpa/inet.h&gt;</code><br />
+<code>#include &lt;sys/types.h&gt;</code><br />
+<code>#include &lt;sys/socket.h&gt;</code><br />
+<code>#include &lt;sys/epoll.h&gt;</code><br />
+<code>#include &lt;bluetooth/bluetooth.h&gt;</code><br />
+<code>#include &lt;bluetooth/rfcomm.h&gt;</code><br />
+<code>#include &lt;bluetooth/hci.h&gt;</code><br />
+<code>#include &lt;bluetooth/hci_lib.h&gt;</code><br />
+<code>#include &lt;unistd.h&gt;</code><br />
+<code>#include &lt;ctime&gt;</code><br />
+<code>#include &quot;<a class="el" href="Commands_8hpp_source.html">Commands.hpp</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="decoders_8hpp_source.html">decoders.hpp</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="loadcfg_8hpp_source.html">loadcfg.hpp</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="debug_8hpp_source.html">debug.hpp</a>&quot;</code><br />
+</div><div class="textblock"><div class="dynheader">
+Dependencia gráfica adjunta para Obd.hpp:</div>
+<div class="dyncontent">
+<div class="center"><img src="Obd_8hpp__incl.png" border="0" usemap="#Obd_8hpp" alt=""/></div>
+<map name="Obd_8hpp" id="Obd_8hpp">
+<area shape="rect" id="node23" href="Commands_8hpp.html" title="Archivo que contiene la clase con la definición de la estructura de los comandos AT y OBD..." alt="" coords="1395,80,1510,107"/>
+<area shape="rect" id="node48" href="decoders_8hpp.html" title="Archivo que contiene la declaración de las funciones de decodificación de las respuestas del disposit..." alt="" coords="2650,155,2750,181"/>
+<area shape="rect" id="node49" href="loadcfg_8hpp.html" title="Archivo que contiene la declaración de las funciones para la lectura de un fichero de configuración d..." alt="" coords="3338,80,3428,107"/>
+<area shape="rect" id="node50" href="debug_8hpp.html" title="Archivo que contiene las funciones de debug en la salida estándar y de error del sistema. " alt="" coords="3452,80,3535,107"/>
+</map>
+</div>
+</div><div class="textblock"><div class="dynheader">
+Gráfico de los archivos que directa o indirectamente incluyen a este archivo:</div>
+<div class="dyncontent">
+<div class="center"><img src="Obd_8hpp__dep__incl.png" border="0" usemap="#Obd_8hppdep" alt=""/></div>
+<map name="Obd_8hppdep" id="Obd_8hppdep">
+<area shape="rect" id="node2" href="main_8cpp_source.html" title="main.cpp" alt="" coords="5,80,80,107"/>
+<area shape="rect" id="node3" href="UnitTestCase_8cpp.html" title="Archivo que contiene el conjunto de pruebas unitarias y de integración del sistema. " alt="" coords="104,80,232,107"/>
+</map>
+</div>
+</div>
+<p><a href="Obd_8hpp_source.html">Ir al código fuente de este archivo.</a></p>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="nested-classes"></a>
+Estructuras de datos</h2></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classObd.html">Obd</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Clase que representa el acceso a la conexión con el dispositivo ELM327.  <a href="classObd.html#details">Más...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="define-members"></a>
+defines</h2></td></tr>
+<tr class="memitem:a115fbf8b5fd0f0b7e912dd166068415b"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="Obd_8hpp.html#a115fbf8b5fd0f0b7e912dd166068415b">MAX_EP_EVTS</a>&#160;&#160;&#160;20</td></tr>
+<tr class="separator:a115fbf8b5fd0f0b7e912dd166068415b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="typedef-members"></a>
+typedefs</h2></td></tr>
+<tr class="memitem:ab701e3ac61a85b337ec5c1abaad6742d"><td class="memItemLeft" align="right" valign="top"><a id="ab701e3ac61a85b337ec5c1abaad6742d"></a>
+using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="Obd_8hpp.html#ab701e3ac61a85b337ec5c1abaad6742d">json</a> = nlohmann::json</td></tr>
+<tr class="memdesc:ab701e3ac61a85b337ec5c1abaad6742d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Utilización de la librería externa nlohmann::json a través del tipo definido json. <br /></td></tr>
+<tr class="separator:ab701e3ac61a85b337ec5c1abaad6742d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aaa63a77fc61ef01154d73b6fac67f1af"><td class="memItemLeft" align="right" valign="top"><a id="aaa63a77fc61ef01154d73b6fac67f1af"></a>
+typedef std::pair&lt; std::string, <a class="el" href="classCommands.html">Commands</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="Obd_8hpp.html#aaa63a77fc61ef01154d73b6fac67f1af">tupla</a></td></tr>
+<tr class="memdesc:aaa63a77fc61ef01154d73b6fac67f1af"><td class="mdescLeft">&#160;</td><td class="mdescRight">Definición del tipo pair para la asignación de los objetos <a class="el" href="classCommands.html" title="Clase que representa los comandos AT y PIDS que se necesitan en el intercambio de mensajes con el dis...">Commands</a> a la clase <a class="el" href="classObd.html" title="Clase que representa el acceso a la conexión con el dispositivo ELM327. ">Obd</a>. <br /></td></tr>
+<tr class="separator:aaa63a77fc61ef01154d73b6fac67f1af"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<a name="details" id="details"></a><h2 class="groupheader">Descripción detallada</h2>
+<div class="textblock"><p>Archivo que contiene la clase con la implementación de la conexión y envío de mensajes OBD con el dispositivo ELM327. </p>
+<dl class="section author"><dt>Autor</dt><dd>Sergio Román González </dd></dl>
+<dl class="section date"><dt>Fecha</dt><dd>05/09/2020 </dd></dl>
+
+<p class="definition">Definición en el archivo <a class="el" href="Obd_8hpp_source.html">Obd.hpp</a>.</p>
+</div><h2 class="groupheader">Documentación de los 'defines'</h2>
+<a id="a115fbf8b5fd0f0b7e912dd166068415b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a115fbf8b5fd0f0b7e912dd166068415b">&#9670;&nbsp;</a></span>MAX_EP_EVTS</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define MAX_EP_EVTS&#160;&#160;&#160;20</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Macro con el número máximo de eventos en la recepción de la instancia epoll </p>
+
+<p class="definition">Definición en la línea <a class="el" href="Obd_8hpp_source.html#l00052">52</a> del archivo <a class="el" href="Obd_8hpp_source.html">Obd.hpp</a>.</p>
+
+</div>
+</div>
+</div><!-- contents -->
+<!-- start footer part -->
+<hr class="footer"/><address class="footer"><small>
+Generado por &#160;<a href="http://www.doxygen.org/index.html">
+<img class="footer" src="doxygen.png" alt="doxygen"/>
+</a> 1.8.13
+</small></address>
+</body>
+</html>

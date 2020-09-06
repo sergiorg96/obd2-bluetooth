@@ -1,0 +1,231 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=9"/>
+<meta name="generator" content="Doxygen 1.8.13"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>obd2-bluetooth: Referencia del Archivo /home/sergiorg/GitHubProjects/obd2-bluetooth/src/picangps.hpp</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr style="height: 56px;">
+  <td id="projectlogo"><img alt="Logo" src="favicon.ico"/></td>
+  <td id="projectalign" style="padding-left: 0.5em;">
+   <div id="projectname">obd2-bluetooth
+   &#160;<span id="projectnumber">1.0</span>
+   </div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Generado por Doxygen 1.8.13 -->
+<script type="text/javascript">
+var searchBox = new SearchBox("searchBox", "search",false,'Buscar');
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+$(function() {
+  initMenu('',true,false,'search.php','Buscar');
+  $(document).ready(function() { init_search(); });
+});
+</script>
+<div id="main-nav"></div>
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<iframe src="javascript:void(0)" frameborder="0" 
+        name="MSearchResults" id="MSearchResults">
+</iframe>
+</div>
+
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li>  </ul>
+</div>
+</div><!-- top -->
+<div class="header">
+  <div class="summary">
+<a href="#func-members">Funciones</a>  </div>
+  <div class="headertitle">
+<div class="title">Referencia del Archivo picangps.hpp</div>  </div>
+</div><!--header-->
+<div class="contents">
+<div class="textblock"><code>#include &lt;string&gt;</code><br />
+<code>#include &lt;termios.h&gt;</code><br />
+<code>#include &lt;unistd.h&gt;</code><br />
+<code>#include &lt;fcntl.h&gt;</code><br />
+<code>#include &lt;cstring&gt;</code><br />
+<code>#include &lt;sys/file.h&gt;</code><br />
+</div><div class="textblock"><div class="dynheader">
+Dependencia gráfica adjunta para picangps.hpp:</div>
+<div class="dyncontent">
+<div class="center"><img src="picangps_8hpp__incl.png" border="0" usemap="#_2home_2sergiorg_2GitHubProjects_2obd2-bluetooth_2src_2picangps_8hpp" alt=""/></div>
+<map name="_2home_2sergiorg_2GitHubProjects_2obd2-bluetooth_2src_2picangps_8hpp" id="_2home_2sergiorg_2GitHubProjects_2obd2-bluetooth_2src_2picangps_8hpp">
+</map>
+</div>
+</div><div class="textblock"><div class="dynheader">
+Gráfico de los archivos que directa o indirectamente incluyen a este archivo:</div>
+<div class="dyncontent">
+<div class="center"><img src="picangps_8hpp__dep__incl.png" border="0" usemap="#_2home_2sergiorg_2GitHubProjects_2obd2-bluetooth_2src_2picangps_8hppdep" alt=""/></div>
+<map name="_2home_2sergiorg_2GitHubProjects_2obd2-bluetooth_2src_2picangps_8hppdep" id="_2home_2sergiorg_2GitHubProjects_2obd2-bluetooth_2src_2picangps_8hppdep">
+<area shape="rect" id="node2" href="alarmfile_8cpp.html" title="/home/sergiorg/GitHubProjects\l/obd2&#45;bluetooth/src/alarmfile.cpp" alt="" coords="5,95,216,136"/>
+<area shape="rect" id="node3" href="main_8cpp.html" title="/home/sergiorg/GitHubProjects\l/obd2&#45;bluetooth/src/main.cpp" alt="" coords="241,95,442,136"/>
+<area shape="rect" id="node4" href="picangps_8cpp.html" title="/home/sergiorg/GitHubProjects\l/obd2&#45;bluetooth/src/picangps.cpp" alt="" coords="466,95,681,136"/>
+</map>
+</div>
+</div>
+<p><a href="picangps_8hpp_source.html">Ir al código fuente de este archivo.</a></p>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
+Funciones</h2></td></tr>
+<tr class="memitem:a0242f725513f2a18dacc0d5b8c4b067e"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="picangps_8hpp.html#a0242f725513f2a18dacc0d5b8c4b067e">openGPS</a> (std::string tty)</td></tr>
+<tr class="separator:a0242f725513f2a18dacc0d5b8c4b067e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0f5a0b4dce5d0e7f60d84d86a1f1dec3"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="picangps_8hpp.html#a0f5a0b4dce5d0e7f60d84d86a1f1dec3">readPicanGPS</a> (int fd, char *buffer, int maxsiz, int seconds)</td></tr>
+<tr class="separator:a0f5a0b4dce5d0e7f60d84d86a1f1dec3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afb64a796832b5341a74f512042507ed3"><td class="memItemLeft" align="right" valign="top">char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="picangps_8hpp.html#afb64a796832b5341a74f512042507ed3">explore</a> (int field, char sep, char *s)</td></tr>
+<tr class="separator:afb64a796832b5341a74f512042507ed3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad73dec060af578834584f203e1b3121a"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="picangps_8hpp.html#ad73dec060af578834584f203e1b3121a">PicanGetGPS</a> (std::string serialPort)</td></tr>
+<tr class="separator:ad73dec060af578834584f203e1b3121a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<h2 class="groupheader">Documentación de las funciones</h2>
+<a id="afb64a796832b5341a74f512042507ed3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#afb64a796832b5341a74f512042507ed3">&#9670;&nbsp;</a></span>explore()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">char* explore </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>field</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">char&#160;</td>
+          <td class="paramname"><em>sep</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">char *&#160;</td>
+          <td class="paramname"><em>s</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>$GPRMC,123519,A,4807.038,N,01131.000,E,022.4,084.4,230394,003.1,W*6A</p>
+<p>Where: RMC Recommended Minimum sentence C 123519 Fix taken at 12:35:19 UTC A Status A=active or V=Void. 4807.038,N Latitude 48 deg 07.038' N 01131.000,E Longitude 11 deg 31.000' E 022.4 Speed over the ground in knots 084.4 Track angle in degrees True 230394 Date - 23rd of March 1994 003.1,W Magnetic Variation *6A The checksum data, always begins with * Returns pointer to the field-th field in s, fields separated by sep. </p>
+
+</div>
+</div>
+<a id="a0242f725513f2a18dacc0d5b8c4b067e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0242f725513f2a18dacc0d5b8c4b067e">&#9670;&nbsp;</a></span>openGPS()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int openGPS </td>
+          <td>(</td>
+          <td class="paramtype">std::string&#160;</td>
+          <td class="paramname"><em>tty</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ad73dec060af578834584f203e1b3121a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad73dec060af578834584f203e1b3121a">&#9670;&nbsp;</a></span>PicanGetGPS()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::string PicanGetGPS </td>
+          <td>(</td>
+          <td class="paramtype">std::string&#160;</td>
+          <td class="paramname"><em>serialPort</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a0f5a0b4dce5d0e7f60d84d86a1f1dec3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0f5a0b4dce5d0e7f60d84d86a1f1dec3">&#9670;&nbsp;</a></span>readPicanGPS()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool readPicanGPS </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>fd</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">char *&#160;</td>
+          <td class="paramname"><em>buffer</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>maxsiz</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>seconds</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+</div><!-- contents -->
+<!-- start footer part -->
+<hr class="footer"/><address class="footer"><small>
+Generado por &#160;<a href="http://www.doxygen.org/index.html">
+<img class="footer" src="doxygen.png" alt="doxygen"/>
+</a> 1.8.13
+</small></address>
+</body>
+</html>

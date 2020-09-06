@@ -1,0 +1,334 @@
+\hypertarget{classObd}{}\section{Referencia de la Clase Obd}
+\label{classObd}\index{Obd@{Obd}}
+
+
+Clase que representa el acceso a la conexión con el dispositivo E\+L\+M327.  
+
+
+
+
+{\ttfamily \#include $<$Obd.\+hpp$>$}
+
+\subsection*{Métodos públicos}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classObd_abd8375cee2ad218a9ae8b464d7b1d63f}{Obd} (const char $\ast$device\+Name)
+\begin{DoxyCompactList}\small\item\em Constructor de la clase \hyperlink{classObd}{Obd}. \end{DoxyCompactList}\item 
+void \hyperlink{classObd_a59676f3fa1fd3052216b55be0a79c474}{discover\+Device\+Address} (const char $\ast$device\+Name, char $\ast$device\+Address)
+\begin{DoxyCompactList}\small\item\em Método que realiza el descubrimiento bluetooth del dispositivo E\+L\+M327. \end{DoxyCompactList}\item 
+void \hyperlink{classObd_a104ccc3f2e0a4a103ae4cd1daa2f64d8}{connect\+Bluetooth} ()
+\begin{DoxyCompactList}\small\item\em Método que realiza la conexión con el dispositivo bluetooth E\+L\+M327. \end{DoxyCompactList}\item 
+void \hyperlink{classObd_a2b8bd75834351a2205d53aec8b3747be}{read\+File\+Data} ()
+\begin{DoxyCompactList}\small\item\em Método de lectura del fichero de P\+I\+DS en formato json. \end{DoxyCompactList}\item 
+void \hyperlink{classObd_a453591bc9a280e8d44d82025ce8590e9}{send} (\hyperlink{classCommands}{Commands} command)
+\begin{DoxyCompactList}\small\item\em Método de envío de mensajes AT y O\+BD al dispositivo E\+L\+M327. \end{DoxyCompactList}\item 
+void \hyperlink{classObd_a0792ecb9247f32760269fdf64a178f8f}{polling} (\hyperlink{classCommands}{Commands} command)
+\begin{DoxyCompactList}\small\item\em Método de recepción de mensajes enviados por el dispositivo E\+L\+M327. \end{DoxyCompactList}\item 
+void \hyperlink{classObd_a5091314ed8068800cce40e7a74a3731e}{init\+Messages} ()
+\begin{DoxyCompactList}\small\item\em Método de inicialización de parámetros de conexión con E\+L\+M327. \end{DoxyCompactList}\item 
+void \hyperlink{classObd_a560631b2e3af0a72c063f915a11e0466}{init\+Decoder\+Functions} ()
+\begin{DoxyCompactList}\small\item\em Método de inicialización de funciones de decodificación de mensajes O\+BD. \end{DoxyCompactList}\item 
+void \hyperlink{classObd_a95d02f8f3c48557c5ad799ecb6dd7f79}{disconnect\+Bluetooth} ()
+\begin{DoxyCompactList}\small\item\em Método de desconexión bluetooth con el dispositivo E\+L\+M327. \end{DoxyCompactList}\item 
+bool \hyperlink{classObd_aeff55ecb0a0a4278a22f20db3d2e17e3}{exist\+P\+ID} (std\+::string command)
+\begin{DoxyCompactList}\small\item\em Método de comprobación de existencia de un P\+ID implemetado en el vehículo. \end{DoxyCompactList}\item 
+void \hyperlink{classObd_abf7e84f45236ea1c78c762ac895c532c}{print\+P\+I\+Ds} ()
+\begin{DoxyCompactList}\small\item\em Método de impresión de la lista de P\+I\+DS implementados en el vehículo. \end{DoxyCompactList}\item 
+void \hyperlink{classObd_a0938bfdd6d05795e826a239cc0f29f32}{print\+Status} ()
+\begin{DoxyCompactList}\small\item\em Método de impresión de las pruebas realizadas en el vehículo. \end{DoxyCompactList}\item 
+std\+::string \hyperlink{classObd_ad88a0f25a7e3961726737915668ee13d}{get\+V\+IN} ()
+\begin{DoxyCompactList}\small\item\em Método que permite obtener el Número de Identificación del Vehículo (V\+IN). \end{DoxyCompactList}\item 
+std\+::vector$<$ std\+::string $>$ \hyperlink{classObd_ac57afb9228d933c6be5b2fa8e6446036}{get\+D\+T\+Cs} ()
+\begin{DoxyCompactList}\small\item\em Método que permite obtener los D\+TC activos en el vehículo. \end{DoxyCompactList}\item 
+bool \hyperlink{classObd_ae28b765bb787467f929eae932133d2aa}{is\+Valid} ()
+\begin{DoxyCompactList}\small\item\em Método de validación del estado de la conexion. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Campos de datos}
+\begin{DoxyCompactItemize}
+\item 
+std\+::map$<$ std\+::string, \hyperlink{classCommands}{Commands} $>$ \hyperlink{classObd_a8300062d1b651d049cf2a2bc916496cd}{map\+\_\+commands}
+\end{DoxyCompactItemize}
+
+
+\subsection{Descripción detallada}
+Clase que representa el acceso a la conexión con el dispositivo E\+L\+M327. 
+
+Clase principal que contiene los atributos y métodos necesarios para la conexión bluetooth con el dispositivo E\+L\+M327 y el posterior envío y recepción de mensajes O\+BD. 
+
+Definición en la línea \hyperlink{Obd_8hpp_source_l00073}{73} del archivo \hyperlink{Obd_8hpp_source}{Obd.\+hpp}.
+
+
+
+\subsection{Documentación del constructor y destructor}
+\mbox{\Hypertarget{classObd_abd8375cee2ad218a9ae8b464d7b1d63f}\label{classObd_abd8375cee2ad218a9ae8b464d7b1d63f}} 
+\index{Obd@{Obd}!Obd@{Obd}}
+\index{Obd@{Obd}!Obd@{Obd}}
+\subsubsection{\texorpdfstring{Obd()}{Obd()}}
+{\footnotesize\ttfamily Obd\+::\+Obd (\begin{DoxyParamCaption}\item[{const char $\ast$}]{device\+Name }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Constructor de la clase \hyperlink{classObd}{Obd}. 
+
+
+\begin{DoxyParams}{Parámetros}
+{\em device\+Name} & Cadena de caracteres con el nombre del dispositivo bluetooth O\+B\+D\+II al que conectar. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Devuelve}
+Devuelve una instancia de la clase \hyperlink{classObd}{Obd}. 
+\end{DoxyReturn}
+
+
+Definición en la línea \hyperlink{Obd_8hpp_source_l00083}{83} del archivo \hyperlink{Obd_8hpp_source}{Obd.\+hpp}.
+
+
+
+\subsection{Documentación de las funciones miembro}
+\mbox{\Hypertarget{classObd_a104ccc3f2e0a4a103ae4cd1daa2f64d8}\label{classObd_a104ccc3f2e0a4a103ae4cd1daa2f64d8}} 
+\index{Obd@{Obd}!connect\+Bluetooth@{connect\+Bluetooth}}
+\index{connect\+Bluetooth@{connect\+Bluetooth}!Obd@{Obd}}
+\subsubsection{\texorpdfstring{connect\+Bluetooth()}{connectBluetooth()}}
+{\footnotesize\ttfamily void Obd\+::connect\+Bluetooth (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Método que realiza la conexión con el dispositivo bluetooth E\+L\+M327. 
+
+Función que lleva a cabo la conexión con la interfaz bluetooth de E\+L\+M327. Crea un socket del tipo A\+F\+\_\+\+B\+L\+U\+E\+T\+O\+O\+TH y configura los parámetros de conexión de éste con la dirección física obtenida tras el descubrimiento. Se crea una instancia epoll que permite monitorizar descriptores de ficheros y obtener notificaciones de ellos, en este caso para el socket de conexión bluetooth. 
+
+Definición en la línea \hyperlink{Obd_8hpp_source_l00167}{167} del archivo \hyperlink{Obd_8hpp_source}{Obd.\+hpp}.
+
+\mbox{\Hypertarget{classObd_a95d02f8f3c48557c5ad799ecb6dd7f79}\label{classObd_a95d02f8f3c48557c5ad799ecb6dd7f79}} 
+\index{Obd@{Obd}!disconnect\+Bluetooth@{disconnect\+Bluetooth}}
+\index{disconnect\+Bluetooth@{disconnect\+Bluetooth}!Obd@{Obd}}
+\subsubsection{\texorpdfstring{disconnect\+Bluetooth()}{disconnectBluetooth()}}
+{\footnotesize\ttfamily void Obd\+::disconnect\+Bluetooth (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Método de desconexión bluetooth con el dispositivo E\+L\+M327. 
+
+Cierra el socket e instancia epoll abiertas. 
+
+Definición en la línea \hyperlink{Obd_8hpp_source_l00548}{548} del archivo \hyperlink{Obd_8hpp_source}{Obd.\+hpp}.
+
+\mbox{\Hypertarget{classObd_a59676f3fa1fd3052216b55be0a79c474}\label{classObd_a59676f3fa1fd3052216b55be0a79c474}} 
+\index{Obd@{Obd}!discover\+Device\+Address@{discover\+Device\+Address}}
+\index{discover\+Device\+Address@{discover\+Device\+Address}!Obd@{Obd}}
+\subsubsection{\texorpdfstring{discover\+Device\+Address()}{discoverDeviceAddress()}}
+{\footnotesize\ttfamily void Obd\+::discover\+Device\+Address (\begin{DoxyParamCaption}\item[{const char $\ast$}]{device\+Name,  }\item[{char $\ast$}]{device\+Address }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Método que realiza el descubrimiento bluetooth del dispositivo E\+L\+M327. 
+
+
+\begin{DoxyParams}{Parámetros}
+{\em device\+Name} & Cadena de caracteres con el nombre del dispositivo bluetooth O\+B\+D\+II del que obtener la dirección física de conexión. \\
+\hline
+{\em device\+Address} & Dirección física del dispositivo al que conectar tras el descubrimiento.\\
+\hline
+\end{DoxyParams}
+Función que realiza un escaneo de todos los dispositivos bluetooth disponibles y mediante un bucle filtra la dirección física del dispositivo bluetooth E\+L\+M327 pasado como primera parámetro. 
+
+Definición en la línea \hyperlink{Obd_8hpp_source_l00112}{112} del archivo \hyperlink{Obd_8hpp_source}{Obd.\+hpp}.
+
+\mbox{\Hypertarget{classObd_aeff55ecb0a0a4278a22f20db3d2e17e3}\label{classObd_aeff55ecb0a0a4278a22f20db3d2e17e3}} 
+\index{Obd@{Obd}!exist\+P\+ID@{exist\+P\+ID}}
+\index{exist\+P\+ID@{exist\+P\+ID}!Obd@{Obd}}
+\subsubsection{\texorpdfstring{exist\+P\+I\+D()}{existPID()}}
+{\footnotesize\ttfamily bool Obd\+::exist\+P\+ID (\begin{DoxyParamCaption}\item[{std\+::string}]{command }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Método de comprobación de existencia de un P\+ID implemetado en el vehículo. 
+
+
+\begin{DoxyParams}{Parámetros}
+{\em command} & String del comando a comprobar de su existencia entre los comandos disponibles. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Devuelve}
+Devuelve true si existe y false en caso contrario. 
+\end{DoxyReturn}
+
+
+Definición en la línea \hyperlink{Obd_8hpp_source_l00560}{560} del archivo \hyperlink{Obd_8hpp_source}{Obd.\+hpp}.
+
+\mbox{\Hypertarget{classObd_ac57afb9228d933c6be5b2fa8e6446036}\label{classObd_ac57afb9228d933c6be5b2fa8e6446036}} 
+\index{Obd@{Obd}!get\+D\+T\+Cs@{get\+D\+T\+Cs}}
+\index{get\+D\+T\+Cs@{get\+D\+T\+Cs}!Obd@{Obd}}
+\subsubsection{\texorpdfstring{get\+D\+T\+Cs()}{getDTCs()}}
+{\footnotesize\ttfamily std\+::vector$<$std\+::string$>$ Obd\+::get\+D\+T\+Cs (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Método que permite obtener los D\+TC activos en el vehículo. 
+
+\begin{DoxyReturn}{Devuelve}
+Vector de strings con los D\+TC activos en el vehículo
+\end{DoxyReturn}
+Realiza la comprobación de existencia del número de D\+TC con el comando S\+T\+A\+T\+US y si existen, obtiene su D\+TC con el comando G\+E\+T\+\_\+\+D\+TC. 
+
+Definición en la línea \hyperlink{Obd_8hpp_source_l00624}{624} del archivo \hyperlink{Obd_8hpp_source}{Obd.\+hpp}.
+
+\mbox{\Hypertarget{classObd_ad88a0f25a7e3961726737915668ee13d}\label{classObd_ad88a0f25a7e3961726737915668ee13d}} 
+\index{Obd@{Obd}!get\+V\+IN@{get\+V\+IN}}
+\index{get\+V\+IN@{get\+V\+IN}!Obd@{Obd}}
+\subsubsection{\texorpdfstring{get\+V\+I\+N()}{getVIN()}}
+{\footnotesize\ttfamily std\+::string Obd\+::get\+V\+IN (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Método que permite obtener el Número de Identificación del Vehículo (V\+IN). 
+
+\begin{DoxyReturn}{Devuelve}
+String del V\+IN de 17 dígitos del vehículo. 
+\end{DoxyReturn}
+
+
+Definición en la línea \hyperlink{Obd_8hpp_source_l00611}{611} del archivo \hyperlink{Obd_8hpp_source}{Obd.\+hpp}.
+
+\mbox{\Hypertarget{classObd_a560631b2e3af0a72c063f915a11e0466}\label{classObd_a560631b2e3af0a72c063f915a11e0466}} 
+\index{Obd@{Obd}!init\+Decoder\+Functions@{init\+Decoder\+Functions}}
+\index{init\+Decoder\+Functions@{init\+Decoder\+Functions}!Obd@{Obd}}
+\subsubsection{\texorpdfstring{init\+Decoder\+Functions()}{initDecoderFunctions()}}
+{\footnotesize\ttfamily void Obd\+::init\+Decoder\+Functions (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Método de inicialización de funciones de decodificación de mensajes O\+BD. 
+
+Función que agrupa los decodificadores dependiendo del tipo de dato a obtener para poder utilizarlos en la función polling y obtener el dato solicitado. 
+
+Definición en la línea \hyperlink{Obd_8hpp_source_l00507}{507} del archivo \hyperlink{Obd_8hpp_source}{Obd.\+hpp}.
+
+\mbox{\Hypertarget{classObd_a5091314ed8068800cce40e7a74a3731e}\label{classObd_a5091314ed8068800cce40e7a74a3731e}} 
+\index{Obd@{Obd}!init\+Messages@{init\+Messages}}
+\index{init\+Messages@{init\+Messages}!Obd@{Obd}}
+\subsubsection{\texorpdfstring{init\+Messages()}{initMessages()}}
+{\footnotesize\ttfamily void Obd\+::init\+Messages (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Método de inicialización de parámetros de conexión con E\+L\+M327. 
+
+Se realiza una secuencia de paso de mensajes que permiten obtener los datos en un formato normalizado. En primer lugar, se hace un R\+E\+S\+ET del dispositivo E\+L\+M327, se establecen los valores por defecto, se configura las respuestas sin eco, sin cabecera y sin espacio y se establece el protocolo automático. Por último, se realiza un escaneo general del estado del vehículo con distintas pruebas establecidas por el comando S\+T\+A\+T\+US, se obtiene el V\+IN del vehículo y se obtiene el número de comandos disponibles tras un escaneo con los P\+I\+DS específicos para ello. 
+
+Definición en la línea \hyperlink{Obd_8hpp_source_l00472}{472} del archivo \hyperlink{Obd_8hpp_source}{Obd.\+hpp}.
+
+\mbox{\Hypertarget{classObd_ae28b765bb787467f929eae932133d2aa}\label{classObd_ae28b765bb787467f929eae932133d2aa}} 
+\index{Obd@{Obd}!is\+Valid@{is\+Valid}}
+\index{is\+Valid@{is\+Valid}!Obd@{Obd}}
+\subsubsection{\texorpdfstring{is\+Valid()}{isValid()}}
+{\footnotesize\ttfamily bool Obd\+::is\+Valid (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Método de validación del estado de la conexion. 
+
+\begin{DoxyReturn}{Devuelve}
+Devuelve true si la conexión está establecida correctamente y false en caso contrario. 
+\end{DoxyReturn}
+
+
+Definición en la línea \hyperlink{Obd_8hpp_source_l00651}{651} del archivo \hyperlink{Obd_8hpp_source}{Obd.\+hpp}.
+
+\mbox{\Hypertarget{classObd_a0792ecb9247f32760269fdf64a178f8f}\label{classObd_a0792ecb9247f32760269fdf64a178f8f}} 
+\index{Obd@{Obd}!polling@{polling}}
+\index{polling@{polling}!Obd@{Obd}}
+\subsubsection{\texorpdfstring{polling()}{polling()}}
+{\footnotesize\ttfamily void Obd\+::polling (\begin{DoxyParamCaption}\item[{\hyperlink{classCommands}{Commands}}]{command }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Método de recepción de mensajes enviados por el dispositivo E\+L\+M327. 
+
+
+\begin{DoxyParams}{Parámetros}
+{\em command} & Objeto del tipo \hyperlink{classCommands}{Commands} con la información del comando a recepcionar.\\
+\hline
+\end{DoxyParams}
+Función que se encarga de mantenerse a la espera del mensaje de respuesta del dispositivo E\+L\+M327 al mensaje anteriormente enviado por la función send. Mediante un bucle y la instancia epoll creada se recogen los eventos de mensajes recibidos, y se filtra su contenido para conocer la finalización del mensaje. Tras esto, se realiza una búsqueda de la información útil del mensaje y una decodificación dependiendo del tipo de dato a recibir. Por útimo, se almacena la respuesta en el propio objeto \hyperlink{classCommands}{Commands} para poder recuperarla posteriormente. 
+
+Definición en la línea \hyperlink{Obd_8hpp_source_l00292}{292} del archivo \hyperlink{Obd_8hpp_source}{Obd.\+hpp}.
+
+\mbox{\Hypertarget{classObd_abf7e84f45236ea1c78c762ac895c532c}\label{classObd_abf7e84f45236ea1c78c762ac895c532c}} 
+\index{Obd@{Obd}!print\+P\+I\+Ds@{print\+P\+I\+Ds}}
+\index{print\+P\+I\+Ds@{print\+P\+I\+Ds}!Obd@{Obd}}
+\subsubsection{\texorpdfstring{print\+P\+I\+Ds()}{printPIDs()}}
+{\footnotesize\ttfamily void Obd\+::print\+P\+I\+Ds (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Método de impresión de la lista de P\+I\+DS implementados en el vehículo. 
+
+Realiza una búsqueda iterativa que obtiene por consola los P\+I\+DS disponibles en el vehículo encontrados en la inicialización del dispositivo E\+L\+M327. 
+
+Definición en la línea \hyperlink{Obd_8hpp_source_l00579}{579} del archivo \hyperlink{Obd_8hpp_source}{Obd.\+hpp}.
+
+\mbox{\Hypertarget{classObd_a0938bfdd6d05795e826a239cc0f29f32}\label{classObd_a0938bfdd6d05795e826a239cc0f29f32}} 
+\index{Obd@{Obd}!print\+Status@{print\+Status}}
+\index{print\+Status@{print\+Status}!Obd@{Obd}}
+\subsubsection{\texorpdfstring{print\+Status()}{printStatus()}}
+{\footnotesize\ttfamily void Obd\+::print\+Status (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Método de impresión de las pruebas realizadas en el vehículo. 
+
+Muestra por consola cada una de las pruebas realizadas en el vehículo y su resultado. 
+
+Definición en la línea \hyperlink{Obd_8hpp_source_l00599}{599} del archivo \hyperlink{Obd_8hpp_source}{Obd.\+hpp}.
+
+\mbox{\Hypertarget{classObd_a2b8bd75834351a2205d53aec8b3747be}\label{classObd_a2b8bd75834351a2205d53aec8b3747be}} 
+\index{Obd@{Obd}!read\+File\+Data@{read\+File\+Data}}
+\index{read\+File\+Data@{read\+File\+Data}!Obd@{Obd}}
+\subsubsection{\texorpdfstring{read\+File\+Data()}{readFileData()}}
+{\footnotesize\ttfamily void Obd\+::read\+File\+Data (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Método de lectura del fichero de P\+I\+DS en formato json. 
+
+Utiliza la librería externa json.\+hpp para la lectura de los P\+I\+DS en formato J\+S\+ON que permite obtener a la clase \hyperlink{classObd}{Obd} los \hyperlink{classCommands}{Commands} a ejecutar. 
+
+Definición en la línea \hyperlink{Obd_8hpp_source_l00228}{228} del archivo \hyperlink{Obd_8hpp_source}{Obd.\+hpp}.
+
+\mbox{\Hypertarget{classObd_a453591bc9a280e8d44d82025ce8590e9}\label{classObd_a453591bc9a280e8d44d82025ce8590e9}} 
+\index{Obd@{Obd}!send@{send}}
+\index{send@{send}!Obd@{Obd}}
+\subsubsection{\texorpdfstring{send()}{send()}}
+{\footnotesize\ttfamily void Obd\+::send (\begin{DoxyParamCaption}\item[{\hyperlink{classCommands}{Commands}}]{command }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Método de envío de mensajes AT y O\+BD al dispositivo E\+L\+M327. 
+
+
+\begin{DoxyParams}{Parámetros}
+{\em command} & Objeto del tipo \hyperlink{classCommands}{Commands} con la información del comando a enviar.\\
+\hline
+\end{DoxyParams}
+Función que se encarga de la creación de un hilo de ejecución que ejecute la función polling para la recepción del comando a enviar y del formateo de éste a través del socket creado al conectar con el dispositivo E\+L\+M327. 
+
+Definición en la línea \hyperlink{Obd_8hpp_source_l00248}{248} del archivo \hyperlink{Obd_8hpp_source}{Obd.\+hpp}.
+
+
+
+\subsection{Documentación de los campos}
+\mbox{\Hypertarget{classObd_a8300062d1b651d049cf2a2bc916496cd}\label{classObd_a8300062d1b651d049cf2a2bc916496cd}} 
+\index{Obd@{Obd}!map\+\_\+commands@{map\+\_\+commands}}
+\index{map\+\_\+commands@{map\+\_\+commands}!Obd@{Obd}}
+\subsubsection{\texorpdfstring{map\+\_\+commands}{map\_commands}}
+{\footnotesize\ttfamily std\+::map$<$std\+::string, \hyperlink{classCommands}{Commands}$>$ Obd\+::map\+\_\+commands}
+
+Map para asignación del nombre al comando correspondiente 
+
+Definición en la línea \hyperlink{Obd_8hpp_source_l00075}{75} del archivo \hyperlink{Obd_8hpp_source}{Obd.\+hpp}.
+
+
+
+La documentación para esta clase fue generada a partir del siguiente fichero\+:\begin{DoxyCompactItemize}
+\item 
+\hyperlink{Obd_8hpp}{Obd.\+hpp}\end{DoxyCompactItemize}
