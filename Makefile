@@ -15,11 +15,11 @@ LibreriaPthread = -lpthread
 LibreriaOBD = -lobd2-bluetooth
 Librerias = $(LibreriaOBD) $(LibreriaBluetooth) $(LibreriaPthread)
 
-programDTC: main.o libobd2-bluetooth.a
-	$(CXX) $(CXXFLAGS) programDTC main.o -Llib $(Librerias)
+monDTC: main.o libobd2-bluetooth.a
+	$(CXX) $(CXXFLAGS) monDTC main.o -Llib $(Librerias)
 
-programDTC-debug: main-debug.o libobd2-bluetooth-debug.a
-	$(CXX) $(CXXFLAGS_DEBUG) programDTC-debug main.o -Llib $(Librerias)
+monDTC-debug: main-debug.o libobd2-bluetooth-debug.a
+	$(CXX) $(CXXFLAGS_DEBUG) monDTC-debug main.o -Llib $(Librerias)
 
 test: UnitTestCase.o libobd2-bluetooth-test.a
 	$(CXX) $(CXXFLAGS_TEST) test/test UnitTestCase.o -Llib $(Librerias)
@@ -70,4 +70,4 @@ clean:
 	rm -f *.o src/*.gch
 
 .PHONY: all
-all: programDTC programDTC-debug test clean
+all: monDTC monDTC-debug test clean
