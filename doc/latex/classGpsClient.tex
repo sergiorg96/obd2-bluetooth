@@ -1,0 +1,80 @@
+\hypertarget{classGpsClient}{}\section{Referencia de la Clase Gps\+Client}
+\label{classGpsClient}\index{Gps\+Client@{Gps\+Client}}
+
+
+Clase que representa la conexión con el servicio gpsd para obtener las coordenadas G\+PS.  
+
+
+
+
+{\ttfamily \#include $<$gpsclient.\+hpp$>$}
+
+\subsection*{Métodos públicos}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classGpsClient_aabd8adfb2fd64e34abb77cdae5d60cb5}{Gps\+Client} (std\+::string Gps\+Port, std\+::string validity)
+\begin{DoxyCompactList}\small\item\em Constructor de la clase \hyperlink{classGpsClient}{Gps\+Client}. \end{DoxyCompactList}\item 
+std\+::string \hyperlink{classGpsClient_ace715e2b156d90e8d0b6cd1a91da4807}{get\+G\+PS} ()
+\begin{DoxyCompactList}\small\item\em Método que obtiene una string con las coordenadas G\+PS. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Descripción detallada}
+Clase que representa la conexión con el servicio gpsd para obtener las coordenadas G\+PS. 
+
+Clase utilizada para la obtención de coordenadas G\+PS. 
+
+Definición en la línea \hyperlink{gpsclient_8hpp_source_l00028}{28} del archivo \hyperlink{gpsclient_8hpp_source}{gpsclient.\+hpp}.
+
+
+
+\subsection{Documentación del constructor y destructor}
+\mbox{\Hypertarget{classGpsClient_aabd8adfb2fd64e34abb77cdae5d60cb5}\label{classGpsClient_aabd8adfb2fd64e34abb77cdae5d60cb5}} 
+\index{Gps\+Client@{Gps\+Client}!Gps\+Client@{Gps\+Client}}
+\index{Gps\+Client@{Gps\+Client}!Gps\+Client@{Gps\+Client}}
+\subsubsection{\texorpdfstring{Gps\+Client()}{GpsClient()}}
+{\footnotesize\ttfamily Gps\+Client\+::\+Gps\+Client (\begin{DoxyParamCaption}\item[{std\+::string}]{Gps\+Port,  }\item[{std\+::string}]{validity }\end{DoxyParamCaption})}
+
+
+
+Constructor de la clase \hyperlink{classGpsClient}{Gps\+Client}. 
+
+
+\begin{DoxyParams}{Parámetros}
+{\em Gps\+Port} & String del puerto U\+DP de conexión con el servicio gpsd. \\
+\hline
+{\em validity} & String con el tiempo máximo de espera en segundos en la recepción del dato G\+PS. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Devuelve}
+Devuelve una instancia de la clase \hyperlink{classGpsClient}{Gps\+Client}. 
+\end{DoxyReturn}
+
+
+Definición en la línea \hyperlink{gpsclient_8cpp_source_l00013}{13} del archivo \hyperlink{gpsclient_8cpp_source}{gpsclient.\+cpp}.
+
+
+
+\subsection{Documentación de las funciones miembro}
+\mbox{\Hypertarget{classGpsClient_ace715e2b156d90e8d0b6cd1a91da4807}\label{classGpsClient_ace715e2b156d90e8d0b6cd1a91da4807}} 
+\index{Gps\+Client@{Gps\+Client}!get\+G\+PS@{get\+G\+PS}}
+\index{get\+G\+PS@{get\+G\+PS}!Gps\+Client@{Gps\+Client}}
+\subsubsection{\texorpdfstring{get\+G\+P\+S()}{getGPS()}}
+{\footnotesize\ttfamily std\+::string Gps\+Client\+::get\+G\+PS (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Método que obtiene una string con las coordenadas G\+PS. 
+
+\begin{DoxyReturn}{Devuelve}
+String con las coordenadas G\+PS. 
+\end{DoxyReturn}
+
+
+Definición en la línea \hyperlink{gpsclient_8cpp_source_l00037}{37} del archivo \hyperlink{gpsclient_8cpp_source}{gpsclient.\+cpp}.
+
+
+
+La documentación para esta clase fue generada a partir de los siguientes ficheros\+:\begin{DoxyCompactItemize}
+\item 
+\hyperlink{gpsclient_8hpp}{gpsclient.\+hpp}\item 
+\hyperlink{gpsclient_8cpp}{gpsclient.\+cpp}\end{DoxyCompactItemize}

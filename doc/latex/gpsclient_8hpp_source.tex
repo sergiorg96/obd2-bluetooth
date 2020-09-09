@@ -1,0 +1,35 @@
+\hypertarget{gpsclient_8hpp_source}{}\section{gpsclient.\+hpp}
+\label{gpsclient_8hpp_source}\index{gpsclient.\+hpp@{gpsclient.\+hpp}}
+
+\begin{DoxyCode}
+00001 
+00008 \textcolor{preprocessor}{#ifndef GPSCLIENT\_HPP}
+00009 \textcolor{preprocessor}{#define GPSCLIENT\_HPP}
+00010 
+00011 \textcolor{preprocessor}{#include <stdio.h>}
+00012 \textcolor{preprocessor}{#include <string.h>}
+00013 \textcolor{preprocessor}{#include <iostream>}
+00014 \textcolor{preprocessor}{#include <string>}
+00015 \textcolor{preprocessor}{#include <termios.h>}
+00016 \textcolor{preprocessor}{#include <fcntl.h>}
+00017 \textcolor{preprocessor}{#include <unistd.h>}
+00018 \textcolor{preprocessor}{#include <stdlib.h>}
+00019 \textcolor{preprocessor}{#include <arpa/inet.h>}
+00020 \textcolor{preprocessor}{#include <netdb.h>}
+00021 
+\Hypertarget{gpsclient_8hpp_source_l00028}\hyperlink{classGpsClient}{00028} \textcolor{keyword}{class }\hyperlink{classGpsClient}{GpsClient} \{
+00029   
+00030  \textcolor{keyword}{private}:
+00031   \textcolor{keywordtype}{int} validity\_; 
+00032   \textcolor{keyword}{struct }sockaddr\_in gpsin\_; 
+00033   \textcolor{keyword}{struct }sockaddr\_in iyo\_; 
+00034   \textcolor{keywordtype}{int} s\_; 
+00036  \textcolor{keyword}{public}:
+00037 
+00045   \hyperlink{classGpsClient_aabd8adfb2fd64e34abb77cdae5d60cb5}{GpsClient} (std::string GpsPort, std::string validity); 
+00046 
+00052   std::string \hyperlink{classGpsClient_ace715e2b156d90e8d0b6cd1a91da4807}{getGPS} ();
+00053 \};
+00054 
+00055 \textcolor{preprocessor}{#endif}
+\end{DoxyCode}

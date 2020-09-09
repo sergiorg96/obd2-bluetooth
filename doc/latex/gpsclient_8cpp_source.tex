@@ -1,0 +1,76 @@
+\hypertarget{gpsclient_8cpp_source}{}\section{gpsclient.\+cpp}
+\label{gpsclient_8cpp_source}\index{gpsclient.\+cpp@{gpsclient.\+cpp}}
+
+\begin{DoxyCode}
+00001 
+00008 \textcolor{preprocessor}{#include "\hyperlink{gpsclient_8hpp}{gpsclient.hpp}"}
+00009 \textcolor{preprocessor}{#include "\hyperlink{loadcfg_8hpp}{loadcfg.hpp}"}
+00010 
+\Hypertarget{gpsclient_8cpp_source_l00011}\hyperlink{gpsclient_8cpp_a63444c88dbff8d58074abff3724261e8}{00011} \textcolor{preprocessor}{#define NOGPSDATA  "000000,010170,0000.000,N,00000.000,E" }
+\Hypertarget{gpsclient_8cpp_source_l00013}\hyperlink{classGpsClient_aabd8adfb2fd64e34abb77cdae5d60cb5}{00013} \textcolor{preprocessor}{GpsClient::GpsClient (std::string GpsPort, }
+00014                       std::string validity):
+00015   validity\_(atoi(validity.c\_str()))
+00016 \{
+00017 
+00018   fprintf(stderr, \textcolor{stringliteral}{"Init GpsClient %s %s\(\backslash\)n"}, GpsPort.c\_str(), validity.c\_str());
+00019   \textcolor{keywordflow}{if} ((s\_= socket (AF\_INET, SOCK\_DGRAM, 0)) < 0)
+00020     \hyperlink{loadcfg_8cpp_a91f772c379dc1d6c6088d077aa722574}{shit} (\textcolor{stringliteral}{"socket"});
+00021   
+00022   memset ((\textcolor{keywordtype}{char} *)&gpsin\_, 0, \textcolor{keyword}{sizeof}(\textcolor{keyword}{struct} sockaddr\_in));
+00023   gpsin\_.sin\_family      = AF\_INET;
+00024   gpsin\_.sin\_addr.s\_addr = inet\_addr(\textcolor{stringliteral}{"127.0.0.1"});
+00025   gpsin\_.sin\_port        = htons(atoi(GpsPort.c\_str()));
+00026   
+00027   memset ((\textcolor{keywordtype}{char} *)&iyo\_, 0, \textcolor{keyword}{sizeof}(\textcolor{keyword}{struct} sockaddr\_in));
+00028   iyo\_.sin\_family      = AF\_INET;
+00029   iyo\_.sin\_addr.s\_addr = INADDR\_ANY;
+00030   iyo\_.sin\_port        = 0;
+00031   
+00032   \textcolor{keywordflow}{if} (bind(s\_, (\textcolor{keyword}{struct} sockaddr *)&iyo\_, \textcolor{keyword}{sizeof}(iyo\_)) == -1)
+00033     \hyperlink{loadcfg_8cpp_a91f772c379dc1d6c6088d077aa722574}{shit}(\textcolor{stringliteral}{"bind"});
+00034 \}
+00035 
+00036 
+\Hypertarget{gpsclient_8cpp_source_l00037}\hyperlink{classGpsClient_ace715e2b156d90e8d0b6cd1a91da4807}{00037} std::string \hyperlink{classGpsClient_ace715e2b156d90e8d0b6cd1a91da4807}{GpsClient::getGPS}()
+00038 \{
+00039   
+00040   \textcolor{keyword}{const} \textcolor{keywordtype}{int} maxbuf = 512;
+00041   \textcolor{keywordtype}{char} buffer [maxbuf];
+00042   \textcolor{keywordtype}{char} msg[]    = \textcolor{stringliteral}{"hhmmss,ddmmyy,llll.lll,N,yyyyy.yyy,E\(\backslash\)n"}; 
+00043   \textcolor{keyword}{struct }timeval tv;
+00044   \textcolor{keywordtype}{int} len = strlen(msg);
+00045 
+00046   memset(msg, 0, len);
+00047   \textcolor{comment}{// Asks}
+00048   \textcolor{comment}{/*}
+00049 \textcolor{comment}{  int cc =  sendto(s\_,}
+00050 \textcolor{comment}{                   buffer,}
+00051 \textcolor{comment}{                   maxbuf,}
+00052 \textcolor{comment}{                   0,}
+00053 \textcolor{comment}{                   (struct sockaddr *)&gpsin\_,}
+00054 \textcolor{comment}{                   sizeof(gpsin\_));}
+00055 \textcolor{comment}{                   */}
+00056   sendto(s\_, buffer, maxbuf, 0, (\textcolor{keyword}{struct} sockaddr *)&gpsin\_, \textcolor{keyword}{sizeof}(gpsin\_));
+00057   
+00058   fd\_set rfds;
+00059   tv.tv\_sec  = 2;
+00060   tv.tv\_usec = 0;
+00061   FD\_ZERO(&rfds);
+00062   FD\_SET(s\_, &rfds);
+00063   \textcolor{keywordtype}{int} ret = select(s\_+1, &rfds, NULL, NULL, &tv);
+00064   
+00065   \textcolor{keywordflow}{if} ((ret == 0)||(!FD\_ISSET(s\_, &rfds))) \{ \textcolor{comment}{/* timeout, return invalid data */}
+00066         time\_t lt;
+00067         \textcolor{comment}{//struct tm *p;}
+00068         time(&lt);
+00069         strftime(msg, len, \textcolor{stringliteral}{"%H%M%S,%d%m%y,,,,"}, localtime(&lt));
+00070   \}
+00071   \textcolor{keywordflow}{else} \{
+00072         \textcolor{keyword}{struct }sockaddr\_in rv;
+00073         socklen\_t          addrlen = \textcolor{keyword}{sizeof}(\textcolor{keyword}{struct }sockaddr\_in);
+00074         (void) recvfrom(s\_, msg, len, 0, (\textcolor{keyword}{struct} sockaddr *)&rv, &addrlen);
+00075   \}
+00076   \textcolor{keywordflow}{return} std::string(msg);
+00077 \}
+00078 
+\end{DoxyCode}
