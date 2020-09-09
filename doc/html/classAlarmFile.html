@@ -77,15 +77,6 @@ Métodos públicos</h2></td></tr>
 <tr class="memitem:ab5b7a78583764cd70d8b5b93a243439d"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classAlarmFile.html#ab5b7a78583764cd70d8b5b93a243439d">AlarmFile</a> (std::string AlarmHost, std::string AlarmPort, std::string AlarmFilename, std::string LastAlarmFilename)</td></tr>
 <tr class="memdesc:ab5b7a78583764cd70d8b5b93a243439d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor de la clase <a class="el" href="classAlarmFile.html" title="Clase que representa la conexión con el servidor remoto para el envío de un mensaje (alarma)...">AlarmFile</a>.  <a href="#ab5b7a78583764cd70d8b5b93a243439d">Más...</a><br /></td></tr>
 <tr class="separator:ab5b7a78583764cd70d8b5b93a243439d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a4865f7e404e938960e45b7e805956401"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classAlarmFile.html#a4865f7e404e938960e45b7e805956401">getGeoPos</a> (std::string serialPort)</td></tr>
-<tr class="memdesc:a4865f7e404e938960e45b7e805956401"><td class="mdescLeft">&#160;</td><td class="mdescRight">Método que obtiene la geolocalización del vehículo.  <a href="#a4865f7e404e938960e45b7e805956401">Más...</a><br /></td></tr>
-<tr class="separator:a4865f7e404e938960e45b7e805956401"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad75728f6e44f38772372b991f21d9caa"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classAlarmFile.html#ad75728f6e44f38772372b991f21d9caa">hasGps</a> ()</td></tr>
-<tr class="memdesc:ad75728f6e44f38772372b991f21d9caa"><td class="mdescLeft">&#160;</td><td class="mdescRight">Método para mostrar si tiene disponible el GPS.  <a href="#ad75728f6e44f38772372b991f21d9caa">Más...</a><br /></td></tr>
-<tr class="separator:ad75728f6e44f38772372b991f21d9caa"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:acfb3c406818e76439ba47aa539178f7d"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classAlarmFile.html#acfb3c406818e76439ba47aa539178f7d">Gps</a> (bool installed)</td></tr>
-<tr class="memdesc:acfb3c406818e76439ba47aa539178f7d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Método para indicar que está disponible el GPS.  <a href="#acfb3c406818e76439ba47aa539178f7d">Más...</a><br /></td></tr>
-<tr class="separator:acfb3c406818e76439ba47aa539178f7d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a37fd701cca3c3458a3009b508383947b"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classAlarmFile.html#a37fd701cca3c3458a3009b508383947b">sendAlarm</a> (std::string msg)</td></tr>
 <tr class="memdesc:a37fd701cca3c3458a3009b508383947b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Método para enviar el mensaje/alarma al servidor remoto.  <a href="#a37fd701cca3c3458a3009b508383947b">Más...</a><br /></td></tr>
 <tr class="separator:a37fd701cca3c3458a3009b508383947b"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -146,90 +137,11 @@ Métodos públicos</h2></td></tr>
 </dl>
 <dl class="section return"><dt>Devuelve</dt><dd>Devuelve una instancia de la clase <a class="el" href="classAlarmFile.html" title="Clase que representa la conexión con el servidor remoto para el envío de un mensaje (alarma)...">AlarmFile</a>. </dd></dl>
 
-<p class="definition">Definición en la línea <a class="el" href="alarmfile_8cpp_source.html#l00045">45</a> del archivo <a class="el" href="alarmfile_8cpp_source.html">alarmfile.cpp</a>.</p>
+<p class="definition">Definición en la línea <a class="el" href="alarmfile_8cpp_source.html#l00026">26</a> del archivo <a class="el" href="alarmfile_8cpp_source.html">alarmfile.cpp</a>.</p>
 
 </div>
 </div>
 <h2 class="groupheader">Documentación de las funciones miembro</h2>
-<a id="a4865f7e404e938960e45b7e805956401"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a4865f7e404e938960e45b7e805956401">&#9670;&nbsp;</a></span>getGeoPos()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">std::string AlarmFile::getGeoPos </td>
-          <td>(</td>
-          <td class="paramtype">std::string&#160;</td>
-          <td class="paramname"><em>serialPort</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Método que obtiene la geolocalización del vehículo. </p>
-<dl class="params"><dt>Parámetros</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">serialPort</td><td>String con la ruta al dispositivo GPS. </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Devuelve</dt><dd>String con la geolocalización del dispositivo GPS. </dd></dl>
-
-<p class="definition">Definición en la línea <a class="el" href="alarmfile_8cpp_source.html#l00024">24</a> del archivo <a class="el" href="alarmfile_8cpp_source.html">alarmfile.cpp</a>.</p>
-
-</div>
-</div>
-<a id="acfb3c406818e76439ba47aa539178f7d"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#acfb3c406818e76439ba47aa539178f7d">&#9670;&nbsp;</a></span>Gps()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void AlarmFile::Gps </td>
-          <td>(</td>
-          <td class="paramtype">bool&#160;</td>
-          <td class="paramname"><em>installed</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Método para indicar que está disponible el GPS. </p>
-<dl class="params"><dt>Parámetros</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">installed</td><td>Booleano que indica si está instalado el GPS (true). </td></tr>
-  </table>
-  </dd>
-</dl>
-
-<p class="definition">Definición en la línea <a class="el" href="alarmfile_8cpp_source.html#l00034">34</a> del archivo <a class="el" href="alarmfile_8cpp_source.html">alarmfile.cpp</a>.</p>
-
-</div>
-</div>
-<a id="ad75728f6e44f38772372b991f21d9caa"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ad75728f6e44f38772372b991f21d9caa">&#9670;&nbsp;</a></span>hasGps()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">bool AlarmFile::hasGps </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Método para mostrar si tiene disponible el GPS. </p>
-<dl class="section return"><dt>Devuelve</dt><dd>Booleano, true si está instalado y false en caso contrario. </dd></dl>
-
-<p class="definition">Definición en la línea <a class="el" href="alarmfile_8cpp_source.html#l00029">29</a> del archivo <a class="el" href="alarmfile_8cpp_source.html">alarmfile.cpp</a>.</p>
-
-</div>
-</div>
 <a id="a37fd701cca3c3458a3009b508383947b"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a37fd701cca3c3458a3009b508383947b">&#9670;&nbsp;</a></span>sendAlarm()</h2>
 
@@ -255,7 +167,7 @@ Métodos públicos</h2></td></tr>
 </dl>
 <dl class="section return"><dt>Devuelve</dt><dd>Booleano, true si el mensaje fue enviado correctamente y false en caso contrario. </dd></dl>
 
-<p class="definition">Definición en la línea <a class="el" href="alarmfile_8cpp_source.html#l00063">63</a> del archivo <a class="el" href="alarmfile_8cpp_source.html">alarmfile.cpp</a>.</p>
+<p class="definition">Definición en la línea <a class="el" href="alarmfile_8cpp_source.html#l00044">44</a> del archivo <a class="el" href="alarmfile_8cpp_source.html">alarmfile.cpp</a>.</p>
 
 </div>
 </div>

@@ -13,548 +13,606 @@
 \Hypertarget{UnitTestCase_8cpp_source_l00016}\hyperlink{UnitTestCase_8cpp_a39116fcd47bddafea0487b3f674b9609}{00016} \textcolor{preprocessor}{#define WAIT\_OBDSIM 15 }
 00019 \textcolor{preprocessor}{using namespace Catch::literals;}
 00020 
-\Hypertarget{UnitTestCase_8cpp_source_l00026}\hyperlink{UnitTestCase_8cpp_ae9f15809d7998bb4a7404d34bb87a5e3}{00026} \textcolor{keywordtype}{void} \hyperlink{UnitTestCase_8cpp_ae9f15809d7998bb4a7404d34bb87a5e3}{getMinicomCMD}(\textcolor{keywordtype}{char} * cmd)\{
-00027 
-00028     std::string devFile = \hyperlink{MockSocket_8cpp_a33fe4c99996c8de03c33962525663851}{findDevPTS}();
-00029 
-00030     snprintf(cmd, \hyperlink{UnitTestCase_8cpp_aeca034f67218340ecb2261a22c2f3dcd}{BUFSIZE}, \textcolor{stringliteral}{"minicom -p %s &"}, devFile.c\_str());
-00031 \}
+00021 
+\Hypertarget{UnitTestCase_8cpp_source_l00027}\hyperlink{UnitTestCase_8cpp_ae9f15809d7998bb4a7404d34bb87a5e3}{00027} \textcolor{keywordtype}{void} \hyperlink{UnitTestCase_8cpp_ae9f15809d7998bb4a7404d34bb87a5e3}{getMinicomCMD}(\textcolor{keywordtype}{char} * cmd)\{
+00028 
+00029     \hyperlink{debug_8hpp_a55f41cf7b0585224496de3d7adbc101c}{debugLog}(\textcolor{stringliteral}{"Principio función getMinicomCMD."});
+00030 
+00031     std::string devFile = \hyperlink{MockSocket_8cpp_a33fe4c99996c8de03c33962525663851}{findDevPTS}();
 00032 
-\Hypertarget{UnitTestCase_8cpp_source_l00040}\hyperlink{UnitTestCase_8cpp_a4460093e274738a0e1bbb551c1d1d3fd}{00040} \textcolor{keywordtype}{void} \hyperlink{UnitTestCase_8cpp_a4460093e274738a0e1bbb551c1d1d3fd}{initOBDSIM}()\{
-00041 
-00042     \textcolor{keywordtype}{char} cmd[\hyperlink{UnitTestCase_8cpp_aeca034f67218340ecb2261a22c2f3dcd}{BUFSIZE}];
-00043 
-00044     system(\textcolor{stringliteral}{"obdsim -g gui\_fltk &"});
-00045     \textcolor{comment}{// 5 segundos para configurar parámetros para el test}
-00046     sleep(\hyperlink{UnitTestCase_8cpp_a39116fcd47bddafea0487b3f674b9609}{WAIT\_OBDSIM});
-00047 
-00048     \hyperlink{UnitTestCase_8cpp_ae9f15809d7998bb4a7404d34bb87a5e3}{getMinicomCMD}(cmd);
-00049 
-00050     \textcolor{comment}{// Se abre terminal en el test con minicom, porque el primer mensaje obdsim no envía >}
-00051     \textcolor{comment}{// a nivel de código, pero si con un terminal con minicom}
-00052     \textcolor{comment}{//system("minicom -p /dev/pts/3 &");}
-00053     system(cmd);
+00033     \hyperlink{debug_8hpp_a55f41cf7b0585224496de3d7adbc101c}{debugLog}(\textcolor{stringliteral}{"Dispositivo a conectarnos %s"}, devFile.c\_str());
+00034 
+00035     snprintf(cmd, \hyperlink{UnitTestCase_8cpp_aeca034f67218340ecb2261a22c2f3dcd}{BUFSIZE}, \textcolor{stringliteral}{"minicom -p %s &"}, devFile.c\_str());
+00036 \}
+00037 
+\Hypertarget{UnitTestCase_8cpp_source_l00047}\hyperlink{UnitTestCase_8cpp_a15137ff9ba6032f171a43694f159ada6}{00047} \textcolor{keywordtype}{void} \hyperlink{UnitTestCase_8cpp_a15137ff9ba6032f171a43694f159ada6}{initOBDSIM}(std::string tipoSimulador, \textcolor{keywordtype}{int} tiempoEspera)\{
+00048 
+00049     \textcolor{keywordtype}{char} cmd[\hyperlink{UnitTestCase_8cpp_aeca034f67218340ecb2261a22c2f3dcd}{BUFSIZE}];
+00050 
+00051     \hyperlink{debug_8hpp_a55f41cf7b0585224496de3d7adbc101c}{debugLog}(\textcolor{stringliteral}{"Ejecutamos OBDSIM."});
+00052 
+00053     \textcolor{keywordtype}{char} cmdTipoSimulador[\hyperlink{UnitTestCase_8cpp_aeca034f67218340ecb2261a22c2f3dcd}{BUFSIZE}];
 00054 
-00055     sleep(1);
+00055     snprintf(cmdTipoSimulador, \hyperlink{UnitTestCase_8cpp_aeca034f67218340ecb2261a22c2f3dcd}{BUFSIZE}, \textcolor{stringliteral}{"obdsim -g %s &"}, tipoSimulador.c\_str());
 00056 
-00057     \textcolor{comment}{// Se mata el proceso minicom, ya que, no es necesario}
-00058     system(\textcolor{stringliteral}{"pkill minicom"});
-00059 
-00060     sleep(1);
-00061 \}
+00057     \textcolor{keywordflow}{if}(system(cmdTipoSimulador) == -1)\{
+00058         perror(\textcolor{stringliteral}{"Error ejecutando comando "});
+00059     \}
+00060     \textcolor{comment}{// 5 segundos para configurar parámetros para el test}
+00061     \textcolor{comment}{//debugLog("Esperamos la introducción de valores.");}
 00062 
-\Hypertarget{UnitTestCase_8cpp_source_l00067}\hyperlink{UnitTestCase_8cpp_ad24bf860f798931c63aaa488e08b8b4e}{00067} \textcolor{keywordtype}{void} \hyperlink{UnitTestCase_8cpp_ad24bf860f798931c63aaa488e08b8b4e}{closeOBDSIM}()\{
-00068     system(\textcolor{stringliteral}{"pkill obdsim"});
-00069 \}
-00070 
-\Hypertarget{UnitTestCase_8cpp_source_l00075}\hyperlink{UnitTestCase_8cpp_a094ceea8956a9b495823bde621ea759a}{00075} \hyperlink{UnitTestCase_8cpp_a094ceea8956a9b495823bde621ea759a}{TEST\_CASE}( \textcolor{stringliteral}{"Test OBD class"}, \textcolor{stringliteral}{"[OBD]"} ) \{
-00076     
-00077     \textcolor{comment}{// Iniciamos el simulador OBDSIM para las pruebas}
-00078     \hyperlink{UnitTestCase_8cpp_a4460093e274738a0e1bbb551c1d1d3fd}{initOBDSIM}();
+00063     sleep(tiempoEspera);
+00064 
+00065     \hyperlink{debug_8hpp_a55f41cf7b0585224496de3d7adbc101c}{debugLog}(\textcolor{stringliteral}{"Llamamos a la función de Minicom."});
+00066 
+00067     \hyperlink{UnitTestCase_8cpp_ae9f15809d7998bb4a7404d34bb87a5e3}{getMinicomCMD}(cmd);
+00068 
+00069     \textcolor{comment}{// Se abre terminal en el test con minicom, porque el primer mensaje obdsim no envía >}
+00070     \textcolor{comment}{// a nivel de código, pero si con un terminal con minicom}
+00071     \textcolor{comment}{//system("minicom -p /dev/pts/3 &");}
+00072     \hyperlink{debug_8hpp_a55f41cf7b0585224496de3d7adbc101c}{debugLog}(\textcolor{stringliteral}{"Ejecutamos minicom."});
+00073 
+00074     \textcolor{keywordflow}{if}(system(cmd) == -1)\{
+00075         perror(\textcolor{stringliteral}{"Error ejecutando comando "});
+00076     \}
+00077 
+00078     sleep(1);
 00079 
-00080 
-00081     \hyperlink{classObd}{Obd} connection = \hyperlink{classObd}{Obd}(\textcolor{stringliteral}{"OBDII"});
-00082 
-00083     REQUIRE (connection.\hyperlink{classObd_ae28b765bb787467f929eae932133d2aa}{isValid}() == \textcolor{keyword}{true});
-00084 
+00080     \hyperlink{debug_8hpp_a55f41cf7b0585224496de3d7adbc101c}{debugLog}(\textcolor{stringliteral}{"Matamos minicom."});
+00081     \textcolor{comment}{// Se mata el proceso minicom, ya que, no es necesario}
+00082     \textcolor{keywordflow}{if}(system(\textcolor{stringliteral}{"pkill minicom"}) == -1)\{
+00083         perror(\textcolor{stringliteral}{"Error ejecutando comando "});
+00084     \}
 00085 
-00086     connection.\hyperlink{classObd_ac57afb9228d933c6be5b2fa8e6446036}{getDTCs}();
-00087     connection.\hyperlink{classObd_abf7e84f45236ea1c78c762ac895c532c}{printPIDs}();
+00086     sleep(1);
+00087 \}
 00088 
-00089     connection.\hyperlink{classObd_a453591bc9a280e8d44d82025ce8590e9}{send}(connection.\hyperlink{classObd_a8300062d1b651d049cf2a2bc916496cd}{map\_commands}.find(\textcolor{stringliteral}{"SPEED"})->second);
-00090 
-00091     std::cout << connection.\hyperlink{classObd_a8300062d1b651d049cf2a2bc916496cd}{map\_commands}.find(\textcolor{stringliteral}{"SPEED"})->second.getJson().dump(4) << std::endl;
-00092 
-00093     std::cout << connection.\hyperlink{classObd_a8300062d1b651d049cf2a2bc916496cd}{map\_commands}.find(\textcolor{stringliteral}{"GET\_DTC"})->second.getJson().dump(4) << std::endl
-      ;
-00094 
-00095     \hyperlink{UnitTestCase_8cpp_ad24bf860f798931c63aaa488e08b8b4e}{closeOBDSIM}();
-00096 \}
-00097 
-\Hypertarget{UnitTestCase_8cpp_source_l00102}\hyperlink{UnitTestCase_8cpp_aa01bede4cf032808617f744cfdc34e85}{00102} \hyperlink{UnitTestCase_8cpp_a094ceea8956a9b495823bde621ea759a}{TEST\_CASE}( \textcolor{stringliteral}{"Test Revoluciones Por Minuto"}, \textcolor{stringliteral}{"[decoders]"} ) \{
-00103     REQUIRE( \hyperlink{decoders_8cpp_a889868c7b1e554aee496e6aed7101cc4}{decodeRPM}((\textcolor{keywordtype}{char} *)\textcolor{stringliteral}{"0000"}) == 0);
-00104     REQUIRE( \hyperlink{decoders_8cpp_a889868c7b1e554aee496e6aed7101cc4}{decodeRPM}((\textcolor{keywordtype}{char} *)\textcolor{stringliteral}{"FFFF"}) == Approx(16383.75).epsilon(0.01));
-00105     REQUIRE( \hyperlink{decoders_8cpp_a889868c7b1e554aee496e6aed7101cc4}{decodeRPM}((\textcolor{keywordtype}{char} *)\textcolor{stringliteral}{"7FFF"}) == Approx(8191.75).epsilon(0.01));
-00106     REQUIRE( \hyperlink{decoders_8cpp_a889868c7b1e554aee496e6aed7101cc4}{decodeRPM}((\textcolor{keywordtype}{char} *)\textcolor{stringliteral}{"12F2"}) == Approx(1212.5).epsilon(0.01));
-00107 \}
-00108 
-\Hypertarget{UnitTestCase_8cpp_source_l00113}\hyperlink{UnitTestCase_8cpp_a6de3b92394355f7de997d66ffda41110}{00113} \hyperlink{UnitTestCase_8cpp_a094ceea8956a9b495823bde621ea759a}{TEST\_CASE}( \textcolor{stringliteral}{"Test Posición EGR"}, \textcolor{stringliteral}{"[decoders]"} ) \{
-00114     REQUIRE( \hyperlink{decoders_8cpp_adbe68794075963c37e654d53b8a46f68}{decodeCargaPosicionEGR}((\textcolor{keywordtype}{char} *)\textcolor{stringliteral}{"00"}) == Approx(0).epsilon(0.01));
-00115     REQUIRE( \hyperlink{decoders_8cpp_adbe68794075963c37e654d53b8a46f68}{decodeCargaPosicionEGR}((\textcolor{keywordtype}{char} *)\textcolor{stringliteral}{"FF"}) == Approx(100).epsilon(0.01));
-00116     REQUIRE( \hyperlink{decoders_8cpp_adbe68794075963c37e654d53b8a46f68}{decodeCargaPosicionEGR}((\textcolor{keywordtype}{char} *)\textcolor{stringliteral}{"7F"}) == Approx(50).epsilon(0.01));
-00117 \}
+\Hypertarget{UnitTestCase_8cpp_source_l00093}\hyperlink{UnitTestCase_8cpp_ad24bf860f798931c63aaa488e08b8b4e}{00093} \textcolor{keywordtype}{void} \hyperlink{UnitTestCase_8cpp_ad24bf860f798931c63aaa488e08b8b4e}{closeOBDSIM}()\{
+00094     \textcolor{keywordflow}{if}(system(\textcolor{stringliteral}{"pkill obdsim"}) == -1)\{
+00095         perror(\textcolor{stringliteral}{"Error ejecutando comando "});
+00096     \}
+00097 \}
+00098 
+\Hypertarget{UnitTestCase_8cpp_source_l00103}\hyperlink{UnitTestCase_8cpp_ab1b7b485076e7de68cd9912827a8ee86}{00103} \hyperlink{UnitTestCase_8cpp_ab1b7b485076e7de68cd9912827a8ee86}{TEST\_CASE}( \textcolor{stringliteral}{"Test OBD class DTC"}, \textcolor{stringliteral}{"[OBD]"} ) \{
+00104     
+00105     \hyperlink{debug_8hpp_a55f41cf7b0585224496de3d7adbc101c}{debugLog}(\textcolor{stringliteral}{"Comenzando test OBD class DTC"});
+00106 
+00107     \hyperlink{debug_8hpp_a55f41cf7b0585224496de3d7adbc101c}{debugLog}(\textcolor{stringliteral}{"Iniciamos el simulador OBDSIM"});
+00108     \textcolor{comment}{// Iniciamos el simulador OBDSIM para las pruebas}
+00109     \hyperlink{UnitTestCase_8cpp_a15137ff9ba6032f171a43694f159ada6}{initOBDSIM}(\textcolor{stringliteral}{"gui\_fltk"}, \hyperlink{UnitTestCase_8cpp_a39116fcd47bddafea0487b3f674b9609}{WAIT\_OBDSIM});
+00110 
+00111     \hyperlink{debug_8hpp_a55f41cf7b0585224496de3d7adbc101c}{debugLog}(\textcolor{stringliteral}{"Iniciamos conexión OBD"});
+00112 
+00113     \hyperlink{classObd}{Obd} connection = \hyperlink{classObd}{Obd}(\textcolor{stringliteral}{"OBDII"});
+00114 
+00115     \hyperlink{debug_8hpp_a55f41cf7b0585224496de3d7adbc101c}{debugLog}(\textcolor{stringliteral}{"Finalizado el proceso de inicio de conexión OBD"});
+00116 
+00117     REQUIRE (connection.\hyperlink{classObd_ae28b765bb787467f929eae932133d2aa}{isValid}() == \textcolor{keyword}{true});
 00118 
-\Hypertarget{UnitTestCase_8cpp_source_l00123}\hyperlink{UnitTestCase_8cpp_a376ac0e4b8eef0360ec825760e4b6b15}{00123} \hyperlink{UnitTestCase_8cpp_a094ceea8956a9b495823bde621ea759a}{TEST\_CASE}( \textcolor{stringliteral}{"Test Temperatura General"}, \textcolor{stringliteral}{"[decoders]"} ) \{
-00124     REQUIRE( \hyperlink{decoders_8cpp_af581438645d7ff67766fa2e5eba5eaf9}{decodeTempGeneral}((\textcolor{keywordtype}{char} *)\textcolor{stringliteral}{"00"}) == Approx(-40).epsilon(0.01));
-00125     REQUIRE( \hyperlink{decoders_8cpp_af581438645d7ff67766fa2e5eba5eaf9}{decodeTempGeneral}((\textcolor{keywordtype}{char} *)\textcolor{stringliteral}{"FF"}) == Approx(215).epsilon(0.01));
-00126     REQUIRE( \hyperlink{decoders_8cpp_af581438645d7ff67766fa2e5eba5eaf9}{decodeTempGeneral}((\textcolor{keywordtype}{char} *)\textcolor{stringliteral}{"7F"}) == Approx(87).epsilon(0.01));
-00127 \}
-00128 
-\Hypertarget{UnitTestCase_8cpp_source_l00133}\hyperlink{UnitTestCase_8cpp_afd7d9244b2b8c27b86ea397d397a6cf6}{00133} \hyperlink{UnitTestCase_8cpp_a094ceea8956a9b495823bde621ea759a}{TEST\_CASE}( \textcolor{stringliteral}{"Test Ajuste Combustible EGR"}, \textcolor{stringliteral}{"[decoders]"} ) \{
-00134     REQUIRE( \hyperlink{decoders_8cpp_aeee9e6d8511a934b3a3644b19de3f2b7}{decodeAjusteCombustibleEGR}((\textcolor{keywordtype}{char} *)\textcolor{stringliteral}{"00"}) == Approx(-100).epsilon(0.0
-      1));
-00135     REQUIRE( \hyperlink{decoders_8cpp_aeee9e6d8511a934b3a3644b19de3f2b7}{decodeAjusteCombustibleEGR}((\textcolor{keywordtype}{char} *)\textcolor{stringliteral}{"FF"}) == Approx(99.2).epsilon(0.0
-      1));
-00136     REQUIRE( \hyperlink{decoders_8cpp_aeee9e6d8511a934b3a3644b19de3f2b7}{decodeAjusteCombustibleEGR}((\textcolor{keywordtype}{char} *)\textcolor{stringliteral}{"7F"}) == Approx(-0.78125).epsilon
-      (0.01));
-00137 \}
-00138 
-\Hypertarget{UnitTestCase_8cpp_source_l00143}\hyperlink{UnitTestCase_8cpp_ae4019c68e76a6f985cf7295357db9853}{00143} \hyperlink{UnitTestCase_8cpp_a094ceea8956a9b495823bde621ea759a}{TEST\_CASE}( \textcolor{stringliteral}{"Test Presión Combustible"}, \textcolor{stringliteral}{"[decoders]"} ) \{
-00144     REQUIRE( \hyperlink{decoders_8cpp_ab1c03e72734d4127a1c48f3b5a44a2e2}{decodePresionCombustible}((\textcolor{keywordtype}{char} *)\textcolor{stringliteral}{"00"}) == Approx(0).epsilon(0.01));
-00145     REQUIRE( \hyperlink{decoders_8cpp_ab1c03e72734d4127a1c48f3b5a44a2e2}{decodePresionCombustible}((\textcolor{keywordtype}{char} *)\textcolor{stringliteral}{"FF"}) == Approx(765).epsilon(0.01));
-00146     REQUIRE( \hyperlink{decoders_8cpp_ab1c03e72734d4127a1c48f3b5a44a2e2}{decodePresionCombustible}((\textcolor{keywordtype}{char} *)\textcolor{stringliteral}{"7F"}) == Approx(381).epsilon(0.01));
-00147 \}
-00148 
-\Hypertarget{UnitTestCase_8cpp_source_l00153}\hyperlink{UnitTestCase_8cpp_a282584e8fd720d07b04a2fd106c9a32c}{00153} \hyperlink{UnitTestCase_8cpp_a094ceea8956a9b495823bde621ea759a}{TEST\_CASE}( \textcolor{stringliteral}{"Test Hexadecimal a Decimal"}, \textcolor{stringliteral}{"[decoders]"} ) \{
-00154     REQUIRE( \hyperlink{decoders_8cpp_aa7c5243702d5462e4b638450e750624e}{decodeHexToDec}((\textcolor{keywordtype}{char} *)\textcolor{stringliteral}{"00"}) == Approx(0).epsilon(0.01));
-00155     REQUIRE( \hyperlink{decoders_8cpp_aa7c5243702d5462e4b638450e750624e}{decodeHexToDec}((\textcolor{keywordtype}{char} *)\textcolor{stringliteral}{"FF"}) == Approx(255).epsilon(0.01));
-00156     REQUIRE( \hyperlink{decoders_8cpp_aa7c5243702d5462e4b638450e750624e}{decodeHexToDec}((\textcolor{keywordtype}{char} *)\textcolor{stringliteral}{"7F"}) == Approx(127).epsilon(0.01));
-00157 \}
-00158 
-\Hypertarget{UnitTestCase_8cpp_source_l00163}\hyperlink{UnitTestCase_8cpp_a8c2e41bed6c672541f7b95ac1edecf0d}{00163} \hyperlink{UnitTestCase_8cpp_a094ceea8956a9b495823bde621ea759a}{TEST\_CASE}( \textcolor{stringliteral}{"Test Avance Tiempo"}, \textcolor{stringliteral}{"[decoders]"} ) \{
-00164     REQUIRE( \hyperlink{decoders_8cpp_a7a2fee87eace8ad6c86c628f5f91b3b5}{decodeAvanceTiempo}((\textcolor{keywordtype}{char} *)\textcolor{stringliteral}{"00"}) == Approx(-64).epsilon(0.01));
-00165     REQUIRE( \hyperlink{decoders_8cpp_a7a2fee87eace8ad6c86c628f5f91b3b5}{decodeAvanceTiempo}((\textcolor{keywordtype}{char} *)\textcolor{stringliteral}{"FF"}) == Approx(63.5).epsilon(0.01));
-00166     REQUIRE( \hyperlink{decoders_8cpp_a7a2fee87eace8ad6c86c628f5f91b3b5}{decodeAvanceTiempo}((\textcolor{keywordtype}{char} *)\textcolor{stringliteral}{"7F"}) == Approx(-0.5).epsilon(0.01));
-00167 \}
-00168 
-\Hypertarget{UnitTestCase_8cpp_source_l00173}\hyperlink{UnitTestCase_8cpp_af5a76ba4da5f3b2cafb3b5366118dbcd}{00173} \hyperlink{UnitTestCase_8cpp_a094ceea8956a9b495823bde621ea759a}{TEST\_CASE}( \textcolor{stringliteral}{"Test Velocidad Flujo Aire MAF"}, \textcolor{stringliteral}{"[decoders]"} ) \{
-00174     REQUIRE( \hyperlink{decoders_8cpp_adceefeb78a70b295b378f4c472630aa1}{decodeVelocidadMAF}((\textcolor{keywordtype}{char} *)\textcolor{stringliteral}{"0000"}) == Approx(0).epsilon(0.01));
-00175     REQUIRE( \hyperlink{decoders_8cpp_adceefeb78a70b295b378f4c472630aa1}{decodeVelocidadMAF}((\textcolor{keywordtype}{char} *)\textcolor{stringliteral}{"FFFF"}) == Approx(655.35).epsilon(0.01));
-00176     REQUIRE( \hyperlink{decoders_8cpp_adceefeb78a70b295b378f4c472630aa1}{decodeVelocidadMAF}((\textcolor{keywordtype}{char} *)\textcolor{stringliteral}{"7FFF"}) == Approx(327.67).epsilon(0.01));
-00177 \}
-00178 
-\Hypertarget{UnitTestCase_8cpp_source_l00183}\hyperlink{UnitTestCase_8cpp_af9cb80dc5e3813608e63479be181d3d7}{00183} \hyperlink{UnitTestCase_8cpp_a094ceea8956a9b495823bde621ea759a}{TEST\_CASE}( \textcolor{stringliteral}{"Test Presión del Combustible, relativa al colector de vacío"}, \textcolor{stringliteral}{"[decoders]"} ) \{
-00184     REQUIRE( \hyperlink{decoders_8cpp_a3e32aaf8ced989570e141f01210564f3}{decodePresionCombColector}((\textcolor{keywordtype}{char} *)\textcolor{stringliteral}{"0000"}) == Approx(0).epsilon(0.01))
+00119     connection.\hyperlink{classObd_a0938bfdd6d05795e826a239cc0f29f32}{printStatus}();
+00120 
+00121     connection.\hyperlink{classObd_ac57afb9228d933c6be5b2fa8e6446036}{getDTCs}();
+00122 
+00123     std::cout << connection.\hyperlink{classObd_a8300062d1b651d049cf2a2bc916496cd}{map\_commands}.find(\textcolor{stringliteral}{"GET\_DTC"})->second.getJson().dump(4) << std::endl
       ;
-00185     REQUIRE( \hyperlink{decoders_8cpp_a3e32aaf8ced989570e141f01210564f3}{decodePresionCombColector}((\textcolor{keywordtype}{char} *)\textcolor{stringliteral}{"FFFF"}) == Approx(5177.265).epsilon
+00124 
+00125     \hyperlink{UnitTestCase_8cpp_ad24bf860f798931c63aaa488e08b8b4e}{closeOBDSIM}();
+00126 \}
+00127 
+\Hypertarget{UnitTestCase_8cpp_source_l00132}\hyperlink{UnitTestCase_8cpp_a88458940ca41021a9d50ac249c995fd1}{00132} \hyperlink{UnitTestCase_8cpp_ab1b7b485076e7de68cd9912827a8ee86}{TEST\_CASE}( \textcolor{stringliteral}{"Test OBD class data SPEED"}, \textcolor{stringliteral}{"[OBD]"} ) \{
+00133     
+00134     \hyperlink{debug_8hpp_a55f41cf7b0585224496de3d7adbc101c}{debugLog}(\textcolor{stringliteral}{"Comenzando test OBD class data SPEED"});
+00135 
+00136     \hyperlink{debug_8hpp_a55f41cf7b0585224496de3d7adbc101c}{debugLog}(\textcolor{stringliteral}{"Iniciamos el simulador OBDSIM"});
+00137     \textcolor{comment}{// Iniciamos el simulador OBDSIM para las pruebas}
+00138     \hyperlink{UnitTestCase_8cpp_a15137ff9ba6032f171a43694f159ada6}{initOBDSIM}(\textcolor{stringliteral}{"Cycle"}, 1);
+00139 
+00140     \hyperlink{debug_8hpp_a55f41cf7b0585224496de3d7adbc101c}{debugLog}(\textcolor{stringliteral}{"Iniciamos conexión OBD"});
+00141 
+00142     \hyperlink{classObd}{Obd} connection = \hyperlink{classObd}{Obd}(\textcolor{stringliteral}{"OBDII"});
+00143 
+00144     \hyperlink{debug_8hpp_a55f41cf7b0585224496de3d7adbc101c}{debugLog}(\textcolor{stringliteral}{"Finalizado el proceso de inicio de conexión OBD"});
+00145 
+00146     REQUIRE (connection.\hyperlink{classObd_ae28b765bb787467f929eae932133d2aa}{isValid}() == \textcolor{keyword}{true});
+00147 
+00148     connection.\hyperlink{classObd_abf7e84f45236ea1c78c762ac895c532c}{printPIDs}();
+00149 
+00150     \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} i = 0; i < 15; ++i)\{
+00151         connection.\hyperlink{classObd_a453591bc9a280e8d44d82025ce8590e9}{send}(connection.\hyperlink{classObd_a8300062d1b651d049cf2a2bc916496cd}{map\_commands}.find(\textcolor{stringliteral}{"SPEED"})->second);
+00152 
+00153         sleep(1);
+00154 
+00155         std::cout << connection.\hyperlink{classObd_a8300062d1b651d049cf2a2bc916496cd}{map\_commands}.find(\textcolor{stringliteral}{"SPEED"})->second.getJson().dump(4) << 
+      std::endl;
+00156     \}
+00157 
+00158     \hyperlink{UnitTestCase_8cpp_ad24bf860f798931c63aaa488e08b8b4e}{closeOBDSIM}();
+00159 \}
+00160 
+\Hypertarget{UnitTestCase_8cpp_source_l00165}\hyperlink{UnitTestCase_8cpp_aa01bede4cf032808617f744cfdc34e85}{00165} \hyperlink{UnitTestCase_8cpp_ab1b7b485076e7de68cd9912827a8ee86}{TEST\_CASE}( \textcolor{stringliteral}{"Test Revoluciones Por Minuto"}, \textcolor{stringliteral}{"[decoders]"} ) \{
+00166     REQUIRE( \hyperlink{decoders_8cpp_a889868c7b1e554aee496e6aed7101cc4}{decodeRPM}((\textcolor{keywordtype}{char} *)\textcolor{stringliteral}{"0000"}) == 0);
+00167     REQUIRE( \hyperlink{decoders_8cpp_a889868c7b1e554aee496e6aed7101cc4}{decodeRPM}((\textcolor{keywordtype}{char} *)\textcolor{stringliteral}{"FFFF"}) == Approx(16383.75).epsilon(0.01));
+00168     REQUIRE( \hyperlink{decoders_8cpp_a889868c7b1e554aee496e6aed7101cc4}{decodeRPM}((\textcolor{keywordtype}{char} *)\textcolor{stringliteral}{"7FFF"}) == Approx(8191.75).epsilon(0.01));
+00169     REQUIRE( \hyperlink{decoders_8cpp_a889868c7b1e554aee496e6aed7101cc4}{decodeRPM}((\textcolor{keywordtype}{char} *)\textcolor{stringliteral}{"12F2"}) == Approx(1212.5).epsilon(0.01));
+00170 \}
+00171 
+\Hypertarget{UnitTestCase_8cpp_source_l00176}\hyperlink{UnitTestCase_8cpp_a6de3b92394355f7de997d66ffda41110}{00176} \hyperlink{UnitTestCase_8cpp_ab1b7b485076e7de68cd9912827a8ee86}{TEST\_CASE}( \textcolor{stringliteral}{"Test Posición EGR"}, \textcolor{stringliteral}{"[decoders]"} ) \{
+00177     REQUIRE( \hyperlink{decoders_8cpp_adbe68794075963c37e654d53b8a46f68}{decodeCargaPosicionEGR}((\textcolor{keywordtype}{char} *)\textcolor{stringliteral}{"00"}) == Approx(0).epsilon(0.01));
+00178     REQUIRE( \hyperlink{decoders_8cpp_adbe68794075963c37e654d53b8a46f68}{decodeCargaPosicionEGR}((\textcolor{keywordtype}{char} *)\textcolor{stringliteral}{"FF"}) == Approx(100).epsilon(0.01));
+00179     REQUIRE( \hyperlink{decoders_8cpp_adbe68794075963c37e654d53b8a46f68}{decodeCargaPosicionEGR}((\textcolor{keywordtype}{char} *)\textcolor{stringliteral}{"7F"}) == Approx(50).epsilon(0.01));
+00180 \}
+00181 
+\Hypertarget{UnitTestCase_8cpp_source_l00186}\hyperlink{UnitTestCase_8cpp_a376ac0e4b8eef0360ec825760e4b6b15}{00186} \hyperlink{UnitTestCase_8cpp_ab1b7b485076e7de68cd9912827a8ee86}{TEST\_CASE}( \textcolor{stringliteral}{"Test Temperatura General"}, \textcolor{stringliteral}{"[decoders]"} ) \{
+00187     REQUIRE( \hyperlink{decoders_8cpp_af581438645d7ff67766fa2e5eba5eaf9}{decodeTempGeneral}((\textcolor{keywordtype}{char} *)\textcolor{stringliteral}{"00"}) == Approx(-40).epsilon(0.01));
+00188     REQUIRE( \hyperlink{decoders_8cpp_af581438645d7ff67766fa2e5eba5eaf9}{decodeTempGeneral}((\textcolor{keywordtype}{char} *)\textcolor{stringliteral}{"FF"}) == Approx(215).epsilon(0.01));
+00189     REQUIRE( \hyperlink{decoders_8cpp_af581438645d7ff67766fa2e5eba5eaf9}{decodeTempGeneral}((\textcolor{keywordtype}{char} *)\textcolor{stringliteral}{"7F"}) == Approx(87).epsilon(0.01));
+00190 \}
+00191 
+\Hypertarget{UnitTestCase_8cpp_source_l00196}\hyperlink{UnitTestCase_8cpp_afd7d9244b2b8c27b86ea397d397a6cf6}{00196} \hyperlink{UnitTestCase_8cpp_ab1b7b485076e7de68cd9912827a8ee86}{TEST\_CASE}( \textcolor{stringliteral}{"Test Ajuste Combustible EGR"}, \textcolor{stringliteral}{"[decoders]"} ) \{
+00197     REQUIRE( \hyperlink{decoders_8cpp_aeee9e6d8511a934b3a3644b19de3f2b7}{decodeAjusteCombustibleEGR}((\textcolor{keywordtype}{char} *)\textcolor{stringliteral}{"00"}) == Approx(-100).epsilon(0.0
+      1));
+00198     REQUIRE( \hyperlink{decoders_8cpp_aeee9e6d8511a934b3a3644b19de3f2b7}{decodeAjusteCombustibleEGR}((\textcolor{keywordtype}{char} *)\textcolor{stringliteral}{"FF"}) == Approx(99.2).epsilon(0.0
+      1));
+00199     REQUIRE( \hyperlink{decoders_8cpp_aeee9e6d8511a934b3a3644b19de3f2b7}{decodeAjusteCombustibleEGR}((\textcolor{keywordtype}{char} *)\textcolor{stringliteral}{"7F"}) == Approx(-0.78125).epsilon
       (0.01));
-00186     REQUIRE( \hyperlink{decoders_8cpp_a3e32aaf8ced989570e141f01210564f3}{decodePresionCombColector}((\textcolor{keywordtype}{char} *)\textcolor{stringliteral}{"7FFF"}) == Approx(2588.593).epsilon
+00200 \}
+00201 
+\Hypertarget{UnitTestCase_8cpp_source_l00206}\hyperlink{UnitTestCase_8cpp_ae4019c68e76a6f985cf7295357db9853}{00206} \hyperlink{UnitTestCase_8cpp_ab1b7b485076e7de68cd9912827a8ee86}{TEST\_CASE}( \textcolor{stringliteral}{"Test Presión Combustible"}, \textcolor{stringliteral}{"[decoders]"} ) \{
+00207     REQUIRE( \hyperlink{decoders_8cpp_ab1c03e72734d4127a1c48f3b5a44a2e2}{decodePresionCombustible}((\textcolor{keywordtype}{char} *)\textcolor{stringliteral}{"00"}) == Approx(0).epsilon(0.01));
+00208     REQUIRE( \hyperlink{decoders_8cpp_ab1c03e72734d4127a1c48f3b5a44a2e2}{decodePresionCombustible}((\textcolor{keywordtype}{char} *)\textcolor{stringliteral}{"FF"}) == Approx(765).epsilon(0.01));
+00209     REQUIRE( \hyperlink{decoders_8cpp_ab1c03e72734d4127a1c48f3b5a44a2e2}{decodePresionCombustible}((\textcolor{keywordtype}{char} *)\textcolor{stringliteral}{"7F"}) == Approx(381).epsilon(0.01));
+00210 \}
+00211 
+\Hypertarget{UnitTestCase_8cpp_source_l00216}\hyperlink{UnitTestCase_8cpp_a282584e8fd720d07b04a2fd106c9a32c}{00216} \hyperlink{UnitTestCase_8cpp_ab1b7b485076e7de68cd9912827a8ee86}{TEST\_CASE}( \textcolor{stringliteral}{"Test Hexadecimal a Decimal"}, \textcolor{stringliteral}{"[decoders]"} ) \{
+00217     REQUIRE( \hyperlink{decoders_8cpp_aa7c5243702d5462e4b638450e750624e}{decodeHexToDec}((\textcolor{keywordtype}{char} *)\textcolor{stringliteral}{"00"}) == Approx(0).epsilon(0.01));
+00218     REQUIRE( \hyperlink{decoders_8cpp_aa7c5243702d5462e4b638450e750624e}{decodeHexToDec}((\textcolor{keywordtype}{char} *)\textcolor{stringliteral}{"FF"}) == Approx(255).epsilon(0.01));
+00219     REQUIRE( \hyperlink{decoders_8cpp_aa7c5243702d5462e4b638450e750624e}{decodeHexToDec}((\textcolor{keywordtype}{char} *)\textcolor{stringliteral}{"7F"}) == Approx(127).epsilon(0.01));
+00220 \}
+00221 
+\Hypertarget{UnitTestCase_8cpp_source_l00226}\hyperlink{UnitTestCase_8cpp_a8c2e41bed6c672541f7b95ac1edecf0d}{00226} \hyperlink{UnitTestCase_8cpp_ab1b7b485076e7de68cd9912827a8ee86}{TEST\_CASE}( \textcolor{stringliteral}{"Test Avance Tiempo"}, \textcolor{stringliteral}{"[decoders]"} ) \{
+00227     REQUIRE( \hyperlink{decoders_8cpp_a7a2fee87eace8ad6c86c628f5f91b3b5}{decodeAvanceTiempo}((\textcolor{keywordtype}{char} *)\textcolor{stringliteral}{"00"}) == Approx(-64).epsilon(0.01));
+00228     REQUIRE( \hyperlink{decoders_8cpp_a7a2fee87eace8ad6c86c628f5f91b3b5}{decodeAvanceTiempo}((\textcolor{keywordtype}{char} *)\textcolor{stringliteral}{"FF"}) == Approx(63.5).epsilon(0.01));
+00229     REQUIRE( \hyperlink{decoders_8cpp_a7a2fee87eace8ad6c86c628f5f91b3b5}{decodeAvanceTiempo}((\textcolor{keywordtype}{char} *)\textcolor{stringliteral}{"7F"}) == Approx(-0.5).epsilon(0.01));
+00230 \}
+00231 
+\Hypertarget{UnitTestCase_8cpp_source_l00236}\hyperlink{UnitTestCase_8cpp_af5a76ba4da5f3b2cafb3b5366118dbcd}{00236} \hyperlink{UnitTestCase_8cpp_ab1b7b485076e7de68cd9912827a8ee86}{TEST\_CASE}( \textcolor{stringliteral}{"Test Velocidad Flujo Aire MAF"}, \textcolor{stringliteral}{"[decoders]"} ) \{
+00237     REQUIRE( \hyperlink{decoders_8cpp_adceefeb78a70b295b378f4c472630aa1}{decodeVelocidadMAF}((\textcolor{keywordtype}{char} *)\textcolor{stringliteral}{"0000"}) == Approx(0).epsilon(0.01));
+00238     REQUIRE( \hyperlink{decoders_8cpp_adceefeb78a70b295b378f4c472630aa1}{decodeVelocidadMAF}((\textcolor{keywordtype}{char} *)\textcolor{stringliteral}{"FFFF"}) == Approx(655.35).epsilon(0.01));
+00239     REQUIRE( \hyperlink{decoders_8cpp_adceefeb78a70b295b378f4c472630aa1}{decodeVelocidadMAF}((\textcolor{keywordtype}{char} *)\textcolor{stringliteral}{"7FFF"}) == Approx(327.67).epsilon(0.01));
+00240 \}
+00241 
+\Hypertarget{UnitTestCase_8cpp_source_l00246}\hyperlink{UnitTestCase_8cpp_af9cb80dc5e3813608e63479be181d3d7}{00246} \hyperlink{UnitTestCase_8cpp_ab1b7b485076e7de68cd9912827a8ee86}{TEST\_CASE}( \textcolor{stringliteral}{"Test Presión del Combustible, relativa al colector de vacío"}, \textcolor{stringliteral}{"[decoders]"} ) \{
+00247     REQUIRE( \hyperlink{decoders_8cpp_a3e32aaf8ced989570e141f01210564f3}{decodePresionCombColector}((\textcolor{keywordtype}{char} *)\textcolor{stringliteral}{"0000"}) == Approx(0).epsilon(0.01))
+      ;
+00248     REQUIRE( \hyperlink{decoders_8cpp_a3e32aaf8ced989570e141f01210564f3}{decodePresionCombColector}((\textcolor{keywordtype}{char} *)\textcolor{stringliteral}{"FFFF"}) == Approx(5177.265).epsilon
       (0.01));
-00187 \}
-00188 
-\Hypertarget{UnitTestCase_8cpp_source_l00193}\hyperlink{UnitTestCase_8cpp_a578a25cbf0eb039b82b3f9c2c9934672}{00193} \hyperlink{UnitTestCase_8cpp_a094ceea8956a9b495823bde621ea759a}{TEST\_CASE}( \textcolor{stringliteral}{"Test Presión del Combustible (Diesel o inyección directa de gasolina)"}, \textcolor{stringliteral}{"[decoders]"} )
+00249     REQUIRE( \hyperlink{decoders_8cpp_a3e32aaf8ced989570e141f01210564f3}{decodePresionCombColector}((\textcolor{keywordtype}{char} *)\textcolor{stringliteral}{"7FFF"}) == Approx(2588.593).epsilon
+      (0.01));
+00250 \}
+00251 
+\Hypertarget{UnitTestCase_8cpp_source_l00256}\hyperlink{UnitTestCase_8cpp_a578a25cbf0eb039b82b3f9c2c9934672}{00256} \hyperlink{UnitTestCase_8cpp_ab1b7b485076e7de68cd9912827a8ee86}{TEST\_CASE}( \textcolor{stringliteral}{"Test Presión del Combustible (Diesel o inyección directa de gasolina)"}, \textcolor{stringliteral}{"[decoders]"} )
        \{
-00194     REQUIRE( \hyperlink{decoders_8cpp_a228605d8cad0901a691ba4155a2326fc}{decodePresionMedidorCombustible}((\textcolor{keywordtype}{char} *)\textcolor{stringliteral}{"0000"}) == Approx(0).
+00257     REQUIRE( \hyperlink{decoders_8cpp_a228605d8cad0901a691ba4155a2326fc}{decodePresionMedidorCombustible}((\textcolor{keywordtype}{char} *)\textcolor{stringliteral}{"0000"}) == Approx(0).
       epsilon(0.01));
-00195     REQUIRE( \hyperlink{decoders_8cpp_a228605d8cad0901a691ba4155a2326fc}{decodePresionMedidorCombustible}((\textcolor{keywordtype}{char} *)\textcolor{stringliteral}{"FFFF"}) == Approx(65535
+00258     REQUIRE( \hyperlink{decoders_8cpp_a228605d8cad0901a691ba4155a2326fc}{decodePresionMedidorCombustible}((\textcolor{keywordtype}{char} *)\textcolor{stringliteral}{"FFFF"}) == Approx(65535
       0).epsilon(0.01));
-00196     REQUIRE( \hyperlink{decoders_8cpp_a228605d8cad0901a691ba4155a2326fc}{decodePresionMedidorCombustible}((\textcolor{keywordtype}{char} *)\textcolor{stringliteral}{"7FFF"}) == Approx(32767
+00259     REQUIRE( \hyperlink{decoders_8cpp_a228605d8cad0901a691ba4155a2326fc}{decodePresionMedidorCombustible}((\textcolor{keywordtype}{char} *)\textcolor{stringliteral}{"7FFF"}) == Approx(32767
       0).epsilon(0.01));
-00197 \}
-00198 
-\Hypertarget{UnitTestCase_8cpp_source_l00203}\hyperlink{UnitTestCase_8cpp_a0a88bc70e4d8ddcd9617e864ec5a4f05}{00203} \hyperlink{UnitTestCase_8cpp_a094ceea8956a9b495823bde621ea759a}{TEST\_CASE}( \textcolor{stringliteral}{"Test Presión de Vapor del Sistema Evaporativo"}, \textcolor{stringliteral}{"[decoders]"} ) \{
-00204     REQUIRE( \hyperlink{decoders_8cpp_ab86bda1fcefda784e048796e2d892475}{decodePresionVapor}((\textcolor{keywordtype}{char} *)\textcolor{stringliteral}{"0000"}) == Approx(-8192).epsilon(0.01));
-00205     REQUIRE( \hyperlink{decoders_8cpp_ab86bda1fcefda784e048796e2d892475}{decodePresionVapor}((\textcolor{keywordtype}{char} *)\textcolor{stringliteral}{"FFFF"}) == Approx(8191.75).epsilon(0.01));
-00206     REQUIRE( \hyperlink{decoders_8cpp_ab86bda1fcefda784e048796e2d892475}{decodePresionVapor}((\textcolor{keywordtype}{char} *)\textcolor{stringliteral}{"7FFF"}) == Approx(-0.25).epsilon(0.01));
-00207 \}
-00208 
-\Hypertarget{UnitTestCase_8cpp_source_l00213}\hyperlink{UnitTestCase_8cpp_a4203cd502f06e1bb0b83e603e04c10cf}{00213} \hyperlink{UnitTestCase_8cpp_a094ceea8956a9b495823bde621ea759a}{TEST\_CASE}( \textcolor{stringliteral}{"Test Temperatura del Catalizador"}, \textcolor{stringliteral}{"[decoders]"} ) \{
-00214     REQUIRE( \hyperlink{decoders_8cpp_a8251853ca2e5b8b2e88c75f50d53bc8d}{decodeTempCatalizador}((\textcolor{keywordtype}{char} *)\textcolor{stringliteral}{"0000"}) == Approx(-40).epsilon(0.01));
-00215     REQUIRE( \hyperlink{decoders_8cpp_a8251853ca2e5b8b2e88c75f50d53bc8d}{decodeTempCatalizador}((\textcolor{keywordtype}{char} *)\textcolor{stringliteral}{"FFFF"}) == Approx(6513.5).epsilon(0.01));
-00216     REQUIRE( \hyperlink{decoders_8cpp_a8251853ca2e5b8b2e88c75f50d53bc8d}{decodeTempCatalizador}((\textcolor{keywordtype}{char} *)\textcolor{stringliteral}{"7FFF"}) == Approx(3236.7).epsilon(0.01));
-00217 \}
-00218 
-\Hypertarget{UnitTestCase_8cpp_source_l00223}\hyperlink{UnitTestCase_8cpp_a358bfaf15b84777b24d4304fb9c2f88b}{00223} \hyperlink{UnitTestCase_8cpp_a094ceea8956a9b495823bde621ea759a}{TEST\_CASE}( \textcolor{stringliteral}{"Test Voltaje del Módulo de Control"}, \textcolor{stringliteral}{"[decoders]"} ) \{
-00224     REQUIRE( \hyperlink{decoders_8cpp_a5937fc059394faad8c9c96a0b27a8796}{decodeVoltajeControl}((\textcolor{keywordtype}{char} *)\textcolor{stringliteral}{"0000"}) == Approx(0).epsilon(0.01));
-00225     REQUIRE( \hyperlink{decoders_8cpp_a5937fc059394faad8c9c96a0b27a8796}{decodeVoltajeControl}((\textcolor{keywordtype}{char} *)\textcolor{stringliteral}{"FFFF"}) == Approx(65.535).epsilon(0.01));
-00226     REQUIRE( \hyperlink{decoders_8cpp_a5937fc059394faad8c9c96a0b27a8796}{decodeVoltajeControl}((\textcolor{keywordtype}{char} *)\textcolor{stringliteral}{"7FFF"}) == Approx(32.767).epsilon(0.01));
-00227 \}
-00228 
-\Hypertarget{UnitTestCase_8cpp_source_l00233}\hyperlink{UnitTestCase_8cpp_a6c2278eca15c6834d6c78885a09497c4}{00233} \hyperlink{UnitTestCase_8cpp_a094ceea8956a9b495823bde621ea759a}{TEST\_CASE}( \textcolor{stringliteral}{"Test Relación Equivaliente Comandada de Combustible"}, \textcolor{stringliteral}{"[decoders]"} ) \{
-00234     REQUIRE( \hyperlink{decoders_8cpp_ade77bb9f8d8a2ba3aa431cdf9bdd0c32}{decodeRelacionCombAireBasica}((\textcolor{keywordtype}{char} *)\textcolor{stringliteral}{"0000"}) == Approx(0).epsilon(
-      0.01));
-00235     REQUIRE( \hyperlink{decoders_8cpp_ade77bb9f8d8a2ba3aa431cdf9bdd0c32}{decodeRelacionCombAireBasica}((\textcolor{keywordtype}{char} *)\textcolor{stringliteral}{"FFFF"}) == Approx(2).epsilon(
-      0.01));
-00236     REQUIRE( \hyperlink{decoders_8cpp_ade77bb9f8d8a2ba3aa431cdf9bdd0c32}{decodeRelacionCombAireBasica}((\textcolor{keywordtype}{char} *)\textcolor{stringliteral}{"7FFF"}) == Approx(1).epsilon(
-      0.01));
-00237 \}
-00238 
-\Hypertarget{UnitTestCase_8cpp_source_l00243}\hyperlink{UnitTestCase_8cpp_a27f82a7800b27dd78331e6ee707cb5f8}{00243} \hyperlink{UnitTestCase_8cpp_a094ceea8956a9b495823bde621ea759a}{TEST\_CASE}( \textcolor{stringliteral}{"Comprobación Diagnostic Trouble Codes"}, \textcolor{stringliteral}{"[DTC]"} ) \{
-00244     REQUIRE( \hyperlink{decoders_8cpp_a4f18f411252f4c60fae4af320989c262}{convertDTCs}(\textcolor{stringliteral}{"0123"}) == \textcolor{stringliteral}{"P0123"});
-00245     REQUIRE( \hyperlink{decoders_8cpp_a4f18f411252f4c60fae4af320989c262}{convertDTCs}(\textcolor{stringliteral}{"1234"}) == \textcolor{stringliteral}{"P1234"});
-00246     REQUIRE( \hyperlink{decoders_8cpp_a4f18f411252f4c60fae4af320989c262}{convertDTCs}(\textcolor{stringliteral}{"2345"}) == \textcolor{stringliteral}{"P2345"});
-00247     REQUIRE( \hyperlink{decoders_8cpp_a4f18f411252f4c60fae4af320989c262}{convertDTCs}(\textcolor{stringliteral}{"3456"}) == \textcolor{stringliteral}{"P3456"});
-00248     REQUIRE( \hyperlink{decoders_8cpp_a4f18f411252f4c60fae4af320989c262}{convertDTCs}(\textcolor{stringliteral}{"4567"}) == \textcolor{stringliteral}{"C0567"});
-00249     REQUIRE( \hyperlink{decoders_8cpp_a4f18f411252f4c60fae4af320989c262}{convertDTCs}(\textcolor{stringliteral}{"5678"}) == \textcolor{stringliteral}{"C1678"});
-00250     REQUIRE( \hyperlink{decoders_8cpp_a4f18f411252f4c60fae4af320989c262}{convertDTCs}(\textcolor{stringliteral}{"6789"}) == \textcolor{stringliteral}{"C2789"});
-00251     REQUIRE( \hyperlink{decoders_8cpp_a4f18f411252f4c60fae4af320989c262}{convertDTCs}(\textcolor{stringliteral}{"789A"}) == \textcolor{stringliteral}{"C389A"});
-00252     REQUIRE( \hyperlink{decoders_8cpp_a4f18f411252f4c60fae4af320989c262}{convertDTCs}(\textcolor{stringliteral}{"89AB"}) == \textcolor{stringliteral}{"B09AB"});
-00253     REQUIRE( \hyperlink{decoders_8cpp_a4f18f411252f4c60fae4af320989c262}{convertDTCs}(\textcolor{stringliteral}{"9ABC"}) == \textcolor{stringliteral}{"B1ABC"});
-00254     REQUIRE( \hyperlink{decoders_8cpp_a4f18f411252f4c60fae4af320989c262}{convertDTCs}(\textcolor{stringliteral}{"ABCD"}) == \textcolor{stringliteral}{"B2BCD"});
-00255     REQUIRE( \hyperlink{decoders_8cpp_a4f18f411252f4c60fae4af320989c262}{convertDTCs}(\textcolor{stringliteral}{"BCDE"}) == \textcolor{stringliteral}{"B3CDE"});
-00256     REQUIRE( \hyperlink{decoders_8cpp_a4f18f411252f4c60fae4af320989c262}{convertDTCs}(\textcolor{stringliteral}{"CDEF"}) == \textcolor{stringliteral}{"U0DEF"});
-00257     REQUIRE( \hyperlink{decoders_8cpp_a4f18f411252f4c60fae4af320989c262}{convertDTCs}(\textcolor{stringliteral}{"DEF0"}) == \textcolor{stringliteral}{"U1EF0"});
-00258     REQUIRE( \hyperlink{decoders_8cpp_a4f18f411252f4c60fae4af320989c262}{convertDTCs}(\textcolor{stringliteral}{"EF01"}) == \textcolor{stringliteral}{"U2F01"});
-00259     REQUIRE( \hyperlink{decoders_8cpp_a4f18f411252f4c60fae4af320989c262}{convertDTCs}(\textcolor{stringliteral}{"F012"}) == \textcolor{stringliteral}{"U3012"});
 00260 \}
 00261 
-\Hypertarget{UnitTestCase_8cpp_source_l00266}\hyperlink{UnitTestCase_8cpp_a666839d6a4f130bd11ac0466c9796884}{00266} \hyperlink{UnitTestCase_8cpp_a094ceea8956a9b495823bde621ea759a}{TEST\_CASE}( \textcolor{stringliteral}{"Test VIN (Vehicle Identification Number)"}, \textcolor{stringliteral}{"[decoders]"} ) \{
-00267     REQUIRE( \hyperlink{decoders_8cpp_a66754738119854c13a74265e209083e4}{decodeVIN}((\textcolor{keywordtype}{char} *)\textcolor{stringliteral}{"01573056\(\backslash\)n1:3058455036384A\(\backslash\)n2:34313430303530"}) == \textcolor{stringliteral}{"
-      W0V0XEP68J4140050"});
-00268     REQUIRE( \hyperlink{decoders_8cpp_a66754738119854c13a74265e209083e4}{decodeVIN}((\textcolor{keywordtype}{char} *)\textcolor{stringliteral}{"01314434\(\backslash\)n1:47503030523535\(\backslash\)n2:42313233343536"}) == \textcolor{stringliteral}{"
-      1D4GP00R55B123456"});
-00269 \}
-00270 
-\Hypertarget{UnitTestCase_8cpp_source_l00275}\hyperlink{UnitTestCase_8cpp_ada6898123ac1c26cdb74330eea16b825}{00275} \hyperlink{UnitTestCase_8cpp_a094ceea8956a9b495823bde621ea759a}{TEST\_CASE}( \textcolor{stringliteral}{"Test Describir el Protocolo Actual"}, \textcolor{stringliteral}{"[decoders]"} ) \{
-00276     REQUIRE( \hyperlink{decoders_8cpp_ab83ce79cd098ea655f3812488e304a0c}{decodeDescribeProtocol}((\textcolor{keywordtype}{char} *)\textcolor{stringliteral}{"AUTO, ISO 15765-4 (CAN 11/500)"}) == \textcolor{stringliteral}{"
-      AUTO, ISO 15765-4 (CAN 11/500)"});
-00277     REQUIRE( \hyperlink{decoders_8cpp_ab83ce79cd098ea655f3812488e304a0c}{decodeDescribeProtocol}((\textcolor{keywordtype}{char} *)\textcolor{stringliteral}{"ISO 9141-2"}) == \textcolor{stringliteral}{"ISO 9141-2"});
-00278 \}
-00279 
-\Hypertarget{UnitTestCase_8cpp_source_l00284}\hyperlink{UnitTestCase_8cpp_aa6afb62ebdd4c3e07996c995f623eb6b}{00284} \hyperlink{UnitTestCase_8cpp_aa6afb62ebdd4c3e07996c995f623eb6b}{SCENARIO}( \textcolor{stringliteral}{"Test de Sensores de Oxígeno"}, \textcolor{stringliteral}{"[decoders]"} ) \{
-00285     GIVEN(\textcolor{stringliteral}{"La estructura OxigenoResponse con valores 0"}) \{
-00286         \textcolor{keyword}{struct }\hyperlink{structOxigenoResponse}{OxigenoResponse} datosOX = \{0,0\};
-00287 
-00288         REQUIRE( datosOX.\hyperlink{structOxigenoResponse_a068c403e5746226cf22bb020b4c786d3}{A} == 0 );
-00289         REQUIRE( datosOX.\hyperlink{structOxigenoResponse_a96b19152dd001e19d1351e2d97f22736}{B} == 0 );
-00290 
-00291         WHEN( \textcolor{stringliteral}{"Valores de entrada mínimos 0x0000"} ) \{
-00292             datosOX = \hyperlink{decoders_8cpp_a5b53fc5fc37fbee9c5e389f6c8c18438}{decodeSensorOxigeno}((\textcolor{keywordtype}{char} *)\textcolor{stringliteral}{"0000"});
-00293 
-00294             THEN( \textcolor{stringliteral}{"Resultados tienen que ser los mínimos"} ) \{
-00295                 REQUIRE( datosOX.\hyperlink{structOxigenoResponse_a068c403e5746226cf22bb020b4c786d3}{A} == Approx(0).epsilon(0.01));
-00296                 REQUIRE( datosOX.\hyperlink{structOxigenoResponse_a96b19152dd001e19d1351e2d97f22736}{B} == Approx(-100).epsilon(0.01));
-00297             \}
-00298         \}
-00299         WHEN( \textcolor{stringliteral}{"Valores de entrada máximos 0xFFFF"} ) \{
-00300             datosOX = \hyperlink{decoders_8cpp_a5b53fc5fc37fbee9c5e389f6c8c18438}{decodeSensorOxigeno}((\textcolor{keywordtype}{char} *)\textcolor{stringliteral}{"FFFF"});
+\Hypertarget{UnitTestCase_8cpp_source_l00266}\hyperlink{UnitTestCase_8cpp_a0a88bc70e4d8ddcd9617e864ec5a4f05}{00266} \hyperlink{UnitTestCase_8cpp_ab1b7b485076e7de68cd9912827a8ee86}{TEST\_CASE}( \textcolor{stringliteral}{"Test Presión de Vapor del Sistema Evaporativo"}, \textcolor{stringliteral}{"[decoders]"} ) \{
+00267     REQUIRE( \hyperlink{decoders_8cpp_ab86bda1fcefda784e048796e2d892475}{decodePresionVapor}((\textcolor{keywordtype}{char} *)\textcolor{stringliteral}{"0000"}) == Approx(-8192).epsilon(0.01));
+00268     REQUIRE( \hyperlink{decoders_8cpp_ab86bda1fcefda784e048796e2d892475}{decodePresionVapor}((\textcolor{keywordtype}{char} *)\textcolor{stringliteral}{"FFFF"}) == Approx(8191.75).epsilon(0.01));
+00269     REQUIRE( \hyperlink{decoders_8cpp_ab86bda1fcefda784e048796e2d892475}{decodePresionVapor}((\textcolor{keywordtype}{char} *)\textcolor{stringliteral}{"7FFF"}) == Approx(-0.25).epsilon(0.01));
+00270 \}
+00271 
+\Hypertarget{UnitTestCase_8cpp_source_l00276}\hyperlink{UnitTestCase_8cpp_a4203cd502f06e1bb0b83e603e04c10cf}{00276} \hyperlink{UnitTestCase_8cpp_ab1b7b485076e7de68cd9912827a8ee86}{TEST\_CASE}( \textcolor{stringliteral}{"Test Temperatura del Catalizador"}, \textcolor{stringliteral}{"[decoders]"} ) \{
+00277     REQUIRE( \hyperlink{decoders_8cpp_a8251853ca2e5b8b2e88c75f50d53bc8d}{decodeTempCatalizador}((\textcolor{keywordtype}{char} *)\textcolor{stringliteral}{"0000"}) == Approx(-40).epsilon(0.01));
+00278     REQUIRE( \hyperlink{decoders_8cpp_a8251853ca2e5b8b2e88c75f50d53bc8d}{decodeTempCatalizador}((\textcolor{keywordtype}{char} *)\textcolor{stringliteral}{"FFFF"}) == Approx(6513.5).epsilon(0.01));
+00279     REQUIRE( \hyperlink{decoders_8cpp_a8251853ca2e5b8b2e88c75f50d53bc8d}{decodeTempCatalizador}((\textcolor{keywordtype}{char} *)\textcolor{stringliteral}{"7FFF"}) == Approx(3236.7).epsilon(0.01));
+00280 \}
+00281 
+\Hypertarget{UnitTestCase_8cpp_source_l00286}\hyperlink{UnitTestCase_8cpp_a358bfaf15b84777b24d4304fb9c2f88b}{00286} \hyperlink{UnitTestCase_8cpp_ab1b7b485076e7de68cd9912827a8ee86}{TEST\_CASE}( \textcolor{stringliteral}{"Test Voltaje del Módulo de Control"}, \textcolor{stringliteral}{"[decoders]"} ) \{
+00287     REQUIRE( \hyperlink{decoders_8cpp_a5937fc059394faad8c9c96a0b27a8796}{decodeVoltajeControl}((\textcolor{keywordtype}{char} *)\textcolor{stringliteral}{"0000"}) == Approx(0).epsilon(0.01));
+00288     REQUIRE( \hyperlink{decoders_8cpp_a5937fc059394faad8c9c96a0b27a8796}{decodeVoltajeControl}((\textcolor{keywordtype}{char} *)\textcolor{stringliteral}{"FFFF"}) == Approx(65.535).epsilon(0.01));
+00289     REQUIRE( \hyperlink{decoders_8cpp_a5937fc059394faad8c9c96a0b27a8796}{decodeVoltajeControl}((\textcolor{keywordtype}{char} *)\textcolor{stringliteral}{"7FFF"}) == Approx(32.767).epsilon(0.01));
+00290 \}
+00291 
+\Hypertarget{UnitTestCase_8cpp_source_l00296}\hyperlink{UnitTestCase_8cpp_a6c2278eca15c6834d6c78885a09497c4}{00296} \hyperlink{UnitTestCase_8cpp_ab1b7b485076e7de68cd9912827a8ee86}{TEST\_CASE}( \textcolor{stringliteral}{"Test Relación Equivaliente Comandada de Combustible"}, \textcolor{stringliteral}{"[decoders]"} ) \{
+00297     REQUIRE( \hyperlink{decoders_8cpp_ade77bb9f8d8a2ba3aa431cdf9bdd0c32}{decodeRelacionCombAireBasica}((\textcolor{keywordtype}{char} *)\textcolor{stringliteral}{"0000"}) == Approx(0).epsilon(
+      0.01));
+00298     REQUIRE( \hyperlink{decoders_8cpp_ade77bb9f8d8a2ba3aa431cdf9bdd0c32}{decodeRelacionCombAireBasica}((\textcolor{keywordtype}{char} *)\textcolor{stringliteral}{"FFFF"}) == Approx(2).epsilon(
+      0.01));
+00299     REQUIRE( \hyperlink{decoders_8cpp_ade77bb9f8d8a2ba3aa431cdf9bdd0c32}{decodeRelacionCombAireBasica}((\textcolor{keywordtype}{char} *)\textcolor{stringliteral}{"7FFF"}) == Approx(1).epsilon(
+      0.01));
+00300 \}
 00301 
-00302             THEN( \textcolor{stringliteral}{"Resultados tienen que ser los máximos"} ) \{
-00303                 REQUIRE( datosOX.\hyperlink{structOxigenoResponse_a068c403e5746226cf22bb020b4c786d3}{A} == Approx(1.275).epsilon(0.01));
-00304                 REQUIRE( datosOX.\hyperlink{structOxigenoResponse_a96b19152dd001e19d1351e2d97f22736}{B} == Approx(99.2).epsilon(0.01));
-00305             \}
-00306         \}
-00307         WHEN( \textcolor{stringliteral}{"Valores de entrada intermedio 0x7F7F"} ) \{
-00308             datosOX = \hyperlink{decoders_8cpp_a5b53fc5fc37fbee9c5e389f6c8c18438}{decodeSensorOxigeno}((\textcolor{keywordtype}{char} *)\textcolor{stringliteral}{"7F7F"});
-00309 
-00310             THEN( \textcolor{stringliteral}{"Resultados tienen que ser intermedios"} ) \{
-00311                 REQUIRE( datosOX.\hyperlink{structOxigenoResponse_a068c403e5746226cf22bb020b4c786d3}{A} == Approx(0.635).epsilon(0.01));
-00312                 REQUIRE( datosOX.\hyperlink{structOxigenoResponse_a96b19152dd001e19d1351e2d97f22736}{B} == Approx(-0.78125).epsilon(0.01));
-00313             \}
-00314         \}
-00315         WHEN( \textcolor{stringliteral}{"Valores Voltaje Mínimo y Ajuste Combustible Máximo 0x00FF"} ) \{
-00316             datosOX = \hyperlink{decoders_8cpp_a5b53fc5fc37fbee9c5e389f6c8c18438}{decodeSensorOxigeno}((\textcolor{keywordtype}{char} *)\textcolor{stringliteral}{"00FF"});
-00317 
-00318             THEN( \textcolor{stringliteral}{"Resultados tienen que ser Voltaje Mínimo y Ajuste Combustible Máximo"} ) \{
-00319                 REQUIRE( datosOX.\hyperlink{structOxigenoResponse_a068c403e5746226cf22bb020b4c786d3}{A} == Approx(0).epsilon(0.01));
-00320                 REQUIRE( datosOX.\hyperlink{structOxigenoResponse_a96b19152dd001e19d1351e2d97f22736}{B} == Approx(99.2).epsilon(0.01));
-00321             \}
-00322         \}
-00323         WHEN( \textcolor{stringliteral}{"Valores Ajuste Combustible Mínimo y Voltaje Máximo 0xFF00"} ) \{
-00324             datosOX = \hyperlink{decoders_8cpp_a5b53fc5fc37fbee9c5e389f6c8c18438}{decodeSensorOxigeno}((\textcolor{keywordtype}{char} *)\textcolor{stringliteral}{"FF00"});
-00325 
-00326             THEN( \textcolor{stringliteral}{"Resultados tienen que ser Ajuste Combustible Mínimo y Voltaje Máximo"} ) \{
-00327                 REQUIRE( datosOX.\hyperlink{structOxigenoResponse_a068c403e5746226cf22bb020b4c786d3}{A} == Approx(1.275).epsilon(0.01));
-00328                 REQUIRE( datosOX.\hyperlink{structOxigenoResponse_a96b19152dd001e19d1351e2d97f22736}{B} == Approx(-100).epsilon(0.01));
-00329             \}
-00330         \}
-00331     \}
+\Hypertarget{UnitTestCase_8cpp_source_l00306}\hyperlink{UnitTestCase_8cpp_a27f82a7800b27dd78331e6ee707cb5f8}{00306} \hyperlink{UnitTestCase_8cpp_ab1b7b485076e7de68cd9912827a8ee86}{TEST\_CASE}( \textcolor{stringliteral}{"Comprobación Diagnostic Trouble Codes"}, \textcolor{stringliteral}{"[DTC]"} ) \{
+00307     REQUIRE( \hyperlink{decoders_8cpp_a4f18f411252f4c60fae4af320989c262}{convertDTCs}(\textcolor{stringliteral}{"0123"}) == \textcolor{stringliteral}{"P0123"});
+00308     REQUIRE( \hyperlink{decoders_8cpp_a4f18f411252f4c60fae4af320989c262}{convertDTCs}(\textcolor{stringliteral}{"1234"}) == \textcolor{stringliteral}{"P1234"});
+00309     REQUIRE( \hyperlink{decoders_8cpp_a4f18f411252f4c60fae4af320989c262}{convertDTCs}(\textcolor{stringliteral}{"2345"}) == \textcolor{stringliteral}{"P2345"});
+00310     REQUIRE( \hyperlink{decoders_8cpp_a4f18f411252f4c60fae4af320989c262}{convertDTCs}(\textcolor{stringliteral}{"3456"}) == \textcolor{stringliteral}{"P3456"});
+00311     REQUIRE( \hyperlink{decoders_8cpp_a4f18f411252f4c60fae4af320989c262}{convertDTCs}(\textcolor{stringliteral}{"4567"}) == \textcolor{stringliteral}{"C0567"});
+00312     REQUIRE( \hyperlink{decoders_8cpp_a4f18f411252f4c60fae4af320989c262}{convertDTCs}(\textcolor{stringliteral}{"5678"}) == \textcolor{stringliteral}{"C1678"});
+00313     REQUIRE( \hyperlink{decoders_8cpp_a4f18f411252f4c60fae4af320989c262}{convertDTCs}(\textcolor{stringliteral}{"6789"}) == \textcolor{stringliteral}{"C2789"});
+00314     REQUIRE( \hyperlink{decoders_8cpp_a4f18f411252f4c60fae4af320989c262}{convertDTCs}(\textcolor{stringliteral}{"789A"}) == \textcolor{stringliteral}{"C389A"});
+00315     REQUIRE( \hyperlink{decoders_8cpp_a4f18f411252f4c60fae4af320989c262}{convertDTCs}(\textcolor{stringliteral}{"89AB"}) == \textcolor{stringliteral}{"B09AB"});
+00316     REQUIRE( \hyperlink{decoders_8cpp_a4f18f411252f4c60fae4af320989c262}{convertDTCs}(\textcolor{stringliteral}{"9ABC"}) == \textcolor{stringliteral}{"B1ABC"});
+00317     REQUIRE( \hyperlink{decoders_8cpp_a4f18f411252f4c60fae4af320989c262}{convertDTCs}(\textcolor{stringliteral}{"ABCD"}) == \textcolor{stringliteral}{"B2BCD"});
+00318     REQUIRE( \hyperlink{decoders_8cpp_a4f18f411252f4c60fae4af320989c262}{convertDTCs}(\textcolor{stringliteral}{"BCDE"}) == \textcolor{stringliteral}{"B3CDE"});
+00319     REQUIRE( \hyperlink{decoders_8cpp_a4f18f411252f4c60fae4af320989c262}{convertDTCs}(\textcolor{stringliteral}{"CDEF"}) == \textcolor{stringliteral}{"U0DEF"});
+00320     REQUIRE( \hyperlink{decoders_8cpp_a4f18f411252f4c60fae4af320989c262}{convertDTCs}(\textcolor{stringliteral}{"DEF0"}) == \textcolor{stringliteral}{"U1EF0"});
+00321     REQUIRE( \hyperlink{decoders_8cpp_a4f18f411252f4c60fae4af320989c262}{convertDTCs}(\textcolor{stringliteral}{"EF01"}) == \textcolor{stringliteral}{"U2F01"});
+00322     REQUIRE( \hyperlink{decoders_8cpp_a4f18f411252f4c60fae4af320989c262}{convertDTCs}(\textcolor{stringliteral}{"F012"}) == \textcolor{stringliteral}{"U3012"});
+00323 \}
+00324 
+\Hypertarget{UnitTestCase_8cpp_source_l00329}\hyperlink{UnitTestCase_8cpp_a3c8d23281675ad40ff5cd11d163c1213}{00329} \hyperlink{UnitTestCase_8cpp_ab1b7b485076e7de68cd9912827a8ee86}{TEST\_CASE}( \textcolor{stringliteral}{"Test VIN (Vehicle Identification Number) ISO15765-4 CAN"}, \textcolor{stringliteral}{"[decoders]"} ) \{
+00330     REQUIRE( \hyperlink{decoders_8cpp_a66754738119854c13a74265e209083e4}{decodeVIN}((\textcolor{keywordtype}{char} *)\textcolor{stringliteral}{"01573056\(\backslash\)n1:3058455036384A\(\backslash\)n2:34313430303530"}) == \textcolor{stringliteral}{"
+      W0V0XEP68J4140050"});
+00331     REQUIRE( \hyperlink{decoders_8cpp_a66754738119854c13a74265e209083e4}{decodeVIN}((\textcolor{keywordtype}{char} *)\textcolor{stringliteral}{"01314434\(\backslash\)n1:47503030523535\(\backslash\)n2:42313233343536"}) == \textcolor{stringliteral}{"
+      1D4GP00R55B123456"});
 00332 \}
 00333 
-\Hypertarget{UnitTestCase_8cpp_source_l00338}\hyperlink{UnitTestCase_8cpp_ad6f2a6821f17834d70717ea1d0b38dee}{00338} \hyperlink{UnitTestCase_8cpp_aa6afb62ebdd4c3e07996c995f623eb6b}{SCENARIO}( \textcolor{stringliteral}{"Test de Relación Equivalente Combustible-Aire"}, \textcolor{stringliteral}{"[decoders]"} ) \{
-00339     GIVEN(\textcolor{stringliteral}{"La estructura OxigenoResponse con valores 0"}) \{
-00340         \textcolor{keyword}{struct }\hyperlink{structOxigenoResponse}{OxigenoResponse} datosOX = \{0,0\};
-00341 
-00342         REQUIRE( datosOX.\hyperlink{structOxigenoResponse_a068c403e5746226cf22bb020b4c786d3}{A} == 0 );
-00343         REQUIRE( datosOX.\hyperlink{structOxigenoResponse_a96b19152dd001e19d1351e2d97f22736}{B} == 0 );
-00344 
-00345         WHEN( \textcolor{stringliteral}{"Valores de entrada mínimos 0x00000000"} ) \{
-00346             datosOX = \hyperlink{decoders_8cpp_a363bd4f505969098be58a175f02b9b50}{decodeRelacionCombAire}((\textcolor{keywordtype}{char} *)\textcolor{stringliteral}{"00000000"});
-00347 
-00348             THEN( \textcolor{stringliteral}{"Resultados tienen que ser los mínimos"} ) \{
-00349                 REQUIRE( datosOX.\hyperlink{structOxigenoResponse_a068c403e5746226cf22bb020b4c786d3}{A} == Approx(0).epsilon(0.01));
-00350                 REQUIRE( datosOX.\hyperlink{structOxigenoResponse_a96b19152dd001e19d1351e2d97f22736}{B} == Approx(0).epsilon(0.01));
-00351             \}
-00352         \}
-00353         WHEN( \textcolor{stringliteral}{"Valores de entrada máximos 0xFFFFFFFF"} ) \{
-00354             datosOX = \hyperlink{decoders_8cpp_a363bd4f505969098be58a175f02b9b50}{decodeRelacionCombAire}((\textcolor{keywordtype}{char} *)\textcolor{stringliteral}{"FFFFFFFF"});
-00355 
-00356             THEN( \textcolor{stringliteral}{"Resultados tienen que ser los máximos"} ) \{
-00357                 REQUIRE( datosOX.\hyperlink{structOxigenoResponse_a068c403e5746226cf22bb020b4c786d3}{A} == Approx(2).epsilon(0.01));
-00358                 REQUIRE( datosOX.\hyperlink{structOxigenoResponse_a96b19152dd001e19d1351e2d97f22736}{B} == Approx(8).epsilon(0.01));
-00359             \}
-00360         \}
-00361         WHEN( \textcolor{stringliteral}{"Valores de entrada intermedio 0x7FFF7FFF"} ) \{
-00362             datosOX = \hyperlink{decoders_8cpp_a363bd4f505969098be58a175f02b9b50}{decodeRelacionCombAire}((\textcolor{keywordtype}{char} *)\textcolor{stringliteral}{"7FFF7FFF"});
-00363 
-00364             THEN( \textcolor{stringliteral}{"Resultados tienen que ser intermedios"} ) \{
-00365                 REQUIRE( datosOX.\hyperlink{structOxigenoResponse_a068c403e5746226cf22bb020b4c786d3}{A} == Approx(1).epsilon(0.01));
-00366                 REQUIRE( datosOX.\hyperlink{structOxigenoResponse_a96b19152dd001e19d1351e2d97f22736}{B} == Approx(4).epsilon(0.01));
-00367             \}
-00368         \}
-00369         WHEN( \textcolor{stringliteral}{"Valores Voltaje Mínimo y Relación Equivalente Máxima 0xFFFF0000"} ) \{
-00370             datosOX = \hyperlink{decoders_8cpp_a363bd4f505969098be58a175f02b9b50}{decodeRelacionCombAire}((\textcolor{keywordtype}{char} *)\textcolor{stringliteral}{"FFFF0000"});
-00371 
-00372             THEN( \textcolor{stringliteral}{"Resultados tienen que ser Voltaje Mínimo y Relación Equivalente Máxima"} ) \{
-00373                 REQUIRE( datosOX.\hyperlink{structOxigenoResponse_a068c403e5746226cf22bb020b4c786d3}{A} == Approx(2).epsilon(0.01));
-00374                 REQUIRE( datosOX.\hyperlink{structOxigenoResponse_a96b19152dd001e19d1351e2d97f22736}{B} == Approx(0).epsilon(0.01));
-00375             \}
-00376         \}
-00377         WHEN( \textcolor{stringliteral}{"Valores Relación Equivalente Mínima y Voltaje Máximo 0x0000FFFF"} ) \{
-00378             datosOX = \hyperlink{decoders_8cpp_a363bd4f505969098be58a175f02b9b50}{decodeRelacionCombAire}((\textcolor{keywordtype}{char} *)\textcolor{stringliteral}{"0000FFFF"});
-00379 
-00380             THEN( \textcolor{stringliteral}{"Resultados tienen que ser Relación Equivalente MínimA y Voltaje Máximo"} ) \{
-00381                 REQUIRE( datosOX.\hyperlink{structOxigenoResponse_a068c403e5746226cf22bb020b4c786d3}{A} == Approx(0).epsilon(0.01));
-00382                 REQUIRE( datosOX.\hyperlink{structOxigenoResponse_a96b19152dd001e19d1351e2d97f22736}{B} == Approx(8).epsilon(0.01));
-00383             \}
-00384         \}
-00385     \}
-00386 \}
-00387 
-\Hypertarget{UnitTestCase_8cpp_source_l00392}\hyperlink{UnitTestCase_8cpp_ab8cb04c98de551d82acba45293028c77}{00392} \hyperlink{UnitTestCase_8cpp_aa6afb62ebdd4c3e07996c995f623eb6b}{SCENARIO}( \textcolor{stringliteral}{"Test de Relación Equivalente Combustible-Aire Actual"}, \textcolor{stringliteral}{"[decoders]"} ) \{
-00393     GIVEN(\textcolor{stringliteral}{"La estructura OxigenoResponse con valores 0"}) \{
-00394         \textcolor{keyword}{struct }\hyperlink{structOxigenoResponse}{OxigenoResponse} datosOX = \{0,0\};
-00395 
-00396         REQUIRE( datosOX.\hyperlink{structOxigenoResponse_a068c403e5746226cf22bb020b4c786d3}{A} == 0 );
-00397         REQUIRE( datosOX.\hyperlink{structOxigenoResponse_a96b19152dd001e19d1351e2d97f22736}{B} == 0 );
-00398 
-00399         WHEN( \textcolor{stringliteral}{"Valores de entrada mínimos 0x00000000"} ) \{
-00400             datosOX = \hyperlink{decoders_8cpp_a4cedb500095b25b3d4fff382094b0eb9}{decodeRelacionCombAireActual}((\textcolor{keywordtype}{char} *)\textcolor{stringliteral}{"00000000"});
-00401 
-00402             THEN( \textcolor{stringliteral}{"Resultados tienen que ser los mínimos"} ) \{
-00403                 REQUIRE( datosOX.\hyperlink{structOxigenoResponse_a068c403e5746226cf22bb020b4c786d3}{A} == Approx(0).epsilon(0.01));
-00404                 REQUIRE( datosOX.\hyperlink{structOxigenoResponse_a96b19152dd001e19d1351e2d97f22736}{B} == Approx(-128).epsilon(0.01));
-00405             \}
-00406         \}
-00407         WHEN( \textcolor{stringliteral}{"Valores de entrada máximos 0xFFFFFFFF"} ) \{
-00408             datosOX = \hyperlink{decoders_8cpp_a4cedb500095b25b3d4fff382094b0eb9}{decodeRelacionCombAireActual}((\textcolor{keywordtype}{char} *)\textcolor{stringliteral}{"FFFFFFFF"});
-00409 
-00410             THEN( \textcolor{stringliteral}{"Resultados tienen que ser los máximos"} ) \{
-00411                 REQUIRE( datosOX.\hyperlink{structOxigenoResponse_a068c403e5746226cf22bb020b4c786d3}{A} == Approx(2).epsilon(0.01));
-00412                 REQUIRE( datosOX.\hyperlink{structOxigenoResponse_a96b19152dd001e19d1351e2d97f22736}{B} == Approx(128).epsilon(0.01));
-00413             \}
-00414         \}
-00415         WHEN( \textcolor{stringliteral}{"Valores de entrada intermedio 0x7FFF7FFF"} ) \{
-00416             datosOX = \hyperlink{decoders_8cpp_a4cedb500095b25b3d4fff382094b0eb9}{decodeRelacionCombAireActual}((\textcolor{keywordtype}{char} *)\textcolor{stringliteral}{"7FFF7FFF"});
-00417 
-00418             THEN( \textcolor{stringliteral}{"Resultados tienen que ser intermedios"} ) \{
-00419                 REQUIRE( datosOX.\hyperlink{structOxigenoResponse_a068c403e5746226cf22bb020b4c786d3}{A} == Approx(1).epsilon(0.01));
-00420                 REQUIRE( datosOX.\hyperlink{structOxigenoResponse_a96b19152dd001e19d1351e2d97f22736}{B} == Approx(-0.00390625).epsilon(0.01));
-00421             \}
-00422         \}
-00423         WHEN( \textcolor{stringliteral}{"Valores Corriente Mínimo y Relación Equivalente Máxima 0xFFFF0000"} ) \{
-00424             datosOX = \hyperlink{decoders_8cpp_a4cedb500095b25b3d4fff382094b0eb9}{decodeRelacionCombAireActual}((\textcolor{keywordtype}{char} *)\textcolor{stringliteral}{"FFFF0000"});
-00425 
-00426             THEN( \textcolor{stringliteral}{"Resultados tienen que ser Corriente Mínimo y Relación Equivalente Máxima"} ) \{
-00427                 REQUIRE( datosOX.\hyperlink{structOxigenoResponse_a068c403e5746226cf22bb020b4c786d3}{A} == Approx(2).epsilon(0.01));
-00428                 REQUIRE( datosOX.\hyperlink{structOxigenoResponse_a96b19152dd001e19d1351e2d97f22736}{B} == Approx(-128).epsilon(0.01));
-00429             \}
-00430         \}
-00431         WHEN( \textcolor{stringliteral}{"Valores Relación Equivalente Mínima y Corriente Máximo 0x0000FFFF"} ) \{
-00432             datosOX = \hyperlink{decoders_8cpp_a4cedb500095b25b3d4fff382094b0eb9}{decodeRelacionCombAireActual}((\textcolor{keywordtype}{char} *)\textcolor{stringliteral}{"0000FFFF"});
-00433 
-00434             THEN( \textcolor{stringliteral}{"Resultados tienen que ser Relación Equivalente MínimA y Corriente Máximo"} ) \{
-00435                 REQUIRE( datosOX.\hyperlink{structOxigenoResponse_a068c403e5746226cf22bb020b4c786d3}{A} == Approx(0).epsilon(0.01));
-00436                 REQUIRE( datosOX.\hyperlink{structOxigenoResponse_a96b19152dd001e19d1351e2d97f22736}{B} == Approx(128).epsilon(0.01));
-00437             \}
-00438         \}
-00439     \}
-00440 \}
-00441 
-\Hypertarget{UnitTestCase_8cpp_source_l00446}\hyperlink{UnitTestCase_8cpp_a40a3028fa1222aa3915042e8d9c0c4d2}{00446} \hyperlink{UnitTestCase_8cpp_aa6afb62ebdd4c3e07996c995f623eb6b}{SCENARIO}( \textcolor{stringliteral}{"Test de Valores máximos relación de combustible-aire, voltaje, corriente y presión
+\Hypertarget{UnitTestCase_8cpp_source_l00338}\hyperlink{UnitTestCase_8cpp_ada6898123ac1c26cdb74330eea16b825}{00338} \hyperlink{UnitTestCase_8cpp_ab1b7b485076e7de68cd9912827a8ee86}{TEST\_CASE}( \textcolor{stringliteral}{"Test Describir el Protocolo Actual"}, \textcolor{stringliteral}{"[decoders]"} ) \{
+00339     REQUIRE( \hyperlink{decoders_8cpp_ab83ce79cd098ea655f3812488e304a0c}{decodeDescribeProtocol}((\textcolor{keywordtype}{char} *)\textcolor{stringliteral}{"AUTO, ISO 15765-4 (CAN 11/500)"}) == \textcolor{stringliteral}{"
+      AUTO, ISO 15765-4 (CAN 11/500)"});
+00340     REQUIRE( \hyperlink{decoders_8cpp_ab83ce79cd098ea655f3812488e304a0c}{decodeDescribeProtocol}((\textcolor{keywordtype}{char} *)\textcolor{stringliteral}{"ISO 9141-2"}) == \textcolor{stringliteral}{"ISO 9141-2"});
+00341 \}
+00342 
+\Hypertarget{UnitTestCase_8cpp_source_l00347}\hyperlink{UnitTestCase_8cpp_aa6afb62ebdd4c3e07996c995f623eb6b}{00347} \hyperlink{UnitTestCase_8cpp_aa6afb62ebdd4c3e07996c995f623eb6b}{SCENARIO}( \textcolor{stringliteral}{"Test de Sensores de Oxígeno"}, \textcolor{stringliteral}{"[decoders]"} ) \{
+00348     GIVEN(\textcolor{stringliteral}{"La estructura OxigenoResponse con valores 0"}) \{
+00349         \textcolor{keyword}{struct }\hyperlink{structOxigenoResponse}{OxigenoResponse} datosOX = \{0,0\};
+00350 
+00351         REQUIRE( datosOX.\hyperlink{structOxigenoResponse_a068c403e5746226cf22bb020b4c786d3}{A} == 0 );
+00352         REQUIRE( datosOX.\hyperlink{structOxigenoResponse_a96b19152dd001e19d1351e2d97f22736}{B} == 0 );
+00353 
+00354         WHEN( \textcolor{stringliteral}{"Valores de entrada mínimos 0x0000"} ) \{
+00355             datosOX = \hyperlink{decoders_8cpp_a5b53fc5fc37fbee9c5e389f6c8c18438}{decodeSensorOxigeno}((\textcolor{keywordtype}{char} *)\textcolor{stringliteral}{"0000"});
+00356 
+00357             THEN( \textcolor{stringliteral}{"Resultados tienen que ser los mínimos"} ) \{
+00358                 REQUIRE( datosOX.\hyperlink{structOxigenoResponse_a068c403e5746226cf22bb020b4c786d3}{A} == Approx(0).epsilon(0.01));
+00359                 REQUIRE( datosOX.\hyperlink{structOxigenoResponse_a96b19152dd001e19d1351e2d97f22736}{B} == Approx(-100).epsilon(0.01));
+00360             \}
+00361         \}
+00362         WHEN( \textcolor{stringliteral}{"Valores de entrada máximos 0xFFFF"} ) \{
+00363             datosOX = \hyperlink{decoders_8cpp_a5b53fc5fc37fbee9c5e389f6c8c18438}{decodeSensorOxigeno}((\textcolor{keywordtype}{char} *)\textcolor{stringliteral}{"FFFF"});
+00364 
+00365             THEN( \textcolor{stringliteral}{"Resultados tienen que ser los máximos"} ) \{
+00366                 REQUIRE( datosOX.\hyperlink{structOxigenoResponse_a068c403e5746226cf22bb020b4c786d3}{A} == Approx(1.275).epsilon(0.01));
+00367                 REQUIRE( datosOX.\hyperlink{structOxigenoResponse_a96b19152dd001e19d1351e2d97f22736}{B} == Approx(99.2).epsilon(0.01));
+00368             \}
+00369         \}
+00370         WHEN( \textcolor{stringliteral}{"Valores de entrada intermedio 0x7F7F"} ) \{
+00371             datosOX = \hyperlink{decoders_8cpp_a5b53fc5fc37fbee9c5e389f6c8c18438}{decodeSensorOxigeno}((\textcolor{keywordtype}{char} *)\textcolor{stringliteral}{"7F7F"});
+00372 
+00373             THEN( \textcolor{stringliteral}{"Resultados tienen que ser intermedios"} ) \{
+00374                 REQUIRE( datosOX.\hyperlink{structOxigenoResponse_a068c403e5746226cf22bb020b4c786d3}{A} == Approx(0.635).epsilon(0.01));
+00375                 REQUIRE( datosOX.\hyperlink{structOxigenoResponse_a96b19152dd001e19d1351e2d97f22736}{B} == Approx(-0.78125).epsilon(0.01));
+00376             \}
+00377         \}
+00378         WHEN( \textcolor{stringliteral}{"Valores Voltaje Mínimo y Ajuste Combustible Máximo 0x00FF"} ) \{
+00379             datosOX = \hyperlink{decoders_8cpp_a5b53fc5fc37fbee9c5e389f6c8c18438}{decodeSensorOxigeno}((\textcolor{keywordtype}{char} *)\textcolor{stringliteral}{"00FF"});
+00380 
+00381             THEN( \textcolor{stringliteral}{"Resultados tienen que ser Voltaje Mínimo y Ajuste Combustible Máximo"} ) \{
+00382                 REQUIRE( datosOX.\hyperlink{structOxigenoResponse_a068c403e5746226cf22bb020b4c786d3}{A} == Approx(0).epsilon(0.01));
+00383                 REQUIRE( datosOX.\hyperlink{structOxigenoResponse_a96b19152dd001e19d1351e2d97f22736}{B} == Approx(99.2).epsilon(0.01));
+00384             \}
+00385         \}
+00386         WHEN( \textcolor{stringliteral}{"Valores Ajuste Combustible Mínimo y Voltaje Máximo 0xFF00"} ) \{
+00387             datosOX = \hyperlink{decoders_8cpp_a5b53fc5fc37fbee9c5e389f6c8c18438}{decodeSensorOxigeno}((\textcolor{keywordtype}{char} *)\textcolor{stringliteral}{"FF00"});
+00388 
+00389             THEN( \textcolor{stringliteral}{"Resultados tienen que ser Ajuste Combustible Mínimo y Voltaje Máximo"} ) \{
+00390                 REQUIRE( datosOX.\hyperlink{structOxigenoResponse_a068c403e5746226cf22bb020b4c786d3}{A} == Approx(1.275).epsilon(0.01));
+00391                 REQUIRE( datosOX.\hyperlink{structOxigenoResponse_a96b19152dd001e19d1351e2d97f22736}{B} == Approx(-100).epsilon(0.01));
+00392             \}
+00393         \}
+00394     \}
+00395 \}
+00396 
+\Hypertarget{UnitTestCase_8cpp_source_l00401}\hyperlink{UnitTestCase_8cpp_ad6f2a6821f17834d70717ea1d0b38dee}{00401} \hyperlink{UnitTestCase_8cpp_aa6afb62ebdd4c3e07996c995f623eb6b}{SCENARIO}( \textcolor{stringliteral}{"Test de Relación Equivalente Combustible-Aire"}, \textcolor{stringliteral}{"[decoders]"} ) \{
+00402     GIVEN(\textcolor{stringliteral}{"La estructura OxigenoResponse con valores 0"}) \{
+00403         \textcolor{keyword}{struct }\hyperlink{structOxigenoResponse}{OxigenoResponse} datosOX = \{0,0\};
+00404 
+00405         REQUIRE( datosOX.\hyperlink{structOxigenoResponse_a068c403e5746226cf22bb020b4c786d3}{A} == 0 );
+00406         REQUIRE( datosOX.\hyperlink{structOxigenoResponse_a96b19152dd001e19d1351e2d97f22736}{B} == 0 );
+00407 
+00408         WHEN( \textcolor{stringliteral}{"Valores de entrada mínimos 0x00000000"} ) \{
+00409             datosOX = \hyperlink{decoders_8cpp_a363bd4f505969098be58a175f02b9b50}{decodeRelacionCombAire}((\textcolor{keywordtype}{char} *)\textcolor{stringliteral}{"00000000"});
+00410 
+00411             THEN( \textcolor{stringliteral}{"Resultados tienen que ser los mínimos"} ) \{
+00412                 REQUIRE( datosOX.\hyperlink{structOxigenoResponse_a068c403e5746226cf22bb020b4c786d3}{A} == Approx(0).epsilon(0.01));
+00413                 REQUIRE( datosOX.\hyperlink{structOxigenoResponse_a96b19152dd001e19d1351e2d97f22736}{B} == Approx(0).epsilon(0.01));
+00414             \}
+00415         \}
+00416         WHEN( \textcolor{stringliteral}{"Valores de entrada máximos 0xFFFFFFFF"} ) \{
+00417             datosOX = \hyperlink{decoders_8cpp_a363bd4f505969098be58a175f02b9b50}{decodeRelacionCombAire}((\textcolor{keywordtype}{char} *)\textcolor{stringliteral}{"FFFFFFFF"});
+00418 
+00419             THEN( \textcolor{stringliteral}{"Resultados tienen que ser los máximos"} ) \{
+00420                 REQUIRE( datosOX.\hyperlink{structOxigenoResponse_a068c403e5746226cf22bb020b4c786d3}{A} == Approx(2).epsilon(0.01));
+00421                 REQUIRE( datosOX.\hyperlink{structOxigenoResponse_a96b19152dd001e19d1351e2d97f22736}{B} == Approx(8).epsilon(0.01));
+00422             \}
+00423         \}
+00424         WHEN( \textcolor{stringliteral}{"Valores de entrada intermedio 0x7FFF7FFF"} ) \{
+00425             datosOX = \hyperlink{decoders_8cpp_a363bd4f505969098be58a175f02b9b50}{decodeRelacionCombAire}((\textcolor{keywordtype}{char} *)\textcolor{stringliteral}{"7FFF7FFF"});
+00426 
+00427             THEN( \textcolor{stringliteral}{"Resultados tienen que ser intermedios"} ) \{
+00428                 REQUIRE( datosOX.\hyperlink{structOxigenoResponse_a068c403e5746226cf22bb020b4c786d3}{A} == Approx(1).epsilon(0.01));
+00429                 REQUIRE( datosOX.\hyperlink{structOxigenoResponse_a96b19152dd001e19d1351e2d97f22736}{B} == Approx(4).epsilon(0.01));
+00430             \}
+00431         \}
+00432         WHEN( \textcolor{stringliteral}{"Valores Voltaje Mínimo y Relación Equivalente Máxima 0xFFFF0000"} ) \{
+00433             datosOX = \hyperlink{decoders_8cpp_a363bd4f505969098be58a175f02b9b50}{decodeRelacionCombAire}((\textcolor{keywordtype}{char} *)\textcolor{stringliteral}{"FFFF0000"});
+00434 
+00435             THEN( \textcolor{stringliteral}{"Resultados tienen que ser Voltaje Mínimo y Relación Equivalente Máxima"} ) \{
+00436                 REQUIRE( datosOX.\hyperlink{structOxigenoResponse_a068c403e5746226cf22bb020b4c786d3}{A} == Approx(2).epsilon(0.01));
+00437                 REQUIRE( datosOX.\hyperlink{structOxigenoResponse_a96b19152dd001e19d1351e2d97f22736}{B} == Approx(0).epsilon(0.01));
+00438             \}
+00439         \}
+00440         WHEN( \textcolor{stringliteral}{"Valores Relación Equivalente Mínima y Voltaje Máximo 0x0000FFFF"} ) \{
+00441             datosOX = \hyperlink{decoders_8cpp_a363bd4f505969098be58a175f02b9b50}{decodeRelacionCombAire}((\textcolor{keywordtype}{char} *)\textcolor{stringliteral}{"0000FFFF"});
+00442 
+00443             THEN( \textcolor{stringliteral}{"Resultados tienen que ser Relación Equivalente MínimA y Voltaje Máximo"} ) \{
+00444                 REQUIRE( datosOX.\hyperlink{structOxigenoResponse_a068c403e5746226cf22bb020b4c786d3}{A} == Approx(0).epsilon(0.01));
+00445                 REQUIRE( datosOX.\hyperlink{structOxigenoResponse_a96b19152dd001e19d1351e2d97f22736}{B} == Approx(8).epsilon(0.01));
+00446             \}
+00447         \}
+00448     \}
+00449 \}
+00450 
+\Hypertarget{UnitTestCase_8cpp_source_l00455}\hyperlink{UnitTestCase_8cpp_ab8cb04c98de551d82acba45293028c77}{00455} \hyperlink{UnitTestCase_8cpp_aa6afb62ebdd4c3e07996c995f623eb6b}{SCENARIO}( \textcolor{stringliteral}{"Test de Relación Equivalente Combustible-Aire Actual"}, \textcolor{stringliteral}{"[decoders]"} ) \{
+00456     GIVEN(\textcolor{stringliteral}{"La estructura OxigenoResponse con valores 0"}) \{
+00457         \textcolor{keyword}{struct }\hyperlink{structOxigenoResponse}{OxigenoResponse} datosOX = \{0,0\};
+00458 
+00459         REQUIRE( datosOX.\hyperlink{structOxigenoResponse_a068c403e5746226cf22bb020b4c786d3}{A} == 0 );
+00460         REQUIRE( datosOX.\hyperlink{structOxigenoResponse_a96b19152dd001e19d1351e2d97f22736}{B} == 0 );
+00461 
+00462         WHEN( \textcolor{stringliteral}{"Valores de entrada mínimos 0x00000000"} ) \{
+00463             datosOX = \hyperlink{decoders_8cpp_a4cedb500095b25b3d4fff382094b0eb9}{decodeRelacionCombAireActual}((\textcolor{keywordtype}{char} *)\textcolor{stringliteral}{"00000000"});
+00464 
+00465             THEN( \textcolor{stringliteral}{"Resultados tienen que ser los mínimos"} ) \{
+00466                 REQUIRE( datosOX.\hyperlink{structOxigenoResponse_a068c403e5746226cf22bb020b4c786d3}{A} == Approx(0).epsilon(0.01));
+00467                 REQUIRE( datosOX.\hyperlink{structOxigenoResponse_a96b19152dd001e19d1351e2d97f22736}{B} == Approx(-128).epsilon(0.01));
+00468             \}
+00469         \}
+00470         WHEN( \textcolor{stringliteral}{"Valores de entrada máximos 0xFFFFFFFF"} ) \{
+00471             datosOX = \hyperlink{decoders_8cpp_a4cedb500095b25b3d4fff382094b0eb9}{decodeRelacionCombAireActual}((\textcolor{keywordtype}{char} *)\textcolor{stringliteral}{"FFFFFFFF"});
+00472 
+00473             THEN( \textcolor{stringliteral}{"Resultados tienen que ser los máximos"} ) \{
+00474                 REQUIRE( datosOX.\hyperlink{structOxigenoResponse_a068c403e5746226cf22bb020b4c786d3}{A} == Approx(2).epsilon(0.01));
+00475                 REQUIRE( datosOX.\hyperlink{structOxigenoResponse_a96b19152dd001e19d1351e2d97f22736}{B} == Approx(128).epsilon(0.01));
+00476             \}
+00477         \}
+00478         WHEN( \textcolor{stringliteral}{"Valores de entrada intermedio 0x7FFF7FFF"} ) \{
+00479             datosOX = \hyperlink{decoders_8cpp_a4cedb500095b25b3d4fff382094b0eb9}{decodeRelacionCombAireActual}((\textcolor{keywordtype}{char} *)\textcolor{stringliteral}{"7FFF7FFF"});
+00480 
+00481             THEN( \textcolor{stringliteral}{"Resultados tienen que ser intermedios"} ) \{
+00482                 REQUIRE( datosOX.\hyperlink{structOxigenoResponse_a068c403e5746226cf22bb020b4c786d3}{A} == Approx(1).epsilon(0.01));
+00483                 REQUIRE( datosOX.\hyperlink{structOxigenoResponse_a96b19152dd001e19d1351e2d97f22736}{B} == Approx(-0.00390625).epsilon(0.01));
+00484             \}
+00485         \}
+00486         WHEN( \textcolor{stringliteral}{"Valores Corriente Mínimo y Relación Equivalente Máxima 0xFFFF0000"} ) \{
+00487             datosOX = \hyperlink{decoders_8cpp_a4cedb500095b25b3d4fff382094b0eb9}{decodeRelacionCombAireActual}((\textcolor{keywordtype}{char} *)\textcolor{stringliteral}{"FFFF0000"});
+00488 
+00489             THEN( \textcolor{stringliteral}{"Resultados tienen que ser Corriente Mínimo y Relación Equivalente Máxima"} ) \{
+00490                 REQUIRE( datosOX.\hyperlink{structOxigenoResponse_a068c403e5746226cf22bb020b4c786d3}{A} == Approx(2).epsilon(0.01));
+00491                 REQUIRE( datosOX.\hyperlink{structOxigenoResponse_a96b19152dd001e19d1351e2d97f22736}{B} == Approx(-128).epsilon(0.01));
+00492             \}
+00493         \}
+00494         WHEN( \textcolor{stringliteral}{"Valores Relación Equivalente Mínima y Corriente Máximo 0x0000FFFF"} ) \{
+00495             datosOX = \hyperlink{decoders_8cpp_a4cedb500095b25b3d4fff382094b0eb9}{decodeRelacionCombAireActual}((\textcolor{keywordtype}{char} *)\textcolor{stringliteral}{"0000FFFF"});
+00496 
+00497             THEN( \textcolor{stringliteral}{"Resultados tienen que ser Relación Equivalente MínimA y Corriente Máximo"} ) \{
+00498                 REQUIRE( datosOX.\hyperlink{structOxigenoResponse_a068c403e5746226cf22bb020b4c786d3}{A} == Approx(0).epsilon(0.01));
+00499                 REQUIRE( datosOX.\hyperlink{structOxigenoResponse_a96b19152dd001e19d1351e2d97f22736}{B} == Approx(128).epsilon(0.01));
+00500             \}
+00501         \}
+00502     \}
+00503 \}
+00504 
+\Hypertarget{UnitTestCase_8cpp_source_l00509}\hyperlink{UnitTestCase_8cpp_a40a3028fa1222aa3915042e8d9c0c4d2}{00509} \hyperlink{UnitTestCase_8cpp_aa6afb62ebdd4c3e07996c995f623eb6b}{SCENARIO}( \textcolor{stringliteral}{"Test de Valores máximos relación de combustible-aire, voltaje, corriente y presión
        absoluta"}, \textcolor{stringliteral}{"[decoders]"} ) \{
-00447     GIVEN(\textcolor{stringliteral}{"La estructura RelacionesResponse con valores 0"}) \{
-00448         \textcolor{keyword}{struct }\hyperlink{structRelacionesResponse}{RelacionesResponse} datosREL = \{0,0,0,0\};
-00449 
-00450         REQUIRE( datosREL.\hyperlink{structRelacionesResponse_a560d1e6af01b999625b467ef3f858181}{A} == 0 );
-00451         REQUIRE( datosREL.\hyperlink{structRelacionesResponse_a1216f6019af393dd85853f352533ed9d}{B} == 0 );
-00452         REQUIRE( datosREL.\hyperlink{structRelacionesResponse_a37feda02f128b77f4f2d61cabcddc9e7}{C} == 0 );
-00453         REQUIRE( datosREL.\hyperlink{structRelacionesResponse_ab76f55b12df3754a9bb5b102a1c06cbc}{D} == 0 );
-00454 
-00455         WHEN( \textcolor{stringliteral}{"Valores de entrada mínimos 0x00000000"} ) \{
-00456             datosREL = \hyperlink{decoders_8cpp_a88d7079325bf81705583d9f2101cfa15}{decodeRelaciones}((\textcolor{keywordtype}{char} *)\textcolor{stringliteral}{"00000000"});
-00457 
-00458             THEN( \textcolor{stringliteral}{"Resultados tienen que ser los mínimos"} ) \{
-00459                 REQUIRE( datosREL.\hyperlink{structRelacionesResponse_a560d1e6af01b999625b467ef3f858181}{A} == Approx(0).epsilon(0.01));
-00460                 REQUIRE( datosREL.\hyperlink{structRelacionesResponse_a1216f6019af393dd85853f352533ed9d}{B} == Approx(0).epsilon(0.01));
-00461                 REQUIRE( datosREL.\hyperlink{structRelacionesResponse_a37feda02f128b77f4f2d61cabcddc9e7}{C} == Approx(0).epsilon(0.01));
-00462                 REQUIRE( datosREL.\hyperlink{structRelacionesResponse_ab76f55b12df3754a9bb5b102a1c06cbc}{D} == Approx(0).epsilon(0.01));
-00463             \}
-00464         \}
-00465         WHEN( \textcolor{stringliteral}{"Valores de entrada máximos 0xFFFFFFFF"} ) \{
-00466             datosREL = \hyperlink{decoders_8cpp_a88d7079325bf81705583d9f2101cfa15}{decodeRelaciones}((\textcolor{keywordtype}{char} *)\textcolor{stringliteral}{"FFFFFFFF"});
-00467 
-00468             THEN( \textcolor{stringliteral}{"Resultados tienen que ser los máximos"} ) \{
-00469                 REQUIRE( datosREL.\hyperlink{structRelacionesResponse_a560d1e6af01b999625b467ef3f858181}{A} == Approx(255).epsilon(0.01));
-00470                 REQUIRE( datosREL.\hyperlink{structRelacionesResponse_a1216f6019af393dd85853f352533ed9d}{B} == Approx(255).epsilon(0.01));
-00471                 REQUIRE( datosREL.\hyperlink{structRelacionesResponse_a37feda02f128b77f4f2d61cabcddc9e7}{C} == Approx(255).epsilon(0.01));
-00472                 REQUIRE( datosREL.\hyperlink{structRelacionesResponse_ab76f55b12df3754a9bb5b102a1c06cbc}{D} == Approx(2550).epsilon(0.01));
-00473             \}
-00474         \}
-00475         WHEN( \textcolor{stringliteral}{"Valores de entrada intermedio 0x7F7F7F7F"} ) \{
-00476             datosREL = \hyperlink{decoders_8cpp_a88d7079325bf81705583d9f2101cfa15}{decodeRelaciones}((\textcolor{keywordtype}{char} *)\textcolor{stringliteral}{"7F7F7F7F"});
-00477 
-00478             THEN( \textcolor{stringliteral}{"Resultados tienen que ser intermedios"} ) \{
-00479                 REQUIRE( datosREL.\hyperlink{structRelacionesResponse_a560d1e6af01b999625b467ef3f858181}{A} == Approx(127).epsilon(0.01));
-00480                 REQUIRE( datosREL.\hyperlink{structRelacionesResponse_a1216f6019af393dd85853f352533ed9d}{B} == Approx(127).epsilon(0.01));
-00481                 REQUIRE( datosREL.\hyperlink{structRelacionesResponse_a37feda02f128b77f4f2d61cabcddc9e7}{C} == Approx(127).epsilon(0.01));
-00482                 REQUIRE( datosREL.\hyperlink{structRelacionesResponse_ab76f55b12df3754a9bb5b102a1c06cbc}{D} == Approx(1270).epsilon(0.01));
-00483             \}
-00484         \}
-00485         WHEN( \textcolor{stringliteral}{"Valores de entrada Relación Máxima, resto mínimo 0xFF000000"} ) \{
-00486             datosREL = \hyperlink{decoders_8cpp_a88d7079325bf81705583d9f2101cfa15}{decodeRelaciones}((\textcolor{keywordtype}{char} *)\textcolor{stringliteral}{"FF000000"});
-00487 
-00488             THEN( \textcolor{stringliteral}{"Resultados tienen que ser Relación Máxima, resto mínimo"} ) \{
-00489                 REQUIRE( datosREL.\hyperlink{structRelacionesResponse_a560d1e6af01b999625b467ef3f858181}{A} == Approx(255).epsilon(0.01));
-00490                 REQUIRE( datosREL.\hyperlink{structRelacionesResponse_a1216f6019af393dd85853f352533ed9d}{B} == Approx(0).epsilon(0.01));
-00491                 REQUIRE( datosREL.\hyperlink{structRelacionesResponse_a37feda02f128b77f4f2d61cabcddc9e7}{C} == Approx(0).epsilon(0.01));
-00492                 REQUIRE( datosREL.\hyperlink{structRelacionesResponse_ab76f55b12df3754a9bb5b102a1c06cbc}{D} == Approx(0).epsilon(0.01));
-00493             \}
-00494         \}
-00495         WHEN( \textcolor{stringliteral}{"Valores Voltaje Máximo, resto mínimo 0x00FF0000"} ) \{
-00496             datosREL = \hyperlink{decoders_8cpp_a88d7079325bf81705583d9f2101cfa15}{decodeRelaciones}((\textcolor{keywordtype}{char} *)\textcolor{stringliteral}{"00FF0000"});
-00497 
-00498             THEN( \textcolor{stringliteral}{"Resultados tienen que ser Voltaje Máximo, resto mínimo"} ) \{
-00499                 REQUIRE( datosREL.\hyperlink{structRelacionesResponse_a560d1e6af01b999625b467ef3f858181}{A} == Approx(0).epsilon(0.01));
-00500                 REQUIRE( datosREL.\hyperlink{structRelacionesResponse_a1216f6019af393dd85853f352533ed9d}{B} == Approx(255).epsilon(0.01));
-00501                 REQUIRE( datosREL.\hyperlink{structRelacionesResponse_a37feda02f128b77f4f2d61cabcddc9e7}{C} == Approx(0).epsilon(0.01));
-00502                 REQUIRE( datosREL.\hyperlink{structRelacionesResponse_ab76f55b12df3754a9bb5b102a1c06cbc}{D} == Approx(0).epsilon(0.01));
-00503             \}
-00504         \}
-00505         WHEN( \textcolor{stringliteral}{"Valores Corriente Máxima, resto mínimo 0x0000FF00"} ) \{
-00506             datosREL = \hyperlink{decoders_8cpp_a88d7079325bf81705583d9f2101cfa15}{decodeRelaciones}((\textcolor{keywordtype}{char} *)\textcolor{stringliteral}{"0000FF00"});
-00507 
-00508             THEN( \textcolor{stringliteral}{"Resultados tienen que ser Corriente Máxima, resto mínimo"} ) \{
-00509                 REQUIRE( datosREL.\hyperlink{structRelacionesResponse_a560d1e6af01b999625b467ef3f858181}{A} == Approx(0).epsilon(0.01));
-00510                 REQUIRE( datosREL.\hyperlink{structRelacionesResponse_a1216f6019af393dd85853f352533ed9d}{B} == Approx(0).epsilon(0.01));
-00511                 REQUIRE( datosREL.\hyperlink{structRelacionesResponse_a37feda02f128b77f4f2d61cabcddc9e7}{C} == Approx(255).epsilon(0.01));
-00512                 REQUIRE( datosREL.\hyperlink{structRelacionesResponse_ab76f55b12df3754a9bb5b102a1c06cbc}{D} == Approx(0).epsilon(0.01));
-00513             \}
-00514         \}
-00515         WHEN( \textcolor{stringliteral}{"Valores Presión Máxima, resto mínimo 0x000000FF"} ) \{
-00516             datosREL = \hyperlink{decoders_8cpp_a88d7079325bf81705583d9f2101cfa15}{decodeRelaciones}((\textcolor{keywordtype}{char} *)\textcolor{stringliteral}{"000000FF"});
+00510     GIVEN(\textcolor{stringliteral}{"La estructura RelacionesResponse con valores 0"}) \{
+00511         \textcolor{keyword}{struct }\hyperlink{structRelacionesResponse}{RelacionesResponse} datosREL = \{0,0,0,0\};
+00512 
+00513         REQUIRE( datosREL.\hyperlink{structRelacionesResponse_a560d1e6af01b999625b467ef3f858181}{A} == 0 );
+00514         REQUIRE( datosREL.\hyperlink{structRelacionesResponse_a1216f6019af393dd85853f352533ed9d}{B} == 0 );
+00515         REQUIRE( datosREL.\hyperlink{structRelacionesResponse_a37feda02f128b77f4f2d61cabcddc9e7}{C} == 0 );
+00516         REQUIRE( datosREL.\hyperlink{structRelacionesResponse_ab76f55b12df3754a9bb5b102a1c06cbc}{D} == 0 );
 00517 
-00518             THEN( \textcolor{stringliteral}{"Resultados tienen que ser Presión Máxima, resto mínimo"} ) \{
-00519                 REQUIRE( datosREL.\hyperlink{structRelacionesResponse_a560d1e6af01b999625b467ef3f858181}{A} == Approx(0).epsilon(0.01));
-00520                 REQUIRE( datosREL.\hyperlink{structRelacionesResponse_a1216f6019af393dd85853f352533ed9d}{B} == Approx(0).epsilon(0.01));
-00521                 REQUIRE( datosREL.\hyperlink{structRelacionesResponse_a37feda02f128b77f4f2d61cabcddc9e7}{C} == Approx(0).epsilon(0.01));
-00522                 REQUIRE( datosREL.\hyperlink{structRelacionesResponse_ab76f55b12df3754a9bb5b102a1c06cbc}{D} == Approx(2550).epsilon(0.01));
-00523             \}
-00524         \}
-00525     \}
-00526 \}
-00527 
-\Hypertarget{UnitTestCase_8cpp_source_l00532}\hyperlink{UnitTestCase_8cpp_a32f4d6ded472fa78eead34a000bb2bbd}{00532} \hyperlink{UnitTestCase_8cpp_aa6afb62ebdd4c3e07996c995f623eb6b}{SCENARIO}( \textcolor{stringliteral}{"Test de decodificación de Data Trouble Codes (DTC)"}, \textcolor{stringliteral}{"[decoders]"} ) \{
-00533     GIVEN(\textcolor{stringliteral}{"Vector vacío cuyos componentes son strings (DTC's)"}) \{
-00534         std::vector<std::string> vec\_dtcs;
-00535 
-00536         REQUIRE( vec\_dtcs.empty() == 1 );
-00537 
-00538         WHEN( \textcolor{stringliteral}{"Sólo un DTC"} ) \{
-00539             vec\_dtcs = \hyperlink{decoders_8cpp_aac9b3d4ea17ee4dbbdf755b0b510137a}{decodeDTCs}((\textcolor{keywordtype}{char} *)\textcolor{stringliteral}{"013300000000"});
+00518         WHEN( \textcolor{stringliteral}{"Valores de entrada mínimos 0x00000000"} ) \{
+00519             datosREL = \hyperlink{decoders_8cpp_a88d7079325bf81705583d9f2101cfa15}{decodeRelaciones}((\textcolor{keywordtype}{char} *)\textcolor{stringliteral}{"00000000"});
+00520 
+00521             THEN( \textcolor{stringliteral}{"Resultados tienen que ser los mínimos"} ) \{
+00522                 REQUIRE( datosREL.\hyperlink{structRelacionesResponse_a560d1e6af01b999625b467ef3f858181}{A} == Approx(0).epsilon(0.01));
+00523                 REQUIRE( datosREL.\hyperlink{structRelacionesResponse_a1216f6019af393dd85853f352533ed9d}{B} == Approx(0).epsilon(0.01));
+00524                 REQUIRE( datosREL.\hyperlink{structRelacionesResponse_a37feda02f128b77f4f2d61cabcddc9e7}{C} == Approx(0).epsilon(0.01));
+00525                 REQUIRE( datosREL.\hyperlink{structRelacionesResponse_ab76f55b12df3754a9bb5b102a1c06cbc}{D} == Approx(0).epsilon(0.01));
+00526             \}
+00527         \}
+00528         WHEN( \textcolor{stringliteral}{"Valores de entrada máximos 0xFFFFFFFF"} ) \{
+00529             datosREL = \hyperlink{decoders_8cpp_a88d7079325bf81705583d9f2101cfa15}{decodeRelaciones}((\textcolor{keywordtype}{char} *)\textcolor{stringliteral}{"FFFFFFFF"});
+00530 
+00531             THEN( \textcolor{stringliteral}{"Resultados tienen que ser los máximos"} ) \{
+00532                 REQUIRE( datosREL.\hyperlink{structRelacionesResponse_a560d1e6af01b999625b467ef3f858181}{A} == Approx(255).epsilon(0.01));
+00533                 REQUIRE( datosREL.\hyperlink{structRelacionesResponse_a1216f6019af393dd85853f352533ed9d}{B} == Approx(255).epsilon(0.01));
+00534                 REQUIRE( datosREL.\hyperlink{structRelacionesResponse_a37feda02f128b77f4f2d61cabcddc9e7}{C} == Approx(255).epsilon(0.01));
+00535                 REQUIRE( datosREL.\hyperlink{structRelacionesResponse_ab76f55b12df3754a9bb5b102a1c06cbc}{D} == Approx(2550).epsilon(0.01));
+00536             \}
+00537         \}
+00538         WHEN( \textcolor{stringliteral}{"Valores de entrada intermedio 0x7F7F7F7F"} ) \{
+00539             datosREL = \hyperlink{decoders_8cpp_a88d7079325bf81705583d9f2101cfa15}{decodeRelaciones}((\textcolor{keywordtype}{char} *)\textcolor{stringliteral}{"7F7F7F7F"});
 00540 
-00541             THEN( \textcolor{stringliteral}{"Resultado de sólo un DTC"} ) \{
-00542                 REQUIRE( vec\_dtcs.size() == 1);
-00543                 REQUIRE( vec\_dtcs[0] == \textcolor{stringliteral}{"P0133"});
-00544             \}
-00545         \}
-00546         WHEN( \textcolor{stringliteral}{"Dos DTC's"} ) \{
-00547             vec\_dtcs = \hyperlink{decoders_8cpp_aac9b3d4ea17ee4dbbdf755b0b510137a}{decodeDTCs}((\textcolor{keywordtype}{char} *)\textcolor{stringliteral}{"0133D0160000"});
-00548 
-00549             THEN( \textcolor{stringliteral}{"Resultado de dos DTC's"} ) \{
-00550                 REQUIRE( vec\_dtcs.size() == 2);
-00551                 REQUIRE( vec\_dtcs[0] == \textcolor{stringliteral}{"P0133"});
-00552                 REQUIRE( vec\_dtcs[1] == \textcolor{stringliteral}{"U1016"});
-00553             \}
-00554         \}
-00555         WHEN( \textcolor{stringliteral}{"Tres DTC's"} ) \{
-00556             vec\_dtcs = \hyperlink{decoders_8cpp_aac9b3d4ea17ee4dbbdf755b0b510137a}{decodeDTCs}((\textcolor{keywordtype}{char} *)\textcolor{stringliteral}{"0133D0161131"});
-00557 
-00558             THEN( \textcolor{stringliteral}{"Resultado de tres DTC's"} ) \{
-00559                 REQUIRE( vec\_dtcs.size() == 3);
-00560                 REQUIRE( vec\_dtcs[0] == \textcolor{stringliteral}{"P0133"});
-00561                 REQUIRE( vec\_dtcs[1] == \textcolor{stringliteral}{"U1016"});
-00562                 REQUIRE( vec\_dtcs[2] == \textcolor{stringliteral}{"P1131"});
-00563             \}
-00564         \}
-00565     \}
-00566 \}
-00567 
-\Hypertarget{UnitTestCase_8cpp_source_l00572}\hyperlink{UnitTestCase_8cpp_afcf7b592e5ac913ea9c83936bfc18227}{00572} \hyperlink{UnitTestCase_8cpp_aa6afb62ebdd4c3e07996c995f623eb6b}{SCENARIO}( \textcolor{stringliteral}{"Test de decodificación PIDs disponibles"}, \textcolor{stringliteral}{"[decoders]"} ) \{
-00573     GIVEN(\textcolor{stringliteral}{"Vector vacío cuyos componentes son int (DTC's)"}) \{
-00574         std::vector<int> vec\_pids;
-00575 
-00576         REQUIRE( vec\_pids.empty() == 1 );
-00577 
-00578         WHEN( \textcolor{stringliteral}{"PIDs impares disponibles"} ) \{
-00579             vec\_pids = \hyperlink{decoders_8cpp_aef44cca306ed9c74b146d2b7dd058763}{decodePIDS}((\textcolor{keywordtype}{char} *)\textcolor{stringliteral}{"AAAAAAAA"});
+00541             THEN( \textcolor{stringliteral}{"Resultados tienen que ser intermedios"} ) \{
+00542                 REQUIRE( datosREL.\hyperlink{structRelacionesResponse_a560d1e6af01b999625b467ef3f858181}{A} == Approx(127).epsilon(0.01));
+00543                 REQUIRE( datosREL.\hyperlink{structRelacionesResponse_a1216f6019af393dd85853f352533ed9d}{B} == Approx(127).epsilon(0.01));
+00544                 REQUIRE( datosREL.\hyperlink{structRelacionesResponse_a37feda02f128b77f4f2d61cabcddc9e7}{C} == Approx(127).epsilon(0.01));
+00545                 REQUIRE( datosREL.\hyperlink{structRelacionesResponse_ab76f55b12df3754a9bb5b102a1c06cbc}{D} == Approx(1270).epsilon(0.01));
+00546             \}
+00547         \}
+00548         WHEN( \textcolor{stringliteral}{"Valores de entrada Relación Máxima, resto mínimo 0xFF000000"} ) \{
+00549             datosREL = \hyperlink{decoders_8cpp_a88d7079325bf81705583d9f2101cfa15}{decodeRelaciones}((\textcolor{keywordtype}{char} *)\textcolor{stringliteral}{"FF000000"});
+00550 
+00551             THEN( \textcolor{stringliteral}{"Resultados tienen que ser Relación Máxima, resto mínimo"} ) \{
+00552                 REQUIRE( datosREL.\hyperlink{structRelacionesResponse_a560d1e6af01b999625b467ef3f858181}{A} == Approx(255).epsilon(0.01));
+00553                 REQUIRE( datosREL.\hyperlink{structRelacionesResponse_a1216f6019af393dd85853f352533ed9d}{B} == Approx(0).epsilon(0.01));
+00554                 REQUIRE( datosREL.\hyperlink{structRelacionesResponse_a37feda02f128b77f4f2d61cabcddc9e7}{C} == Approx(0).epsilon(0.01));
+00555                 REQUIRE( datosREL.\hyperlink{structRelacionesResponse_ab76f55b12df3754a9bb5b102a1c06cbc}{D} == Approx(0).epsilon(0.01));
+00556             \}
+00557         \}
+00558         WHEN( \textcolor{stringliteral}{"Valores Voltaje Máximo, resto mínimo 0x00FF0000"} ) \{
+00559             datosREL = \hyperlink{decoders_8cpp_a88d7079325bf81705583d9f2101cfa15}{decodeRelaciones}((\textcolor{keywordtype}{char} *)\textcolor{stringliteral}{"00FF0000"});
+00560 
+00561             THEN( \textcolor{stringliteral}{"Resultados tienen que ser Voltaje Máximo, resto mínimo"} ) \{
+00562                 REQUIRE( datosREL.\hyperlink{structRelacionesResponse_a560d1e6af01b999625b467ef3f858181}{A} == Approx(0).epsilon(0.01));
+00563                 REQUIRE( datosREL.\hyperlink{structRelacionesResponse_a1216f6019af393dd85853f352533ed9d}{B} == Approx(255).epsilon(0.01));
+00564                 REQUIRE( datosREL.\hyperlink{structRelacionesResponse_a37feda02f128b77f4f2d61cabcddc9e7}{C} == Approx(0).epsilon(0.01));
+00565                 REQUIRE( datosREL.\hyperlink{structRelacionesResponse_ab76f55b12df3754a9bb5b102a1c06cbc}{D} == Approx(0).epsilon(0.01));
+00566             \}
+00567         \}
+00568         WHEN( \textcolor{stringliteral}{"Valores Corriente Máxima, resto mínimo 0x0000FF00"} ) \{
+00569             datosREL = \hyperlink{decoders_8cpp_a88d7079325bf81705583d9f2101cfa15}{decodeRelaciones}((\textcolor{keywordtype}{char} *)\textcolor{stringliteral}{"0000FF00"});
+00570 
+00571             THEN( \textcolor{stringliteral}{"Resultados tienen que ser Corriente Máxima, resto mínimo"} ) \{
+00572                 REQUIRE( datosREL.\hyperlink{structRelacionesResponse_a560d1e6af01b999625b467ef3f858181}{A} == Approx(0).epsilon(0.01));
+00573                 REQUIRE( datosREL.\hyperlink{structRelacionesResponse_a1216f6019af393dd85853f352533ed9d}{B} == Approx(0).epsilon(0.01));
+00574                 REQUIRE( datosREL.\hyperlink{structRelacionesResponse_a37feda02f128b77f4f2d61cabcddc9e7}{C} == Approx(255).epsilon(0.01));
+00575                 REQUIRE( datosREL.\hyperlink{structRelacionesResponse_ab76f55b12df3754a9bb5b102a1c06cbc}{D} == Approx(0).epsilon(0.01));
+00576             \}
+00577         \}
+00578         WHEN( \textcolor{stringliteral}{"Valores Presión Máxima, resto mínimo 0x000000FF"} ) \{
+00579             datosREL = \hyperlink{decoders_8cpp_a88d7079325bf81705583d9f2101cfa15}{decodeRelaciones}((\textcolor{keywordtype}{char} *)\textcolor{stringliteral}{"000000FF"});
 00580 
-00581             THEN( \textcolor{stringliteral}{"Resultado con números impares del 1-20 (Hexadecimal, decimal 1-32)"} ) \{
-00582                 REQUIRE( vec\_pids.size() == 16);
-00583                 \textcolor{keywordtype}{int} pids\_impares = 1;
-00584                 \textcolor{keywordflow}{for} (uint32\_t i = 0; i < vec\_pids.size(); ++i)\{
-00585                     REQUIRE( vec\_pids[i] == pids\_impares);
-00586                     pids\_impares+=2;
-00587 
-00588                 \}
-00589             \}
-00590         \}
-00591         WHEN( \textcolor{stringliteral}{"PIDs pares disponibles"} ) \{
-00592             vec\_pids = \hyperlink{decoders_8cpp_aef44cca306ed9c74b146d2b7dd058763}{decodePIDS}((\textcolor{keywordtype}{char} *)\textcolor{stringliteral}{"55555555"});
-00593 
-00594             THEN( \textcolor{stringliteral}{"Resultado con números pares del 1-20 (Hexadecimal, decimal 1-32)"} ) \{
-00595                 REQUIRE( vec\_pids.size() == 16);
-00596                 \textcolor{keywordtype}{int} pids\_pares = 2;
-00597                 \textcolor{keywordflow}{for} (uint32\_t i = 0; i < vec\_pids.size(); ++i)\{
-00598                     REQUIRE( vec\_pids[i] == pids\_pares);
-00599                     pids\_pares+=2;
+00581             THEN( \textcolor{stringliteral}{"Resultados tienen que ser Presión Máxima, resto mínimo"} ) \{
+00582                 REQUIRE( datosREL.\hyperlink{structRelacionesResponse_a560d1e6af01b999625b467ef3f858181}{A} == Approx(0).epsilon(0.01));
+00583                 REQUIRE( datosREL.\hyperlink{structRelacionesResponse_a1216f6019af393dd85853f352533ed9d}{B} == Approx(0).epsilon(0.01));
+00584                 REQUIRE( datosREL.\hyperlink{structRelacionesResponse_a37feda02f128b77f4f2d61cabcddc9e7}{C} == Approx(0).epsilon(0.01));
+00585                 REQUIRE( datosREL.\hyperlink{structRelacionesResponse_ab76f55b12df3754a9bb5b102a1c06cbc}{D} == Approx(2550).epsilon(0.01));
+00586             \}
+00587         \}
+00588     \}
+00589 \}
+00590 
+\Hypertarget{UnitTestCase_8cpp_source_l00595}\hyperlink{UnitTestCase_8cpp_a32f4d6ded472fa78eead34a000bb2bbd}{00595} \hyperlink{UnitTestCase_8cpp_aa6afb62ebdd4c3e07996c995f623eb6b}{SCENARIO}( \textcolor{stringliteral}{"Test de decodificación de Data Trouble Codes (DTC)"}, \textcolor{stringliteral}{"[decoders]"} ) \{
+00596     GIVEN(\textcolor{stringliteral}{"Vector vacío cuyos componentes son strings (DTC's)"}) \{
+00597         std::vector<std::string> vec\_dtcs;
+00598 
+00599         REQUIRE( vec\_dtcs.empty() == 1 );
 00600 
-00601                 \}
-00602             \}
-00603         \}
-00604         WHEN( \textcolor{stringliteral}{"PIDs primeros disponibles"} ) \{
-00605             vec\_pids = \hyperlink{decoders_8cpp_aef44cca306ed9c74b146d2b7dd058763}{decodePIDS}((\textcolor{keywordtype}{char} *)\textcolor{stringliteral}{"FFFF0000"});
-00606 
-00607             THEN( \textcolor{stringliteral}{"Resultado con los primeros números del 1-20 (Hexadecimal, decimal 1-32)"} ) \{
-00608                 REQUIRE( vec\_pids.size() == 16);
-00609                 \textcolor{keywordtype}{int} pids\_primeros = 1;
-00610                 \textcolor{keywordflow}{for} (uint32\_t i = 0; i < vec\_pids.size(); ++i)\{
-00611                     REQUIRE( vec\_pids[i] == pids\_primeros);
-00612                     pids\_primeros++;
-00613 
-00614                 \}
-00615             \}
-00616         \}
-00617         WHEN( \textcolor{stringliteral}{"PIDs ultimos disponibles"} ) \{
-00618             vec\_pids = \hyperlink{decoders_8cpp_aef44cca306ed9c74b146d2b7dd058763}{decodePIDS}((\textcolor{keywordtype}{char} *)\textcolor{stringliteral}{"0000FFFF"});
-00619 
-00620             THEN( \textcolor{stringliteral}{"Resultado con los ultimos números del 1-20 (Hexadecimal, decimal 1-32)"} ) \{
-00621                 REQUIRE( vec\_pids.size() == 16);
-00622                 \textcolor{keywordtype}{int} pids\_ultimos = 17;
-00623                 \textcolor{keywordflow}{for} (uint32\_t i = 0; i < vec\_pids.size(); ++i)\{
-00624                     REQUIRE( vec\_pids[i] == pids\_ultimos);
-00625                     pids\_ultimos++;
-00626 
-00627                 \}
-00628             \}
-00629         \}
-00630     \}
-00631 \}
-00632 
-\Hypertarget{UnitTestCase_8cpp_source_l00637}\hyperlink{UnitTestCase_8cpp_a856763231cf6f39f98e63e778fa453b1}{00637} \hyperlink{UnitTestCase_8cpp_aa6afb62ebdd4c3e07996c995f623eb6b}{SCENARIO}( \textcolor{stringliteral}{"Test de decodificación del estado del coche"}, \textcolor{stringliteral}{"[decoders]"} ) \{
-00638     GIVEN(\textcolor{stringliteral}{"Map de <string, string> de estado vacío"}) \{
-00639         std::map<std::string, std::string> status;
+00601         WHEN( \textcolor{stringliteral}{"Sólo un DTC"} ) \{
+00602             vec\_dtcs = \hyperlink{decoders_8cpp_aac9b3d4ea17ee4dbbdf755b0b510137a}{decodeDTCs}((\textcolor{keywordtype}{char} *)\textcolor{stringliteral}{"013300000000"});
+00603 
+00604             THEN( \textcolor{stringliteral}{"Resultado de sólo un DTC"} ) \{
+00605                 REQUIRE( vec\_dtcs.size() == 1);
+00606                 REQUIRE( vec\_dtcs[0] == \textcolor{stringliteral}{"P0133"});
+00607             \}
+00608         \}
+00609         WHEN( \textcolor{stringliteral}{"Dos DTC's"} ) \{
+00610             vec\_dtcs = \hyperlink{decoders_8cpp_aac9b3d4ea17ee4dbbdf755b0b510137a}{decodeDTCs}((\textcolor{keywordtype}{char} *)\textcolor{stringliteral}{"0133D0160000"});
+00611 
+00612             THEN( \textcolor{stringliteral}{"Resultado de dos DTC's"} ) \{
+00613                 REQUIRE( vec\_dtcs.size() == 2);
+00614                 REQUIRE( vec\_dtcs[0] == \textcolor{stringliteral}{"P0133"});
+00615                 REQUIRE( vec\_dtcs[1] == \textcolor{stringliteral}{"U1016"});
+00616             \}
+00617         \}
+00618         WHEN( \textcolor{stringliteral}{"Tres DTC's"} ) \{
+00619             vec\_dtcs = \hyperlink{decoders_8cpp_aac9b3d4ea17ee4dbbdf755b0b510137a}{decodeDTCs}((\textcolor{keywordtype}{char} *)\textcolor{stringliteral}{"0133D0161131"});
+00620 
+00621             THEN( \textcolor{stringliteral}{"Resultado de tres DTC's"} ) \{
+00622                 REQUIRE( vec\_dtcs.size() == 3);
+00623                 REQUIRE( vec\_dtcs[0] == \textcolor{stringliteral}{"P0133"});
+00624                 REQUIRE( vec\_dtcs[1] == \textcolor{stringliteral}{"U1016"});
+00625                 REQUIRE( vec\_dtcs[2] == \textcolor{stringliteral}{"P1131"});
+00626             \}
+00627         \}
+00628     \}
+00629 \}
+00630 
+\Hypertarget{UnitTestCase_8cpp_source_l00635}\hyperlink{UnitTestCase_8cpp_afcf7b592e5ac913ea9c83936bfc18227}{00635} \hyperlink{UnitTestCase_8cpp_aa6afb62ebdd4c3e07996c995f623eb6b}{SCENARIO}( \textcolor{stringliteral}{"Test de decodificación PIDs disponibles"}, \textcolor{stringliteral}{"[decoders]"} ) \{
+00636     GIVEN(\textcolor{stringliteral}{"Vector vacío cuyos componentes son int (DTC's)"}) \{
+00637         std::vector<int> vec\_pids;
+00638 
+00639         REQUIRE( vec\_pids.empty() == 1 );
 00640 
-00641         REQUIRE( status.empty() == 1 );
-00642 
-00643         WHEN( \textcolor{stringliteral}{"La entrada es 0x81076504"} ) \{
-00644             status = \hyperlink{decoders_8cpp_aca9cad863d8603615597a0291804c8ae}{decodeStatus}((\textcolor{keywordtype}{char} *)\textcolor{stringliteral}{"81076504"});
-00645 
-00646             THEN( \textcolor{stringliteral}{"Resultado 1 DTC, Compresión, MIL Encendida y todas pruebas correctas"} ) \{
-00647                 REQUIRE( status.size() == 9);
-00648                 REQUIRE( status[\textcolor{stringliteral}{"MIL"}] == \textcolor{stringliteral}{"Encendida"});
-00649                 REQUIRE( status[\textcolor{stringliteral}{"DTC\_CNT"}] == \textcolor{stringliteral}{"1"});
-00650                 REQUIRE( status[\textcolor{stringliteral}{"IGNICION"}] == \textcolor{stringliteral}{"Compresión"});
-00651                 REQUIRE( status[\textcolor{stringliteral}{"Sistema de catalizador NMHC"}] == \textcolor{stringliteral}{"Prueba Correcta"});
-00652                 REQUIRE( status[\textcolor{stringliteral}{"Sistema de detección de condiciones inadecuadas de ignición en cilindros"}]
+00641         WHEN( \textcolor{stringliteral}{"PIDs impares disponibles"} ) \{
+00642             vec\_pids = \hyperlink{decoders_8cpp_aef44cca306ed9c74b146d2b7dd058763}{decodePIDS}((\textcolor{keywordtype}{char} *)\textcolor{stringliteral}{"AAAAAAAA"});
+00643 
+00644             THEN( \textcolor{stringliteral}{"Resultado con números impares del 1-20 (Hexadecimal, decimal 1-32)"} ) \{
+00645                 REQUIRE( vec\_pids.size() == 16);
+00646                 \textcolor{keywordtype}{int} pids\_impares = 1;
+00647                 \textcolor{keywordflow}{for} (uint32\_t i = 0; i < vec\_pids.size(); ++i)\{
+00648                     REQUIRE( vec\_pids[i] == pids\_impares);
+00649                     pids\_impares+=2;
+00650 
+00651                 \}
+00652             \}
+00653         \}
+00654         WHEN( \textcolor{stringliteral}{"PIDs pares disponibles"} ) \{
+00655             vec\_pids = \hyperlink{decoders_8cpp_aef44cca306ed9c74b146d2b7dd058763}{decodePIDS}((\textcolor{keywordtype}{char} *)\textcolor{stringliteral}{"55555555"});
+00656 
+00657             THEN( \textcolor{stringliteral}{"Resultado con números pares del 1-20 (Hexadecimal, decimal 1-32)"} ) \{
+00658                 REQUIRE( vec\_pids.size() == 16);
+00659                 \textcolor{keywordtype}{int} pids\_pares = 2;
+00660                 \textcolor{keywordflow}{for} (uint32\_t i = 0; i < vec\_pids.size(); ++i)\{
+00661                     REQUIRE( vec\_pids[i] == pids\_pares);
+00662                     pids\_pares+=2;
+00663 
+00664                 \}
+00665             \}
+00666         \}
+00667         WHEN( \textcolor{stringliteral}{"PIDs primeros disponibles"} ) \{
+00668             vec\_pids = \hyperlink{decoders_8cpp_aef44cca306ed9c74b146d2b7dd058763}{decodePIDS}((\textcolor{keywordtype}{char} *)\textcolor{stringliteral}{"FFFF0000"});
+00669 
+00670             THEN( \textcolor{stringliteral}{"Resultado con los primeros números del 1-20 (Hexadecimal, decimal 1-32)"} ) \{
+00671                 REQUIRE( vec\_pids.size() == 16);
+00672                 \textcolor{keywordtype}{int} pids\_primeros = 1;
+00673                 \textcolor{keywordflow}{for} (uint32\_t i = 0; i < vec\_pids.size(); ++i)\{
+00674                     REQUIRE( vec\_pids[i] == pids\_primeros);
+00675                     pids\_primeros++;
+00676 
+00677                 \}
+00678             \}
+00679         \}
+00680         WHEN( \textcolor{stringliteral}{"PIDs ultimos disponibles"} ) \{
+00681             vec\_pids = \hyperlink{decoders_8cpp_aef44cca306ed9c74b146d2b7dd058763}{decodePIDS}((\textcolor{keywordtype}{char} *)\textcolor{stringliteral}{"0000FFFF"});
+00682 
+00683             THEN( \textcolor{stringliteral}{"Resultado con los ultimos números del 1-20 (Hexadecimal, decimal 1-32)"} ) \{
+00684                 REQUIRE( vec\_pids.size() == 16);
+00685                 \textcolor{keywordtype}{int} pids\_ultimos = 17;
+00686                 \textcolor{keywordflow}{for} (uint32\_t i = 0; i < vec\_pids.size(); ++i)\{
+00687                     REQUIRE( vec\_pids[i] == pids\_ultimos);
+00688                     pids\_ultimos++;
+00689 
+00690                 \}
+00691             \}
+00692         \}
+00693     \}
+00694 \}
+00695 
+\Hypertarget{UnitTestCase_8cpp_source_l00700}\hyperlink{UnitTestCase_8cpp_a856763231cf6f39f98e63e778fa453b1}{00700} \hyperlink{UnitTestCase_8cpp_aa6afb62ebdd4c3e07996c995f623eb6b}{SCENARIO}( \textcolor{stringliteral}{"Test de decodificación del estado del coche"}, \textcolor{stringliteral}{"[decoders]"} ) \{
+00701     GIVEN(\textcolor{stringliteral}{"Map de <string, string> de estado vacío"}) \{
+00702         std::map<std::string, std::string> status;
+00703 
+00704         REQUIRE( status.empty() == 1 );
+00705 
+00706         WHEN( \textcolor{stringliteral}{"La entrada es 0x81076504"} ) \{
+00707             status = \hyperlink{decoders_8cpp_aca9cad863d8603615597a0291804c8ae}{decodeStatus}((\textcolor{keywordtype}{char} *)\textcolor{stringliteral}{"81076504"});
+00708 
+00709             THEN( \textcolor{stringliteral}{"Resultado 1 DTC, Compresión, MIL Encendida y todas pruebas correctas"} ) \{
+00710                 REQUIRE( status.size() == 9);
+00711                 REQUIRE( status[\textcolor{stringliteral}{"MIL"}] == \textcolor{stringliteral}{"Encendida"});
+00712                 REQUIRE( status[\textcolor{stringliteral}{"DTC\_CNT"}] == \textcolor{stringliteral}{"1"});
+00713                 REQUIRE( status[\textcolor{stringliteral}{"IGNICION"}] == \textcolor{stringliteral}{"Compresión"});
+00714                 REQUIRE( status[\textcolor{stringliteral}{"Sistema de catalizador NMHC"}] == \textcolor{stringliteral}{"Prueba Correcta"});
+00715                 REQUIRE( status[\textcolor{stringliteral}{"Sistema de detección de condiciones inadecuadas de ignición en cilindros"}]
        == \textcolor{stringliteral}{"Prueba Correcta"});
-00653                 REQUIRE( status[\textcolor{stringliteral}{"Sistema de componentes integrales"}] == \textcolor{stringliteral}{"Prueba Correcta"});
-00654                 REQUIRE( status[\textcolor{stringliteral}{"Sistema de combustible"}] == \textcolor{stringliteral}{"Prueba Correcta"});
-00655                 REQUIRE( status[\textcolor{stringliteral}{"Sistema del sensor de gases de escape"}] == \textcolor{stringliteral}{"Prueba Correcta"});
-00656                 REQUIRE( status[\textcolor{stringliteral}{"Sistema de monitor del filtro de partículas (Particular Matter, PM)"}] == \textcolor{stringliteral}{"
+00716                 REQUIRE( status[\textcolor{stringliteral}{"Sistema de componentes integrales"}] == \textcolor{stringliteral}{"Prueba Correcta"});
+00717                 REQUIRE( status[\textcolor{stringliteral}{"Sistema de combustible"}] == \textcolor{stringliteral}{"Prueba Correcta"});
+00718                 REQUIRE( status[\textcolor{stringliteral}{"Sistema del sensor de gases de escape"}] == \textcolor{stringliteral}{"Prueba Correcta"});
+00719                 REQUIRE( status[\textcolor{stringliteral}{"Sistema de monitor del filtro de partículas (Particular Matter, PM)"}] == \textcolor{stringliteral}{"
       Prueba Correcta"});
-00657             \}
-00658         \}
-00659     \}
-00660 \}
+00720             \}
+00721         \}
+00722     \}
+00723 \}
 \end{DoxyCode}

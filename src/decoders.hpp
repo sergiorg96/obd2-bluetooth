@@ -77,7 +77,7 @@ std::vector<std::string> decodeDTCs(char *response);
 std::string convertDTCs(std::string dtc);
 
 /**
-* @brief Función de decodificación del Número de Identificación del Vehículo (VIN).
+* @brief Función de decodificación del Número de Identificación del Vehículo (VIN) para ISO15765-4 CAN.
 * @param response Cadena de caracteres con los bytes útiles de la respuesta del dispositivo ELM327.
 * @return String con el Número de Identificación del Vehículo (VIN).
 */

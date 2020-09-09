@@ -35,27 +35,6 @@ public:
            std::string AlarmFilename,
            std::string LastAlarmFilename);
 
-  /**
-  * @brief Método que obtiene la geolocalización del vehículo.
-  * @param serialPort String con la ruta al dispositivo GPS.
-  * @return String con la geolocalización del dispositivo GPS.
-  */
-
-  std::string getGeoPos(std::string serialPort);
-
-  /**
-  * @brief Método para mostrar si tiene disponible el GPS.
-  * @return Booleano, true si está instalado y false en caso contrario.
-  */
-
-  bool hasGps();
-
-    /**
-  * @brief Método para indicar que está disponible el GPS.
-  * @param installed Booleano que indica si está instalado el GPS (true).
-  */
-
-  void Gps(bool installed);
 
   /**
   * @brief Método para enviar el mensaje/alarma al servidor remoto.
@@ -72,7 +51,6 @@ private:
   */
 
   void shit (const char *mens);
-  static bool gps_; /**< Booleano que indica si está instalado el GPS. */
   std::string alarmHost_; /**< String con la dirección del servido remoto. */
   int alarmPort_; /**< Entero con el puerto de conexión del servidor remoto. */
   std::string alarmFilename_; /**< String con el nombre del archivo de almacenamiento de la alarma. */

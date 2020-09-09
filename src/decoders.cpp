@@ -43,6 +43,30 @@ std::string decodeVIN(char * response){
 
 	return vin; 
 }
+/* decodeVIN para vehículos que no soportan ISO 15765-4 CAN
+std::string decodeVIN(char * response){
+	std::string bytes_res(response);
+	std::string vin;
+
+	//División de orden y datos
+	std::string order = bytes_res.substr(0,8);
+	std::string vin_bytes = bytes_res.substr(8,70);
+
+	std::size_t found = vin_bytes.find("\n");
+	while(found!=std::string::npos){
+		vin_bytes.erase(found,7);
+		found = vin_bytes.find("\n");
+	}
+
+
+	for (uint32_t i = 0; i < vin_bytes.size(); i+=2){
+		std::string vin_char = vin_bytes.substr(i,2);
+		//Conversión de bytes en char
+		vin.push_back((char) stoi(vin_char,nullptr,16));
+	}
+	return vin; 
+}
+*/
 
 std::string convertDTCs(std::string dtc){
 	if(dtc[0] == '0'){

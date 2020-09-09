@@ -51,20 +51,20 @@ alarmfile.o: src/alarmfile.cpp src/alarmfile.hpp
 loadcfg.o: src/loadcfg.cpp src/loadcfg.hpp
 	$(CXX) $(CXXFLAGS_LIB) src/loadcfg.cpp src/loadcfg.hpp
 
-picangps.o: src/picangps.cpp src/picangps.hpp
-	$(CXX) $(CXXFLAGS_LIB) src/picangps.cpp src/picangps.hpp
+gpsclient.o: src/gpsclient.cpp src/gpsclient.hpp
+	$(CXX) $(CXXFLAGS_LIB) src/gpsclient.cpp src/gpsclient.hpp
 
-libobd2-bluetooth.a: Obd.o decoders.o alarmfile.o loadcfg.o picangps.o
+libobd2-bluetooth.a: Obd.o decoders.o alarmfile.o loadcfg.o gpsclient.o
 	if [ ! -d "lib" ]; then mkdir lib; fi
-	ar rcs lib/libobd2-bluetooth.a Obd.o decoders.o alarmfile.o loadcfg.o picangps.o
+	ar rcs lib/libobd2-bluetooth.a Obd.o decoders.o alarmfile.o loadcfg.o gpsclient.o
 
-libobd2-bluetooth-debug.a: Obd-debug.o decoders.o alarmfile.o loadcfg.o picangps.o
+libobd2-bluetooth-debug.a: Obd-debug.o decoders.o alarmfile.o loadcfg.o gpsclient.o
 	if [ ! -d "lib" ]; then mkdir lib; fi
-	ar rcs lib/libobd2-bluetooth.a Obd.o decoders.o alarmfile.o loadcfg.o picangps.o
+	ar rcs lib/libobd2-bluetooth.a Obd.o decoders.o alarmfile.o loadcfg.o gpsclient.o
 
-libobd2-bluetooth-test.a: Obd-test.o decoders.o alarmfile.o loadcfg.o picangps.o
+libobd2-bluetooth-test.a: Obd-test.o decoders.o alarmfile.o loadcfg.o gpsclient.o
 	if [ ! -d "lib" ]; then mkdir lib; fi
-	ar rcs lib/libobd2-bluetooth.a Obd.o decoders.o alarmfile.o loadcfg.o picangps.o
+	ar rcs lib/libobd2-bluetooth.a Obd.o decoders.o alarmfile.o loadcfg.o gpsclient.o
 
 clean:
 	rm -f *.o src/*.gch

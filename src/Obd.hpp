@@ -187,6 +187,7 @@ public:
 
 			if (statusConnection) {
 				close(this->m_cli_s);
+				perror("error");
 				throw std::string("No se ha podido conectar");
 			}
 
@@ -296,7 +297,7 @@ public:
 		int nfds;
 		bool continuar = true;
 
-		debugLog("Polling function");
+		//debugLog("Polling function");
 
 		// Bucle infinito para el envío de datos por bluetooth al conector OBD
 		while(continuar) {
@@ -321,7 +322,7 @@ public:
 						perror("socket read error");
 						continue;
 					}
-					debugLog("Evento leído: %s", buf);
+					//debugLog("Evento leído: %s", buf);
 					strcat(message_rcv, buf);
 					//Si se detecta el caracter ">" se ha finalizado el mensaje
 					if(strstr(buf, ">") != NULL) {
@@ -341,7 +342,7 @@ public:
 						char * ocurrencia = message_rcv;
 						if((ocurrencia=strstr(ocurrencia, command.getCMDResponse().c_str())) != NULL){
 							while((ocurrencia=strstr(ocurrencia, command.getCMDResponse().c_str())) != NULL){
-								debugLog("Ocurrencia encontrada");
+								//debugLog("Ocurrencia encontrada");
 								char info[1024];
 								memset(info, '\0', sizeof(info));
 								strncpy(info, ocurrencia + command.getCMD().size() , command.getBytesResponse());
@@ -406,6 +407,7 @@ public:
 									if(!command.getDecoder().compare("decodeVIN"))
 										this->vin.append(varResultado);
 									std::cout << command.getName() << " - " << command.getDescription() << " - Min=" << command.getMIN() << " Max=" << command.getMAX() << std::endl;
+									std::cout << "-> " << varResultado << std::endl;
 								} else if (!type_data.compare("map")) {
 									auto varResultado = this->decoderFunctionsMap[command.getDecoder().c_str()](info);
 									this->map_commands.find(command.getName())->second.setResValue(varResultado);

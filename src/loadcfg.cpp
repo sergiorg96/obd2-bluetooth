@@ -56,16 +56,16 @@ void loadCfg (const char* filename, cfgType* pcfg)
    }
 }
 
+
 std::string getmac (const char* name)
 {
    int i;
    struct ifaddrs *addrs,*tmp;
    std::stringstream macaddress;
-   char mymac[18];
+   char mymac[25];
    getifaddrs(&addrs);
    tmp = addrs;
-
-   memset (mymac, 0, 18);
+   memset (mymac, 0, 25);
    while (tmp) {
      if (!strcmp(name, tmp->ifa_name)){
           struct sockaddr_ll *s = (struct sockaddr_ll*)tmp->ifa_addr;

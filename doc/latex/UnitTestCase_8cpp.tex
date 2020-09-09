@@ -8,8 +8,7 @@ Archivo que contiene el conjunto de pruebas unitarias y de integración del sist
 {\ttfamily \#include \char`\"{}../src/external/catch.\+hpp\char`\"{}}\newline
 {\ttfamily \#include \char`\"{}../src/decoders.\+hpp\char`\"{}}\newline
 {\ttfamily \#include \char`\"{}../src/\+Obd.\+hpp\char`\"{}}\newline
-Dependencia gráfica adjunta para Unit\+Test\+Case.\+cpp\+:
-\nopagebreak
+Dependencia gráfica adjunta para Unit\+Test\+Case.\+cpp\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -30,14 +29,17 @@ Dependencia gráfica adjunta para Unit\+Test\+Case.\+cpp\+:
 \item 
 void \hyperlink{UnitTestCase_8cpp_ae9f15809d7998bb4a7404d34bb87a5e3}{get\+Minicom\+C\+MD} (char $\ast$cmd)
 \begin{DoxyCompactList}\small\item\em Función que obtiene el comando Minicom para la primera conexión con el simulador O\+B\+D\+S\+IM. \end{DoxyCompactList}\item 
-void \hyperlink{UnitTestCase_8cpp_a4460093e274738a0e1bbb551c1d1d3fd}{init\+O\+B\+D\+S\+IM} ()
+void \hyperlink{UnitTestCase_8cpp_a15137ff9ba6032f171a43694f159ada6}{init\+O\+B\+D\+S\+IM} (std\+::string tipo\+Simulador, int tiempo\+Espera)
 \begin{DoxyCompactList}\small\item\em Función de inicialización del simulador O\+B\+D\+S\+IM. \end{DoxyCompactList}\item 
 \mbox{\Hypertarget{UnitTestCase_8cpp_ad24bf860f798931c63aaa488e08b8b4e}\label{UnitTestCase_8cpp_ad24bf860f798931c63aaa488e08b8b4e}} 
 void \hyperlink{UnitTestCase_8cpp_ad24bf860f798931c63aaa488e08b8b4e}{close\+O\+B\+D\+S\+IM} ()
 \begin{DoxyCompactList}\small\item\em Función de finalización del simulador O\+B\+D\+S\+IM. \end{DoxyCompactList}\item 
-\mbox{\Hypertarget{UnitTestCase_8cpp_a094ceea8956a9b495823bde621ea759a}\label{UnitTestCase_8cpp_a094ceea8956a9b495823bde621ea759a}} 
-\hyperlink{UnitTestCase_8cpp_a094ceea8956a9b495823bde621ea759a}{T\+E\+S\+T\+\_\+\+C\+A\+SE} (\char`\"{}Test O\+BD class\char`\"{}, \char`\"{}\mbox{[}O\+BD\mbox{]}\char`\"{})
-\begin{DoxyCompactList}\small\item\em Prueba de integración para el funcionamiento general del sistema. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{UnitTestCase_8cpp_ab1b7b485076e7de68cd9912827a8ee86}\label{UnitTestCase_8cpp_ab1b7b485076e7de68cd9912827a8ee86}} 
+\hyperlink{UnitTestCase_8cpp_ab1b7b485076e7de68cd9912827a8ee86}{T\+E\+S\+T\+\_\+\+C\+A\+SE} (\char`\"{}Test O\+BD class D\+TC\char`\"{}, \char`\"{}\mbox{[}O\+BD\mbox{]}\char`\"{})
+\begin{DoxyCompactList}\small\item\em Prueba de integración para el funcionamiento de la obtención de D\+TC y P\+I\+DS disponibles. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{UnitTestCase_8cpp_a88458940ca41021a9d50ac249c995fd1}\label{UnitTestCase_8cpp_a88458940ca41021a9d50ac249c995fd1}} 
+\hyperlink{UnitTestCase_8cpp_a88458940ca41021a9d50ac249c995fd1}{T\+E\+S\+T\+\_\+\+C\+A\+SE} (\char`\"{}Test O\+BD class data S\+P\+E\+ED\char`\"{}, \char`\"{}\mbox{[}O\+BD\mbox{]}\char`\"{})
+\begin{DoxyCompactList}\small\item\em Prueba de integración para el funcionamiento de solicitud de un dato continúo (velocidad). \end{DoxyCompactList}\item 
 \mbox{\Hypertarget{UnitTestCase_8cpp_aa01bede4cf032808617f744cfdc34e85}\label{UnitTestCase_8cpp_aa01bede4cf032808617f744cfdc34e85}} 
 \hyperlink{UnitTestCase_8cpp_aa01bede4cf032808617f744cfdc34e85}{T\+E\+S\+T\+\_\+\+C\+A\+SE} (\char`\"{}Test Revoluciones Por Minuto\char`\"{}, \char`\"{}\mbox{[}decoders\mbox{]}\char`\"{})
 \begin{DoxyCompactList}\small\item\em Prueba unitaria del decodificador R\+PM. \end{DoxyCompactList}\item 
@@ -83,8 +85,8 @@ void \hyperlink{UnitTestCase_8cpp_ad24bf860f798931c63aaa488e08b8b4e}{close\+O\+B
 \mbox{\Hypertarget{UnitTestCase_8cpp_a27f82a7800b27dd78331e6ee707cb5f8}\label{UnitTestCase_8cpp_a27f82a7800b27dd78331e6ee707cb5f8}} 
 \hyperlink{UnitTestCase_8cpp_a27f82a7800b27dd78331e6ee707cb5f8}{T\+E\+S\+T\+\_\+\+C\+A\+SE} (\char`\"{}Comprobación Diagnostic Trouble Codes\char`\"{}, \char`\"{}\mbox{[}D\+TC\mbox{]}\char`\"{})
 \begin{DoxyCompactList}\small\item\em Prueba unitaria del conversor del primer byte D\+TC. \end{DoxyCompactList}\item 
-\mbox{\Hypertarget{UnitTestCase_8cpp_a666839d6a4f130bd11ac0466c9796884}\label{UnitTestCase_8cpp_a666839d6a4f130bd11ac0466c9796884}} 
-\hyperlink{UnitTestCase_8cpp_a666839d6a4f130bd11ac0466c9796884}{T\+E\+S\+T\+\_\+\+C\+A\+SE} (\char`\"{}Test V\+IN (Vehicle Identification Number)\char`\"{}, \char`\"{}\mbox{[}decoders\mbox{]}\char`\"{})
+\mbox{\Hypertarget{UnitTestCase_8cpp_a3c8d23281675ad40ff5cd11d163c1213}\label{UnitTestCase_8cpp_a3c8d23281675ad40ff5cd11d163c1213}} 
+\hyperlink{UnitTestCase_8cpp_a3c8d23281675ad40ff5cd11d163c1213}{T\+E\+S\+T\+\_\+\+C\+A\+SE} (\char`\"{}Test V\+IN (Vehicle Identification Number) I\+S\+O15765-\/4 C\+AN\char`\"{}, \char`\"{}\mbox{[}decoders\mbox{]}\char`\"{})
 \begin{DoxyCompactList}\small\item\em Prueba unitaria del Número de Identificación del vehículo. \end{DoxyCompactList}\item 
 \mbox{\Hypertarget{UnitTestCase_8cpp_ada6898123ac1c26cdb74330eea16b825}\label{UnitTestCase_8cpp_ada6898123ac1c26cdb74330eea16b825}} 
 \hyperlink{UnitTestCase_8cpp_ada6898123ac1c26cdb74330eea16b825}{T\+E\+S\+T\+\_\+\+C\+A\+SE} (\char`\"{}Test Describir el Protocolo Actual\char`\"{}, \char`\"{}\mbox{[}decoders\mbox{]}\char`\"{})
@@ -154,7 +156,7 @@ Definición en la línea \hyperlink{UnitTestCase_8cpp_source_l00009}{9} del arch
 \subsubsection{\texorpdfstring{W\+A\+I\+T\+\_\+\+O\+B\+D\+S\+IM}{WAIT\_OBDSIM}}
 {\footnotesize\ttfamily \#define W\+A\+I\+T\+\_\+\+O\+B\+D\+S\+IM~15}
 
-Macro con el tiempo de espera del simulador O\+B\+D\+S\+IM para introducir valores 
+Macro con el tiempo de espera en segundos del simulador O\+B\+D\+S\+IM para introducir valores 
 
 Definición en la línea \hyperlink{UnitTestCase_8cpp_source_l00016}{16} del archivo \hyperlink{UnitTestCase_8cpp_source}{Unit\+Test\+Case.\+cpp}.
 
@@ -178,19 +180,26 @@ Función que obtiene el comando Minicom para la primera conexión con el simulad
 \end{DoxyParams}
 
 
-Definición en la línea \hyperlink{UnitTestCase_8cpp_source_l00026}{26} del archivo \hyperlink{UnitTestCase_8cpp_source}{Unit\+Test\+Case.\+cpp}.
+Definición en la línea \hyperlink{UnitTestCase_8cpp_source_l00027}{27} del archivo \hyperlink{UnitTestCase_8cpp_source}{Unit\+Test\+Case.\+cpp}.
 
-\mbox{\Hypertarget{UnitTestCase_8cpp_a4460093e274738a0e1bbb551c1d1d3fd}\label{UnitTestCase_8cpp_a4460093e274738a0e1bbb551c1d1d3fd}} 
+\mbox{\Hypertarget{UnitTestCase_8cpp_a15137ff9ba6032f171a43694f159ada6}\label{UnitTestCase_8cpp_a15137ff9ba6032f171a43694f159ada6}} 
 \index{Unit\+Test\+Case.\+cpp@{Unit\+Test\+Case.\+cpp}!init\+O\+B\+D\+S\+IM@{init\+O\+B\+D\+S\+IM}}
 \index{init\+O\+B\+D\+S\+IM@{init\+O\+B\+D\+S\+IM}!Unit\+Test\+Case.\+cpp@{Unit\+Test\+Case.\+cpp}}
 \subsubsection{\texorpdfstring{init\+O\+B\+D\+S\+I\+M()}{initOBDSIM()}}
-{\footnotesize\ttfamily void init\+O\+B\+D\+S\+IM (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily void init\+O\+B\+D\+S\+IM (\begin{DoxyParamCaption}\item[{std\+::string}]{tipo\+Simulador,  }\item[{int}]{tiempo\+Espera }\end{DoxyParamCaption})}
 
 
 
 Función de inicialización del simulador O\+B\+D\+S\+IM. 
 
+
+\begin{DoxyParams}{Parámetros}
+{\em tipo\+Simulador} & String para indicar el tipo de simulador a iniciar. \\
+\hline
+{\em tiempo\+Espera} & Entero con el número de segundos de espera del simulador.\\
+\hline
+\end{DoxyParams}
 Inicializa el simulador con entorno gráfico permitiendo la introducción de D\+TC y otros valores para las pruebas. 
 
-Definición en la línea \hyperlink{UnitTestCase_8cpp_source_l00040}{40} del archivo \hyperlink{UnitTestCase_8cpp_source}{Unit\+Test\+Case.\+cpp}.
+Definición en la línea \hyperlink{UnitTestCase_8cpp_source_l00047}{47} del archivo \hyperlink{UnitTestCase_8cpp_source}{Unit\+Test\+Case.\+cpp}.
 

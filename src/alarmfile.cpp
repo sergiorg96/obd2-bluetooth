@@ -17,25 +17,6 @@
 #include <stdio.h>
 #include "alarmfile.hpp"
 
-#include "picangps.hpp"
-
-bool AlarmFile::gps_ = false;
-
-std::string AlarmFile::getGeoPos(std::string serialPort)
-{
-  return PicanGetGPS(serialPort);
-}
-
-bool AlarmFile::hasGps()
-{
-  return AlarmFile::gps_;
-}
-
-void AlarmFile::Gps(bool installed)
-{
-  AlarmFile::gps_ = installed;
-}
-
 void AlarmFile::shit (const char *mens)
 {
   fprintf(stderr, "%s - %d\n", mens, errno);

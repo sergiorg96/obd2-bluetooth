@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['relacionesresponse',['RelacionesResponse',['../structRelacionesResponse.html',1,'']]]
+  ['obd',['Obd',['../classObd.html',1,'']]],
+  ['oxigenoresponse',['OxigenoResponse',['../structOxigenoResponse.html',1,'']]]
 ];

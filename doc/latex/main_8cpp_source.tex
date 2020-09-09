@@ -3,8 +3,8 @@
 
 \begin{DoxyCode}
 00001 \textcolor{preprocessor}{#include "\hyperlink{Obd_8hpp}{Obd.hpp}"}
-00002 \textcolor{preprocessor}{#include "picangps.hpp"}
-00003 \textcolor{preprocessor}{#include "\hyperlink{alarmfile_8hpp}{alarmfile.hpp}"}
+00002 \textcolor{preprocessor}{#include "\hyperlink{alarmfile_8hpp}{alarmfile.hpp}"}
+00003 \textcolor{preprocessor}{#include "\hyperlink{gpsclient_8hpp}{gpsclient.hpp}"}
 00004 
 00005 \textcolor{keyword}{typedef}  std::map <std::string, std::string> \hyperlink{loadcfg_8hpp_a3bc0e674227412446fc364a733cebde6}{cfgType};
 00006 
@@ -27,7 +27,7 @@
 00023 
 00024     \hyperlink{Commands_8hpp_ab701e3ac61a85b337ec5c1abaad6742d}{json} data;
 00025 
-00026     std::vector<int> coordenadas;
+00026     std::vector<std::string> coordenadas;
 00027     
 00028     \textcolor{keywordtype}{char}* geoPosChar = \textcolor{keyword}{const\_cast<}\textcolor{keywordtype}{char}*\textcolor{keyword}{>}(geoPos.c\_str());
 00029 
@@ -36,7 +36,7 @@
 00032             \textcolor{keywordflow}{if}(token != NULL)\{
 00033                 \textcolor{keywordflow}{while}(token != NULL)\{
 00034                 \textcolor{comment}{// Sólo en la primera pasamos la cadena; en las siguientes pasamos NULL}
-00035                 coordenadas.push\_back(atoi(token));
+00035                 coordenadas.push\_back(token);
 00036                 token = strtok(NULL, \textcolor{stringliteral}{","});
 00037                 \}
 00038             \}
@@ -61,59 +61,63 @@
 00057     \textcolor{keywordflow}{return} msg;
 00058 \}
 00059 
-00060 \textcolor{keywordtype}{int} main()
-00061 \{
-00062     \textcolor{comment}{//Variable para cargar información de configuración}
-00063     \hyperlink{loadcfg_8hpp_a3bc0e674227412446fc364a733cebde6}{cfgType} variablesCfg;
-00064     \textcolor{comment}{//Asigna los valores del archivo de configuración a la variable}
-00065     \hyperlink{loadcfg_8cpp_a4667fdb45ba6b04ab678f894e58a2fcb}{loadCfg}(\textcolor{stringliteral}{"./conf/configuration.cfg"}, &variablesCfg);
-00066 
-00067     \textcolor{comment}{//Intenta conectarse con el dispositivo con el nombre de la configuración}
-00068     \hyperlink{classObd}{Obd} connection = \hyperlink{classObd}{Obd}(variablesCfg[\textcolor{stringliteral}{"BT-DISP-NAME"}].c\_str());
-00069 
-00070     \textcolor{comment}{//Si se ha conectado correctamente se pasa a comprobar los DTC's}
-00071     \textcolor{keywordflow}{if}(connection.\hyperlink{classObd_ae28b765bb787467f929eae932133d2aa}{isValid}())\{
-00072         \hyperlink{debug_8hpp_a55f41cf7b0585224496de3d7adbc101c}{debugLog}(\textcolor{stringliteral}{"Se ha conectado correctamente"});
-00073         \hyperlink{debug_8hpp_a55f41cf7b0585224496de3d7adbc101c}{debugLog}(\textcolor{stringliteral}{"Valores pasados:\(\backslash\)nIP: %s\(\backslash\)nPuerto: %s"}, variablesCfg[\textcolor{stringliteral}{"IP"}].c\_str(), variablesCfg[\textcolor{stringliteral}{"
+00060 
+00061 
+00062 \textcolor{keywordtype}{int} main()
+00063 \{
+00064     \textcolor{comment}{//Variable para cargar información de configuración}
+00065     \hyperlink{loadcfg_8hpp_a3bc0e674227412446fc364a733cebde6}{cfgType} variablesCfg;
+00066     \textcolor{comment}{//Asigna los valores del archivo de configuración a la variable}
+00067     \hyperlink{loadcfg_8cpp_a4667fdb45ba6b04ab678f894e58a2fcb}{loadCfg}(\textcolor{stringliteral}{"./conf/configuration.cfg"}, &variablesCfg);
+00068 
+00069     \textcolor{comment}{//Intenta conectarse con el dispositivo con el nombre de la configuración}
+00070     \hyperlink{classObd}{Obd} connection = \hyperlink{classObd}{Obd}(variablesCfg[\textcolor{stringliteral}{"BT-DISP-NAME"}].c\_str());
+00071 
+00072     \textcolor{comment}{//Si se ha conectado correctamente se pasa a comprobar los DTC's}
+00073     \textcolor{keywordflow}{if}(connection.\hyperlink{classObd_ae28b765bb787467f929eae932133d2aa}{isValid}())\{
+00074         \hyperlink{debug_8hpp_a55f41cf7b0585224496de3d7adbc101c}{debugLog}(\textcolor{stringliteral}{"Se ha conectado correctamente"});
+00075         \hyperlink{debug_8hpp_a55f41cf7b0585224496de3d7adbc101c}{debugLog}(\textcolor{stringliteral}{"Valores pasados:\(\backslash\)nIP: %s\(\backslash\)nPuerto: %s"}, variablesCfg[\textcolor{stringliteral}{"IP"}].c\_str(), variablesCfg[\textcolor{stringliteral}{"
       PORT"}].c\_str());
-00074         \textcolor{comment}{//Configuración de dirección y puerto del servidor para enviar los DTC's}
-00075         \hyperlink{classAlarmFile}{AlarmFile} fileAlr = \hyperlink{classAlarmFile}{AlarmFile}(variablesCfg[\textcolor{stringliteral}{"IP"}].c\_str(), variablesCfg[\textcolor{stringliteral}{"PORT"}].
+00076         \textcolor{comment}{//Configuración de dirección y puerto del servidor para enviar los DTC's}
+00077         \hyperlink{classAlarmFile}{AlarmFile} fileAlr = \hyperlink{classAlarmFile}{AlarmFile}(variablesCfg[\textcolor{stringliteral}{"IP"}].c\_str(), variablesCfg[\textcolor{stringliteral}{"PORT"}].
       c\_str(), variablesCfg[\textcolor{stringliteral}{"ALARM-FILE-NAME"}].c\_str(), variablesCfg[\textcolor{stringliteral}{"ALARM-FILE-NAME"}].c\_str());
-00076         \textcolor{comment}{//Dirección MAC para identificar el vehículo de origen de los datos}
-00077         std::string macAddress = \hyperlink{loadcfg_8cpp_ae4db05d33445e6b6ca0c4a6a0ba23bf3}{getmac}(variablesCfg[\textcolor{stringliteral}{"INTERFACE-NAME"}].c\_str());
-00078 
-00079         \textcolor{comment}{//Bucle infinito que cada cierto tiempo consulta si hay algún DTC}
-00080         \textcolor{keywordflow}{while}(1)\{
-00081             \textcolor{comment}{//Espera un periodo para volver a consultar DTC}
-00082             std::this\_thread::sleep\_for(std::chrono::seconds(std::stoi(variablesCfg[\textcolor{stringliteral}{"PERIOD"}])));
-00083             \textcolor{comment}{//Comprueba si hay DTC en el vehículo}
-00084             std::vector<std::string> vecDTCs = connection.\hyperlink{classObd_ac57afb9228d933c6be5b2fa8e6446036}{getDTCs}();
-00085 
-00086             \textcolor{keywordflow}{if}(vecDTCs.empty())\{
-00087                 std::cout << \textcolor{stringliteral}{"No hay DTCs"} << std::endl;
-00088             \} \textcolor{keywordflow}{else} \{
-00089                 \textcolor{comment}{//Si hay algún DTC se obtiene la geoposición en la que se detectó}
-00090                 std::string geoPos = fileAlr.\hyperlink{classAlarmFile_a4865f7e404e938960e45b7e805956401}{getGeoPos}(variablesCfg[\textcolor{stringliteral}{"PORT-GPS"}].c\_str());
-00091                 std::cout << \textcolor{stringliteral}{"Códigos de errores DTCs:"} << std::endl;
-00092                 \textcolor{keywordflow}{for} (uint32\_t i = 0; i < vecDTCs.size(); ++i)\{
-00093                     std::cout <<  \textcolor{stringliteral}{"#############################"} << std::endl;
-00094                     std::cout <<  vecDTCs[i] << std::endl;
-00095                     std::cout <<  \textcolor{stringliteral}{"#############################"} << std::endl;
-00096                     \textcolor{comment}{//Forma el mensaje con los datos obtenidos}
-00097                     std::string msgToSend = formMessageJSON(macAddress, geoPos, vecDTCs[i]);
-00098                     \textcolor{comment}{//Envía la alarma al servidor}
-00099                     \textcolor{keywordflow}{if} (fileAlr.\hyperlink{classAlarmFile_a37fd701cca3c3458a3009b508383947b}{sendAlarm}(msgToSend))\{
-00100                         std::cout << \textcolor{stringliteral}{"Alarma enviada."} << std::endl;
-00101                     \} \textcolor{keywordflow}{else} \{
-00102                         std::cout << \textcolor{stringliteral}{"Mensaje vacío, alarma no enviada."} << std::endl;
-00103                     \}                   
-00104                 \}
-00105             \}
-00106         \}
-00107     \} \textcolor{keywordflow}{else} \{
-00108         \hyperlink{debug_8hpp_a06cd512b8b15b6da31a5a557445f7027}{debugError}(\textcolor{stringliteral}{"No se ha conectado correctamente"});
-00109     \}
-00110 
-00111     \textcolor{keywordflow}{return} 0;
-00112 \}
+00078         \hyperlink{classGpsClient}{GpsClient} g(std::string(variablesCfg[\textcolor{stringliteral}{"PORT-GPS"}].c\_str()), std::string(\textcolor{stringliteral}{"10"}));
+00079         \textcolor{comment}{//Dirección MAC para identificar el vehículo de origen de los datos}
+00080         std::string macAddress = \hyperlink{loadcfg_8cpp_ae4db05d33445e6b6ca0c4a6a0ba23bf3}{getmac}(variablesCfg[\textcolor{stringliteral}{"INTERFACE-NAME"}].c\_str());
+00081 
+00082         \textcolor{comment}{//Bucle infinito que cada cierto tiempo consulta si hay algún DTC}
+00083         \textcolor{keywordflow}{while}(1)\{
+00084             \textcolor{comment}{//Espera un periodo para volver a consultar DTC}
+00085             std::this\_thread::sleep\_for(std::chrono::seconds(std::stoi(variablesCfg[\textcolor{stringliteral}{"PERIOD"}])));
+00086             \textcolor{comment}{//Comprueba si hay DTC en el vehículo}
+00087             std::vector<std::string> vecDTCs = connection.\hyperlink{classObd_ac57afb9228d933c6be5b2fa8e6446036}{getDTCs}();
+00088 
+00089             \textcolor{keywordflow}{if}(vecDTCs.empty())\{
+00090                 std::cout << \textcolor{stringliteral}{"No hay DTCs"} << std::endl;
+00091             \} \textcolor{keywordflow}{else} \{
+00092                 \textcolor{comment}{//Si hay algún DTC se obtiene la geoposición en la que se detectó}
+00093                 \textcolor{comment}{//std::string geoPos = fileAlr.getGeoPos(variablesCfg["PORT-GPS"].c\_str());}
+00094                 std::string geoPos = g.getGPS();
+00095                 std::cout << \textcolor{stringliteral}{"Códigos de errores DTCs:"} << std::endl;
+00096                 \textcolor{keywordflow}{for} (uint32\_t i = 0; i < vecDTCs.size(); ++i)\{
+00097                     std::cout <<  \textcolor{stringliteral}{"#############################"} << std::endl;
+00098                     std::cout <<  vecDTCs[i] << std::endl;
+00099                     std::cout <<  \textcolor{stringliteral}{"#############################"} << std::endl;
+00100                     \textcolor{comment}{//Forma el mensaje con los datos obtenidos}
+00101                     std::string msgToSend = formMessageJSON(macAddress, geoPos, vecDTCs[i]);
+00102                     \textcolor{comment}{//Envía la alarma al servidor}
+00103                     \textcolor{keywordflow}{if} (fileAlr.\hyperlink{classAlarmFile_a37fd701cca3c3458a3009b508383947b}{sendAlarm}(msgToSend))\{
+00104                         std::cout << \textcolor{stringliteral}{"Alarma enviada."} << std::endl;
+00105                     \} \textcolor{keywordflow}{else} \{
+00106                         std::cout << \textcolor{stringliteral}{"Mensaje vacío, alarma no enviada."} << std::endl;
+00107                     \}                   
+00108                 \}
+00109             \}
+00110         \}
+00111     \} \textcolor{keywordflow}{else} \{
+00112         \hyperlink{debug_8hpp_a06cd512b8b15b6da31a5a557445f7027}{debugError}(\textcolor{stringliteral}{"No se ha conectado correctamente"});
+00113     \}
+00114 
+00115     \textcolor{keywordflow}{return} 0;
+00116 \}
 \end{DoxyCode}

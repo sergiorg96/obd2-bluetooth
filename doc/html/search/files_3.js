@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['loadcfg_2ecpp',['loadcfg.cpp',['../loadcfg_8cpp.html',1,'']]],
-  ['loadcfg_2ehpp',['loadcfg.hpp',['../loadcfg_8hpp.html',1,'']]]
+  ['gpsclient_2ecpp',['gpsclient.cpp',['../gpsclient_8cpp.html',1,'']]],
+  ['gpsclient_2ehpp',['gpsclient.hpp',['../gpsclient_8hpp.html',1,'']]]
 ];

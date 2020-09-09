@@ -145,450 +145,454 @@
 00187 
 00188             \textcolor{keywordflow}{if} (statusConnection) \{
 00189                 close(this->m\_cli\_s);
-00190                 \textcolor{keywordflow}{throw} std::string(\textcolor{stringliteral}{"No se ha podido conectar"});
-00191             \}
-00192 
-00193             \hyperlink{debug_8hpp_a55f41cf7b0585224496de3d7adbc101c}{debugLog}(\textcolor{stringliteral}{"Conectado!"});
-00194             this->m\_status = \textcolor{keyword}{true};
-00195 
-00196             \textcolor{comment}{//Creamos instancia epoll para la recepción de datos en el socket}
-00197             this->epoll\_fd = epoll\_create(1);
-00198             \textcolor{keywordflow}{if} (this->epoll\_fd < 0) \{
-00199                 perror(\textcolor{stringliteral}{"No se ha podido crear epoll"});
-00200                 close(this->m\_cli\_s);
-00201             \}
-00202 
-00203             this->ev.events = EPOLLIN;
-00204             this->ev.data.fd = this->m\_cli\_s;
-00205 
-00206             \textcolor{comment}{//Añadimos el socket de conexión a la instancia de epoll creada}
-00207             \textcolor{keywordtype}{int} err = epoll\_ctl(this->epoll\_fd, EPOLL\_CTL\_ADD, this->m\_cli\_s, &ev);
-00208             
-00209             \textcolor{keywordflow}{if} (err) \{
-00210                 perror(\textcolor{stringliteral}{"No se ha podido añadir el socket cliente a la instancia epoll"});
-00211                 close(this->m\_cli\_s);
-00212                 close(this->epoll\_fd);
-00213             \}
-00214 
+00190                 perror(\textcolor{stringliteral}{"error"});
+00191                 \textcolor{keywordflow}{throw} std::string(\textcolor{stringliteral}{"No se ha podido conectar"});
+00192             \}
+00193 
+00194             \hyperlink{debug_8hpp_a55f41cf7b0585224496de3d7adbc101c}{debugLog}(\textcolor{stringliteral}{"Conectado!"});
+00195             this->m\_status = \textcolor{keyword}{true};
+00196 
+00197             \textcolor{comment}{//Creamos instancia epoll para la recepción de datos en el socket}
+00198             this->epoll\_fd = epoll\_create(1);
+00199             \textcolor{keywordflow}{if} (this->epoll\_fd < 0) \{
+00200                 perror(\textcolor{stringliteral}{"No se ha podido crear epoll"});
+00201                 close(this->m\_cli\_s);
+00202             \}
+00203 
+00204             this->ev.events = EPOLLIN;
+00205             this->ev.data.fd = this->m\_cli\_s;
+00206 
+00207             \textcolor{comment}{//Añadimos el socket de conexión a la instancia de epoll creada}
+00208             \textcolor{keywordtype}{int} err = epoll\_ctl(this->epoll\_fd, EPOLL\_CTL\_ADD, this->m\_cli\_s, &ev);
+00209             
+00210             \textcolor{keywordflow}{if} (err) \{
+00211                 perror(\textcolor{stringliteral}{"No se ha podido añadir el socket cliente a la instancia epoll"});
+00212                 close(this->m\_cli\_s);
+00213                 close(this->epoll\_fd);
+00214             \}
 00215 
-00216         \} \textcolor{keywordflow}{catch}(std::string e) \{
-00217             std::cerr << e << std::endl;
-00218         \}
-00219     \}
-00220 
-\Hypertarget{Obd_8hpp_source_l00228}\hyperlink{classObd_a2b8bd75834351a2205d53aec8b3747be}{00228}     \textcolor{keywordtype}{void} \hyperlink{classObd_a2b8bd75834351a2205d53aec8b3747be}{readFileData}()\{
-00229         std::ifstream ifs(\textcolor{stringliteral}{"data/PIDS.json"});
-00230         \textcolor{keyword}{auto} j = json::parse(ifs);
-00231 
-00232         \textcolor{comment}{//Convertimos todos los PIDS en objetos del tipo Commands y los añadimos a Obd}
-00233         \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} i = 0; i < (int)j.size(); ++i)
-00234         \{
-00235             this->map\_commands.insert(\hyperlink{Obd_8hpp_aaa63a77fc61ef01154d73b6fac67f1af}{tupla}(j[i][\textcolor{stringliteral}{"name"}], \hyperlink{classCommands}{Commands}(j[i])));
-00236         \}
-00237     \}
-00238     
-\Hypertarget{Obd_8hpp_source_l00248}\hyperlink{classObd_a453591bc9a280e8d44d82025ce8590e9}{00248}     \textcolor{keywordtype}{void} \hyperlink{classObd_a453591bc9a280e8d44d82025ce8590e9}{send}(\hyperlink{classCommands}{Commands} command)\{
-00249         \textcolor{comment}{//Iniciamos en un hilo de ejecución la función polling de recepción de datos}
-00250         std::thread t1(&\hyperlink{classObd_a0792ecb9247f32760269fdf64a178f8f}{Obd::polling}, \textcolor{keyword}{this}, command);
-00251 
-00252         \textcolor{keywordtype}{char} *p;
-00253         \textcolor{keywordtype}{char} buf[1024];
-00254         \textcolor{keywordtype}{int} len;
-00255 
-00256         \textcolor{comment}{//Comando a enviar}
-00257         std::string message = command.\hyperlink{classCommands_a9aee21ab91fdfc8e9daa59e1e8f20b73}{getCMD}();
-00258         strcpy(buf, message.c\_str());
-00259 
-00260         len = strlen(buf);
-00261         buf[len] = \textcolor{charliteral}{'\(\backslash\)n'};
-00262         buf[len+1] = \textcolor{charliteral}{'\(\backslash\)0'};
-00263         
-00264         \textcolor{comment}{// Todo los mensajes a ELM327  deben terminar con el caracter retorno de carro (hex  ‘0D’, \(\backslash\)r).}
-00265         p = buf;
-00266         \textcolor{keywordflow}{while} (*p) \{
-00267             \textcolor{keywordflow}{if} (*p == \textcolor{charliteral}{'\(\backslash\)n'})
-00268                 *p = \textcolor{charliteral}{'\(\backslash\)r'};
-00269             p++;
-00270         \}
-00271         
-00272         \hyperlink{debug_8hpp_a55f41cf7b0585224496de3d7adbc101c}{debugLog}(\textcolor{stringliteral}{"Mensaje a enviar: %s"}, buf);
-00273         \hyperlink{debug_8hpp_a55f41cf7b0585224496de3d7adbc101c}{debugLog}(\textcolor{stringliteral}{"Enviando mensaje..."});
-00274         write(this->m\_cli\_s, buf, strlen(buf));
-00275         
-00276         \textcolor{comment}{//Queda a la espera de finalización de ejecución del hilo de recepción del mensaje OBD}
-00277         t1.join();
-00278     \}
-00279 
-\Hypertarget{Obd_8hpp_source_l00292}\hyperlink{classObd_a0792ecb9247f32760269fdf64a178f8f}{00292}     \textcolor{keywordtype}{void} \hyperlink{classObd_a0792ecb9247f32760269fdf64a178f8f}{polling}(\hyperlink{classCommands}{Commands} command)\{
-00293         \textcolor{keyword}{struct }epoll\_event events[MAX\_EP\_EVTS];
-00294         \textcolor{keywordtype}{int} nfds;
-00295         \textcolor{keywordtype}{bool} continuar = \textcolor{keyword}{true};
-00296 
-00297         \hyperlink{debug_8hpp_a55f41cf7b0585224496de3d7adbc101c}{debugLog}(\textcolor{stringliteral}{"Polling function"});
-00298 
-00299         \textcolor{comment}{// Bucle infinito para el envío de datos por bluetooth al conector OBD}
-00300         \textcolor{keywordflow}{while}(continuar) \{
-00301         \textcolor{comment}{// Buffer para enviar y recibir}
-00302             \textcolor{keywordtype}{char} message\_rcv[1024], buf[1024], *p;
-00303             ssize\_t len;
-00304             \textcolor{keywordtype}{int} i;
-00305             \textcolor{comment}{//Quedamos a la espera de recepción de eventos en la instancia epoll (socket)}
-00306             nfds = epoll\_wait(this->epoll\_fd, events, MAX\_EP\_EVTS, -1);
-00307             \textcolor{keywordflow}{if} (nfds < 0) \{
-00308                 perror(\textcolor{stringliteral}{"epoll error"});
-00309                 \textcolor{keywordflow}{break};
-00310             \}
-00311             \textcolor{keywordflow}{for} (i = 0; i < nfds; i++) \{
-00312                 \textcolor{keywordflow}{if} ((events[i].events & EPOLLERR) || (events[i].events & EPOLLHUP)) \{
-00313                     \hyperlink{debug_8hpp_a06cd512b8b15b6da31a5a557445f7027}{debugError}(\textcolor{stringliteral}{"epoll error"});
-00314                 \}
-00315                 \textcolor{comment}{//Si los eventos detectados corresponden al socket de conexión con el vehículo, tratamos el
+00216 
+00217         \} \textcolor{keywordflow}{catch}(std::string e) \{
+00218             std::cerr << e << std::endl;
+00219         \}
+00220     \}
+00221 
+\Hypertarget{Obd_8hpp_source_l00229}\hyperlink{classObd_a2b8bd75834351a2205d53aec8b3747be}{00229}     \textcolor{keywordtype}{void} \hyperlink{classObd_a2b8bd75834351a2205d53aec8b3747be}{readFileData}()\{
+00230         std::ifstream ifs(\textcolor{stringliteral}{"data/PIDS.json"});
+00231         \textcolor{keyword}{auto} j = json::parse(ifs);
+00232 
+00233         \textcolor{comment}{//Convertimos todos los PIDS en objetos del tipo Commands y los añadimos a Obd}
+00234         \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} i = 0; i < (int)j.size(); ++i)
+00235         \{
+00236             this->map\_commands.insert(\hyperlink{Obd_8hpp_aaa63a77fc61ef01154d73b6fac67f1af}{tupla}(j[i][\textcolor{stringliteral}{"name"}], \hyperlink{classCommands}{Commands}(j[i])));
+00237         \}
+00238     \}
+00239     
+\Hypertarget{Obd_8hpp_source_l00249}\hyperlink{classObd_a453591bc9a280e8d44d82025ce8590e9}{00249}     \textcolor{keywordtype}{void} \hyperlink{classObd_a453591bc9a280e8d44d82025ce8590e9}{send}(\hyperlink{classCommands}{Commands} command)\{
+00250         \textcolor{comment}{//Iniciamos en un hilo de ejecución la función polling de recepción de datos}
+00251         std::thread t1(&\hyperlink{classObd_a0792ecb9247f32760269fdf64a178f8f}{Obd::polling}, \textcolor{keyword}{this}, command);
+00252 
+00253         \textcolor{keywordtype}{char} *p;
+00254         \textcolor{keywordtype}{char} buf[1024];
+00255         \textcolor{keywordtype}{int} len;
+00256 
+00257         \textcolor{comment}{//Comando a enviar}
+00258         std::string message = command.\hyperlink{classCommands_a9aee21ab91fdfc8e9daa59e1e8f20b73}{getCMD}();
+00259         strcpy(buf, message.c\_str());
+00260 
+00261         len = strlen(buf);
+00262         buf[len] = \textcolor{charliteral}{'\(\backslash\)n'};
+00263         buf[len+1] = \textcolor{charliteral}{'\(\backslash\)0'};
+00264         
+00265         \textcolor{comment}{// Todo los mensajes a ELM327  deben terminar con el caracter retorno de carro (hex  ‘0D’, \(\backslash\)r).}
+00266         p = buf;
+00267         \textcolor{keywordflow}{while} (*p) \{
+00268             \textcolor{keywordflow}{if} (*p == \textcolor{charliteral}{'\(\backslash\)n'})
+00269                 *p = \textcolor{charliteral}{'\(\backslash\)r'};
+00270             p++;
+00271         \}
+00272         
+00273         \hyperlink{debug_8hpp_a55f41cf7b0585224496de3d7adbc101c}{debugLog}(\textcolor{stringliteral}{"Mensaje a enviar: %s"}, buf);
+00274         \hyperlink{debug_8hpp_a55f41cf7b0585224496de3d7adbc101c}{debugLog}(\textcolor{stringliteral}{"Enviando mensaje..."});
+00275         \textcolor{keywordflow}{if}(write(this->m\_cli\_s, buf, strlen(buf)) != (ssize\_t) strlen(buf))\{
+00276             \hyperlink{debug_8hpp_a06cd512b8b15b6da31a5a557445f7027}{debugError}(\textcolor{stringliteral}{"Error enviando mensaje."});
+00277         \}
+00278         
+00279         \textcolor{comment}{//Queda a la espera de finalización de ejecución del hilo de recepción del mensaje OBD}
+00280         t1.join();
+00281     \}
+00282 
+\Hypertarget{Obd_8hpp_source_l00295}\hyperlink{classObd_a0792ecb9247f32760269fdf64a178f8f}{00295}     \textcolor{keywordtype}{void} \hyperlink{classObd_a0792ecb9247f32760269fdf64a178f8f}{polling}(\hyperlink{classCommands}{Commands} command)\{
+00296         \textcolor{keyword}{struct }epoll\_event events[MAX\_EP\_EVTS];
+00297         \textcolor{keywordtype}{int} nfds;
+00298         \textcolor{keywordtype}{bool} continuar = \textcolor{keyword}{true};
+00299 
+00300         \textcolor{comment}{//debugLog("Polling function");}
+00301 
+00302         \textcolor{comment}{// Bucle infinito para el envío de datos por bluetooth al conector OBD}
+00303         \textcolor{keywordflow}{while}(continuar) \{
+00304         \textcolor{comment}{// Buffer para enviar y recibir}
+00305             \textcolor{keywordtype}{char} message\_rcv[1024], buf[1024], *p;
+00306             ssize\_t len;
+00307             \textcolor{keywordtype}{int} i;
+00308             \textcolor{comment}{//Quedamos a la espera de recepción de eventos en la instancia epoll (socket)}
+00309             nfds = epoll\_wait(this->epoll\_fd, events, MAX\_EP\_EVTS, -1);
+00310             \textcolor{keywordflow}{if} (nfds < 0) \{
+00311                 perror(\textcolor{stringliteral}{"epoll error"});
+00312                 \textcolor{keywordflow}{break};
+00313             \}
+00314             \textcolor{keywordflow}{for} (i = 0; i < nfds; i++) \{
+00315                 \textcolor{keywordflow}{if} ((events[i].events & EPOLLERR) || (events[i].events & EPOLLHUP)) \{
+00316                     \hyperlink{debug_8hpp_a06cd512b8b15b6da31a5a557445f7027}{debugError}(\textcolor{stringliteral}{"epoll error"});
+00317                 \}
+00318                 \textcolor{comment}{//Si los eventos detectados corresponden al socket de conexión con el vehículo, tratamos el
        mensaje}
-00316                 \textcolor{keywordflow}{if} (events[i].data.fd == this->m\_cli\_s) \{
-00317                     len = read(this->m\_cli\_s, &buf, \textcolor{keyword}{sizeof}(buf) - 1);
-00318                     \textcolor{keywordflow}{if} (len < 0) \{
-00319                         perror(\textcolor{stringliteral}{"socket read error"});
-00320                         \textcolor{keywordflow}{continue};
-00321                     \}
-00322                     \hyperlink{debug_8hpp_a55f41cf7b0585224496de3d7adbc101c}{debugLog}(\textcolor{stringliteral}{"Evento leído: %s"}, buf);
-00323                     strcat(message\_rcv, buf);
-00324                     \textcolor{comment}{//Si se detecta el caracter ">" se ha finalizado el mensaje}
-00325                     \textcolor{keywordflow}{if}(strstr(buf, \textcolor{stringliteral}{">"}) != NULL) \{
-00326                         len = strlen(message\_rcv);
-00327                         message\_rcv[len] = \textcolor{charliteral}{'\(\backslash\)0'};
-00328 
-00329                         p = message\_rcv;
-00330                         \textcolor{comment}{//Conversión inversa del mensaje ELM327 enviado en el último carácter}
-00331                         \textcolor{keywordflow}{while}(*p) \{
-00332                             \textcolor{keywordflow}{if} (*p == \textcolor{charliteral}{'\(\backslash\)r'})
-00333                                 *p = \textcolor{charliteral}{'\(\backslash\)n'};
-00334                             p++;
-00335                         \}
-00336                         \textcolor{comment}{//Transformar respuesta}
-00337                         \hyperlink{debug_8hpp_a55f41cf7b0585224496de3d7adbc101c}{debugLog}(\textcolor{stringliteral}{"Mensaje recibido:\(\backslash\)n%s"}, message\_rcv);
-00338 
-00339                         \textcolor{keywordtype}{char} * ocurrencia = message\_rcv;
-00340                         \textcolor{keywordflow}{if}((ocurrencia=strstr(ocurrencia, command.\hyperlink{classCommands_ab4806a2fda5c80e10ab4446faa1e39b5}{getCMDResponse}().c\_str())) 
+00319                 \textcolor{keywordflow}{if} (events[i].data.fd == this->m\_cli\_s) \{
+00320                     len = read(this->m\_cli\_s, &buf, \textcolor{keyword}{sizeof}(buf) - 1);
+00321                     \textcolor{keywordflow}{if} (len < 0) \{
+00322                         perror(\textcolor{stringliteral}{"socket read error"});
+00323                         \textcolor{keywordflow}{continue};
+00324                     \}
+00325                     \textcolor{comment}{//debugLog("Evento leído: %s", buf);}
+00326                     strcat(message\_rcv, buf);
+00327                     \textcolor{comment}{//Si se detecta el caracter ">" se ha finalizado el mensaje}
+00328                     \textcolor{keywordflow}{if}(strstr(buf, \textcolor{stringliteral}{">"}) != NULL) \{
+00329                         len = strlen(message\_rcv);
+00330                         message\_rcv[len] = \textcolor{charliteral}{'\(\backslash\)0'};
+00331 
+00332                         p = message\_rcv;
+00333                         \textcolor{comment}{//Conversión inversa del mensaje ELM327 enviado en el último carácter}
+00334                         \textcolor{keywordflow}{while}(*p) \{
+00335                             \textcolor{keywordflow}{if} (*p == \textcolor{charliteral}{'\(\backslash\)r'})
+00336                                 *p = \textcolor{charliteral}{'\(\backslash\)n'};
+00337                             p++;
+00338                         \}
+00339                         \textcolor{comment}{//Transformar respuesta}
+00340                         \hyperlink{debug_8hpp_a55f41cf7b0585224496de3d7adbc101c}{debugLog}(\textcolor{stringliteral}{"Mensaje recibido:\(\backslash\)n%s"}, message\_rcv);
+00341 
+00342                         \textcolor{keywordtype}{char} * ocurrencia = message\_rcv;
+00343                         \textcolor{keywordflow}{if}((ocurrencia=strstr(ocurrencia, command.\hyperlink{classCommands_ab4806a2fda5c80e10ab4446faa1e39b5}{getCMDResponse}().c\_str())) 
       != NULL)\{
-00341                             \textcolor{keywordflow}{while}((ocurrencia=strstr(ocurrencia, command.
+00344                             \textcolor{keywordflow}{while}((ocurrencia=strstr(ocurrencia, command.
       \hyperlink{classCommands_ab4806a2fda5c80e10ab4446faa1e39b5}{getCMDResponse}().c\_str())) != NULL)\{
-00342                                 \hyperlink{debug_8hpp_a55f41cf7b0585224496de3d7adbc101c}{debugLog}(\textcolor{stringliteral}{"Ocurrencia encontrada"});
-00343                                 \textcolor{keywordtype}{char} info[1024];
-00344                                 memset(info, \textcolor{charliteral}{'\(\backslash\)0'}, \textcolor{keyword}{sizeof}(info));
-00345                                 strncpy(info, ocurrencia + command.\hyperlink{classCommands_a9aee21ab91fdfc8e9daa59e1e8f20b73}{getCMD}().size() , command.
+00345                                 \textcolor{comment}{//debugLog("Ocurrencia encontrada");}
+00346                                 \textcolor{keywordtype}{char} info[1024];
+00347                                 memset(info, \textcolor{charliteral}{'\(\backslash\)0'}, \textcolor{keyword}{sizeof}(info));
+00348                                 strncpy(info, ocurrencia + command.\hyperlink{classCommands_a9aee21ab91fdfc8e9daa59e1e8f20b73}{getCMD}().size() , command.
       \hyperlink{classCommands_a9b3d961dbebbd25f141d18cd5a267738}{getBytesResponse}());
-00346                                 \hyperlink{debug_8hpp_a55f41cf7b0585224496de3d7adbc101c}{debugLog}(\textcolor{stringliteral}{"Información: %s"}, info);
-00347                                 std::string type\_data = command.\hyperlink{classCommands_a7d983e153465d335db0b3ad7724b8ef6}{getTypeData}();
-00348                                 \textcolor{comment}{//Dependiendo del tipo de dato de la respuesta se busca el decodificador
+00349                                 \hyperlink{debug_8hpp_a55f41cf7b0585224496de3d7adbc101c}{debugLog}(\textcolor{stringliteral}{"Información: %s"}, info);
+00350                                 std::string type\_data = command.\hyperlink{classCommands_a7d983e153465d335db0b3ad7724b8ef6}{getTypeData}();
+00351                                 \textcolor{comment}{//Dependiendo del tipo de dato de la respuesta se busca el decodificador
        correspondiente}
-00349                                 \textcolor{keywordflow}{if} (!type\_data.compare(\textcolor{stringliteral}{"float"}))\{
-00350                                     \textcolor{keyword}{auto} varResultado = this->decoderFunctionsFloat[command.
+00352                                 \textcolor{keywordflow}{if} (!type\_data.compare(\textcolor{stringliteral}{"float"}))\{
+00353                                     \textcolor{keyword}{auto} varResultado = this->decoderFunctionsFloat[command.
       \hyperlink{classCommands_a8b4c2a655d8dd3de334338d6684d469c}{getDecoder}().c\_str()](info);
-00351                                     std::cout << command.\hyperlink{classCommands_adf3d8a96310b1f4e57a6ecf0f2f153ea}{getName}() << \textcolor{stringliteral}{" - "} << command.
+00354                                     std::cout << command.\hyperlink{classCommands_adf3d8a96310b1f4e57a6ecf0f2f153ea}{getName}() << \textcolor{stringliteral}{" - "} << command.
       \hyperlink{classCommands_ad82fe7dfcf1908423bdb59d048020e26}{getDescription}() << \textcolor{stringliteral}{" - Min="} << command.\hyperlink{classCommands_af0a1e2ea65b5a57997c721a8d77a1013}{getMIN}() << \textcolor{stringliteral}{" Max="} << command.
       \hyperlink{classCommands_afbad1051313d0cdecba276384cb7fc6b}{getMAX}() << std::endl;
-00352                                     std::cout << \textcolor{stringliteral}{"-> "} << varResultado << \textcolor{stringliteral}{" "}<< command.
+00355                                     std::cout << \textcolor{stringliteral}{"-> "} << varResultado << \textcolor{stringliteral}{" "}<< command.
       \hyperlink{classCommands_ac67214a4fbd93fbb4d8ebb2dd815a3fa}{getUnits}() << std::endl;
-00353                                     this->map\_commands.find(command.\hyperlink{classCommands_adf3d8a96310b1f4e57a6ecf0f2f153ea}{getName}())->second.setResValue(
+00356                                     this->map\_commands.find(command.\hyperlink{classCommands_adf3d8a96310b1f4e57a6ecf0f2f153ea}{getName}())->second.setResValue(
       varResultado);
-00354                                 \} \textcolor{keywordflow}{else} \textcolor{keywordflow}{if}(!type\_data.compare(\textcolor{stringliteral}{"OxigenoResponse"}))\{
-00355                                     \textcolor{keyword}{auto} varResultado = this->decoderFunctionsStructOx[command.
+00357                                 \} \textcolor{keywordflow}{else} \textcolor{keywordflow}{if}(!type\_data.compare(\textcolor{stringliteral}{"OxigenoResponse"}))\{
+00358                                     \textcolor{keyword}{auto} varResultado = this->decoderFunctionsStructOx[command.
       \hyperlink{classCommands_a8b4c2a655d8dd3de334338d6684d469c}{getDecoder}().c\_str()](info);
-00356                                     std::cout << command.\hyperlink{classCommands_adf3d8a96310b1f4e57a6ecf0f2f153ea}{getName}() << \textcolor{stringliteral}{" - "} << command.
+00359                                     std::cout << command.\hyperlink{classCommands_adf3d8a96310b1f4e57a6ecf0f2f153ea}{getName}() << \textcolor{stringliteral}{" - "} << command.
       \hyperlink{classCommands_ad82fe7dfcf1908423bdb59d048020e26}{getDescription}() << \textcolor{stringliteral}{" - Min="} << command.\hyperlink{classCommands_af0a1e2ea65b5a57997c721a8d77a1013}{getMIN}() << \textcolor{stringliteral}{" Max="} << command.
       \hyperlink{classCommands_afbad1051313d0cdecba276384cb7fc6b}{getMAX}() << std::endl;
-00357                                     std::cout << \textcolor{stringliteral}{"-> "} << varResultado.A << \textcolor{stringliteral}{"/"} << varResultado.B << \textcolor{stringliteral}{" "}<< 
+00360                                     std::cout << \textcolor{stringliteral}{"-> "} << varResultado.A << \textcolor{stringliteral}{"/"} << varResultado.B << \textcolor{stringliteral}{" "}<< 
       command.\hyperlink{classCommands_ac67214a4fbd93fbb4d8ebb2dd815a3fa}{getUnits}() << std::endl;
-00358                                     this->map\_commands.find(command.\hyperlink{classCommands_adf3d8a96310b1f4e57a6ecf0f2f153ea}{getName}())->second.setResValue(
+00361                                     this->map\_commands.find(command.\hyperlink{classCommands_adf3d8a96310b1f4e57a6ecf0f2f153ea}{getName}())->second.setResValue(
       varResultado);
-00359 
-00360                                 \} \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (!type\_data.compare(\textcolor{stringliteral}{"RelacionesResponse"})) \{
-00361                                     \textcolor{keyword}{auto} varResultado = this->decoderFunctionsStructRel[command.
+00362 
+00363                                 \} \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (!type\_data.compare(\textcolor{stringliteral}{"RelacionesResponse"})) \{
+00364                                     \textcolor{keyword}{auto} varResultado = this->decoderFunctionsStructRel[command.
       \hyperlink{classCommands_a8b4c2a655d8dd3de334338d6684d469c}{getDecoder}().c\_str()](info);
-00362                                     std::cout << command.\hyperlink{classCommands_adf3d8a96310b1f4e57a6ecf0f2f153ea}{getName}() << \textcolor{stringliteral}{" - "} << command.
+00365                                     std::cout << command.\hyperlink{classCommands_adf3d8a96310b1f4e57a6ecf0f2f153ea}{getName}() << \textcolor{stringliteral}{" - "} << command.
       \hyperlink{classCommands_ad82fe7dfcf1908423bdb59d048020e26}{getDescription}() << \textcolor{stringliteral}{" - Min="} << command.\hyperlink{classCommands_af0a1e2ea65b5a57997c721a8d77a1013}{getMIN}() << \textcolor{stringliteral}{" Max="} << command.
       \hyperlink{classCommands_afbad1051313d0cdecba276384cb7fc6b}{getMAX}() << std::endl;
-00363                                     std::cout << \textcolor{stringliteral}{"-> "} << varResultado.A << \textcolor{stringliteral}{"/"} << varResultado.B << \textcolor{stringliteral}{"/"} <<
+00366                                     std::cout << \textcolor{stringliteral}{"-> "} << varResultado.A << \textcolor{stringliteral}{"/"} << varResultado.B << \textcolor{stringliteral}{"/"} <<
        varResultado.C << \textcolor{stringliteral}{"/"} << varResultado.D << \textcolor{stringliteral}{" "}<< command.\hyperlink{classCommands_ac67214a4fbd93fbb4d8ebb2dd815a3fa}{getUnits}() << std::endl;
-00364                                     this->map\_commands.find(command.\hyperlink{classCommands_adf3d8a96310b1f4e57a6ecf0f2f153ea}{getName}())->second.setResValue(
+00367                                     this->map\_commands.find(command.\hyperlink{classCommands_adf3d8a96310b1f4e57a6ecf0f2f153ea}{getName}())->second.setResValue(
       varResultado);
-00365 
-00366                                 \} \textcolor{keywordflow}{else} \textcolor{keywordflow}{if}(!type\_data.compare(\textcolor{stringliteral}{"vectorInt"}))\{
-00367                                     \textcolor{keyword}{auto} varResultado = this->decoderFunctionsVectorInt[command.
+00368 
+00369                                 \} \textcolor{keywordflow}{else} \textcolor{keywordflow}{if}(!type\_data.compare(\textcolor{stringliteral}{"vectorInt"}))\{
+00370                                     \textcolor{keyword}{auto} varResultado = this->decoderFunctionsVectorInt[command.
       \hyperlink{classCommands_a8b4c2a655d8dd3de334338d6684d469c}{getDecoder}().c\_str()](info);
-00368                                     this->map\_commands.find(command.\hyperlink{classCommands_adf3d8a96310b1f4e57a6ecf0f2f153ea}{getName}())->second.setResValue(
+00371                                     this->map\_commands.find(command.\hyperlink{classCommands_adf3d8a96310b1f4e57a6ecf0f2f153ea}{getName}())->second.setResValue(
       varResultado);
-00369 
-00370                                     std::cout << command.\hyperlink{classCommands_adf3d8a96310b1f4e57a6ecf0f2f153ea}{getName}() << \textcolor{stringliteral}{" - "} << command.
+00372 
+00373                                     std::cout << command.\hyperlink{classCommands_adf3d8a96310b1f4e57a6ecf0f2f153ea}{getName}() << \textcolor{stringliteral}{" - "} << command.
       \hyperlink{classCommands_ad82fe7dfcf1908423bdb59d048020e26}{getDescription}() << \textcolor{stringliteral}{" - Min="} << command.\hyperlink{classCommands_af0a1e2ea65b5a57997c721a8d77a1013}{getMIN}() << \textcolor{stringliteral}{" Max="} << command.
       \hyperlink{classCommands_afbad1051313d0cdecba276384cb7fc6b}{getMAX}() << std::endl;
-00371                                     \textcolor{comment}{//Tratamiento para los PIDs disponibles}
-00372                                     \textcolor{keywordflow}{for} (uint32\_t i = 0; i < varResultado.size(); ++i)\{
-00373                                         std::string substr\_cmd = command.\hyperlink{classCommands_a9aee21ab91fdfc8e9daa59e1e8f20b73}{getCMD}().substr(2,2);
-00374                                         \textcolor{keywordtype}{int} sum\_pid = stoi(substr\_cmd,\textcolor{keyword}{nullptr},16);
-00375                                         std::stringstream stream;
-00376                                         stream << std::hex << sum\_pid+varResultado[i];
-00377                                         std::string result(stream.str());
-00378                                         \textcolor{keywordflow}{if}(result.size() == 1)
-00379                                         \textcolor{comment}{//Si el resultado solo tiene un caracter se añade un 0 al principio}
-00380                                             result.insert(0,\textcolor{stringliteral}{"0"});
-00381                                         result.insert(0,\textcolor{stringliteral}{"01"});
-00382                                         std::transform(result.begin(), result.end(),result.begin(), 
+00374                                     \textcolor{comment}{//Tratamiento para los PIDs disponibles}
+00375                                     \textcolor{keywordflow}{for} (uint32\_t i = 0; i < varResultado.size(); ++i)\{
+00376                                         std::string substr\_cmd = command.\hyperlink{classCommands_a9aee21ab91fdfc8e9daa59e1e8f20b73}{getCMD}().substr(2,2);
+00377                                         \textcolor{keywordtype}{int} sum\_pid = stoi(substr\_cmd,\textcolor{keyword}{nullptr},16);
+00378                                         std::stringstream stream;
+00379                                         stream << std::hex << sum\_pid+varResultado[i];
+00380                                         std::string result(stream.str());
+00381                                         \textcolor{keywordflow}{if}(result.size() == 1)
+00382                                         \textcolor{comment}{//Si el resultado solo tiene un caracter se añade un 0 al principio}
+00383                                             result.insert(0,\textcolor{stringliteral}{"0"});
+00384                                         result.insert(0,\textcolor{stringliteral}{"01"});
+00385                                         std::transform(result.begin(), result.end(),result.begin(), 
       ::toupper);
-00383 
-00384                                         \textcolor{comment}{//Almacenamos el resultado de los PIDs disponibles}
-00385                                         this->vecPIDs.push\_back(result);
-00386                                     \}
-00387                                 \} \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (!type\_data.compare(\textcolor{stringliteral}{"vectorStr"})) \{
-00388                                     \textcolor{keyword}{auto} varResultado = this->decoderFunctionsVectorStr[command.
+00386 
+00387                                         \textcolor{comment}{//Almacenamos el resultado de los PIDs disponibles}
+00388                                         this->vecPIDs.push\_back(result);
+00389                                     \}
+00390                                 \} \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (!type\_data.compare(\textcolor{stringliteral}{"vectorStr"})) \{
+00391                                     \textcolor{keyword}{auto} varResultado = this->decoderFunctionsVectorStr[command.
       \hyperlink{classCommands_a8b4c2a655d8dd3de334338d6684d469c}{getDecoder}().c\_str()](info);
-00389                                     this->map\_commands.find(command.\hyperlink{classCommands_adf3d8a96310b1f4e57a6ecf0f2f153ea}{getName}())->second.setResValue(
+00392                                     this->map\_commands.find(command.\hyperlink{classCommands_adf3d8a96310b1f4e57a6ecf0f2f153ea}{getName}())->second.setResValue(
       varResultado);
-00390                                     \textcolor{comment}{//Decodificador para DTC}
-00391                                     \textcolor{keywordflow}{if} (varResultado.empty())\{
-00392                                         \hyperlink{debug_8hpp_a55f41cf7b0585224496de3d7adbc101c}{debugLog}(\textcolor{stringliteral}{"No hay DTC en el vehículo"});
-00393                                     \} \textcolor{keywordflow}{else} \{
-00394                                         this->vecDTCs = varResultado;
-00395                                         \textcolor{keywordflow}{for} (uint32\_t i = 0; i < varResultado.size(); ++i)
-00396                                         \{
-00397                                             \hyperlink{debug_8hpp_a55f41cf7b0585224496de3d7adbc101c}{debugLog}(\textcolor{stringliteral}{"Enviar DTC: %s"}, varResultado[i].c\_str());
-00398                                         \}
-00399                                     \}
-00400                                 \} \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (!type\_data.compare(\textcolor{stringliteral}{"string"})) \{
-00401                                     \textcolor{keyword}{auto} varResultado = this->decoderFunctionsStr[command.
+00393                                     \textcolor{comment}{//Decodificador para DTC}
+00394                                     \textcolor{keywordflow}{if} (varResultado.empty())\{
+00395                                         \hyperlink{debug_8hpp_a55f41cf7b0585224496de3d7adbc101c}{debugLog}(\textcolor{stringliteral}{"No hay DTC en el vehículo"});
+00396                                     \} \textcolor{keywordflow}{else} \{
+00397                                         this->vecDTCs = varResultado;
+00398                                         \textcolor{keywordflow}{for} (uint32\_t i = 0; i < varResultado.size(); ++i)
+00399                                         \{
+00400                                             \hyperlink{debug_8hpp_a55f41cf7b0585224496de3d7adbc101c}{debugLog}(\textcolor{stringliteral}{"Enviar DTC: %s"}, varResultado[i].c\_str());
+00401                                         \}
+00402                                     \}
+00403                                 \} \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (!type\_data.compare(\textcolor{stringliteral}{"string"})) \{
+00404                                     \textcolor{keyword}{auto} varResultado = this->decoderFunctionsStr[command.
       \hyperlink{classCommands_a8b4c2a655d8dd3de334338d6684d469c}{getDecoder}().c\_str()](info);
-00402                                     this->map\_commands.find(command.\hyperlink{classCommands_adf3d8a96310b1f4e57a6ecf0f2f153ea}{getName}())->second.setResValue(
+00405                                     this->map\_commands.find(command.\hyperlink{classCommands_adf3d8a96310b1f4e57a6ecf0f2f153ea}{getName}())->second.setResValue(
       varResultado);
-00403                                     \textcolor{comment}{//Decodificador para el número de identificación del vehículo}
-00404                                     \textcolor{keywordflow}{if}(!command.\hyperlink{classCommands_a8b4c2a655d8dd3de334338d6684d469c}{getDecoder}().compare(\textcolor{stringliteral}{"decodeVIN"}))
-00405                                         this->vin.append(varResultado);
-00406                                     std::cout << command.\hyperlink{classCommands_adf3d8a96310b1f4e57a6ecf0f2f153ea}{getName}() << \textcolor{stringliteral}{" - "} << command.
+00406                                     \textcolor{comment}{//Decodificador para el número de identificación del vehículo}
+00407                                     \textcolor{keywordflow}{if}(!command.\hyperlink{classCommands_a8b4c2a655d8dd3de334338d6684d469c}{getDecoder}().compare(\textcolor{stringliteral}{"decodeVIN"}))
+00408                                         this->vin.append(varResultado);
+00409                                     std::cout << command.\hyperlink{classCommands_adf3d8a96310b1f4e57a6ecf0f2f153ea}{getName}() << \textcolor{stringliteral}{" - "} << command.
       \hyperlink{classCommands_ad82fe7dfcf1908423bdb59d048020e26}{getDescription}() << \textcolor{stringliteral}{" - Min="} << command.\hyperlink{classCommands_af0a1e2ea65b5a57997c721a8d77a1013}{getMIN}() << \textcolor{stringliteral}{" Max="} << command.
       \hyperlink{classCommands_afbad1051313d0cdecba276384cb7fc6b}{getMAX}() << std::endl;
-00407                                 \} \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (!type\_data.compare(\textcolor{stringliteral}{"map"})) \{
-00408                                     \textcolor{keyword}{auto} varResultado = this->decoderFunctionsMap[command.
+00410                                     std::cout << \textcolor{stringliteral}{"-> "} << varResultado << std::endl;
+00411                                 \} \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (!type\_data.compare(\textcolor{stringliteral}{"map"})) \{
+00412                                     \textcolor{keyword}{auto} varResultado = this->decoderFunctionsMap[command.
       \hyperlink{classCommands_a8b4c2a655d8dd3de334338d6684d469c}{getDecoder}().c\_str()](info);
-00409                                     this->map\_commands.find(command.\hyperlink{classCommands_adf3d8a96310b1f4e57a6ecf0f2f153ea}{getName}())->second.setResValue(
+00413                                     this->map\_commands.find(command.\hyperlink{classCommands_adf3d8a96310b1f4e57a6ecf0f2f153ea}{getName}())->second.setResValue(
       varResultado);
-00410                                     this->mapStatus = varResultado;
-00411                                 \} \textcolor{keywordflow}{else} \{
-00412                                     \hyperlink{debug_8hpp_a55f41cf7b0585224496de3d7adbc101c}{debugLog}(\textcolor{stringliteral}{"Tipo de dato no reconocido"});
-00413                                 \}
-00414                                 ocurrencia++;
-00415                             \}
-00416                             std::cout << \textcolor{stringliteral}{"--------------------------------------------------------------"} <
+00414                                     this->mapStatus = varResultado;
+00415                                 \} \textcolor{keywordflow}{else} \{
+00416                                     \hyperlink{debug_8hpp_a55f41cf7b0585224496de3d7adbc101c}{debugLog}(\textcolor{stringliteral}{"Tipo de dato no reconocido"});
+00417                                 \}
+00418                                 ocurrencia++;
+00419                             \}
+00420                             std::cout << \textcolor{stringliteral}{"--------------------------------------------------------------"} <
       < std::endl;
-00417                             memset(message\_rcv, \textcolor{charliteral}{'\(\backslash\)0'}, \textcolor{keyword}{sizeof}(message\_rcv));
-00418                             continuar = \textcolor{keyword}{false};
-00419                             \textcolor{comment}{//Respuestas de mensajes de AT de configuración}
-00420                         \} \textcolor{keywordflow}{else} \textcolor{keywordflow}{if}((strstr(message\_rcv, \textcolor{stringliteral}{"OK"})) != NULL)\{
-00421                             \hyperlink{debug_8hpp_a55f41cf7b0585224496de3d7adbc101c}{debugLog}(\textcolor{stringliteral}{"%s = OK."}, command.\hyperlink{classCommands_ad82fe7dfcf1908423bdb59d048020e26}{getDescription}().c\_str());
-00422                             memset(message\_rcv, \textcolor{charliteral}{'\(\backslash\)0'}, \textcolor{keyword}{sizeof}(message\_rcv));                         
-00423                             continuar = \textcolor{keyword}{false};
-00424                             \textcolor{comment}{//Vehículo sin el dato solicitado}
-00425                         \} \textcolor{keywordflow}{else} \textcolor{keywordflow}{if}((strstr(message\_rcv, \textcolor{stringliteral}{"NO DATA"})) != NULL)\{
-00426                             \hyperlink{debug_8hpp_a55f41cf7b0585224496de3d7adbc101c}{debugLog}(\textcolor{stringliteral}{"%s = No disponible."}, command.
+00421                             memset(message\_rcv, \textcolor{charliteral}{'\(\backslash\)0'}, \textcolor{keyword}{sizeof}(message\_rcv));
+00422                             continuar = \textcolor{keyword}{false};
+00423                             \textcolor{comment}{//Respuestas de mensajes de AT de configuración}
+00424                         \} \textcolor{keywordflow}{else} \textcolor{keywordflow}{if}((strstr(message\_rcv, \textcolor{stringliteral}{"OK"})) != NULL)\{
+00425                             \hyperlink{debug_8hpp_a55f41cf7b0585224496de3d7adbc101c}{debugLog}(\textcolor{stringliteral}{"%s = OK."}, command.\hyperlink{classCommands_ad82fe7dfcf1908423bdb59d048020e26}{getDescription}().c\_str());
+00426                             memset(message\_rcv, \textcolor{charliteral}{'\(\backslash\)0'}, \textcolor{keyword}{sizeof}(message\_rcv));                         
+00427                             continuar = \textcolor{keyword}{false};
+00428                             \textcolor{comment}{//Vehículo sin el dato solicitado}
+00429                         \} \textcolor{keywordflow}{else} \textcolor{keywordflow}{if}((strstr(message\_rcv, \textcolor{stringliteral}{"NO DATA"})) != NULL)\{
+00430                             \hyperlink{debug_8hpp_a55f41cf7b0585224496de3d7adbc101c}{debugLog}(\textcolor{stringliteral}{"%s = No disponible."}, command.
       \hyperlink{classCommands_ad82fe7dfcf1908423bdb59d048020e26}{getDescription}().c\_str());
-00427                             memset(message\_rcv, \textcolor{charliteral}{'\(\backslash\)0'}, \textcolor{keyword}{sizeof}(message\_rcv));                         
-00428                             continuar = \textcolor{keyword}{false};
-00429                         \} \textcolor{keywordflow}{else} \{
-00430                             \textcolor{comment}{//Para conocer el protocolo actual}
-00431                             \textcolor{keywordflow}{if}(!command.\hyperlink{classCommands_adf3d8a96310b1f4e57a6ecf0f2f153ea}{getName}().compare(\textcolor{stringliteral}{"DESCRIBE\_PROTOCOL"}))\{
-00432                                 \textcolor{keywordtype}{char} info[1024];
-00433                                 \textcolor{keywordtype}{char}* token = strtok(message\_rcv, \textcolor{stringliteral}{"\(\backslash\)n"});
-00434                                 strcpy(info, token);
-00435                                 \textcolor{keyword}{auto} varResultado = this->decoderFunctionsStr[command.
+00431                             memset(message\_rcv, \textcolor{charliteral}{'\(\backslash\)0'}, \textcolor{keyword}{sizeof}(message\_rcv));                         
+00432                             continuar = \textcolor{keyword}{false};
+00433                         \} \textcolor{keywordflow}{else} \{
+00434                             \textcolor{comment}{//Para conocer el protocolo actual}
+00435                             \textcolor{keywordflow}{if}(!command.\hyperlink{classCommands_adf3d8a96310b1f4e57a6ecf0f2f153ea}{getName}().compare(\textcolor{stringliteral}{"DESCRIBE\_PROTOCOL"}))\{
+00436                                 \textcolor{keywordtype}{char} info[1024];
+00437                                 \textcolor{keywordtype}{char}* token = strtok(message\_rcv, \textcolor{stringliteral}{"\(\backslash\)n"});
+00438                                 strcpy(info, token);
+00439                                 \textcolor{keyword}{auto} varResultado = this->decoderFunctionsStr[command.
       \hyperlink{classCommands_a8b4c2a655d8dd3de334338d6684d469c}{getDecoder}().c\_str()](info);
-00436                                 this->map\_commands.find(command.\hyperlink{classCommands_adf3d8a96310b1f4e57a6ecf0f2f153ea}{getName}())->second.setResValue(
+00440                                 this->map\_commands.find(command.\hyperlink{classCommands_adf3d8a96310b1f4e57a6ecf0f2f153ea}{getName}())->second.setResValue(
       varResultado);
-00437                                 this->currentProtocol = varResultado;
-00438                             \}\textcolor{keywordflow}{else} \textcolor{keywordflow}{if}(!command.\hyperlink{classCommands_adf3d8a96310b1f4e57a6ecf0f2f153ea}{getName}().compare(\textcolor{stringliteral}{"DESCRIBE\_PROTOCOL\_NUMBER"}))\{
-00439                                 \textcolor{keywordtype}{char} info[1024];
-00440                                 \textcolor{keywordtype}{char}* token = strtok(message\_rcv, \textcolor{stringliteral}{"\(\backslash\)n"});
-00441                                 strcpy(info, token);
-00442                                 \textcolor{keyword}{auto} varResultado = this->decoderFunctionsStr[command.
+00441                                 this->currentProtocol = varResultado;
+00442                             \}\textcolor{keywordflow}{else} \textcolor{keywordflow}{if}(!command.\hyperlink{classCommands_adf3d8a96310b1f4e57a6ecf0f2f153ea}{getName}().compare(\textcolor{stringliteral}{"DESCRIBE\_PROTOCOL\_NUMBER"}))\{
+00443                                 \textcolor{keywordtype}{char} info[1024];
+00444                                 \textcolor{keywordtype}{char}* token = strtok(message\_rcv, \textcolor{stringliteral}{"\(\backslash\)n"});
+00445                                 strcpy(info, token);
+00446                                 \textcolor{keyword}{auto} varResultado = this->decoderFunctionsStr[command.
       \hyperlink{classCommands_a8b4c2a655d8dd3de334338d6684d469c}{getDecoder}().c\_str()](info);
-00443                                 this->map\_commands.find(command.\hyperlink{classCommands_adf3d8a96310b1f4e57a6ecf0f2f153ea}{getName}())->second.setResValue(
+00447                                 this->map\_commands.find(command.\hyperlink{classCommands_adf3d8a96310b1f4e57a6ecf0f2f153ea}{getName}())->second.setResValue(
       varResultado);
-00444                                 this->currentProtocolNumber = varResultado;
-00445                             \} \textcolor{keywordflow}{else} \{
-00446                                 \hyperlink{debug_8hpp_a55f41cf7b0585224496de3d7adbc101c}{debugLog}(\textcolor{stringliteral}{"Mensaje recibido no entendido!"});
-00447                             \}
-00448                             memset(message\_rcv, \textcolor{charliteral}{'\(\backslash\)0'}, \textcolor{keyword}{sizeof}(message\_rcv));                         
-00449                             continuar = \textcolor{keyword}{false};
-00450                         \}
-00451                     \}
-00452 
-00453                     memset(buf, \textcolor{charliteral}{'\(\backslash\)0'}, \textcolor{keyword}{sizeof}(buf));
-00454                 \} \textcolor{keywordflow}{else} \{
-00455                     \hyperlink{debug_8hpp_a06cd512b8b15b6da31a5a557445f7027}{debugError}(\textcolor{stringliteral}{"Evento desconocido"});
-00456                 \}
-00457             \}
-00458         \}
-00459     \}
-00460 
-\Hypertarget{Obd_8hpp_source_l00472}\hyperlink{classObd_a5091314ed8068800cce40e7a74a3731e}{00472}     \textcolor{keywordtype}{void} \hyperlink{classObd_a5091314ed8068800cce40e7a74a3731e}{initMessages}()\{
-00473         \textcolor{comment}{//Inicialización de la conexión con ELM327}
-00474         std::map<std::string, std::string> listPIDs = \{
-00475             \{\textcolor{stringliteral}{"PIDS\_B"}, \textcolor{stringliteral}{"0120"}\},
-00476             \{\textcolor{stringliteral}{"PIDS\_C"}, \textcolor{stringliteral}{"0140"}\},
-00477             \{\textcolor{stringliteral}{"PIDS\_D"}, \textcolor{stringliteral}{"0160"}\},
-00478             \{\textcolor{stringliteral}{"PIDS\_E"}, \textcolor{stringliteral}{"0180"}\},
-00479             \{\textcolor{stringliteral}{"PIDS\_F"}, \textcolor{stringliteral}{"01A0"}\},
-00480             \{\textcolor{stringliteral}{"PIDS\_G"}, \textcolor{stringliteral}{"01C0"}\}
-00481         \};
-00482         this->\hyperlink{classObd_a453591bc9a280e8d44d82025ce8590e9}{send}(this->map\_commands.find(\textcolor{stringliteral}{"RESET"})->second);
-00483         this->\hyperlink{classObd_a453591bc9a280e8d44d82025ce8590e9}{send}(this->map\_commands.find(\textcolor{stringliteral}{"DEFAULT\_VALUES"})->second);
-00484         this->\hyperlink{classObd_a453591bc9a280e8d44d82025ce8590e9}{send}(this->map\_commands.find(\textcolor{stringliteral}{"RESP\_SIN\_ESPACIOS"})->second);                   
-00485         this->\hyperlink{classObd_a453591bc9a280e8d44d82025ce8590e9}{send}(this->map\_commands.find(\textcolor{stringliteral}{"SIN\_ECO"})->second);
-00486         this->\hyperlink{classObd_a453591bc9a280e8d44d82025ce8590e9}{send}(this->map\_commands.find(\textcolor{stringliteral}{"SIN\_HEADER"})->second);                  
-00487         this->\hyperlink{classObd_a453591bc9a280e8d44d82025ce8590e9}{send}(this->map\_commands.find(\textcolor{stringliteral}{"AUTO\_PROTO"})->second);
-00488         this->\hyperlink{classObd_a453591bc9a280e8d44d82025ce8590e9}{send}(this->map\_commands.find(\textcolor{stringliteral}{"STATUS"})->second);
-00489         this->\hyperlink{classObd_a453591bc9a280e8d44d82025ce8590e9}{send}(this->map\_commands.find(\textcolor{stringliteral}{"GET\_VIN"})->second);
-00490         this->\hyperlink{classObd_a453591bc9a280e8d44d82025ce8590e9}{send}(this->map\_commands.find(\textcolor{stringliteral}{"PIDS\_A"})->second);
-00491         \textcolor{comment}{//Bucle para detectar PIDs disponibles}
-00492         \textcolor{keywordflow}{for} (std::map<std::string, std::string>::iterator it=listPIDs.begin(); it!=listPIDs.end(); ++it)\{
-00493             \textcolor{keywordflow}{if}(this->\hyperlink{classObd_aeff55ecb0a0a4278a22f20db3d2e17e3}{existPID}(it->second))\{
-00494                 this->\hyperlink{classObd_a453591bc9a280e8d44d82025ce8590e9}{send}(this->map\_commands.find(it->first)->second); 
-00495             \}
-00496         \}
-00497         \hyperlink{debug_8hpp_a55f41cf7b0585224496de3d7adbc101c}{debugLog}(\textcolor{stringliteral}{"Nº de comandos disponibles = %zu"}, vecPIDs.size());
-00498     \}
-00499 
-\Hypertarget{Obd_8hpp_source_l00507}\hyperlink{classObd_a560631b2e3af0a72c063f915a11e0466}{00507}     \textcolor{keywordtype}{void} \hyperlink{classObd_a560631b2e3af0a72c063f915a11e0466}{initDecoderFunctions}()\{
-00508     \textcolor{comment}{//Inicia las funciones dependiendo del tipo de dato de respuesta    }
-00509     this->decoderFunctionsFloat = \{
-00510             \{ \textcolor{stringliteral}{"decodeCargaPosicionEGR"}, \hyperlink{decoders_8cpp_adbe68794075963c37e654d53b8a46f68}{decodeCargaPosicionEGR}\},
-00511             \{ \textcolor{stringliteral}{"decodeTempGeneral"}, \hyperlink{decoders_8cpp_af581438645d7ff67766fa2e5eba5eaf9}{decodeTempGeneral}\},
-00512             \{ \textcolor{stringliteral}{"decodeAjusteCombustibleEGR"}, \hyperlink{decoders_8cpp_aeee9e6d8511a934b3a3644b19de3f2b7}{decodeAjusteCombustibleEGR}\},
-00513             \{ \textcolor{stringliteral}{"decodePresionCombustible"}, \hyperlink{decoders_8cpp_ab1c03e72734d4127a1c48f3b5a44a2e2}{decodePresionCombustible}\},
-00514             \{ \textcolor{stringliteral}{"decodeHexToDec"}, \hyperlink{decoders_8cpp_aa7c5243702d5462e4b638450e750624e}{decodeHexToDec}\},
-00515             \{ \textcolor{stringliteral}{"decodeRPM"}, \hyperlink{decoders_8cpp_a889868c7b1e554aee496e6aed7101cc4}{decodeRPM}\},
-00516             \{ \textcolor{stringliteral}{"decodeAvanceTiempo"}, \hyperlink{decoders_8cpp_a7a2fee87eace8ad6c86c628f5f91b3b5}{decodeAvanceTiempo}\},
-00517             \{ \textcolor{stringliteral}{"decodeVelocidadMAF"}, \hyperlink{decoders_8cpp_adceefeb78a70b295b378f4c472630aa1}{decodeVelocidadMAF}\},
-00518             \{ \textcolor{stringliteral}{"decodePresionCombColector"}, \hyperlink{decoders_8cpp_a3e32aaf8ced989570e141f01210564f3}{decodePresionCombColector}\},
-00519             \{ \textcolor{stringliteral}{"decodePresionMedidorCombustible"}, \hyperlink{decoders_8cpp_a228605d8cad0901a691ba4155a2326fc}{decodePresionMedidorCombustible}
+00448                                 this->currentProtocolNumber = varResultado;
+00449                             \} \textcolor{keywordflow}{else} \{
+00450                                 \hyperlink{debug_8hpp_a55f41cf7b0585224496de3d7adbc101c}{debugLog}(\textcolor{stringliteral}{"Mensaje recibido no entendido!"});
+00451                             \}
+00452                             memset(message\_rcv, \textcolor{charliteral}{'\(\backslash\)0'}, \textcolor{keyword}{sizeof}(message\_rcv));                         
+00453                             continuar = \textcolor{keyword}{false};
+00454                         \}
+00455                     \}
+00456 
+00457                     memset(buf, \textcolor{charliteral}{'\(\backslash\)0'}, \textcolor{keyword}{sizeof}(buf));
+00458                 \} \textcolor{keywordflow}{else} \{
+00459                     \hyperlink{debug_8hpp_a06cd512b8b15b6da31a5a557445f7027}{debugError}(\textcolor{stringliteral}{"Evento desconocido"});
+00460                 \}
+00461             \}
+00462         \}
+00463     \}
+00464 
+\Hypertarget{Obd_8hpp_source_l00476}\hyperlink{classObd_a5091314ed8068800cce40e7a74a3731e}{00476}     \textcolor{keywordtype}{void} \hyperlink{classObd_a5091314ed8068800cce40e7a74a3731e}{initMessages}()\{
+00477         \textcolor{comment}{//Inicialización de la conexión con ELM327}
+00478         std::map<std::string, std::string> listPIDs = \{
+00479             \{\textcolor{stringliteral}{"PIDS\_B"}, \textcolor{stringliteral}{"0120"}\},
+00480             \{\textcolor{stringliteral}{"PIDS\_C"}, \textcolor{stringliteral}{"0140"}\},
+00481             \{\textcolor{stringliteral}{"PIDS\_D"}, \textcolor{stringliteral}{"0160"}\},
+00482             \{\textcolor{stringliteral}{"PIDS\_E"}, \textcolor{stringliteral}{"0180"}\},
+00483             \{\textcolor{stringliteral}{"PIDS\_F"}, \textcolor{stringliteral}{"01A0"}\},
+00484             \{\textcolor{stringliteral}{"PIDS\_G"}, \textcolor{stringliteral}{"01C0"}\}
+00485         \};
+00486         this->\hyperlink{classObd_a453591bc9a280e8d44d82025ce8590e9}{send}(this->map\_commands.find(\textcolor{stringliteral}{"RESET"})->second);
+00487         this->\hyperlink{classObd_a453591bc9a280e8d44d82025ce8590e9}{send}(this->map\_commands.find(\textcolor{stringliteral}{"DEFAULT\_VALUES"})->second);
+00488         this->\hyperlink{classObd_a453591bc9a280e8d44d82025ce8590e9}{send}(this->map\_commands.find(\textcolor{stringliteral}{"RESP\_SIN\_ESPACIOS"})->second);                   
+00489         this->\hyperlink{classObd_a453591bc9a280e8d44d82025ce8590e9}{send}(this->map\_commands.find(\textcolor{stringliteral}{"SIN\_ECO"})->second);
+00490         this->\hyperlink{classObd_a453591bc9a280e8d44d82025ce8590e9}{send}(this->map\_commands.find(\textcolor{stringliteral}{"SIN\_HEADER"})->second);                  
+00491         this->\hyperlink{classObd_a453591bc9a280e8d44d82025ce8590e9}{send}(this->map\_commands.find(\textcolor{stringliteral}{"AUTO\_PROTO"})->second);
+00492         this->\hyperlink{classObd_a453591bc9a280e8d44d82025ce8590e9}{send}(this->map\_commands.find(\textcolor{stringliteral}{"STATUS"})->second);
+00493         this->\hyperlink{classObd_a453591bc9a280e8d44d82025ce8590e9}{send}(this->map\_commands.find(\textcolor{stringliteral}{"GET\_VIN"})->second);
+00494         this->\hyperlink{classObd_a453591bc9a280e8d44d82025ce8590e9}{send}(this->map\_commands.find(\textcolor{stringliteral}{"PIDS\_A"})->second);
+00495         \textcolor{comment}{//Bucle para detectar PIDs disponibles}
+00496         \textcolor{keywordflow}{for} (std::map<std::string, std::string>::iterator it=listPIDs.begin(); it!=listPIDs.end(); ++it)\{
+00497             \textcolor{keywordflow}{if}(this->\hyperlink{classObd_aeff55ecb0a0a4278a22f20db3d2e17e3}{existPID}(it->second))\{
+00498                 this->\hyperlink{classObd_a453591bc9a280e8d44d82025ce8590e9}{send}(this->map\_commands.find(it->first)->second); 
+00499             \}
+00500         \}
+00501         \hyperlink{debug_8hpp_a55f41cf7b0585224496de3d7adbc101c}{debugLog}(\textcolor{stringliteral}{"Nº de comandos disponibles = %zu"}, vecPIDs.size());
+00502     \}
+00503 
+\Hypertarget{Obd_8hpp_source_l00511}\hyperlink{classObd_a560631b2e3af0a72c063f915a11e0466}{00511}     \textcolor{keywordtype}{void} \hyperlink{classObd_a560631b2e3af0a72c063f915a11e0466}{initDecoderFunctions}()\{
+00512     \textcolor{comment}{//Inicia las funciones dependiendo del tipo de dato de respuesta    }
+00513     this->decoderFunctionsFloat = \{
+00514             \{ \textcolor{stringliteral}{"decodeCargaPosicionEGR"}, \hyperlink{decoders_8cpp_adbe68794075963c37e654d53b8a46f68}{decodeCargaPosicionEGR}\},
+00515             \{ \textcolor{stringliteral}{"decodeTempGeneral"}, \hyperlink{decoders_8cpp_af581438645d7ff67766fa2e5eba5eaf9}{decodeTempGeneral}\},
+00516             \{ \textcolor{stringliteral}{"decodeAjusteCombustibleEGR"}, \hyperlink{decoders_8cpp_aeee9e6d8511a934b3a3644b19de3f2b7}{decodeAjusteCombustibleEGR}\},
+00517             \{ \textcolor{stringliteral}{"decodePresionCombustible"}, \hyperlink{decoders_8cpp_ab1c03e72734d4127a1c48f3b5a44a2e2}{decodePresionCombustible}\},
+00518             \{ \textcolor{stringliteral}{"decodeHexToDec"}, \hyperlink{decoders_8cpp_aa7c5243702d5462e4b638450e750624e}{decodeHexToDec}\},
+00519             \{ \textcolor{stringliteral}{"decodeRPM"}, \hyperlink{decoders_8cpp_a889868c7b1e554aee496e6aed7101cc4}{decodeRPM}\},
+00520             \{ \textcolor{stringliteral}{"decodeAvanceTiempo"}, \hyperlink{decoders_8cpp_a7a2fee87eace8ad6c86c628f5f91b3b5}{decodeAvanceTiempo}\},
+00521             \{ \textcolor{stringliteral}{"decodeVelocidadMAF"}, \hyperlink{decoders_8cpp_adceefeb78a70b295b378f4c472630aa1}{decodeVelocidadMAF}\},
+00522             \{ \textcolor{stringliteral}{"decodePresionCombColector"}, \hyperlink{decoders_8cpp_a3e32aaf8ced989570e141f01210564f3}{decodePresionCombColector}\},
+00523             \{ \textcolor{stringliteral}{"decodePresionMedidorCombustible"}, \hyperlink{decoders_8cpp_a228605d8cad0901a691ba4155a2326fc}{decodePresionMedidorCombustible}
       \},
-00520             \{ \textcolor{stringliteral}{"decodePresionVapor"}, \hyperlink{decoders_8cpp_ab86bda1fcefda784e048796e2d892475}{decodePresionVapor}\},
-00521             \{ \textcolor{stringliteral}{"decodeTempCatalizador"}, \hyperlink{decoders_8cpp_a8251853ca2e5b8b2e88c75f50d53bc8d}{decodeTempCatalizador}\},
-00522             \{ \textcolor{stringliteral}{"decodeVoltajeControl"}, \hyperlink{decoders_8cpp_a5937fc059394faad8c9c96a0b27a8796}{decodeVoltajeControl}\},
-00523             \{ \textcolor{stringliteral}{"decodeRelacionCombAireBasica"}, \hyperlink{decoders_8cpp_ade77bb9f8d8a2ba3aa431cdf9bdd0c32}{decodeRelacionCombAireBasica}\}
-00524         \};
-00525         this->decoderFunctionsStructOx = \{
-00526             \{ \textcolor{stringliteral}{"decodeSensorOxigeno"}, \hyperlink{decoders_8cpp_a5b53fc5fc37fbee9c5e389f6c8c18438}{decodeSensorOxigeno}\},
-00527             \{ \textcolor{stringliteral}{"decodeRelacionCombAire"}, \hyperlink{decoders_8cpp_a363bd4f505969098be58a175f02b9b50}{decodeRelacionCombAire}\},
-00528             \{ \textcolor{stringliteral}{"decodeRelacionCombAireActual"}, \hyperlink{decoders_8cpp_a4cedb500095b25b3d4fff382094b0eb9}{decodeRelacionCombAireActual}\}
-00529         \};
-00530 
-00531         this->decoderFunctionsStructRel[\textcolor{stringliteral}{"decodeRelaciones"}] = \hyperlink{decoders_8cpp_a88d7079325bf81705583d9f2101cfa15}{decodeRelaciones};
-00532         this->decoderFunctionsVectorInt[\textcolor{stringliteral}{"decodePIDS"}] = \hyperlink{decoders_8cpp_aef44cca306ed9c74b146d2b7dd058763}{decodePIDS};
-00533         this->decoderFunctionsVectorStr[\textcolor{stringliteral}{"decodeDTCs"}] = \hyperlink{decoders_8cpp_aac9b3d4ea17ee4dbbdf755b0b510137a}{decodeDTCs};
-00534         this->decoderFunctionsStr = \{
-00535             \{\textcolor{stringliteral}{"decodeVIN"}, \hyperlink{decoders_8cpp_a66754738119854c13a74265e209083e4}{decodeVIN}\},
-00536             \{\textcolor{stringliteral}{"decodeDescribeProtocol"}, \hyperlink{decoders_8cpp_ab83ce79cd098ea655f3812488e304a0c}{decodeDescribeProtocol}\}
-00537         \};
-00538         this->decoderFunctionsMap[\textcolor{stringliteral}{"decodeStatus"}] = \hyperlink{decoders_8cpp_aca9cad863d8603615597a0291804c8ae}{decodeStatus};
-00539         this->noDecodeFunctionAT[\textcolor{stringliteral}{"noDecodeAT"}] = \hyperlink{decoders_8cpp_a8ee851a37675f190ea728d6b2f0cdc92}{noDecodeAT};
-00540     \}
-00541 
-\Hypertarget{Obd_8hpp_source_l00548}\hyperlink{classObd_a95d02f8f3c48557c5ad799ecb6dd7f79}{00548}     \textcolor{keywordtype}{void} \hyperlink{classObd_a95d02f8f3c48557c5ad799ecb6dd7f79}{disconnectBluetooth}()\{
-00549         \hyperlink{debug_8hpp_a55f41cf7b0585224496de3d7adbc101c}{debugLog}(\textcolor{stringliteral}{"Desconectando dispositivo Bluetooth"});
-00550         close(this->m\_cli\_s);
-00551         close(this->epoll\_fd);
-00552     \}
-00553 
-\Hypertarget{Obd_8hpp_source_l00560}\hyperlink{classObd_aeff55ecb0a0a4278a22f20db3d2e17e3}{00560}     \textcolor{keywordtype}{bool} \hyperlink{classObd_aeff55ecb0a0a4278a22f20db3d2e17e3}{existPID}(std::string command)\{
-00561         \textcolor{keywordtype}{bool} exists = \textcolor{keyword}{false};
-00562         \textcolor{comment}{//Comprueba en la lista de PIDs que el comando este implementado}
-00563         \textcolor{keywordflow}{for} (uint32\_t i = 0; i < this->vecPIDs.size(); ++i)\{
-00564             \textcolor{keywordflow}{if}(!this->vecPIDs[i].compare(command))\{
-00565                 exists = \textcolor{keyword}{true};
-00566                 \textcolor{keywordflow}{break};
-00567             \}
-00568         \}
-00569         \textcolor{keywordflow}{return} exists;
-00570     \}
-00571     
-\Hypertarget{Obd_8hpp_source_l00579}\hyperlink{classObd_abf7e84f45236ea1c78c762ac895c532c}{00579}     \textcolor{keywordtype}{void} \hyperlink{classObd_abf7e84f45236ea1c78c762ac895c532c}{printPIDs}()\{
-00580         \textcolor{comment}{//Iteración para imprimir por consola los PIDs disponibles}
-00581         \textcolor{keywordflow}{for} (std::map<std::string, Commands>::iterator it=this->map\_commands.begin(); it!=this->
+00524             \{ \textcolor{stringliteral}{"decodePresionVapor"}, \hyperlink{decoders_8cpp_ab86bda1fcefda784e048796e2d892475}{decodePresionVapor}\},
+00525             \{ \textcolor{stringliteral}{"decodeTempCatalizador"}, \hyperlink{decoders_8cpp_a8251853ca2e5b8b2e88c75f50d53bc8d}{decodeTempCatalizador}\},
+00526             \{ \textcolor{stringliteral}{"decodeVoltajeControl"}, \hyperlink{decoders_8cpp_a5937fc059394faad8c9c96a0b27a8796}{decodeVoltajeControl}\},
+00527             \{ \textcolor{stringliteral}{"decodeRelacionCombAireBasica"}, \hyperlink{decoders_8cpp_ade77bb9f8d8a2ba3aa431cdf9bdd0c32}{decodeRelacionCombAireBasica}\}
+00528         \};
+00529         this->decoderFunctionsStructOx = \{
+00530             \{ \textcolor{stringliteral}{"decodeSensorOxigeno"}, \hyperlink{decoders_8cpp_a5b53fc5fc37fbee9c5e389f6c8c18438}{decodeSensorOxigeno}\},
+00531             \{ \textcolor{stringliteral}{"decodeRelacionCombAire"}, \hyperlink{decoders_8cpp_a363bd4f505969098be58a175f02b9b50}{decodeRelacionCombAire}\},
+00532             \{ \textcolor{stringliteral}{"decodeRelacionCombAireActual"}, \hyperlink{decoders_8cpp_a4cedb500095b25b3d4fff382094b0eb9}{decodeRelacionCombAireActual}\}
+00533         \};
+00534 
+00535         this->decoderFunctionsStructRel[\textcolor{stringliteral}{"decodeRelaciones"}] = \hyperlink{decoders_8cpp_a88d7079325bf81705583d9f2101cfa15}{decodeRelaciones};
+00536         this->decoderFunctionsVectorInt[\textcolor{stringliteral}{"decodePIDS"}] = \hyperlink{decoders_8cpp_aef44cca306ed9c74b146d2b7dd058763}{decodePIDS};
+00537         this->decoderFunctionsVectorStr[\textcolor{stringliteral}{"decodeDTCs"}] = \hyperlink{decoders_8cpp_aac9b3d4ea17ee4dbbdf755b0b510137a}{decodeDTCs};
+00538         this->decoderFunctionsStr = \{
+00539             \{\textcolor{stringliteral}{"decodeVIN"}, \hyperlink{decoders_8cpp_a66754738119854c13a74265e209083e4}{decodeVIN}\},
+00540             \{\textcolor{stringliteral}{"decodeDescribeProtocol"}, \hyperlink{decoders_8cpp_ab83ce79cd098ea655f3812488e304a0c}{decodeDescribeProtocol}\}
+00541         \};
+00542         this->decoderFunctionsMap[\textcolor{stringliteral}{"decodeStatus"}] = \hyperlink{decoders_8cpp_aca9cad863d8603615597a0291804c8ae}{decodeStatus};
+00543         this->noDecodeFunctionAT[\textcolor{stringliteral}{"noDecodeAT"}] = \hyperlink{decoders_8cpp_a8ee851a37675f190ea728d6b2f0cdc92}{noDecodeAT};
+00544     \}
+00545 
+\Hypertarget{Obd_8hpp_source_l00552}\hyperlink{classObd_a95d02f8f3c48557c5ad799ecb6dd7f79}{00552}     \textcolor{keywordtype}{void} \hyperlink{classObd_a95d02f8f3c48557c5ad799ecb6dd7f79}{disconnectBluetooth}()\{
+00553         \hyperlink{debug_8hpp_a55f41cf7b0585224496de3d7adbc101c}{debugLog}(\textcolor{stringliteral}{"Desconectando dispositivo Bluetooth"});
+00554         close(this->m\_cli\_s);
+00555         close(this->epoll\_fd);
+00556     \}
+00557 
+\Hypertarget{Obd_8hpp_source_l00564}\hyperlink{classObd_aeff55ecb0a0a4278a22f20db3d2e17e3}{00564}     \textcolor{keywordtype}{bool} \hyperlink{classObd_aeff55ecb0a0a4278a22f20db3d2e17e3}{existPID}(std::string command)\{
+00565         \textcolor{keywordtype}{bool} exists = \textcolor{keyword}{false};
+00566         \textcolor{comment}{//Comprueba en la lista de PIDs que el comando este implementado}
+00567         \textcolor{keywordflow}{for} (uint32\_t i = 0; i < this->vecPIDs.size(); ++i)\{
+00568             \textcolor{keywordflow}{if}(!this->vecPIDs[i].compare(command))\{
+00569                 exists = \textcolor{keyword}{true};
+00570                 \textcolor{keywordflow}{break};
+00571             \}
+00572         \}
+00573         \textcolor{keywordflow}{return} exists;
+00574     \}
+00575     
+\Hypertarget{Obd_8hpp_source_l00583}\hyperlink{classObd_abf7e84f45236ea1c78c762ac895c532c}{00583}     \textcolor{keywordtype}{void} \hyperlink{classObd_abf7e84f45236ea1c78c762ac895c532c}{printPIDs}()\{
+00584         \textcolor{comment}{//Iteración para imprimir por consola los PIDs disponibles}
+00585         \textcolor{keywordflow}{for} (std::map<std::string, Commands>::iterator it=this->map\_commands.begin(); it!=this->
       map\_commands.end(); ++it)\{
-00582             \hyperlink{classCommands}{Commands} command = it->second;
-00583             std::string str\_cmd = command.\hyperlink{classCommands_a9aee21ab91fdfc8e9daa59e1e8f20b73}{getCMD}();
-00584             \textcolor{keywordflow}{for} (uint32\_t i = 0; i < this->vecPIDs.size(); ++i)\{
-00585                 \textcolor{keywordflow}{if}(!str\_cmd.compare(this->vecPIDs[i]))\{
-00586                     std::cout << str\_cmd << \textcolor{stringliteral}{" - "}<< command.\hyperlink{classCommands_adf3d8a96310b1f4e57a6ecf0f2f153ea}{getName}() << \textcolor{stringliteral}{" - "} << command.
+00586             \hyperlink{classCommands}{Commands} command = it->second;
+00587             std::string str\_cmd = command.\hyperlink{classCommands_a9aee21ab91fdfc8e9daa59e1e8f20b73}{getCMD}();
+00588             \textcolor{keywordflow}{for} (uint32\_t i = 0; i < this->vecPIDs.size(); ++i)\{
+00589                 \textcolor{keywordflow}{if}(!str\_cmd.compare(this->vecPIDs[i]))\{
+00590                     std::cout << str\_cmd << \textcolor{stringliteral}{" - "}<< command.\hyperlink{classCommands_adf3d8a96310b1f4e57a6ecf0f2f153ea}{getName}() << \textcolor{stringliteral}{" - "} << command.
       \hyperlink{classCommands_ad82fe7dfcf1908423bdb59d048020e26}{getDescription}() << \textcolor{stringliteral}{" - Min="} << command.\hyperlink{classCommands_af0a1e2ea65b5a57997c721a8d77a1013}{getMIN}() << \textcolor{stringliteral}{" Max="} << command.
       \hyperlink{classCommands_afbad1051313d0cdecba276384cb7fc6b}{getMAX}() << std::endl;
-00587                     \textcolor{keywordflow}{break};
-00588                 \}
-00589             \}
-00590         \}
-00591     \}
-00592 
-\Hypertarget{Obd_8hpp_source_l00599}\hyperlink{classObd_a0938bfdd6d05795e826a239cc0f29f32}{00599}     \textcolor{keywordtype}{void} \hyperlink{classObd_a0938bfdd6d05795e826a239cc0f29f32}{printStatus}()\{
-00600         \textcolor{comment}{//Imprime por consola los resultados de las pruebas del comando STATUS}
-00601         \textcolor{keywordflow}{for} (std::map<std::string, std::string>::iterator it=this->mapStatus.begin(); it!=this->mapStatus.
+00591                     \textcolor{keywordflow}{break};
+00592                 \}
+00593             \}
+00594         \}
+00595     \}
+00596 
+\Hypertarget{Obd_8hpp_source_l00603}\hyperlink{classObd_a0938bfdd6d05795e826a239cc0f29f32}{00603}     \textcolor{keywordtype}{void} \hyperlink{classObd_a0938bfdd6d05795e826a239cc0f29f32}{printStatus}()\{
+00604         \textcolor{comment}{//Imprime por consola los resultados de las pruebas del comando STATUS}
+00605         \textcolor{keywordflow}{for} (std::map<std::string, std::string>::iterator it=this->mapStatus.begin(); it!=this->mapStatus.
       end(); ++it)\{
-00602             std::cout << it->first << \textcolor{stringliteral}{" -> "} << it->second << std::endl;
-00603         \}
-00604     \}
-00605 
-\Hypertarget{Obd_8hpp_source_l00611}\hyperlink{classObd_ad88a0f25a7e3961726737915668ee13d}{00611}     std::string \hyperlink{classObd_ad88a0f25a7e3961726737915668ee13d}{getVIN}()\{
-00612         \textcolor{comment}{//Devuelve el número de identificación del vehículo}
-00613         \textcolor{keywordflow}{return} this->vin;
-00614     \}
-00615     
-\Hypertarget{Obd_8hpp_source_l00624}\hyperlink{classObd_ac57afb9228d933c6be5b2fa8e6446036}{00624}     std::vector<std::string> \hyperlink{classObd_ac57afb9228d933c6be5b2fa8e6446036}{getDTCs}()\{
-00625         time\_t curr\_time;
-00626         tm *curr\_tm;
-00627         \textcolor{keywordtype}{char} date\_string[100];
-00628         \textcolor{keywordtype}{char} time\_string[100];
-00629         time(&curr\_time);
-00630 
-00631         curr\_tm = localtime(&curr\_time);
-00632         strftime(date\_string, 50, \textcolor{stringliteral}{"%d/%m/%Y"}, curr\_tm);
-00633         strftime(time\_string, 50, \textcolor{stringliteral}{"%T"}, curr\_tm);
-00634         std::cout << date\_string << \textcolor{stringliteral}{" "} << time\_string << std::endl;
-00635 
-00636         \textcolor{comment}{//Consulta de DTC del vehículo}
-00637         this->\hyperlink{classObd_a453591bc9a280e8d44d82025ce8590e9}{send}(this->map\_commands.find(\textcolor{stringliteral}{"STATUS"})->second);
-00638         \textcolor{keywordflow}{if} (this->mapStatus[\textcolor{stringliteral}{"DTC\_CNT"}].compare(\textcolor{stringliteral}{"0"}))\{
-00639             this->\hyperlink{classObd_a453591bc9a280e8d44d82025ce8590e9}{send}(this->map\_commands.find(\textcolor{stringliteral}{"GET\_DTC"})->second);
-00640         \} \textcolor{keywordflow}{else} \{
-00641             std::cout << \textcolor{stringliteral}{"No hay DTC disponibles"} << std::endl;
-00642         \}
-00643         \textcolor{keywordflow}{return} this->vecDTCs;
-00644     \}
-00645 
-\Hypertarget{Obd_8hpp_source_l00651}\hyperlink{classObd_ae28b765bb787467f929eae932133d2aa}{00651}     \textcolor{keywordtype}{bool} \hyperlink{classObd_ae28b765bb787467f929eae932133d2aa}{isValid}()\{
-00652         \textcolor{comment}{//Bool del estado de la conexión bluetooth}
-00653         \textcolor{keywordflow}{return} this->m\_status;
-00654     \}
-00655 \textcolor{keyword}{private}:
-00656     \textcolor{comment}{// Atributos privados de la clase "Obd"}
-00657     std::vector<std::string> vecPIDs; 
-00658     std::vector<std::string> vecDTCs; 
-00659     std::string vin; 
-00660     std::string currentProtocol; 
-00661     std::string currentProtocolNumber; 
-00662     std::map<std::string, std::string> mapStatus; 
-00664     std::map<std::string, std::function<void()>> noDecodeFunctionAT; 
-00665     std::map<std::string, std::function<float(char *)>> decoderFunctionsFloat; 
-00666     std::map<std::string, std::function<struct OxigenoResponse(char *)>> decoderFunctionsStructOx; 
-00667     std::map<std::string, std::function<struct RelacionesResponse(char *)>> decoderFunctionsStructRel; 
-00668     std::map<std::string, std::function<std::vector<int>(\textcolor{keywordtype}{char} *)>> decoderFunctionsVectorInt; 
-00669     std::map<std::string, std::function<std::vector<std::string>(\textcolor{keywordtype}{char} *)>> decoderFunctionsVectorStr; 
-00670     std::map<std::string, std::function<std::string(char *)>> decoderFunctionsStr; 
-00671     std::map<std::string, std::function<std::map<std::string, std::string>(\textcolor{keywordtype}{char} *)>> decoderFunctionsMap; 
-00673     \textcolor{keywordtype}{char} dest[19] = \{ 0 \}; 
-00674     \textcolor{keywordtype}{int} m\_cli\_s; 
-00675     \textcolor{keywordtype}{bool} m\_deviceFound = \textcolor{keyword}{false}; 
-00676     \textcolor{keywordtype}{bool} m\_status = \textcolor{keyword}{false}; 
-00677     \textcolor{keywordtype}{int} epoll\_fd; 
-00678     \textcolor{keyword}{struct }epoll\_event ev; 
-00679 \};
-00680 
-00681 
-00682 \textcolor{preprocessor}{#endif}
+00606             std::cout << it->first << \textcolor{stringliteral}{" -> "} << it->second << std::endl;
+00607         \}
+00608     \}
+00609 
+\Hypertarget{Obd_8hpp_source_l00615}\hyperlink{classObd_ad88a0f25a7e3961726737915668ee13d}{00615}     std::string \hyperlink{classObd_ad88a0f25a7e3961726737915668ee13d}{getVIN}()\{
+00616         \textcolor{comment}{//Devuelve el número de identificación del vehículo}
+00617         \textcolor{keywordflow}{return} this->vin;
+00618     \}
+00619     
+\Hypertarget{Obd_8hpp_source_l00628}\hyperlink{classObd_ac57afb9228d933c6be5b2fa8e6446036}{00628}     std::vector<std::string> \hyperlink{classObd_ac57afb9228d933c6be5b2fa8e6446036}{getDTCs}()\{
+00629         time\_t curr\_time;
+00630         tm *curr\_tm;
+00631         \textcolor{keywordtype}{char} date\_string[100];
+00632         \textcolor{keywordtype}{char} time\_string[100];
+00633         time(&curr\_time);
+00634 
+00635         curr\_tm = localtime(&curr\_time);
+00636         strftime(date\_string, 50, \textcolor{stringliteral}{"%d/%m/%Y"}, curr\_tm);
+00637         strftime(time\_string, 50, \textcolor{stringliteral}{"%T"}, curr\_tm);
+00638         std::cout << date\_string << \textcolor{stringliteral}{" "} << time\_string << std::endl;
+00639 
+00640         \textcolor{comment}{//Consulta de DTC del vehículo}
+00641         this->\hyperlink{classObd_a453591bc9a280e8d44d82025ce8590e9}{send}(this->map\_commands.find(\textcolor{stringliteral}{"STATUS"})->second);
+00642         \textcolor{keywordflow}{if} (this->mapStatus[\textcolor{stringliteral}{"DTC\_CNT"}].compare(\textcolor{stringliteral}{"0"}))\{
+00643             this->\hyperlink{classObd_a453591bc9a280e8d44d82025ce8590e9}{send}(this->map\_commands.find(\textcolor{stringliteral}{"GET\_DTC"})->second);
+00644         \} \textcolor{keywordflow}{else} \{
+00645             std::cout << \textcolor{stringliteral}{"No hay DTC disponibles"} << std::endl;
+00646         \}
+00647         \textcolor{keywordflow}{return} this->vecDTCs;
+00648     \}
+00649 
+\Hypertarget{Obd_8hpp_source_l00655}\hyperlink{classObd_ae28b765bb787467f929eae932133d2aa}{00655}     \textcolor{keywordtype}{bool} \hyperlink{classObd_ae28b765bb787467f929eae932133d2aa}{isValid}()\{
+00656         \textcolor{comment}{//Bool del estado de la conexión bluetooth}
+00657         \textcolor{keywordflow}{return} this->m\_status;
+00658     \}
+00659 \textcolor{keyword}{private}:
+00660     \textcolor{comment}{// Atributos privados de la clase "Obd"}
+00661     std::vector<std::string> vecPIDs; 
+00662     std::vector<std::string> vecDTCs; 
+00663     std::string vin; 
+00664     std::string currentProtocol; 
+00665     std::string currentProtocolNumber; 
+00666     std::map<std::string, std::string> mapStatus; 
+00668     std::map<std::string, std::function<void()>> noDecodeFunctionAT; 
+00669     std::map<std::string, std::function<float(char *)>> decoderFunctionsFloat; 
+00670     std::map<std::string, std::function<struct OxigenoResponse(char *)>> decoderFunctionsStructOx; 
+00671     std::map<std::string, std::function<struct RelacionesResponse(char *)>> decoderFunctionsStructRel; 
+00672     std::map<std::string, std::function<std::vector<int>(\textcolor{keywordtype}{char} *)>> decoderFunctionsVectorInt; 
+00673     std::map<std::string, std::function<std::vector<std::string>(\textcolor{keywordtype}{char} *)>> decoderFunctionsVectorStr; 
+00674     std::map<std::string, std::function<std::string(char *)>> decoderFunctionsStr; 
+00675     std::map<std::string, std::function<std::map<std::string, std::string>(\textcolor{keywordtype}{char} *)>> decoderFunctionsMap; 
+00677     \textcolor{keywordtype}{char} dest[19] = \{ 0 \}; 
+00678     \textcolor{keywordtype}{int} m\_cli\_s; 
+00679     \textcolor{keywordtype}{bool} m\_deviceFound = \textcolor{keyword}{false}; 
+00680     \textcolor{keywordtype}{bool} m\_status = \textcolor{keyword}{false}; 
+00681     \textcolor{keywordtype}{int} epoll\_fd; 
+00682     \textcolor{keyword}{struct }epoll\_event ev; 
+00683 \};
+00684 
+00685 
+00686 \textcolor{preprocessor}{#endif}
 \end{DoxyCode}

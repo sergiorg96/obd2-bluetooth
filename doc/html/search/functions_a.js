@@ -1,4 +1,6 @@
 var searchData=
 [
-  ['obd',['Obd',['../classObd.html#abd8375cee2ad218a9ae8b464d7b1d63f',1,'Obd']]]
+  ['polling',['polling',['../classObd.html#a0792ecb9247f32760269fdf64a178f8f',1,'Obd']]],
+  ['printpids',['printPIDs',['../classObd.html#abf7e84f45236ea1c78c762ac895c532c',1,'Obd']]],
+  ['printstatus',['printStatus',['../classObd.html#a0938bfdd6d05795e826a239cc0f29f32',1,'Obd']]]
 ];

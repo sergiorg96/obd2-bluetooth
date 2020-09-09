@@ -103,17 +103,21 @@ Funciones</h2></td></tr>
 <tr class="memitem:ae9f15809d7998bb4a7404d34bb87a5e3"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="UnitTestCase_8cpp.html#ae9f15809d7998bb4a7404d34bb87a5e3">getMinicomCMD</a> (char *cmd)</td></tr>
 <tr class="memdesc:ae9f15809d7998bb4a7404d34bb87a5e3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Función que obtiene el comando Minicom para la primera conexión con el simulador OBDSIM.  <a href="#ae9f15809d7998bb4a7404d34bb87a5e3">Más...</a><br /></td></tr>
 <tr class="separator:ae9f15809d7998bb4a7404d34bb87a5e3"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a4460093e274738a0e1bbb551c1d1d3fd"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="UnitTestCase_8cpp.html#a4460093e274738a0e1bbb551c1d1d3fd">initOBDSIM</a> ()</td></tr>
-<tr class="memdesc:a4460093e274738a0e1bbb551c1d1d3fd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Función de inicialización del simulador OBDSIM.  <a href="#a4460093e274738a0e1bbb551c1d1d3fd">Más...</a><br /></td></tr>
-<tr class="separator:a4460093e274738a0e1bbb551c1d1d3fd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a15137ff9ba6032f171a43694f159ada6"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="UnitTestCase_8cpp.html#a15137ff9ba6032f171a43694f159ada6">initOBDSIM</a> (std::string tipoSimulador, int tiempoEspera)</td></tr>
+<tr class="memdesc:a15137ff9ba6032f171a43694f159ada6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Función de inicialización del simulador OBDSIM.  <a href="#a15137ff9ba6032f171a43694f159ada6">Más...</a><br /></td></tr>
+<tr class="separator:a15137ff9ba6032f171a43694f159ada6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad24bf860f798931c63aaa488e08b8b4e"><td class="memItemLeft" align="right" valign="top"><a id="ad24bf860f798931c63aaa488e08b8b4e"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="UnitTestCase_8cpp.html#ad24bf860f798931c63aaa488e08b8b4e">closeOBDSIM</a> ()</td></tr>
 <tr class="memdesc:ad24bf860f798931c63aaa488e08b8b4e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Función de finalización del simulador OBDSIM. <br /></td></tr>
 <tr class="separator:ad24bf860f798931c63aaa488e08b8b4e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a094ceea8956a9b495823bde621ea759a"><td class="memItemLeft" align="right" valign="top"><a id="a094ceea8956a9b495823bde621ea759a"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="UnitTestCase_8cpp.html#a094ceea8956a9b495823bde621ea759a">TEST_CASE</a> (&quot;Test OBD class&quot;, &quot;[OBD]&quot;)</td></tr>
-<tr class="memdesc:a094ceea8956a9b495823bde621ea759a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Prueba de integración para el funcionamiento general del sistema. <br /></td></tr>
-<tr class="separator:a094ceea8956a9b495823bde621ea759a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab1b7b485076e7de68cd9912827a8ee86"><td class="memItemLeft" align="right" valign="top"><a id="ab1b7b485076e7de68cd9912827a8ee86"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="UnitTestCase_8cpp.html#ab1b7b485076e7de68cd9912827a8ee86">TEST_CASE</a> (&quot;Test OBD class DTC&quot;, &quot;[OBD]&quot;)</td></tr>
+<tr class="memdesc:ab1b7b485076e7de68cd9912827a8ee86"><td class="mdescLeft">&#160;</td><td class="mdescRight">Prueba de integración para el funcionamiento de la obtención de DTC y PIDS disponibles. <br /></td></tr>
+<tr class="separator:ab1b7b485076e7de68cd9912827a8ee86"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a88458940ca41021a9d50ac249c995fd1"><td class="memItemLeft" align="right" valign="top"><a id="a88458940ca41021a9d50ac249c995fd1"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="UnitTestCase_8cpp.html#a88458940ca41021a9d50ac249c995fd1">TEST_CASE</a> (&quot;Test OBD class data SPEED&quot;, &quot;[OBD]&quot;)</td></tr>
+<tr class="memdesc:a88458940ca41021a9d50ac249c995fd1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Prueba de integración para el funcionamiento de solicitud de un dato continúo (velocidad). <br /></td></tr>
+<tr class="separator:a88458940ca41021a9d50ac249c995fd1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa01bede4cf032808617f744cfdc34e85"><td class="memItemLeft" align="right" valign="top"><a id="aa01bede4cf032808617f744cfdc34e85"></a>
 &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="UnitTestCase_8cpp.html#aa01bede4cf032808617f744cfdc34e85">TEST_CASE</a> (&quot;Test Revoluciones Por Minuto&quot;, &quot;[decoders]&quot;)</td></tr>
 <tr class="memdesc:aa01bede4cf032808617f744cfdc34e85"><td class="mdescLeft">&#160;</td><td class="mdescRight">Prueba unitaria del decodificador RPM. <br /></td></tr>
@@ -174,10 +178,10 @@ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="Unit
 &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="UnitTestCase_8cpp.html#a27f82a7800b27dd78331e6ee707cb5f8">TEST_CASE</a> (&quot;Comprobación Diagnostic Trouble Codes&quot;, &quot;[DTC]&quot;)</td></tr>
 <tr class="memdesc:a27f82a7800b27dd78331e6ee707cb5f8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Prueba unitaria del conversor del primer byte DTC. <br /></td></tr>
 <tr class="separator:a27f82a7800b27dd78331e6ee707cb5f8"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a666839d6a4f130bd11ac0466c9796884"><td class="memItemLeft" align="right" valign="top"><a id="a666839d6a4f130bd11ac0466c9796884"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="UnitTestCase_8cpp.html#a666839d6a4f130bd11ac0466c9796884">TEST_CASE</a> (&quot;Test VIN (Vehicle Identification Number)&quot;, &quot;[decoders]&quot;)</td></tr>
-<tr class="memdesc:a666839d6a4f130bd11ac0466c9796884"><td class="mdescLeft">&#160;</td><td class="mdescRight">Prueba unitaria del Número de Identificación del vehículo. <br /></td></tr>
-<tr class="separator:a666839d6a4f130bd11ac0466c9796884"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3c8d23281675ad40ff5cd11d163c1213"><td class="memItemLeft" align="right" valign="top"><a id="a3c8d23281675ad40ff5cd11d163c1213"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="UnitTestCase_8cpp.html#a3c8d23281675ad40ff5cd11d163c1213">TEST_CASE</a> (&quot;Test VIN (Vehicle Identification Number) ISO15765-4 CAN&quot;, &quot;[decoders]&quot;)</td></tr>
+<tr class="memdesc:a3c8d23281675ad40ff5cd11d163c1213"><td class="mdescLeft">&#160;</td><td class="mdescRight">Prueba unitaria del Número de Identificación del vehículo. <br /></td></tr>
+<tr class="separator:a3c8d23281675ad40ff5cd11d163c1213"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ada6898123ac1c26cdb74330eea16b825"><td class="memItemLeft" align="right" valign="top"><a id="ada6898123ac1c26cdb74330eea16b825"></a>
 &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="UnitTestCase_8cpp.html#ada6898123ac1c26cdb74330eea16b825">TEST_CASE</a> (&quot;Test Describir el Protocolo Actual&quot;, &quot;[decoders]&quot;)</td></tr>
 <tr class="memdesc:ada6898123ac1c26cdb74330eea16b825"><td class="mdescLeft">&#160;</td><td class="mdescRight">Prueba unitaria del decodificador de descriptor del protocolo actual. <br /></td></tr>
@@ -263,7 +267,7 @@ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="Unit
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Macro con el tiempo de espera del simulador OBDSIM para introducir valores </p>
+<p>Macro con el tiempo de espera en segundos del simulador OBDSIM para introducir valores </p>
 
 <p class="definition">Definición en la línea <a class="el" href="UnitTestCase_8cpp_source.html#l00016">16</a> del archivo <a class="el" href="UnitTestCase_8cpp_source.html">UnitTestCase.cpp</a>.</p>
 
@@ -294,12 +298,12 @@ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="Unit
   </dd>
 </dl>
 
-<p class="definition">Definición en la línea <a class="el" href="UnitTestCase_8cpp_source.html#l00026">26</a> del archivo <a class="el" href="UnitTestCase_8cpp_source.html">UnitTestCase.cpp</a>.</p>
+<p class="definition">Definición en la línea <a class="el" href="UnitTestCase_8cpp_source.html#l00027">27</a> del archivo <a class="el" href="UnitTestCase_8cpp_source.html">UnitTestCase.cpp</a>.</p>
 
 </div>
 </div>
-<a id="a4460093e274738a0e1bbb551c1d1d3fd"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a4460093e274738a0e1bbb551c1d1d3fd">&#9670;&nbsp;</a></span>initOBDSIM()</h2>
+<a id="a15137ff9ba6032f171a43694f159ada6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a15137ff9ba6032f171a43694f159ada6">&#9670;&nbsp;</a></span>initOBDSIM()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -307,16 +311,34 @@ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="Unit
         <tr>
           <td class="memname">void initOBDSIM </td>
           <td>(</td>
-          <td class="paramname"></td><td>)</td>
+          <td class="paramtype">std::string&#160;</td>
+          <td class="paramname"><em>tipoSimulador</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
           <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>tiempoEspera</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
         </tr>
       </table>
 </div><div class="memdoc">
 
 <p>Función de inicialización del simulador OBDSIM. </p>
+<dl class="params"><dt>Parámetros</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">tipoSimulador</td><td>String para indicar el tipo de simulador a iniciar. </td></tr>
+    <tr><td class="paramname">tiempoEspera</td><td>Entero con el número de segundos de espera del simulador.</td></tr>
+  </table>
+  </dd>
+</dl>
 <p>Inicializa el simulador con entorno gráfico permitiendo la introducción de DTC y otros valores para las pruebas. </p>
 
-<p class="definition">Definición en la línea <a class="el" href="UnitTestCase_8cpp_source.html#l00040">40</a> del archivo <a class="el" href="UnitTestCase_8cpp_source.html">UnitTestCase.cpp</a>.</p>
+<p class="definition">Definición en la línea <a class="el" href="UnitTestCase_8cpp_source.html#l00047">47</a> del archivo <a class="el" href="UnitTestCase_8cpp_source.html">UnitTestCase.cpp</a>.</p>
 
 </div>
 </div>

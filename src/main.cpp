@@ -1,6 +1,6 @@
 #include "Obd.hpp"
-#include "picangps.hpp"
 #include "alarmfile.hpp"
+#include "gpsclient.hpp"
 
 typedef  std::map <std::string, std::string> cfgType;
 
@@ -23,7 +23,7 @@ std::string formMessageJSON(std::string macAddress, std::string geoPos, std::str
 
 	json data;
 
-	std::vector<int> coordenadas;
+	std::vector<std::string> coordenadas;
 	
 	char* geoPosChar = const_cast<char*>(geoPos.c_str());
 
@@ -32,7 +32,7 @@ std::string formMessageJSON(std::string macAddress, std::string geoPos, std::str
     		if(token != NULL){
         		while(token != NULL){
             	// Sólo en la primera pasamos la cadena; en las siguientes pasamos NULL
-            	coordenadas.push_back(atoi(token));
+            	coordenadas.push_back(token);
             	token = strtok(NULL, ",");
         		}
     		}
@@ -57,6 +57,8 @@ std::string formMessageJSON(std::string macAddress, std::string geoPos, std::str
 	return msg;
 }
 
+
+
 int main()
 {
 	//Variable para cargar información de configuración
@@ -73,6 +75,7 @@ int main()
 		debugLog("Valores pasados:\nIP: %s\nPuerto: %s", variablesCfg["IP"].c_str(), variablesCfg["PORT"].c_str());
 		//Configuración de dirección y puerto del servidor para enviar los DTC's
 		AlarmFile fileAlr = AlarmFile(variablesCfg["IP"].c_str(), variablesCfg["PORT"].c_str(), variablesCfg["ALARM-FILE-NAME"].c_str(), variablesCfg["ALARM-FILE-NAME"].c_str());
+		GpsClient g(std::string(variablesCfg["PORT-GPS"].c_str()), std::string("10"));
 		//Dirección MAC para identificar el vehículo de origen de los datos
 		std::string macAddress = getmac(variablesCfg["INTERFACE-NAME"].c_str());
 
@@ -87,7 +90,8 @@ int main()
 				std::cout << "No hay DTCs" << std::endl;
 			} else {
 				//Si hay algún DTC se obtiene la geoposición en la que se detectó
-				std::string geoPos = fileAlr.getGeoPos(variablesCfg["PORT-GPS"].c_str());
+				//std::string geoPos = fileAlr.getGeoPos(variablesCfg["PORT-GPS"].c_str());
+				std::string geoPos = g.getGPS();
 				std::cout << "Códigos de errores DTCs:" << std::endl;
 				for (uint32_t i = 0; i < vecDTCs.size(); ++i){
 					std::cout <<  "#############################" << std::endl;

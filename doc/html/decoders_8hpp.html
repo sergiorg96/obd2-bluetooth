@@ -85,8 +85,6 @@ $(function() {
 Dependencia gráfica adjunta para decoders.hpp:</div>
 <div class="dyncontent">
 <div class="center"><img src="decoders_8hpp__incl.png" border="0" usemap="#decoders_8hpp" alt=""/></div>
-<map name="decoders_8hpp" id="decoders_8hpp">
-</map>
 </div>
 </div><div class="textblock"><div class="dynheader">
 Gráfico de los archivos que directa o indirectamente incluyen a este archivo:</div>
@@ -138,7 +136,7 @@ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="deco
 <tr class="memdesc:a4f18f411252f4c60fae4af320989c262"><td class="mdescLeft">&#160;</td><td class="mdescRight">Función de conversión del primer byte del DTC en su valor correspondiente.  <a href="#a4f18f411252f4c60fae4af320989c262">Más...</a><br /></td></tr>
 <tr class="separator:a4f18f411252f4c60fae4af320989c262"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a66754738119854c13a74265e209083e4"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="decoders_8hpp.html#a66754738119854c13a74265e209083e4">decodeVIN</a> (char *response)</td></tr>
-<tr class="memdesc:a66754738119854c13a74265e209083e4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Función de decodificación del Número de Identificación del Vehículo (VIN).  <a href="#a66754738119854c13a74265e209083e4">Más...</a><br /></td></tr>
+<tr class="memdesc:a66754738119854c13a74265e209083e4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Función de decodificación del Número de Identificación del Vehículo (VIN) para ISO15765-4 CAN.  <a href="#a66754738119854c13a74265e209083e4">Más...</a><br /></td></tr>
 <tr class="separator:a66754738119854c13a74265e209083e4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab83ce79cd098ea655f3812488e304a0c"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="decoders_8hpp.html#ab83ce79cd098ea655f3812488e304a0c">decodeDescribeProtocol</a> (char *response)</td></tr>
 <tr class="memdesc:ab83ce79cd098ea655f3812488e304a0c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Función de decodificación del protocolo de funcionamiento actual.  <a href="#ab83ce79cd098ea655f3812488e304a0c">Más...</a><br /></td></tr>
@@ -265,7 +263,7 @@ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="deco
 </dl>
 <dl class="section return"><dt>Devuelve</dt><dd>String de DTC con el primer byte convertido. </dd></dl>
 
-<p class="definition">Definición en la línea <a class="el" href="decoders_8cpp_source.html#l00047">47</a> del archivo <a class="el" href="decoders_8cpp_source.html">decoders.cpp</a>.</p>
+<p class="definition">Definición en la línea <a class="el" href="decoders_8cpp_source.html#l00071">71</a> del archivo <a class="el" href="decoders_8cpp_source.html">decoders.cpp</a>.</p>
 
 </div>
 </div>
@@ -294,7 +292,7 @@ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="deco
 </dl>
 <dl class="section return"><dt>Devuelve</dt><dd>Float del valor de la respuesta decodificada. </dd></dl>
 
-<p class="definition">Definición en la línea <a class="el" href="decoders_8cpp_source.html#l00284">284</a> del archivo <a class="el" href="decoders_8cpp_source.html">decoders.cpp</a>.</p>
+<p class="definition">Definición en la línea <a class="el" href="decoders_8cpp_source.html#l00308">308</a> del archivo <a class="el" href="decoders_8cpp_source.html">decoders.cpp</a>.</p>
 
 </div>
 </div>
@@ -323,7 +321,7 @@ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="deco
 </dl>
 <dl class="section return"><dt>Devuelve</dt><dd>Float del valor de la respuesta decodificada. </dd></dl>
 
-<p class="definition">Definición en la línea <a class="el" href="decoders_8cpp_source.html#l00316">316</a> del archivo <a class="el" href="decoders_8cpp_source.html">decoders.cpp</a>.</p>
+<p class="definition">Definición en la línea <a class="el" href="decoders_8cpp_source.html#l00340">340</a> del archivo <a class="el" href="decoders_8cpp_source.html">decoders.cpp</a>.</p>
 
 </div>
 </div>
@@ -352,7 +350,7 @@ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="deco
 </dl>
 <dl class="section return"><dt>Devuelve</dt><dd>Float del valor de la respuesta decodificada. </dd></dl>
 
-<p class="definition">Definición en la línea <a class="el" href="decoders_8cpp_source.html#l00270">270</a> del archivo <a class="el" href="decoders_8cpp_source.html">decoders.cpp</a>.</p>
+<p class="definition">Definición en la línea <a class="el" href="decoders_8cpp_source.html#l00294">294</a> del archivo <a class="el" href="decoders_8cpp_source.html">decoders.cpp</a>.</p>
 
 </div>
 </div>
@@ -410,7 +408,7 @@ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="deco
 </dl>
 <dl class="section return"><dt>Devuelve</dt><dd>Vector de strings con los DTC activos en el vehículo. </dd></dl>
 
-<p class="definition">Definición en la línea <a class="el" href="decoders_8cpp_source.html#l00086">86</a> del archivo <a class="el" href="decoders_8cpp_source.html">decoders.cpp</a>.</p>
+<p class="definition">Definición en la línea <a class="el" href="decoders_8cpp_source.html#l00110">110</a> del archivo <a class="el" href="decoders_8cpp_source.html">decoders.cpp</a>.</p>
 
 </div>
 </div>
@@ -439,7 +437,7 @@ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="deco
 </dl>
 <dl class="section return"><dt>Devuelve</dt><dd>Float del valor de la respuesta decodificada. </dd></dl>
 
-<p class="definition">Definición en la línea <a class="el" href="decoders_8cpp_source.html#l00298">298</a> del archivo <a class="el" href="decoders_8cpp_source.html">decoders.cpp</a>.</p>
+<p class="definition">Definición en la línea <a class="el" href="decoders_8cpp_source.html#l00322">322</a> del archivo <a class="el" href="decoders_8cpp_source.html">decoders.cpp</a>.</p>
 
 </div>
 </div>
@@ -468,7 +466,7 @@ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="deco
 </dl>
 <dl class="section return"><dt>Devuelve</dt><dd>Vector de enteros con los PIDS disponibles en el vehículo. </dd></dl>
 
-<p class="definition">Definición en la línea <a class="el" href="decoders_8cpp_source.html#l00112">112</a> del archivo <a class="el" href="decoders_8cpp_source.html">decoders.cpp</a>.</p>
+<p class="definition">Definición en la línea <a class="el" href="decoders_8cpp_source.html#l00136">136</a> del archivo <a class="el" href="decoders_8cpp_source.html">decoders.cpp</a>.</p>
 
 </div>
 </div>
@@ -497,7 +495,7 @@ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="deco
 </dl>
 <dl class="section return"><dt>Devuelve</dt><dd>Float del valor de la respuesta decodificada. </dd></dl>
 
-<p class="definition">Definición en la línea <a class="el" href="decoders_8cpp_source.html#l00384">384</a> del archivo <a class="el" href="decoders_8cpp_source.html">decoders.cpp</a>.</p>
+<p class="definition">Definición en la línea <a class="el" href="decoders_8cpp_source.html#l00408">408</a> del archivo <a class="el" href="decoders_8cpp_source.html">decoders.cpp</a>.</p>
 
 </div>
 </div>
@@ -526,7 +524,7 @@ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="deco
 </dl>
 <dl class="section return"><dt>Devuelve</dt><dd>Float del valor de la respuesta decodificada. </dd></dl>
 
-<p class="definition">Definición en la línea <a class="el" href="decoders_8cpp_source.html#l00291">291</a> del archivo <a class="el" href="decoders_8cpp_source.html">decoders.cpp</a>.</p>
+<p class="definition">Definición en la línea <a class="el" href="decoders_8cpp_source.html#l00315">315</a> del archivo <a class="el" href="decoders_8cpp_source.html">decoders.cpp</a>.</p>
 
 </div>
 </div>
@@ -555,7 +553,7 @@ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="deco
 </dl>
 <dl class="section return"><dt>Devuelve</dt><dd>Float del valor de la respuesta decodificada. </dd></dl>
 
-<p class="definition">Definición en la línea <a class="el" href="decoders_8cpp_source.html#l00391">391</a> del archivo <a class="el" href="decoders_8cpp_source.html">decoders.cpp</a>.</p>
+<p class="definition">Definición en la línea <a class="el" href="decoders_8cpp_source.html#l00415">415</a> del archivo <a class="el" href="decoders_8cpp_source.html">decoders.cpp</a>.</p>
 
 </div>
 </div>
@@ -584,7 +582,7 @@ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="deco
 </dl>
 <dl class="section return"><dt>Devuelve</dt><dd>Float del valor de la respuesta decodificada. </dd></dl>
 
-<p class="definition">Definición en la línea <a class="el" href="decoders_8cpp_source.html#l00442">442</a> del archivo <a class="el" href="decoders_8cpp_source.html">decoders.cpp</a>.</p>
+<p class="definition">Definición en la línea <a class="el" href="decoders_8cpp_source.html#l00466">466</a> del archivo <a class="el" href="decoders_8cpp_source.html">decoders.cpp</a>.</p>
 
 </div>
 </div>
@@ -613,7 +611,7 @@ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="deco
 </dl>
 <dl class="section return"><dt>Devuelve</dt><dd>Estructura <a class="el" href="structOxigenoResponse.html" title="Estructura de datos para las respuesta de dos valores en PIDS relacionados con gases de escape...">OxigenoResponse</a> con el valor A y B correspondiente al comando solicitado. </dd></dl>
 
-<p class="definition">Definición en la línea <a class="el" href="decoders_8cpp_source.html#l00398">398</a> del archivo <a class="el" href="decoders_8cpp_source.html">decoders.cpp</a>.</p>
+<p class="definition">Definición en la línea <a class="el" href="decoders_8cpp_source.html#l00422">422</a> del archivo <a class="el" href="decoders_8cpp_source.html">decoders.cpp</a>.</p>
 
 </div>
 </div>
@@ -642,7 +640,7 @@ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="deco
 </dl>
 <dl class="section return"><dt>Devuelve</dt><dd>Estructura <a class="el" href="structOxigenoResponse.html" title="Estructura de datos para las respuesta de dos valores en PIDS relacionados con gases de escape...">OxigenoResponse</a> con el valor A y B correspondiente al comando solicitado. </dd></dl>
 
-<p class="definition">Definición en la línea <a class="el" href="decoders_8cpp_source.html#l00453">453</a> del archivo <a class="el" href="decoders_8cpp_source.html">decoders.cpp</a>.</p>
+<p class="definition">Definición en la línea <a class="el" href="decoders_8cpp_source.html#l00477">477</a> del archivo <a class="el" href="decoders_8cpp_source.html">decoders.cpp</a>.</p>
 
 </div>
 </div>
@@ -671,7 +669,7 @@ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="deco
 </dl>
 <dl class="section return"><dt>Devuelve</dt><dd>Float del valor de la respuesta decodificada. </dd></dl>
 
-<p class="definition">Definición en la línea <a class="el" href="decoders_8cpp_source.html#l00496">496</a> del archivo <a class="el" href="decoders_8cpp_source.html">decoders.cpp</a>.</p>
+<p class="definition">Definición en la línea <a class="el" href="decoders_8cpp_source.html#l00520">520</a> del archivo <a class="el" href="decoders_8cpp_source.html">decoders.cpp</a>.</p>
 
 </div>
 </div>
@@ -700,7 +698,7 @@ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="deco
 </dl>
 <dl class="section return"><dt>Devuelve</dt><dd>Estructura <a class="el" href="structOxigenoResponse.html" title="Estructura de datos para las respuesta de dos valores en PIDS relacionados con gases de escape...">OxigenoResponse</a> con el valor A y B correspondiente al comando solicitado. </dd></dl>
 
-<p class="definition">Definición en la línea <a class="el" href="decoders_8cpp_source.html#l00520">520</a> del archivo <a class="el" href="decoders_8cpp_source.html">decoders.cpp</a>.</p>
+<p class="definition">Definición en la línea <a class="el" href="decoders_8cpp_source.html#l00544">544</a> del archivo <a class="el" href="decoders_8cpp_source.html">decoders.cpp</a>.</p>
 
 </div>
 </div>
@@ -729,7 +727,7 @@ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="deco
 </dl>
 <dl class="section return"><dt>Devuelve</dt><dd>Float del valor de la respuesta decodificada. </dd></dl>
 
-<p class="definition">Definición en la línea <a class="el" href="decoders_8cpp_source.html#l00305">305</a> del archivo <a class="el" href="decoders_8cpp_source.html">decoders.cpp</a>.</p>
+<p class="definition">Definición en la línea <a class="el" href="decoders_8cpp_source.html#l00329">329</a> del archivo <a class="el" href="decoders_8cpp_source.html">decoders.cpp</a>.</p>
 
 </div>
 </div>
@@ -758,7 +756,7 @@ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="deco
 </dl>
 <dl class="section return"><dt>Devuelve</dt><dd>Estructura <a class="el" href="structOxigenoResponse.html" title="Estructura de datos para las respuesta de dos valores en PIDS relacionados con gases de escape...">OxigenoResponse</a> con el valor A y B correspondiente al comando solicitado. </dd></dl>
 
-<p class="definition">Definición en la línea <a class="el" href="decoders_8cpp_source.html#l00341">341</a> del archivo <a class="el" href="decoders_8cpp_source.html">decoders.cpp</a>.</p>
+<p class="definition">Definición en la línea <a class="el" href="decoders_8cpp_source.html#l00365">365</a> del archivo <a class="el" href="decoders_8cpp_source.html">decoders.cpp</a>.</p>
 
 </div>
 </div>
@@ -787,7 +785,7 @@ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="deco
 </dl>
 <dl class="section return"><dt>Devuelve</dt><dd>Mapa string/string con el estado de los monitores de diagnóstico. </dd></dl>
 
-<p class="definition">Definición en la línea <a class="el" href="decoders_8cpp_source.html#l00128">128</a> del archivo <a class="el" href="decoders_8cpp_source.html">decoders.cpp</a>.</p>
+<p class="definition">Definición en la línea <a class="el" href="decoders_8cpp_source.html#l00152">152</a> del archivo <a class="el" href="decoders_8cpp_source.html">decoders.cpp</a>.</p>
 
 </div>
 </div>
@@ -816,7 +814,7 @@ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="deco
 </dl>
 <dl class="section return"><dt>Devuelve</dt><dd>Float del valor de la respuesta decodificada. </dd></dl>
 
-<p class="definition">Definición en la línea <a class="el" href="decoders_8cpp_source.html#l00476">476</a> del archivo <a class="el" href="decoders_8cpp_source.html">decoders.cpp</a>.</p>
+<p class="definition">Definición en la línea <a class="el" href="decoders_8cpp_source.html#l00500">500</a> del archivo <a class="el" href="decoders_8cpp_source.html">decoders.cpp</a>.</p>
 
 </div>
 </div>
@@ -845,7 +843,7 @@ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="deco
 </dl>
 <dl class="section return"><dt>Devuelve</dt><dd>Float del valor de la respuesta decodificada. </dd></dl>
 
-<p class="definition">Definición en la línea <a class="el" href="decoders_8cpp_source.html#l00277">277</a> del archivo <a class="el" href="decoders_8cpp_source.html">decoders.cpp</a>.</p>
+<p class="definition">Definición en la línea <a class="el" href="decoders_8cpp_source.html#l00301">301</a> del archivo <a class="el" href="decoders_8cpp_source.html">decoders.cpp</a>.</p>
 
 </div>
 </div>
@@ -874,7 +872,7 @@ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="deco
 </dl>
 <dl class="section return"><dt>Devuelve</dt><dd>Float del valor de la respuesta decodificada. </dd></dl>
 
-<p class="definition">Definición en la línea <a class="el" href="decoders_8cpp_source.html#l00327">327</a> del archivo <a class="el" href="decoders_8cpp_source.html">decoders.cpp</a>.</p>
+<p class="definition">Definición en la línea <a class="el" href="decoders_8cpp_source.html#l00351">351</a> del archivo <a class="el" href="decoders_8cpp_source.html">decoders.cpp</a>.</p>
 
 </div>
 </div>
@@ -894,7 +892,7 @@ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="deco
       </table>
 </div><div class="memdoc">
 
-<p>Función de decodificación del Número de Identificación del Vehículo (VIN). </p>
+<p>Función de decodificación del Número de Identificación del Vehículo (VIN) para ISO15765-4 CAN. </p>
 <dl class="params"><dt>Parámetros</dt><dd>
   <table class="params">
     <tr><td class="paramname">response</td><td>Cadena de caracteres con los bytes útiles de la respuesta del dispositivo ELM327. </td></tr>
@@ -932,7 +930,7 @@ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="deco
 </dl>
 <dl class="section return"><dt>Devuelve</dt><dd>Float del valor de la respuesta decodificada. </dd></dl>
 
-<p class="definition">Definición en la línea <a class="el" href="decoders_8cpp_source.html#l00485">485</a> del archivo <a class="el" href="decoders_8cpp_source.html">decoders.cpp</a>.</p>
+<p class="definition">Definición en la línea <a class="el" href="decoders_8cpp_source.html#l00509">509</a> del archivo <a class="el" href="decoders_8cpp_source.html">decoders.cpp</a>.</p>
 
 </div>
 </div>

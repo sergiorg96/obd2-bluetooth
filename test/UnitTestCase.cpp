@@ -97,12 +97,12 @@ void closeOBDSIM(){
 }
 
 /**
-* @brief Prueba de integración para el funcionamiento general del sistema.
+* @brief Prueba de integración para el funcionamiento de la obtención de DTC y PIDS disponibles.
 */
 
 TEST_CASE( "Test OBD class DTC", "[OBD]" ) {
     
-    debugLog("Comenzando test OBD class");
+    debugLog("Comenzando test OBD class DTC");
 
     debugLog("Iniciamos el simulador OBDSIM");
     // Iniciamos el simulador OBDSIM para las pruebas
@@ -116,6 +116,8 @@ TEST_CASE( "Test OBD class DTC", "[OBD]" ) {
 
 	REQUIRE (connection.isValid() == true);
 
+    connection.printStatus();
+
 	connection.getDTCs();
 
     std::cout << connection.map_commands.find("GET_DTC")->second.getJson().dump(4) << std::endl;
@@ -123,9 +125,13 @@ TEST_CASE( "Test OBD class DTC", "[OBD]" ) {
     closeOBDSIM();
 }
 
+/**
+* @brief Prueba de integración para el funcionamiento de solicitud de un dato continúo (velocidad).
+*/
+
 TEST_CASE( "Test OBD class data SPEED", "[OBD]" ) {
     
-    debugLog("Comenzando test OBD class");
+    debugLog("Comenzando test OBD class data SPEED");
 
     debugLog("Iniciamos el simulador OBDSIM");
     // Iniciamos el simulador OBDSIM para las pruebas
@@ -320,7 +326,7 @@ TEST_CASE( "Comprobación Diagnostic Trouble Codes", "[DTC]" ) {
 * @brief Prueba unitaria del Número de Identificación del vehículo.
 */
 
-TEST_CASE( "Test VIN (Vehicle Identification Number)", "[decoders]" ) {
+TEST_CASE( "Test VIN (Vehicle Identification Number) ISO15765-4 CAN", "[decoders]" ) {
     REQUIRE( decodeVIN((char *)"01573056\n1:3058455036384A\n2:34313430303530") == "W0V0XEP68J4140050");
     REQUIRE( decodeVIN((char *)"01314434\n1:47503030523535\n2:42313233343536") == "1D4GP00R55B123456");
 }

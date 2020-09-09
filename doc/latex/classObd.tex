@@ -110,7 +110,7 @@ Método de desconexión bluetooth con el dispositivo E\+L\+M327.
 
 Cierra el socket e instancia epoll abiertas. 
 
-Definición en la línea \hyperlink{Obd_8hpp_source_l00548}{548} del archivo \hyperlink{Obd_8hpp_source}{Obd.\+hpp}.
+Definición en la línea \hyperlink{Obd_8hpp_source_l00552}{552} del archivo \hyperlink{Obd_8hpp_source}{Obd.\+hpp}.
 
 \mbox{\Hypertarget{classObd_a59676f3fa1fd3052216b55be0a79c474}\label{classObd_a59676f3fa1fd3052216b55be0a79c474}} 
 \index{Obd@{Obd}!discover\+Device\+Address@{discover\+Device\+Address}}
@@ -153,7 +153,7 @@ Devuelve true si existe y false en caso contrario.
 \end{DoxyReturn}
 
 
-Definición en la línea \hyperlink{Obd_8hpp_source_l00560}{560} del archivo \hyperlink{Obd_8hpp_source}{Obd.\+hpp}.
+Definición en la línea \hyperlink{Obd_8hpp_source_l00564}{564} del archivo \hyperlink{Obd_8hpp_source}{Obd.\+hpp}.
 
 \mbox{\Hypertarget{classObd_ac57afb9228d933c6be5b2fa8e6446036}\label{classObd_ac57afb9228d933c6be5b2fa8e6446036}} 
 \index{Obd@{Obd}!get\+D\+T\+Cs@{get\+D\+T\+Cs}}
@@ -170,7 +170,7 @@ Vector de strings con los D\+TC activos en el vehículo
 \end{DoxyReturn}
 Realiza la comprobación de existencia del número de D\+TC con el comando S\+T\+A\+T\+US y si existen, obtiene su D\+TC con el comando G\+E\+T\+\_\+\+D\+TC. 
 
-Definición en la línea \hyperlink{Obd_8hpp_source_l00624}{624} del archivo \hyperlink{Obd_8hpp_source}{Obd.\+hpp}.
+Definición en la línea \hyperlink{Obd_8hpp_source_l00628}{628} del archivo \hyperlink{Obd_8hpp_source}{Obd.\+hpp}.
 
 \mbox{\Hypertarget{classObd_ad88a0f25a7e3961726737915668ee13d}\label{classObd_ad88a0f25a7e3961726737915668ee13d}} 
 \index{Obd@{Obd}!get\+V\+IN@{get\+V\+IN}}
@@ -187,7 +187,7 @@ String del V\+IN de 17 dígitos del vehículo.
 \end{DoxyReturn}
 
 
-Definición en la línea \hyperlink{Obd_8hpp_source_l00611}{611} del archivo \hyperlink{Obd_8hpp_source}{Obd.\+hpp}.
+Definición en la línea \hyperlink{Obd_8hpp_source_l00615}{615} del archivo \hyperlink{Obd_8hpp_source}{Obd.\+hpp}.
 
 \mbox{\Hypertarget{classObd_a560631b2e3af0a72c063f915a11e0466}\label{classObd_a560631b2e3af0a72c063f915a11e0466}} 
 \index{Obd@{Obd}!init\+Decoder\+Functions@{init\+Decoder\+Functions}}
@@ -201,7 +201,7 @@ Método de inicialización de funciones de decodificación de mensajes O\+BD.
 
 Función que agrupa los decodificadores dependiendo del tipo de dato a obtener para poder utilizarlos en la función polling y obtener el dato solicitado. 
 
-Definición en la línea \hyperlink{Obd_8hpp_source_l00507}{507} del archivo \hyperlink{Obd_8hpp_source}{Obd.\+hpp}.
+Definición en la línea \hyperlink{Obd_8hpp_source_l00511}{511} del archivo \hyperlink{Obd_8hpp_source}{Obd.\+hpp}.
 
 \mbox{\Hypertarget{classObd_a5091314ed8068800cce40e7a74a3731e}\label{classObd_a5091314ed8068800cce40e7a74a3731e}} 
 \index{Obd@{Obd}!init\+Messages@{init\+Messages}}
@@ -215,7 +215,7 @@ Método de inicialización de parámetros de conexión con E\+L\+M327.
 
 Se realiza una secuencia de paso de mensajes que permiten obtener los datos en un formato normalizado. En primer lugar, se hace un R\+E\+S\+ET del dispositivo E\+L\+M327, se establecen los valores por defecto, se configura las respuestas sin eco, sin cabecera y sin espacio y se establece el protocolo automático. Por último, se realiza un escaneo general del estado del vehículo con distintas pruebas establecidas por el comando S\+T\+A\+T\+US, se obtiene el V\+IN del vehículo y se obtiene el número de comandos disponibles tras un escaneo con los P\+I\+DS específicos para ello. 
 
-Definición en la línea \hyperlink{Obd_8hpp_source_l00472}{472} del archivo \hyperlink{Obd_8hpp_source}{Obd.\+hpp}.
+Definición en la línea \hyperlink{Obd_8hpp_source_l00476}{476} del archivo \hyperlink{Obd_8hpp_source}{Obd.\+hpp}.
 
 \mbox{\Hypertarget{classObd_ae28b765bb787467f929eae932133d2aa}\label{classObd_ae28b765bb787467f929eae932133d2aa}} 
 \index{Obd@{Obd}!is\+Valid@{is\+Valid}}
@@ -232,7 +232,7 @@ Devuelve true si la conexión está establecida correctamente y false en caso co
 \end{DoxyReturn}
 
 
-Definición en la línea \hyperlink{Obd_8hpp_source_l00651}{651} del archivo \hyperlink{Obd_8hpp_source}{Obd.\+hpp}.
+Definición en la línea \hyperlink{Obd_8hpp_source_l00655}{655} del archivo \hyperlink{Obd_8hpp_source}{Obd.\+hpp}.
 
 \mbox{\Hypertarget{classObd_a0792ecb9247f32760269fdf64a178f8f}\label{classObd_a0792ecb9247f32760269fdf64a178f8f}} 
 \index{Obd@{Obd}!polling@{polling}}
@@ -251,7 +251,7 @@ Método de recepción de mensajes enviados por el dispositivo E\+L\+M327.
 \end{DoxyParams}
 Función que se encarga de mantenerse a la espera del mensaje de respuesta del dispositivo E\+L\+M327 al mensaje anteriormente enviado por la función send. Mediante un bucle y la instancia epoll creada se recogen los eventos de mensajes recibidos, y se filtra su contenido para conocer la finalización del mensaje. Tras esto, se realiza una búsqueda de la información útil del mensaje y una decodificación dependiendo del tipo de dato a recibir. Por útimo, se almacena la respuesta en el propio objeto \hyperlink{classCommands}{Commands} para poder recuperarla posteriormente. 
 
-Definición en la línea \hyperlink{Obd_8hpp_source_l00292}{292} del archivo \hyperlink{Obd_8hpp_source}{Obd.\+hpp}.
+Definición en la línea \hyperlink{Obd_8hpp_source_l00295}{295} del archivo \hyperlink{Obd_8hpp_source}{Obd.\+hpp}.
 
 \mbox{\Hypertarget{classObd_abf7e84f45236ea1c78c762ac895c532c}\label{classObd_abf7e84f45236ea1c78c762ac895c532c}} 
 \index{Obd@{Obd}!print\+P\+I\+Ds@{print\+P\+I\+Ds}}
@@ -265,7 +265,7 @@ Método de impresión de la lista de P\+I\+DS implementados en el vehículo.
 
 Realiza una búsqueda iterativa que obtiene por consola los P\+I\+DS disponibles en el vehículo encontrados en la inicialización del dispositivo E\+L\+M327. 
 
-Definición en la línea \hyperlink{Obd_8hpp_source_l00579}{579} del archivo \hyperlink{Obd_8hpp_source}{Obd.\+hpp}.
+Definición en la línea \hyperlink{Obd_8hpp_source_l00583}{583} del archivo \hyperlink{Obd_8hpp_source}{Obd.\+hpp}.
 
 \mbox{\Hypertarget{classObd_a0938bfdd6d05795e826a239cc0f29f32}\label{classObd_a0938bfdd6d05795e826a239cc0f29f32}} 
 \index{Obd@{Obd}!print\+Status@{print\+Status}}
@@ -279,7 +279,7 @@ Método de impresión de las pruebas realizadas en el vehículo.
 
 Muestra por consola cada una de las pruebas realizadas en el vehículo y su resultado. 
 
-Definición en la línea \hyperlink{Obd_8hpp_source_l00599}{599} del archivo \hyperlink{Obd_8hpp_source}{Obd.\+hpp}.
+Definición en la línea \hyperlink{Obd_8hpp_source_l00603}{603} del archivo \hyperlink{Obd_8hpp_source}{Obd.\+hpp}.
 
 \mbox{\Hypertarget{classObd_a2b8bd75834351a2205d53aec8b3747be}\label{classObd_a2b8bd75834351a2205d53aec8b3747be}} 
 \index{Obd@{Obd}!read\+File\+Data@{read\+File\+Data}}
@@ -293,7 +293,7 @@ Método de lectura del fichero de P\+I\+DS en formato json.
 
 Utiliza la librería externa json.\+hpp para la lectura de los P\+I\+DS en formato J\+S\+ON que permite obtener a la clase \hyperlink{classObd}{Obd} los \hyperlink{classCommands}{Commands} a ejecutar. 
 
-Definición en la línea \hyperlink{Obd_8hpp_source_l00228}{228} del archivo \hyperlink{Obd_8hpp_source}{Obd.\+hpp}.
+Definición en la línea \hyperlink{Obd_8hpp_source_l00229}{229} del archivo \hyperlink{Obd_8hpp_source}{Obd.\+hpp}.
 
 \mbox{\Hypertarget{classObd_a453591bc9a280e8d44d82025ce8590e9}\label{classObd_a453591bc9a280e8d44d82025ce8590e9}} 
 \index{Obd@{Obd}!send@{send}}
@@ -312,7 +312,7 @@ Método de envío de mensajes AT y O\+BD al dispositivo E\+L\+M327.
 \end{DoxyParams}
 Función que se encarga de la creación de un hilo de ejecución que ejecute la función polling para la recepción del comando a enviar y del formateo de éste a través del socket creado al conectar con el dispositivo E\+L\+M327. 
 
-Definición en la línea \hyperlink{Obd_8hpp_source_l00248}{248} del archivo \hyperlink{Obd_8hpp_source}{Obd.\+hpp}.
+Definición en la línea \hyperlink{Obd_8hpp_source_l00249}{249} del archivo \hyperlink{Obd_8hpp_source}{Obd.\+hpp}.
 
 
 

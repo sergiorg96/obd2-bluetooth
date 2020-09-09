@@ -226,7 +226,7 @@ Campos de datos</h2></td></tr>
 <p>Método de desconexión bluetooth con el dispositivo ELM327. </p>
 <p>Cierra el socket e instancia epoll abiertas. </p>
 
-<p class="definition">Definición en la línea <a class="el" href="Obd_8hpp_source.html#l00548">548</a> del archivo <a class="el" href="Obd_8hpp_source.html">Obd.hpp</a>.</p>
+<p class="definition">Definición en la línea <a class="el" href="Obd_8hpp_source.html#l00552">552</a> del archivo <a class="el" href="Obd_8hpp_source.html">Obd.hpp</a>.</p>
 
 </div>
 </div>
@@ -311,7 +311,7 @@ Campos de datos</h2></td></tr>
 </dl>
 <dl class="section return"><dt>Devuelve</dt><dd>Devuelve true si existe y false en caso contrario. </dd></dl>
 
-<p class="definition">Definición en la línea <a class="el" href="Obd_8hpp_source.html#l00560">560</a> del archivo <a class="el" href="Obd_8hpp_source.html">Obd.hpp</a>.</p>
+<p class="definition">Definición en la línea <a class="el" href="Obd_8hpp_source.html#l00564">564</a> del archivo <a class="el" href="Obd_8hpp_source.html">Obd.hpp</a>.</p>
 
 </div>
 </div>
@@ -342,7 +342,7 @@ Campos de datos</h2></td></tr>
 <dl class="section return"><dt>Devuelve</dt><dd>Vector de strings con los DTC activos en el vehículo</dd></dl>
 <p>Realiza la comprobación de existencia del número de DTC con el comando STATUS y si existen, obtiene su DTC con el comando GET_DTC. </p>
 
-<p class="definition">Definición en la línea <a class="el" href="Obd_8hpp_source.html#l00624">624</a> del archivo <a class="el" href="Obd_8hpp_source.html">Obd.hpp</a>.</p>
+<p class="definition">Definición en la línea <a class="el" href="Obd_8hpp_source.html#l00628">628</a> del archivo <a class="el" href="Obd_8hpp_source.html">Obd.hpp</a>.</p>
 
 </div>
 </div>
@@ -372,7 +372,7 @@ Campos de datos</h2></td></tr>
 <p>Método que permite obtener el Número de Identificación del Vehículo (VIN). </p>
 <dl class="section return"><dt>Devuelve</dt><dd>String del VIN de 17 dígitos del vehículo. </dd></dl>
 
-<p class="definition">Definición en la línea <a class="el" href="Obd_8hpp_source.html#l00611">611</a> del archivo <a class="el" href="Obd_8hpp_source.html">Obd.hpp</a>.</p>
+<p class="definition">Definición en la línea <a class="el" href="Obd_8hpp_source.html#l00615">615</a> del archivo <a class="el" href="Obd_8hpp_source.html">Obd.hpp</a>.</p>
 
 </div>
 </div>
@@ -402,7 +402,7 @@ Campos de datos</h2></td></tr>
 <p>Método de inicialización de funciones de decodificación de mensajes OBD. </p>
 <p>Función que agrupa los decodificadores dependiendo del tipo de dato a obtener para poder utilizarlos en la función polling y obtener el dato solicitado. </p>
 
-<p class="definition">Definición en la línea <a class="el" href="Obd_8hpp_source.html#l00507">507</a> del archivo <a class="el" href="Obd_8hpp_source.html">Obd.hpp</a>.</p>
+<p class="definition">Definición en la línea <a class="el" href="Obd_8hpp_source.html#l00511">511</a> del archivo <a class="el" href="Obd_8hpp_source.html">Obd.hpp</a>.</p>
 
 </div>
 </div>
@@ -432,7 +432,7 @@ Campos de datos</h2></td></tr>
 <p>Método de inicialización de parámetros de conexión con ELM327. </p>
 <p>Se realiza una secuencia de paso de mensajes que permiten obtener los datos en un formato normalizado. En primer lugar, se hace un RESET del dispositivo ELM327, se establecen los valores por defecto, se configura las respuestas sin eco, sin cabecera y sin espacio y se establece el protocolo automático. Por último, se realiza un escaneo general del estado del vehículo con distintas pruebas establecidas por el comando STATUS, se obtiene el VIN del vehículo y se obtiene el número de comandos disponibles tras un escaneo con los PIDS específicos para ello. </p>
 
-<p class="definition">Definición en la línea <a class="el" href="Obd_8hpp_source.html#l00472">472</a> del archivo <a class="el" href="Obd_8hpp_source.html">Obd.hpp</a>.</p>
+<p class="definition">Definición en la línea <a class="el" href="Obd_8hpp_source.html#l00476">476</a> del archivo <a class="el" href="Obd_8hpp_source.html">Obd.hpp</a>.</p>
 
 </div>
 </div>
@@ -462,7 +462,7 @@ Campos de datos</h2></td></tr>
 <p>Método de validación del estado de la conexion. </p>
 <dl class="section return"><dt>Devuelve</dt><dd>Devuelve true si la conexión está establecida correctamente y false en caso contrario. </dd></dl>
 
-<p class="definition">Definición en la línea <a class="el" href="Obd_8hpp_source.html#l00651">651</a> del archivo <a class="el" href="Obd_8hpp_source.html">Obd.hpp</a>.</p>
+<p class="definition">Definición en la línea <a class="el" href="Obd_8hpp_source.html#l00655">655</a> del archivo <a class="el" href="Obd_8hpp_source.html">Obd.hpp</a>.</p>
 
 </div>
 </div>
@@ -499,7 +499,7 @@ Campos de datos</h2></td></tr>
 </dl>
 <p>Función que se encarga de mantenerse a la espera del mensaje de respuesta del dispositivo ELM327 al mensaje anteriormente enviado por la función send. Mediante un bucle y la instancia epoll creada se recogen los eventos de mensajes recibidos, y se filtra su contenido para conocer la finalización del mensaje. Tras esto, se realiza una búsqueda de la información útil del mensaje y una decodificación dependiendo del tipo de dato a recibir. Por útimo, se almacena la respuesta en el propio objeto <a class="el" href="classCommands.html" title="Clase que representa los comandos AT y PIDS que se necesitan en el intercambio de mensajes con el dis...">Commands</a> para poder recuperarla posteriormente. </p>
 
-<p class="definition">Definición en la línea <a class="el" href="Obd_8hpp_source.html#l00292">292</a> del archivo <a class="el" href="Obd_8hpp_source.html">Obd.hpp</a>.</p>
+<p class="definition">Definición en la línea <a class="el" href="Obd_8hpp_source.html#l00295">295</a> del archivo <a class="el" href="Obd_8hpp_source.html">Obd.hpp</a>.</p>
 
 </div>
 </div>
@@ -529,7 +529,7 @@ Campos de datos</h2></td></tr>
 <p>Método de impresión de la lista de PIDS implementados en el vehículo. </p>
 <p>Realiza una búsqueda iterativa que obtiene por consola los PIDS disponibles en el vehículo encontrados en la inicialización del dispositivo ELM327. </p>
 
-<p class="definition">Definición en la línea <a class="el" href="Obd_8hpp_source.html#l00579">579</a> del archivo <a class="el" href="Obd_8hpp_source.html">Obd.hpp</a>.</p>
+<p class="definition">Definición en la línea <a class="el" href="Obd_8hpp_source.html#l00583">583</a> del archivo <a class="el" href="Obd_8hpp_source.html">Obd.hpp</a>.</p>
 
 </div>
 </div>
@@ -559,7 +559,7 @@ Campos de datos</h2></td></tr>
 <p>Método de impresión de las pruebas realizadas en el vehículo. </p>
 <p>Muestra por consola cada una de las pruebas realizadas en el vehículo y su resultado. </p>
 
-<p class="definition">Definición en la línea <a class="el" href="Obd_8hpp_source.html#l00599">599</a> del archivo <a class="el" href="Obd_8hpp_source.html">Obd.hpp</a>.</p>
+<p class="definition">Definición en la línea <a class="el" href="Obd_8hpp_source.html#l00603">603</a> del archivo <a class="el" href="Obd_8hpp_source.html">Obd.hpp</a>.</p>
 
 </div>
 </div>
@@ -589,7 +589,7 @@ Campos de datos</h2></td></tr>
 <p>Método de lectura del fichero de PIDS en formato json. </p>
 <p>Utiliza la librería externa json.hpp para la lectura de los PIDS en formato JSON que permite obtener a la clase <a class="el" href="classObd.html" title="Clase que representa el acceso a la conexión con el dispositivo ELM327. ">Obd</a> los <a class="el" href="classCommands.html" title="Clase que representa los comandos AT y PIDS que se necesitan en el intercambio de mensajes con el dis...">Commands</a> a ejecutar. </p>
 
-<p class="definition">Definición en la línea <a class="el" href="Obd_8hpp_source.html#l00228">228</a> del archivo <a class="el" href="Obd_8hpp_source.html">Obd.hpp</a>.</p>
+<p class="definition">Definición en la línea <a class="el" href="Obd_8hpp_source.html#l00229">229</a> del archivo <a class="el" href="Obd_8hpp_source.html">Obd.hpp</a>.</p>
 
 </div>
 </div>
@@ -626,7 +626,7 @@ Campos de datos</h2></td></tr>
 </dl>
 <p>Función que se encarga de la creación de un hilo de ejecución que ejecute la función polling para la recepción del comando a enviar y del formateo de éste a través del socket creado al conectar con el dispositivo ELM327. </p>
 
-<p class="definition">Definición en la línea <a class="el" href="Obd_8hpp_source.html#l00248">248</a> del archivo <a class="el" href="Obd_8hpp_source.html">Obd.hpp</a>.</p>
+<p class="definition">Definición en la línea <a class="el" href="Obd_8hpp_source.html#l00249">249</a> del archivo <a class="el" href="Obd_8hpp_source.html">Obd.hpp</a>.</p>
 
 </div>
 </div>

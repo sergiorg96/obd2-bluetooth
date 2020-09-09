@@ -15,65 +15,46 @@
 00017 \textcolor{preprocessor}{#include <stdio.h>}
 00018 \textcolor{preprocessor}{#include "\hyperlink{alarmfile_8hpp}{alarmfile.hpp}"}
 00019 
-00020 \textcolor{preprocessor}{#include "picangps.hpp"}
-00021 
-00022 \textcolor{keywordtype}{bool} AlarmFile::gps\_ = \textcolor{keyword}{false};
-00023 
-\Hypertarget{alarmfile_8cpp_source_l00024}\hyperlink{classAlarmFile_a4865f7e404e938960e45b7e805956401}{00024} std::string \hyperlink{classAlarmFile_a4865f7e404e938960e45b7e805956401}{AlarmFile::getGeoPos}(std::string serialPort)
-00025 \{
-00026   \textcolor{keywordflow}{return} PicanGetGPS(serialPort);
-00027 \}
-00028 
-\Hypertarget{alarmfile_8cpp_source_l00029}\hyperlink{classAlarmFile_ad75728f6e44f38772372b991f21d9caa}{00029} \textcolor{keywordtype}{bool} \hyperlink{classAlarmFile_ad75728f6e44f38772372b991f21d9caa}{AlarmFile::hasGps}()
-00030 \{
-00031   \textcolor{keywordflow}{return} AlarmFile::gps\_;
-00032 \}
-00033 
-\Hypertarget{alarmfile_8cpp_source_l00034}\hyperlink{classAlarmFile_acfb3c406818e76439ba47aa539178f7d}{00034} \textcolor{keywordtype}{void} \hyperlink{classAlarmFile_acfb3c406818e76439ba47aa539178f7d}{AlarmFile::Gps}(\textcolor{keywordtype}{bool} installed)
-00035 \{
-00036   AlarmFile::gps\_ = installed;
-00037 \}
-00038 
-00039 \textcolor{keywordtype}{void} AlarmFile::shit (\textcolor{keyword}{const} \textcolor{keywordtype}{char} *mens)
-00040 \{
-00041   fprintf(stderr, \textcolor{stringliteral}{"%s - %d\(\backslash\)n"}, mens, errno);
-00042   perror(\textcolor{stringliteral}{"Error is "});
-00043 \}
-00044 
-\Hypertarget{alarmfile_8cpp_source_l00045}\hyperlink{classAlarmFile_ab5b7a78583764cd70d8b5b93a243439d}{00045} \hyperlink{classAlarmFile_ab5b7a78583764cd70d8b5b93a243439d}{AlarmFile::AlarmFile}(std::string AlarmHost,
-00046                      std::string AlarmPort,
-00047                      std::string AlarmFilename,
-00048                      std::string LastAlarmFilename):
-00049   alarmHost\_(AlarmHost),
-00050   alarmPort\_(atoi(AlarmPort.c\_str())),
-00051   alarmFilename\_(AlarmFilename),
-00052   lastAlarmFilename\_(LastAlarmFilename)
-00053 \{
-00054   \textcolor{keywordflow}{if} ((s\_ = socket (AF\_INET, SOCK\_DGRAM, 0)) < 0) shit (\textcolor{stringliteral}{"socket"});
-00055 
-00056   memset ((\textcolor{keywordtype}{char} *)&iTu\_, 0, \textcolor{keyword}{sizeof}(\textcolor{keyword}{struct} sockaddr\_in));
-00057   iTu\_.sin\_family      = AF\_INET;  
-00058   iTu\_.sin\_addr.s\_addr = inet\_addr(alarmHost\_.c\_str()); 
-00059   iTu\_.sin\_port        = htons(alarmPort\_);
-00060 \}
-00061 
-00062 
-\Hypertarget{alarmfile_8cpp_source_l00063}\hyperlink{classAlarmFile_a37fd701cca3c3458a3009b508383947b}{00063} \textcolor{keywordtype}{bool} \hyperlink{classAlarmFile_a37fd701cca3c3458a3009b508383947b}{AlarmFile::sendAlarm}(std::string msg)
-00064 \{
-00065   \textcolor{keywordflow}{if} ( \textcolor{stringliteral}{""} != msg )\{
-00066     \textcolor{keywordtype}{int} cc =  sendto(s\_, msg.c\_str(), strlen(msg.c\_str()), 0,(\textcolor{keyword}{struct} sockaddr *)&iTu\_, \textcolor{keyword}{sizeof}(iTu\_));
-00067 
-00068     \textcolor{keywordflow}{if} (cc < 0)\{
-00069       perror(\textcolor{stringliteral}{"Error is "});
-00070       fprintf(stderr, \textcolor{stringliteral}{"Value of errno: %d\(\backslash\)n"}, errno);
-00071     \}
-00072 
-00073     fprintf(stderr, \textcolor{stringliteral}{"Alarma enviada (%d): %s a %s:%d\(\backslash\)n"}, cc, msg.c\_str(), inet\_ntoa(iTu\_.sin\_addr), (int) 
+00020 \textcolor{keywordtype}{void} AlarmFile::shit (\textcolor{keyword}{const} \textcolor{keywordtype}{char} *mens)
+00021 \{
+00022   fprintf(stderr, \textcolor{stringliteral}{"%s - %d\(\backslash\)n"}, mens, errno);
+00023   perror(\textcolor{stringliteral}{"Error is "});
+00024 \}
+00025 
+\Hypertarget{alarmfile_8cpp_source_l00026}\hyperlink{classAlarmFile_ab5b7a78583764cd70d8b5b93a243439d}{00026} \hyperlink{classAlarmFile_ab5b7a78583764cd70d8b5b93a243439d}{AlarmFile::AlarmFile}(std::string AlarmHost,
+00027                      std::string AlarmPort,
+00028                      std::string AlarmFilename,
+00029                      std::string LastAlarmFilename):
+00030   alarmHost\_(AlarmHost),
+00031   alarmPort\_(atoi(AlarmPort.c\_str())),
+00032   alarmFilename\_(AlarmFilename),
+00033   lastAlarmFilename\_(LastAlarmFilename)
+00034 \{
+00035   \textcolor{keywordflow}{if} ((s\_ = socket (AF\_INET, SOCK\_DGRAM, 0)) < 0) shit (\textcolor{stringliteral}{"socket"});
+00036 
+00037   memset ((\textcolor{keywordtype}{char} *)&iTu\_, 0, \textcolor{keyword}{sizeof}(\textcolor{keyword}{struct} sockaddr\_in));
+00038   iTu\_.sin\_family      = AF\_INET;  
+00039   iTu\_.sin\_addr.s\_addr = inet\_addr(alarmHost\_.c\_str()); 
+00040   iTu\_.sin\_port        = htons(alarmPort\_);
+00041 \}
+00042 
+00043 
+\Hypertarget{alarmfile_8cpp_source_l00044}\hyperlink{classAlarmFile_a37fd701cca3c3458a3009b508383947b}{00044} \textcolor{keywordtype}{bool} \hyperlink{classAlarmFile_a37fd701cca3c3458a3009b508383947b}{AlarmFile::sendAlarm}(std::string msg)
+00045 \{
+00046   \textcolor{keywordflow}{if} ( \textcolor{stringliteral}{""} != msg )\{
+00047     \textcolor{keywordtype}{int} cc =  sendto(s\_, msg.c\_str(), strlen(msg.c\_str()), 0,(\textcolor{keyword}{struct} sockaddr *)&iTu\_, \textcolor{keyword}{sizeof}(iTu\_));
+00048 
+00049     \textcolor{keywordflow}{if} (cc < 0)\{
+00050       perror(\textcolor{stringliteral}{"Error is "});
+00051       fprintf(stderr, \textcolor{stringliteral}{"Value of errno: %d\(\backslash\)n"}, errno);
+00052     \}
+00053 
+00054     fprintf(stderr, \textcolor{stringliteral}{"Alarma enviada (%d): %s a %s:%d\(\backslash\)n"}, cc, msg.c\_str(), inet\_ntoa(iTu\_.sin\_addr), (int) 
       ntohs(iTu\_.sin\_port));
-00074 
-00075     \textcolor{keywordflow}{return} \textcolor{keyword}{true};
-00076   \}
-00077   \textcolor{keywordflow}{return} \textcolor{keyword}{false};
-00078 \}
-00079 
+00055 
+00056     \textcolor{keywordflow}{return} \textcolor{keyword}{true};
+00057   \}
+00058   \textcolor{keywordflow}{return} \textcolor{keyword}{false};
+00059 \}
+00060 
 \end{DoxyCode}

@@ -54,16 +54,16 @@
 00056    \}
 00057 \}
 00058 
-\Hypertarget{loadcfg_8cpp_source_l00059}\hyperlink{loadcfg_8hpp_ae4db05d33445e6b6ca0c4a6a0ba23bf3}{00059} std::string \hyperlink{loadcfg_8cpp_ae4db05d33445e6b6ca0c4a6a0ba23bf3}{getmac} (\textcolor{keyword}{const} \textcolor{keywordtype}{char}* name)
-00060 \{
-00061    \textcolor{keywordtype}{int} i;
-00062    \textcolor{keyword}{struct }ifaddrs *addrs,*tmp;
-00063    std::stringstream macaddress;
-00064    \textcolor{keywordtype}{char} mymac[18];
-00065    getifaddrs(&addrs);
-00066    tmp = addrs;
-00067 
-00068    memset (mymac, 0, 18);
+00059 
+\Hypertarget{loadcfg_8cpp_source_l00060}\hyperlink{loadcfg_8hpp_ae4db05d33445e6b6ca0c4a6a0ba23bf3}{00060} std::string \hyperlink{loadcfg_8cpp_ae4db05d33445e6b6ca0c4a6a0ba23bf3}{getmac} (\textcolor{keyword}{const} \textcolor{keywordtype}{char}* name)
+00061 \{
+00062    \textcolor{keywordtype}{int} i;
+00063    \textcolor{keyword}{struct }ifaddrs *addrs,*tmp;
+00064    std::stringstream macaddress;
+00065    \textcolor{keywordtype}{char} mymac[25];
+00066    getifaddrs(&addrs);
+00067    tmp = addrs;
+00068    memset (mymac, 0, 25);
 00069    \textcolor{keywordflow}{while} (tmp) \{
 00070      \textcolor{keywordflow}{if} (!strcmp(name, tmp->ifa\_name))\{
 00071           \textcolor{keyword}{struct }sockaddr\_ll *s = (\textcolor{keyword}{struct }sockaddr\_ll*)tmp->ifa\_addr;
