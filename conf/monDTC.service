@@ -1,6 +1,6 @@
-# ***Obd2-bluetooth.service***
+# ***monDTC.service***
 [Unit]
-Description=Servicio de conexión bluetooth con el protocolo OBD2
+Description=Servicio de obtención de DTC de un vehículo y envío a servidor remoto
 After=multi-user.target
 
 [Service]
