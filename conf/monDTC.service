@@ -5,7 +5,7 @@ After=multi-user.target
 
 [Service]
 Type=simple
-ExecStart=/RUTA-AL-DIRECTORIO-DE-DESCARGA-GITHUB/obd2-bluetooth/main
+ExecStart=/RUTA-AL-DIRECTORIO-DE-DESCARGA-GITHUB/obd2-bluetooth/monDTC
 User=USUARIO-DEL-SISTEMA
 RestartSec=10
 WorkingDirectory=/RUTA-AL-DIRECTORIO-DE-DESCARGA-GITHUB/obd2-bluetooth

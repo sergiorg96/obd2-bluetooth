@@ -13,7 +13,7 @@
 #include "../src/Obd.hpp"
 
 #define BUFSIZE 30 /**< Macro del tamaño del buffer de la cadena de caracteres para el comando Minicom a ejecutar */
-#define WAIT_OBDSIM 15 /**< Macro con el tiempo de espera en segundos del simulador OBDSIM para introducir valores */
+#define WAIT_OBDSIM 1 /**< Macro con el tiempo de espera en segundos del simulador OBDSIM para introducir valores */
 
 
 using namespace Catch::literals;
@@ -106,7 +106,7 @@ TEST_CASE( "Test OBD class DTC", "[OBD]" ) {
 
     debugLog("Iniciamos el simulador OBDSIM");
     // Iniciamos el simulador OBDSIM para las pruebas
-    initOBDSIM("gui_fltk", WAIT_OBDSIM);
+    initOBDSIM("Error", WAIT_OBDSIM);
 
     debugLog("Iniciamos conexión OBD");
 
@@ -120,7 +120,9 @@ TEST_CASE( "Test OBD class DTC", "[OBD]" ) {
 
 	connection.getDTCs();
 
-    std::cout << connection.map_commands.find("GET_DTC")->second.getJson().dump(4) << std::endl;
+    std::cout << connection.map_commands.find("GET_DTC")->second.getJson().dump() << std::endl;
+
+    REQUIRE ( connection.map_commands.find("GET_DTC")->second.getJson().dump() == "{\"description\":\"Get DTCs\",\"name\":\"GET_DTC\",\"units\":\"No units\",\"value\":[\"P0104\",\"B0003\",\"C0123\"]}" );
 
     closeOBDSIM();
 }
