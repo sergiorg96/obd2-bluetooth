@@ -135,7 +135,7 @@ std::vector<std::string> decodeDTCs(char *response){
 
 std::vector<int> decodePIDS(char *response){
 	//Conversión a long para poder convertirlo a bitset
-	long value_rcv = std::stol(response, nullptr, 16);
+	long long value_rcv = std::stoll(response, nullptr, 16);
 	//Conversión a bitset
 	std::bitset<PID_BITS> setBit (value_rcv);
 	std::vector<int> vec_pids;
